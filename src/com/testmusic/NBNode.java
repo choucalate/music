@@ -8,10 +8,10 @@ package com.testmusic;
  */
 public class NBNode {
 	private String key;
-	private int tempo;
+	private int tempo1;
 	public NBNode(String k, int t)
 	{
 		this.key = k;
-		this.tempo= t;
+		this.tempo1= t;
 	}
 }
