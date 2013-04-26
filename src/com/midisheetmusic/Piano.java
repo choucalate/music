@@ -112,7 +112,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	private boolean tutUnShade;
 	private int blinkShade;
 	private Timer time;
-	private int numBlinks;
+	private int numBlinks = 0;
 	private boolean wantTutCall;
 
 	/** Create a new Piano. */
@@ -820,12 +820,16 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return numBlinks;
 	}
 
+	int[] noteArr = {};
+	int i = 0;
+	int noteToShade = 0;
+
 	/**
 	 * for the tutorial note to enter: Black {C#, D#, F#, G#, A#, C#, D#, F#,
 	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
 	 * note][sharp # or N]
 	 */
-	public void tutorialNote(String note) {
+	public void tutorialNote(int[] note) {
 		// Log.e("coord", " THE COORD I WANT IS : " + (WhiteKeyWidth * 6 +
 		// (margin_val[0] + WhiteKeyWidth + BlackBorder)));
 		// make it blink
@@ -834,24 +838,18 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			return;
 		}
 
-		final int noteToShade;
+		noteArr = note;
 		boolean isBlack; // either black or white
-		if (note == "")
-			return;
-		else {
-			// turn from [note][Sharp or flat][1 or 2] into black[] or white[]
-			// array
-			int letter = Integer.parseInt(note.charAt(0) + ""); // get the note
-			String sharp = note.charAt(1) + "";
-			isBlack = (sharp.equals("N")) ? false : true;
-			if (isBlack) {
-				Log.i("black", "is balck");
-				noteToShade = black[letter];
-			} else {
-				Log.i("black", "is white");
-				noteToShade = white[letter];
-			}
-		}
+		/*
+		 * if (note == "") return; else { // turn from [note][Sharp or flat][1
+		 * or 2] into black[] or white[] // array int letter =
+		 * Integer.parseInt(note.charAt(0) + ""); // get the note String sharp =
+		 * note.charAt(1) + ""; isBlack = (sharp.equals("N")) ? false : true; if
+		 * (isBlack) { Log.i("black", "is balck"); noteToShade = black[letter];
+		 * } else { Log.i("black", "is white"); noteToShade = white[letter]; } }
+		 */
+		blinkShade = 1; // 1=unshade
+
 		try {
 			unShade(noteToShade);
 			time.cancel();
@@ -867,11 +865,13 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 			@Override
 			public void run() {
-				if (TutorialMSActivity.getCallBack() == noteToShade) {
+
+	/*			if (TutorialMSActivity.getCallBack() == noteToShade) {
 					cancel();
 					unShade(noteToShade);
 				}
-
+*/
+				// Shade and play note
 				if (blinkShade == 1) {
 					SurfaceHolder holder = getHolder();
 					Canvas canvas = holder.lockCanvas();
@@ -882,8 +882,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					}
 					bufferCanvas.translate(margin + BlackBorder, margin
 							+ BlackBorder);
-
+					noteToShade = white[noteArr[i]];
 					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
+
+					// soundPool.playNote("keya4", 1);
 					bufferCanvas.translate(-(margin + BlackBorder),
 							-(margin + BlackBorder));
 					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
@@ -894,6 +896,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
+					if (i >= noteArr.length)
+						cancel();
+					i++;
 				}
 				if (!tutUnShade) {
 					unShade(noteToShade);
@@ -905,6 +910,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			@Override
 			public boolean cancel() {
 				super.cancel();
+				Log.e("timer", "canceled");
 				unShade(noteToShade);
 				return true;
 			}

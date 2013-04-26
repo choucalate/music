@@ -667,6 +667,8 @@ public class TutorialMSActivity extends Activity {
 		popUp = new PopupWindow(this);
 
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
+		final int[] playAscending = {0,1,2,3,4,5,6,7};
+		final int[] playDescending = {7,6,5,4,3,2,1,0};
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -677,18 +679,18 @@ public class TutorialMSActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				numClicks++;
-				switch (numClicks) {
+				switch (numClicks-1) {
 				case 0:
-					piano.tutorialNote(blinkNotes[0]);
+					piano.tutorialNote(playAscending);
 					break;
 				case 1:
-					piano.tutorialNote(blinkNotes[4]);
+					piano.tutorialNote(playDescending);
 					break;
 				case 2:
-					piano.tutorialNote(blinkNotes[2]);
+					//piano.tutorialNote(blinkNotes[2]);
 					break;
 				case 3:
-					piano.tutorialNote(blinkNotes[3]);
+					//piano.tutorialNote(blinkNotes[3]);
 					break;
 				case 5:
 					numClicks = 0;
