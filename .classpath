@@ -4,6 +4,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="com.nineoldandroids.parent"/>
-	<classpathentry exported="true" kind="lib" path="/Users/aradia/eclipseWorkspace/GAEDemo/libs/android-support-v4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

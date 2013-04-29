@@ -12,7 +12,7 @@
 
 package com.midisheetmusic;
 
-import com.testmusic.SoundPoolExample;
+//import com.testmusic.SoundPoolExample;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -42,22 +42,22 @@ public class MidiSheetMusicActivity extends Activity {
 				chooseLevel();
 			}
 		});
-		Button compose = (Button) findViewById(R.id.Compose_Choice);
-		compose.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				chooseSong();
-			}
-		});
+//		Button compose = (Button) findViewById(R.id.Compose_Choice);
+//		compose.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View v) {
+//				chooseSong();
+//			}
+//		});
 	}
 	private void chooseLevel() {
 		Intent intent = new Intent(this, LevelActivity.class);
 		startActivity(intent);
 	}
 	/** Start the ChooseSongActivity when the "Choose Song" button is clicked */
-	private void chooseSong() {
-		Intent intent = new Intent(this, SoundPoolExample.class);
-		startActivity(intent);
-	}
+//	private void chooseSong() {
+//		Intent intent = new Intent(this, SoundPoolExample.class);
+//		startActivity(intent);
+//	}
 
 	/** Load all the resource images */
 	private void loadImages() {
