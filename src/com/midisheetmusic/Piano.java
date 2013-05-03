@@ -207,7 +207,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		int screenheight = MeasureSpec.getSize(heightspec);
 		// (int) (screenwidth / (2.0 + KeysPerOctave * MaxOctave));
 		WhiteKeyWidth = (int) (screenwidth / (0.8 + KeysPerOctave * MaxOctave)); // orig
-																					// 2.0
+		// 2.0
 		if (WhiteKeyWidth % 2 != 0)
 			WhiteKeyWidth--;
 
@@ -866,11 +866,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			@Override
 			public void run() {
 
-	/*			if (TutorialMSActivity.getCallBack() == noteToShade) {
-					cancel();
-					unShade(noteToShade);
-				}
-*/
+				/*
+				 * if (TutorialMSActivity.getCallBack() == noteToShade) {
+				 * cancel(); unShade(noteToShade); }
+				 */
 				// Shade and play note
 				if (blinkShade == 1) {
 					SurfaceHolder holder = getHolder();
@@ -896,8 +895,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
-					if (i >= noteArr.length)
+					if (i >= noteArr.length-1)
+					{
+						i =0;
 						cancel();
+					}
 					i++;
 				}
 				if (!tutUnShade) {
