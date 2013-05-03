@@ -883,8 +883,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 							+ BlackBorder);
 					noteToShade = white[noteArr[i]];
 					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
-					noteToShadetoPlayConverter(noteToShade, true);
-					// soundPool.playNote("keya4", 1);
+					String toPlaySound = noteToShadetoPlayConverter(
+							noteToShade, true);
+					soundPool.playNote(toPlaySound, 1);
 					bufferCanvas.translate(-(margin + BlackBorder),
 							-(margin + BlackBorder));
 					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
@@ -898,8 +899,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					if (i >= noteArr.length - 1) {
 						i = 0;
 						cancel();
-					}
-					i++;
+					} else
+						i++;
 				}
 				if (!tutUnShade) {
 					unShade(noteToShade);
@@ -937,15 +938,19 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		String key = "key";
 		char note = 'c';
-		if (i < 6)
-			note = (char) (note + i);
-
+		note = (char) (note + index);
+		Log.i("current not:", " the note is " + note);
+		if (note > 'g') {
+			note = 'a';
+			note = (char) (note + (index - 5));
+		} else
+			Log.i("current note:", "the note is :" + note);
 		// if index > something change to 3 otherwise 4
 		key = key + note + "3";
 
-		Log.i("changed into", "note: " + note);
+		Log.i("changed into", "note: " + key);
 
-		return "";
+		return key;
 	}
 
 	/** When the Piano is touched, pause the midi player */
