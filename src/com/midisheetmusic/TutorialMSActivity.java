@@ -669,6 +669,11 @@ public class TutorialMSActivity extends Activity {
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
 		final int[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		final int[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		final int[] playAscending2 = {0,1,1,2,2,3,3,4,4,5,5,6,6,7};
+		final int[] playDescending2 = {7,6,6,5,5,4,4,3,3,2,1,1,0};
+		final int[] playAscending3 = {0,1,2,1,2,3,2,3,4,3,4,5,4,5,6,5,6,7};
+		final int[] playDescending3 = {7,6,5,6,5,4,5,4,3,4,3,2,3,2,1,2,1,0};
+		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -687,12 +692,18 @@ public class TutorialMSActivity extends Activity {
 					piano.tutorialNote(playDescending);
 					break;
 				case 2:
-					// piano.tutorialNote(blinkNotes[2]);
+					piano.tutorialNote(playAscending2);
 					break;
 				case 3:
-					// piano.tutorialNote(blinkNotes[3]);
+					piano.tutorialNote(playDescending2);
+					break;
+				case 4:
+					piano.tutorialNote(playAscending3);
 					break;
 				case 5:
+					piano.tutorialNote(playDescending3);
+					break;
+				case 6:
 					numClicks = 0;
 					break;
 				default:
