@@ -883,7 +883,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 							+ BlackBorder);
 					noteToShade = white[noteArr[i]];
 					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
-
+					noteToShadetoPlayConverter(noteToShade, true);
 					// soundPool.playNote("keya4", 1);
 					bufferCanvas.translate(-(margin + BlackBorder),
 							-(margin + BlackBorder));
@@ -895,9 +895,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
-					if (i >= noteArr.length-1)
-					{
-						i =0;
+					if (i >= noteArr.length - 1) {
+						i = 0;
 						cancel();
 					}
 					i++;
@@ -919,6 +918,34 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 		}, 500, 200);
 
+	}
+
+	private String noteToShadetoPlayConverter(int noteToShade,
+			boolean blackorwhite) {
+		// final int[] black = { 25, 27, 30, 32, 34, 37, 39, 42, 44, 46 };
+		// final int[] white = { 24, 26, 28, 29, 31, 33, 35, 36, 38, 40, 41, 43,
+		// 45,
+		// 47 };
+		// find index first, then convert index to note from c = index 0, d =
+		// index 1
+		int index = 0;
+		for (int i = 0; i < white.length; i++) {
+			if (white[i] == noteToShade) {
+				index = i;
+				Log.i("found the index at index:", "index: " + i);
+			}
+		}
+		String key = "key";
+		char note = 'c';
+		if (i < 6)
+			note = (char) (note + i);
+
+		// if index > something change to 3 otherwise 4
+		key = key + note + "3";
+
+		Log.i("changed into", "note: " + note);
+
+		return "";
 	}
 
 	/** When the Piano is touched, pause the midi player */
