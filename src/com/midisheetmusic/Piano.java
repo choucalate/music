@@ -112,7 +112,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	private boolean tutUnShade;
 	private int blinkShade;
 	private Timer time;
-	private int numBlinks;
+	private int numBlinks = 0;
 	private boolean wantTutCall;
 
 	/** Create a new Piano. */
@@ -207,7 +207,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		int screenheight = MeasureSpec.getSize(heightspec);
 		// (int) (screenwidth / (2.0 + KeysPerOctave * MaxOctave));
 		WhiteKeyWidth = (int) (screenwidth / (0.8 + KeysPerOctave * MaxOctave)); // orig
-																					// 2.0
+		// 2.0
 		if (WhiteKeyWidth % 2 != 0)
 			WhiteKeyWidth--;
 
@@ -820,12 +820,16 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return numBlinks;
 	}
 
+	int[] noteArr = {};
+	int i = 0;
+	int noteToShade = 0;
+
 	/**
 	 * for the tutorial note to enter: Black {C#, D#, F#, G#, A#, C#, D#, F#,
 	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
 	 * note][sharp # or N]
 	 */
-	public void tutorialNote(String note) {
+	public void tutorialNote(int[] note) {
 		// Log.e("coord", " THE COORD I WANT IS : " + (WhiteKeyWidth * 6 +
 		// (margin_val[0] + WhiteKeyWidth + BlackBorder)));
 		// make it blink
@@ -834,24 +838,18 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			return;
 		}
 
-		final int noteToShade;
+		noteArr = note;
 		boolean isBlack; // either black or white
-		if (note == "")
-			return;
-		else {
-			// turn from [note][Sharp or flat][1 or 2] into black[] or white[]
-			// array
-			int letter = Integer.parseInt(note.charAt(0) + ""); // get the note
-			String sharp = note.charAt(1) + "";
-			isBlack = (sharp.equals("N")) ? false : true;
-			if (isBlack) {
-				Log.i("black", "is balck");
-				noteToShade = black[letter];
-			} else {
-				Log.i("black", "is white");
-				noteToShade = white[letter];
-			}
-		}
+		/*
+		 * if (note == "") return; else { // turn from [note][Sharp or flat][1
+		 * or 2] into black[] or white[] // array int letter =
+		 * Integer.parseInt(note.charAt(0) + ""); // get the note String sharp =
+		 * note.charAt(1) + ""; isBlack = (sharp.equals("N")) ? false : true; if
+		 * (isBlack) { Log.i("black", "is balck"); noteToShade = black[letter];
+		 * } else { Log.i("black", "is white"); noteToShade = white[letter]; } }
+		 */
+		blinkShade = 1; // 1=unshade
+
 		try {
 			unShade(noteToShade);
 			time.cancel();
@@ -867,11 +865,12 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 			@Override
 			public void run() {
-				if (TutorialMSActivity.getCallBack() == noteToShade) {
-					cancel();
-					unShade(noteToShade);
-				}
 
+				/*
+				 * if (TutorialMSActivity.getCallBack() == noteToShade) {
+				 * cancel(); unShade(noteToShade); }
+				 */
+				// Shade and play note
 				if (blinkShade == 1) {
 					SurfaceHolder holder = getHolder();
 					Canvas canvas = holder.lockCanvas();
@@ -882,8 +881,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					}
 					bufferCanvas.translate(margin + BlackBorder, margin
 							+ BlackBorder);
-
+					noteToShade = white[noteArr[i]];
 					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
+					String toPlaySound = noteToShadetoPlayConverter(
+							noteToShade, true);
+					soundPool.playNote(toPlaySound, 1);
 					bufferCanvas.translate(-(margin + BlackBorder),
 							-(margin + BlackBorder));
 					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
@@ -894,6 +896,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
+					if (i >= noteArr.length - 1) {
+						i = 0;
+						cancel();
+					} else
+						i++;
 				}
 				if (!tutUnShade) {
 					unShade(noteToShade);
@@ -905,12 +912,45 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			@Override
 			public boolean cancel() {
 				super.cancel();
+				Log.e("timer", "canceled");
 				unShade(noteToShade);
 				return true;
 			}
 
 		}, 500, 200);
 
+	}
+
+	private String noteToShadetoPlayConverter(int noteToShade,
+			boolean blackorwhite) {
+		// final int[] black = { 25, 27, 30, 32, 34, 37, 39, 42, 44, 46 };
+		// final int[] white = { 24, 26, 28, 29, 31, 33, 35, 36, 38, 40, 41, 43,
+		// 45,
+		// 47 };
+		// find index first, then convert index to note from c = index 0, d =
+		// index 1
+		int index = 0;
+		for (int i = 0; i < white.length; i++) {
+			if (white[i] == noteToShade) {
+				index = i;
+				Log.i("found the index at index:", "index: " + i);
+			}
+		}
+		String key = "key";
+		char note = 'c';
+		note = (char) (note + index);
+		Log.i("current not:", " the note is " + note);
+		if (note > 'g') {
+			note = 'a';
+			note = (char) (note + (index - 5));
+		} else
+			Log.i("current note:", "the note is :" + note);
+		// if index > something change to 3 otherwise 4
+		key = key + note + "3";
+
+		Log.i("changed into", "note: " + key);
+
+		return key;
 	}
 
 	/** When the Piano is touched, pause the midi player */

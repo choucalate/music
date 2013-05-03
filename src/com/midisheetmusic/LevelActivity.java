@@ -14,8 +14,8 @@ import android.widget.ListView;
 public class LevelActivity extends ListActivity {
 	ArrayList<String> levels = new ArrayList<String>();
 	public final static String mSelected = "The Level";
-	String[] values = new String[] { "Level 0: Keyboard Note Training! " ,"Level 1: Major Scales",
-			"Level 2: Learning Chords", "Level 3: Actual Songs" };
+	String[] values = new String[] { "Level 1: C-Major Scales & Practice" ,"Level 2: Twinkle Twinkle Little Stars",
+			"Level 3: Mary had a Little Lamb", "Level 4: Justin BIEBS" };
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("Choose A Level!");

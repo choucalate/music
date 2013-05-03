@@ -95,6 +95,7 @@ public class SPPlayer {
 	}
 
 	public void playNote(String note, int priority) {
+		Log.i("the note is", note);
 		// needa lastnote & delta for each note
 		long delta = Math.abs(justP - System.currentTimeMillis());
 		// Log.i("SP", "delta time: " + delta);
