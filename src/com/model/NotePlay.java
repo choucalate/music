@@ -5,7 +5,14 @@ public class NotePlay {
 	private int note;
 	private int counter;
 
-	//counter will index until hits duration
+	public NotePlay() {
+		super();
+		this.duration = 0;
+		this.note = 0;
+		this.counter = 0;
+	}
+
+	// counter will index until hits duration
 	public NotePlay(int duration, int note) {
 		super();
 		this.duration = duration;
@@ -13,12 +20,17 @@ public class NotePlay {
 		this.counter = 0;
 	}
 
+	public void setValues(int duration, int note) {
+		this.duration = duration;
+		this.note = note;
+	}
+
 	public int getCounter() {
 		return counter;
 	}
 
-	public void setCounter(int c) {
-		this.counter = c;
+	public void incCounter() {
+		this.counter++;
 	}
 
 	public int getDuration() {

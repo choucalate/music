@@ -26,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.model.NotePlay;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -105,6 +106,8 @@ public class TutorialMSActivity extends Activity {
 
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
+
+	private NotePlay[] np;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -669,13 +672,19 @@ public class TutorialMSActivity extends Activity {
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
 		final int[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		final int[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
-		
+
 		/*
-		 * final NotePlay[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		 * final NotePlay[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		 * final NotePlay[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 }; final
+		 * NotePlay[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
 		 */
-		
-		
+
+		int size = 8;
+		np = new NotePlay[size];
+		final int[] npNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		final int[] npDur = { 6, 2, 6, 2, 6, 2, 6, 2 };
+		for (int i = 0; i < np.length; i++)
+			np[i] = new NotePlay(npDur[i], npNote[i]);
+
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -688,13 +697,14 @@ public class TutorialMSActivity extends Activity {
 				numClicks++;
 				switch (numClicks - 1) {
 				case 0:
+
 					piano.tutorialNote(playAscending);
 					break;
 				case 1:
 					piano.tutorialNote(playDescending);
 					break;
 				case 2:
-					// piano.tutorialNote(blinkNotes[2]);
+					piano.playSong(np);
 					break;
 				case 3:
 					// piano.tutorialNote(blinkNotes[3]);
