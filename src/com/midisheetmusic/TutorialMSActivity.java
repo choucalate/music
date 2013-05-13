@@ -669,6 +669,13 @@ public class TutorialMSActivity extends Activity {
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
 		final int[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		final int[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		
+		/*
+		 * final NotePlay[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		 * final NotePlay[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		 */
+		
+		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
