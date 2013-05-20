@@ -28,7 +28,8 @@ import android.view.MotionEvent;
 import android.view.MotionEvent.PointerCoords;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
+
+import com.model.NotePlay;
 
 /**
  * @class Piano
@@ -821,7 +822,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	int[] noteArr = {};
-	int i = 0;
+	NotePlay[] songArr = {};
+
+	int curr = 0;
 	int noteToShade = 0;
 
 	/**
@@ -829,6 +832,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
 	 * note][sharp # or N]
 	 */
+	// (NotePlay[] notes)
 	public void tutorialNote(int[] note) {
 		// Log.e("coord", " THE COORD I WANT IS : " + (WhiteKeyWidth * 6 +
 		// (margin_val[0] + WhiteKeyWidth + BlackBorder)));
@@ -881,7 +885,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					}
 					bufferCanvas.translate(margin + BlackBorder, margin
 							+ BlackBorder);
-					noteToShade = white[noteArr[i]];
+					noteToShade = white[noteArr[curr]]; // noteArr[curr].getNote()
 					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
 					String toPlaySound = noteToShadetoPlayConverter(
 							noteToShade, true);
@@ -896,11 +900,109 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
-					if (i >= noteArr.length - 1) {
-						i = 0;
+					if (curr >= noteArr.length - 1) {
+						curr = 0;
 						cancel();
 					} else
-						i++;
+						curr++;
+				}
+				if (!tutUnShade) {
+					unShade(noteToShade);
+					blinkShade = 2;
+					return;
+				}
+			}
+
+			@Override
+			public boolean cancel() {
+				super.cancel();
+				Log.e("timer", "canceled");
+				unShade(noteToShade);
+				return true;
+			}
+
+		}, 500, 200);
+
+	}
+
+	/**
+	 * for the tutorial note to enter: Black {C#, D#, F#, G#, A#, C#, D#, F#,
+	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
+	 * note][sharp # or N]
+	 */
+	// (NotePlay[] notes)
+	public void playSong(NotePlay[] notes) {
+		if (!surfaceReady || bufferBitmap == null) {
+			Log.e("Shade", "fail");
+			return;
+		}
+
+		songArr = notes;
+		blinkShade = 1; // 1=unshade
+		curr = 0;
+		try {
+			unShade(noteToShade);
+			time.cancel();
+		} catch (Exception ex) {
+			Log.i("unshading", " error playsong");
+		}
+		time = new Timer();
+		if (tutUnShade == false) {
+			unShade(noteToShade);
+			time.cancel();
+			return;
+		}
+		time.scheduleAtFixedRate(new TimerTask() {
+
+			@Override
+			public void run() {
+				// Shade and play note
+				if (blinkShade == 1) {
+					SurfaceHolder holder = getHolder();
+					Canvas canvas = holder.lockCanvas();
+					if (canvas == null) {
+						Log.e("Shade", "fail in timer scheduling");
+						time.cancel();
+						return;	
+					}
+					bufferCanvas.translate(margin + BlackBorder, margin
+							+ BlackBorder);
+					noteToShade = white[songArr[curr].getNote()]; // noteArr[curr].getNote()
+					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
+					String toPlaySound = noteToShadetoPlayConverter(
+							noteToShade, true);
+					songArr[curr].incCounter();
+
+					/*
+					 * In this place, if counter has reached duration, set
+					 * blinkshade to 0 otherwise, keep blinkshade and play the
+					 * note, but only once.
+					 */
+					if (songArr[curr].getCounter() >= (songArr[curr]
+							.getDuration())) {
+						Log.i("GETTING DURATION",
+								"at curr: " + curr
+										+ " the duration and counter "
+										+ songArr[curr].getDuration() + " , "
+										+ songArr[curr].getCounter());
+						blinkShade = 0;
+					} else if (songArr[curr].getCounter() == 1)
+						soundPool.playNote(toPlaySound, 1);
+					bufferCanvas.translate(-(margin + BlackBorder),
+							-(margin + BlackBorder));
+					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+					DrawNoteLetters(canvas);
+					holder.unlockCanvasAndPost(canvas);
+
+					// numBlinks++;
+				} else if (blinkShade == 0) {
+					unShade(noteToShade);
+					blinkShade = 1;
+					if (curr >= noteArr.length - 1) {
+						curr = 0;
+						cancel();
+					} else
+						curr++;
 				}
 				if (!tutUnShade) {
 					unShade(noteToShade);
@@ -946,8 +1048,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		} else
 			Log.i("current note:", "the note is :" + note);
 		// if index > something change to 3 otherwise 4
-		key = key + note + "3";
-
+		//if lower octave, encoding = 3, 
+		if (noteToShade <= 35)
+			key = key + note + "3";
+		else
+			key = key + note + "4";
 		Log.i("changed into", "note: " + key);
 
 		return key;
