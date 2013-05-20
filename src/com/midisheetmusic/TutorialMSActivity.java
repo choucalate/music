@@ -107,7 +107,7 @@ public class TutorialMSActivity extends Activity {
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
 
-	private NotePlay[] np;
+	private NotePlay[] np, littlelamb, twinkle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -678,13 +678,22 @@ public class TutorialMSActivity extends Activity {
 		 * NotePlay[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
 		 */
 
+		/****** Cmajor scale ******/
 		int size = 8;
 		np = new NotePlay[size];
 		final int[] npNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		final int[] npDur = { 6, 2, 6, 2, 6, 2, 6, 2 };
+		final int[] npDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
 		for (int i = 0; i < np.length; i++)
 			np[i] = new NotePlay(npDur[i], npNote[i]);
 
+		/********** Mary had a little lamb **************/
+
+		final int[] llNote = {6,5,4,5,6,6,6,5,5,5,6,8,8,6,5,4,5,6,6,6,5,5,6,5,4};
+		final int[] llDur =  {1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,2,1,1,1,1,4};
+		int lambsize = llNote.length;
+		littlelamb = new NotePlay[lambsize];
+		for (int i = 0; i < littlelamb.length; i++)
+			littlelamb[i] = new NotePlay(llDur[i], llNote[i]);
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -697,8 +706,7 @@ public class TutorialMSActivity extends Activity {
 				numClicks++;
 				switch (numClicks - 1) {
 				case 0:
-
-					piano.tutorialNote(playAscending);
+					piano.playSong(littlelamb);
 					break;
 				case 1:
 					piano.tutorialNote(playDescending);

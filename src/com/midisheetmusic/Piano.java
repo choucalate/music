@@ -998,7 +998,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				} else if (blinkShade == 0) {
 					unShade(noteToShade);
 					blinkShade = 1;
-					if (curr >= noteArr.length - 1) {
+					if (curr >= songArr.length - 1) {
 						curr = 0;
 						cancel();
 					} else
