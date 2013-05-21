@@ -94,7 +94,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	 * **/
 	private boolean pianoType;
 
-	private SPPlayer soundPool;
+	private SPPlayer soundPool, mySP;
 	private int lastShaded = 0;
 
 	private int blackHeightY = 150;
@@ -112,7 +112,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	private boolean tutUnShade;
 	private int blinkShade;
-	private Timer time;
+	private Timer time, songTime;
 	private int numBlinks = 0;
 	private boolean wantTutCall;
 
@@ -940,12 +940,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		songArr = notes;
 		blinkShade = 1; // 1=unshade
 		curr = 0;
-		try {
-			unShade(noteToShade);
-			time.cancel();
-		} catch (Exception ex) {
-			Log.i("unshading", " error playsong");
-		}
+		/*
+		 * try { unShade(noteToShade); time.cancel(); } catch (Exception ex) {
+		 * Log.i("unshading", " error playsong"); }
+		 */
 		time = new Timer();
 		if (tutUnShade == false) {
 			unShade(noteToShade);
@@ -963,7 +961,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					if (canvas == null) {
 						Log.e("Shade", "fail in timer scheduling");
 						time.cancel();
-						return;	
+						return;
 					}
 					bufferCanvas.translate(margin + BlackBorder, margin
 							+ BlackBorder);
@@ -978,7 +976,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					 * blinkshade to 0 otherwise, keep blinkshade and play the
 					 * note, but only once.
 					 */
-					if (songArr[curr].getCounter() >= (songArr[curr]
+					if (songArr[curr].getCounter() > (songArr[curr]
 							.getDuration())) {
 						Log.i("GETTING DURATION",
 								"at curr: " + curr
@@ -986,8 +984,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 										+ songArr[curr].getDuration() + " , "
 										+ songArr[curr].getCounter());
 						blinkShade = 0;
-					} else if (songArr[curr].getCounter() == 1)
+					} else if (songArr[curr].getCounter() == 1) {
+						Log.i("NOTEPLAY", " playing " + toPlaySound);
 						soundPool.playNote(toPlaySound, 1);
+					}
 					bufferCanvas.translate(-(margin + BlackBorder),
 							-(margin + BlackBorder));
 					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
@@ -1048,7 +1048,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		} else
 			Log.i("current note:", "the note is :" + note);
 		// if index > something change to 3 otherwise 4
-		//if lower octave, encoding = 3, 
+		// if lower octave, encoding = 3,
 		if (noteToShade <= 35)
 			key = key + note + "3";
 		else
