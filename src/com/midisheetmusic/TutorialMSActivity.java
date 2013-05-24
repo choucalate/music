@@ -692,9 +692,9 @@ public class TutorialMSActivity extends Activity {
 
 		/********** Mary had a little lamb **************/
 
-		final int[] llNote = { 0, 0, 0, 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8,
+		final int[] llNote = {6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8,
 				6, 5, 4, 5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur = { 3, 3, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2,
+		final int[] llDur = {1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2,
 				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
 		int lambsize = llNote.length;
 		littlelamb = new NotePlay[lambsize];
