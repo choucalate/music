@@ -71,18 +71,19 @@ public final class R {
         public static final int photos_default=0x7f020024;
         public static final int photos_pressed=0x7f020025;
         public static final int photos_selected=0x7f020026;
-        public static final int pianoicon=0x7f020027;
-        public static final int places_default=0x7f020028;
-        public static final int places_pressed=0x7f020029;
-        public static final int places_selected=0x7f02002a;
-        public static final int play=0x7f02002b;
-        public static final int rewind=0x7f02002c;
-        public static final int six=0x7f02002d;
-        public static final int stop=0x7f02002e;
-        public static final int three=0x7f02002f;
-        public static final int treble=0x7f020030;
-        public static final int twelve=0x7f020031;
-        public static final int two=0x7f020032;
+        public static final int pianobckgd1=0x7f020027;
+        public static final int pianoicon=0x7f020028;
+        public static final int places_default=0x7f020029;
+        public static final int places_pressed=0x7f02002a;
+        public static final int places_selected=0x7f02002b;
+        public static final int play=0x7f02002c;
+        public static final int rewind=0x7f02002d;
+        public static final int six=0x7f02002e;
+        public static final int stop=0x7f02002f;
+        public static final int three=0x7f020030;
+        public static final int treble=0x7f020031;
+        public static final int twelve=0x7f020032;
+        public static final int two=0x7f020033;
     }
     public static final class id {
         public static final int Compose_Choice=0x7f0a001d;

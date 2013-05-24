@@ -954,6 +954,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 			@Override
 			public void run() {
+				String toPlaySound;
 				// Shade and play note
 				if (blinkShade == 1) {
 					SurfaceHolder holder = getHolder();
@@ -965,10 +966,16 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					}
 					bufferCanvas.translate(margin + BlackBorder, margin
 							+ BlackBorder);
-					noteToShade = white[songArr[curr].getNote()]; // noteArr[curr].getNote()
-					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
-					String toPlaySound = noteToShadetoPlayConverter(
-							noteToShade, true);
+
+					if (songArr[curr].getNote() == -1) {
+						noteToShade = -1;
+						toPlaySound = "";
+					} else {
+						noteToShade = white[songArr[curr].getNote()]; // noteArr[curr].getNote()
+						ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
+						toPlaySound = noteToShadetoPlayConverter(noteToShade,
+								true);
+					}
 					songArr[curr].incCounter();
 
 					/*

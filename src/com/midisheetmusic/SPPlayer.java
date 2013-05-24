@@ -95,11 +95,13 @@ public class SPPlayer {
 	}
 
 	public void playNote(String note, int priority) {
-		Log.i("the note is", note);
+		if (note == "")
+			return;
+		// Log.i("the note is", note);
 		// needa lastnote & delta for each note
 		long delta = Math.abs(justP - System.currentTimeMillis());
 		// Log.i("SP", "delta time: " + delta);
-		if (!(delta < 100) || lastNote != note) {
+		if (lastNote != note) {
 			try {
 				float actualVolume = (float) audio
 						.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -128,8 +130,8 @@ public class SPPlayer {
 		}
 	}
 
-	public void stopNote() {
-		soundPool.stop(a4);
+	public void stopNote(int note) {
+		soundPool.stop(note);
 	}
 
 	public void release() {
