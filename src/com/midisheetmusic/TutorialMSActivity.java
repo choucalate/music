@@ -62,7 +62,7 @@ public class TutorialMSActivity extends Activity {
 	private boolean loaded = false;
 
 	/* button to guide image falling process */
-	Button noteFall;
+	Button playNote, backTut, nextTut, restartTut;
 	/**
 	 * "note" + "key" + "1|2 position" +
 	 * "1st primary or 2nd secondary imageview"
@@ -494,10 +494,10 @@ public class TutorialMSActivity extends Activity {
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 
-		noteFall = new Button(this);
-		noteFall.setText("fall!");
-		noteFall.setLayoutParams(layoutParams2);
-		rl.addView(noteFall);
+		playNote = new Button(this);
+		playNote.setText("fall!");
+		playNote.setLayoutParams(layoutParams2);
+		rl.addView(playNote);
 
 		noteC1A = new ImageView(this);
 		noteD1A = new ImageView(this);
@@ -575,7 +575,7 @@ public class TutorialMSActivity extends Activity {
 		 * N]); to stop, setTutUnShade = -1
 		 * 
 		 */
-		noteFall.setOnClickListener(new Button.OnClickListener() {
+		playNote.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				numClicks++;
@@ -653,16 +653,62 @@ public class TutorialMSActivity extends Activity {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-		/* for the button */
+		/* for the button play */
 		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		RelativeLayout rl = new RelativeLayout(this);
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
-		noteFall = new Button(this);
-		noteFall.setText("Start Tutorial!");
-		noteFall.setLayoutParams(layoutParams2);
-		rl.addView(noteFall);
+		/* for the button next */
+		LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+		/* for the button restart */
+		LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+
+		/* for the button back */
+		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+		LinearLayout rl = new LinearLayout(this);
+		rl.setOrientation(LinearLayout.HORIZONTAL);
+		// layoutParams3.leftMargin = 100;
+		// layoutParams3.topMargin = 100;
+		// layoutParams3.setMargins(10, 10, 10, 10);
+		/*
+		 * For the button to start that tutorial
+		 */
+		playNote = new Button(this);
+		playNote.setText("Play!");
+		playNote.setLayoutParams(layoutParams2);
+
+		/*
+		 * For the button to play the next tutorial
+		 */
+		nextTut = new Button(this);
+		nextTut.setText("Next!");
+		nextTut.setLayoutParams(layoutParams3);
+
+		/*
+		 * For the button to play the back tutorial
+		 */
+		backTut = new Button(this);
+		backTut.setText("Previous");
+		backTut.setLayoutParams(layoutParams4);
+
+		/*
+		 * For the button to play the restart tutorial
+		 */
+		restartTut = new Button(this);
+		restartTut.setText("Restart!");
+		restartTut.setLayoutParams(layoutParams5);
+
+		rl.addView(playNote);
+		rl.addView(nextTut);
+		rl.addView(backTut);
+		rl.addView(restartTut);
+
 		layout.addView(rl, layoutParams);
 
 		popupLayout = new LinearLayout(this);
@@ -706,7 +752,7 @@ public class TutorialMSActivity extends Activity {
 		 * N]); to stop, setTutUnShade = -1
 		 * 
 		 */
-		noteFall.setOnClickListener(new Button.OnClickListener() {
+		playNote.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				numClicks++;
@@ -762,10 +808,10 @@ public class TutorialMSActivity extends Activity {
 				R.drawable.pianobckgd1, 768, 469);
 		BitmapDrawable background = new BitmapDrawable(bmImg);
 		int sdk = android.os.Build.VERSION.SDK_INT;
-		if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-		    layout.setBackgroundDrawable(background);
+		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+			layout.setBackgroundDrawable(background);
 		} else {
-		    layout.setBackground(background);
+			layout.setBackground(background);
 		}
 		setContentView(layout);
 		// player.SetPiano(piano);
