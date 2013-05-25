@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -62,7 +63,7 @@ public class TutorialMSActivity extends Activity {
 	private boolean loaded = false;
 
 	/* button to guide image falling process */
-	Button noteFall;
+	Button playNote, backTut, nextTut, restartTut;
 	/**
 	 * "note" + "key" + "1|2 position" +
 	 * "1st primary or 2nd secondary imageview"
@@ -104,7 +105,7 @@ public class TutorialMSActivity extends Activity {
 	int index = 0;
 	int tArr[] = {};
 
-	int numClicks; // count numclicks to the buttons
+	int numClicks = 0; // count numclicks to the buttons
 
 	static int callBack = 0;
 
@@ -494,10 +495,10 @@ public class TutorialMSActivity extends Activity {
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 
-		noteFall = new Button(this);
-		noteFall.setText("fall!");
-		noteFall.setLayoutParams(layoutParams2);
-		rl.addView(noteFall);
+		playNote = new Button(this);
+		playNote.setText("fall!");
+		playNote.setLayoutParams(layoutParams2);
+		rl.addView(playNote);
 
 		noteC1A = new ImageView(this);
 		noteD1A = new ImageView(this);
@@ -575,7 +576,7 @@ public class TutorialMSActivity extends Activity {
 		 * N]); to stop, setTutUnShade = -1
 		 * 
 		 */
-		noteFall.setOnClickListener(new Button.OnClickListener() {
+		playNote.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				numClicks++;
@@ -653,16 +654,62 @@ public class TutorialMSActivity extends Activity {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-		/* for the button */
+		/* for the button play */
 		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		RelativeLayout rl = new RelativeLayout(this);
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
-		noteFall = new Button(this);
-		noteFall.setText("Start Tutorial!");
-		noteFall.setLayoutParams(layoutParams2);
-		rl.addView(noteFall);
+		/* for the button next */
+		LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+		/* for the button restart */
+		LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+
+		/* for the button back */
+		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+		LinearLayout rl = new LinearLayout(this);
+		rl.setOrientation(LinearLayout.HORIZONTAL);
+		// layoutParams3.leftMargin = 100;
+		// layoutParams3.topMargin = 100;
+		// layoutParams3.setMargins(10, 10, 10, 10);
+		/*
+		 * For the button to start that tutorial
+		 */
+		playNote = new Button(this);
+		playNote.setText("Play!");
+		playNote.setLayoutParams(layoutParams2);
+
+		/*
+		 * For the button to play the next tutorial
+		 */
+		nextTut = new Button(this);
+		nextTut.setText("Next!");
+		nextTut.setLayoutParams(layoutParams3);
+
+		/*
+		 * For the button to play the back tutorial
+		 */
+		backTut = new Button(this);
+		backTut.setText("Previous");
+		backTut.setLayoutParams(layoutParams4);
+
+		/*
+		 * For the button to play the restart tutorial
+		 */
+		restartTut = new Button(this);
+		restartTut.setText("Restart!");
+		restartTut.setLayoutParams(layoutParams5);
+
+		rl.addView(playNote);
+		rl.addView(nextTut);
+		rl.addView(backTut);
+		rl.addView(restartTut);
+
 		layout.addView(rl, layoutParams);
 
 		popupLayout = new LinearLayout(this);
@@ -692,10 +739,10 @@ public class TutorialMSActivity extends Activity {
 
 		/********** Mary had a little lamb **************/
 
-		final int[] llNote = {6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8,
-				6, 5, 4, 5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur = {1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
+		final int[] llNote = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8, 6, 5, 4,
+				5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
+		final int[] llDur = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
 		int lambsize = llNote.length;
 		littlelamb = new NotePlay[lambsize];
 		for (int i = 0; i < littlelamb.length; i++)
@@ -706,11 +753,29 @@ public class TutorialMSActivity extends Activity {
 		 * N]); to stop, setTutUnShade = -1
 		 * 
 		 */
-		noteFall.setOnClickListener(new Button.OnClickListener() {
+		OnClickListener myPlay = new OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
-				numClicks++;
-				switch (numClicks - 1) {
+				Log.e("numclicks", "the cliks: " + numClicks);
+				if (playNote.getId() == ((Button) arg0).getId())
+					Log.i("asdf", "playnote");
+				// numClicks++;
+				if (nextTut.getId() == ((Button) arg0).getId()) {
+					numClicks++;
+					Log.i("asdf", "nexttut");
+				}
+				if (backTut.getId() == ((Button) arg0).getId()) {
+					Log.i("asdf", "backttut");
+					if (numClicks > 0)
+						numClicks--;
+				}
+				if (restartTut.getId() == ((Button) arg0).getId())
+				{
+					Log.i("asdf","restart");
+					numClicks = 0;
+				}
+				switch (numClicks) {
 				case 0:
 					piano.playSong(littlelamb);
 					break;
@@ -731,7 +796,12 @@ public class TutorialMSActivity extends Activity {
 				}
 
 			}
-		});
+		};
+		playNote.setOnClickListener(myPlay);
+		nextTut.setOnClickListener(myPlay);
+		backTut.setOnClickListener(myPlay);
+		restartTut.setOnClickListener(myPlay);
+
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
 
@@ -762,10 +832,10 @@ public class TutorialMSActivity extends Activity {
 				R.drawable.pianobckgd1, 768, 469);
 		BitmapDrawable background = new BitmapDrawable(bmImg);
 		int sdk = android.os.Build.VERSION.SDK_INT;
-		if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-		    layout.setBackgroundDrawable(background);
+		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+			layout.setBackgroundDrawable(background);
 		} else {
-		    layout.setBackground(background);
+			layout.setBackground(background);
 		}
 		setContentView(layout);
 		// player.SetPiano(piano);
