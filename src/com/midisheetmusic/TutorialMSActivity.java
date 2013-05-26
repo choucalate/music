@@ -1,6 +1,8 @@
 package com.midisheetmusic;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -113,6 +115,8 @@ public class TutorialMSActivity extends Activity {
 
 	private NotePlay[] np, littlelamb, twinkle;
 
+	private pianoAsync setPiano;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -134,7 +138,9 @@ public class TutorialMSActivity extends Activity {
 		setUpAnimation();
 		try {
 			// if (tutLevel.equals(values[0]))
-			createViewOnlyPiano();
+			setPiano = new pianoAsync();
+			setPiano.execute();
+
 			// else
 			// createView();
 		} catch (Exception ex) {
@@ -860,6 +866,26 @@ public class TutorialMSActivity extends Activity {
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
 
+	/** Show an error dialog with the given message */
+	private void showDialog(String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(message);
+		builder.setTitle("Piano Tutorial");
+		builder.setCancelable(false);
+		builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				
+			}
+		});
+		builder.setNegativeButton("Restart", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
 	//
 	// public void playNote(String note) {
 	// sp.playNote();
@@ -907,13 +933,19 @@ public class TutorialMSActivity extends Activity {
 		//
 	}
 
-	public class setupPiano extends AsyncTask<Void, Void, Boolean> {
+	public class pianoAsync extends AsyncTask<Void, Void, Boolean> {
 		boolean running = false;
 
 		@Override
 		protected Boolean doInBackground(Void... arg0) {
 			Log.e("noteFallTask", "BackExecute");
-			return true;
+			try {
+				createViewOnlyPiano();
+
+				return true;
+			} catch (Exception ex) {
+				return false;
+			}
 		}
 
 		@Override
@@ -921,9 +953,8 @@ public class TutorialMSActivity extends Activity {
 			// finish?
 			// TODO Auto-generated method stub
 			Log.e("noteFallTask", "PostExecute");
-			long ticks = 0L;
-
-			noteC1A.startAnimation(animC1);
+			if (false)
+				System.out.println("failed");
 
 			// Log.e("noteFallTask", "PostExecute");
 		}
