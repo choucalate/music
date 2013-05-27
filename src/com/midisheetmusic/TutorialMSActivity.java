@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -106,7 +107,7 @@ public class TutorialMSActivity extends Activity {
 	int index = 0;
 	int tArr[] = {};
 
-	int numClicks; // count numclicks to the buttons
+	int numClicks = 0; // count numclicks to the buttons
 
 	static int callBack = 0;
 
@@ -744,10 +745,10 @@ public class TutorialMSActivity extends Activity {
 
 		/********** Mary had a little lamb **************/
 
-		final int[] llNote = { 0, 0, 0, 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8,
-				6, 5, 4, 5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur = { 3, 3, 3, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
+		final int[] llNote = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8, 6, 5, 4,
+				5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
+		final int[] llDur = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
 		int lambsize = llNote.length;
 		littlelamb = new NotePlay[lambsize];
 		for (int i = 0; i < littlelamb.length; i++)
@@ -758,11 +759,29 @@ public class TutorialMSActivity extends Activity {
 		 * N]); to stop, setTutUnShade = -1
 		 * 
 		 */
-		playNote.setOnClickListener(new Button.OnClickListener() {
+		OnClickListener myPlay = new OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
-				numClicks++;
-				switch (numClicks - 1) {
+				Log.e("numclicks", "the cliks: " + numClicks);
+				if (playNote.getId() == ((Button) arg0).getId())
+					Log.i("asdf", "playnote");
+				// numClicks++;
+				if (nextTut.getId() == ((Button) arg0).getId()) {
+					numClicks++;
+					Log.i("asdf", "nexttut");
+				}
+				if (backTut.getId() == ((Button) arg0).getId()) {
+					Log.i("asdf", "backttut");
+					if (numClicks > 0)
+						numClicks--;
+				}
+				if (restartTut.getId() == ((Button) arg0).getId())
+				{
+					Log.i("asdf","restart");
+					numClicks = 0;
+				}
+				switch (numClicks) {
 				case 0:
 					piano.playSong(littlelamb);
 					break;
@@ -783,7 +802,12 @@ public class TutorialMSActivity extends Activity {
 				}
 
 			}
-		});
+		};
+		playNote.setOnClickListener(myPlay);
+		nextTut.setOnClickListener(myPlay);
+		backTut.setOnClickListener(myPlay);
+		restartTut.setOnClickListener(myPlay);
+
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
 
