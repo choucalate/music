@@ -112,7 +112,7 @@ public class TutorialMSActivity extends Activity {
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
 
-	private NotePlay[] np, littlelamb, twinkle;
+	private NotePlay[] np, littlelamb1, littlelamb2, twinkle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -739,14 +739,22 @@ public class TutorialMSActivity extends Activity {
 
 		/********** Mary had a little lamb **************/
 
-		final int[] llNote = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8, 6, 5, 4,
-				5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
-		int lambsize = llNote.length;
-		littlelamb = new NotePlay[lambsize];
-		for (int i = 0; i < littlelamb.length; i++)
-			littlelamb[i] = new NotePlay(llDur[i], llNote[i]);
+		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
+		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
+		
+		final int[] llNote2 = {	6, 5, 4, 5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
+		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
+		
+		int lambsize1 = llNote1.length;
+		int lambsize2 = llNote2.length;
+		littlelamb1 = new NotePlay[lambsize1];
+		littlelamb2 = new NotePlay[lambsize2];
+		
+		for (int i = 0; i < littlelamb1.length; i++)
+			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
+		for (int i = 0; i < littlelamb2.length; i++)
+			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
+		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -758,35 +766,36 @@ public class TutorialMSActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Log.e("numclicks", "the cliks: " + numClicks);
+				Log.e("numclicks", "playnote: " + playNote.getId() + " nextTut:" + nextTut.getId() + " arg0 " + arg0.getId());
 				if (playNote.getId() == ((Button) arg0).getId())
 					Log.i("asdf", "playnote");
 				// numClicks++;
-				if (nextTut.getId() == ((Button) arg0).getId()) {
+				else if (nextTut.getId() == ((Button) arg0).getId()) {
 					numClicks++;
 					Log.i("asdf", "nexttut");
 				}
-				if (backTut.getId() == ((Button) arg0).getId()) {
+				else if (backTut.getId() == ((Button) arg0).getId()) {
 					Log.i("asdf", "backttut");
 					if (numClicks > 0)
 						numClicks--;
 				}
-				if (restartTut.getId() == ((Button) arg0).getId())
+				else if (restartTut.getId() == ((Button) arg0).getId())
 				{
 					Log.i("asdf","restart");
 					numClicks = 0;
 				}
 				switch (numClicks) {
 				case 0:
-					piano.playSong(littlelamb);
+					piano.playSong(littlelamb1);
 					break;
 				case 1:
-					piano.tutorialNote(playDescending);
+					piano.playSong(littlelamb2);
 					break;
 				case 2:
 					piano.playSong(np);
 					break;
 				case 3:
-					// piano.tutorialNote(blinkNotes[3]);
+					piano.tutorialNote(playDescending);
 					break;
 				case 5:
 					numClicks = 0;
@@ -797,6 +806,7 @@ public class TutorialMSActivity extends Activity {
 
 			}
 		};
+		
 		playNote.setOnClickListener(myPlay);
 		nextTut.setOnClickListener(myPlay);
 		backTut.setOnClickListener(myPlay);
