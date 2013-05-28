@@ -32,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -117,10 +116,11 @@ public class TutorialMSActivity extends Activity {
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
 
-	private NotePlay[] np, littlelamb, twinkle, main;
-
 	private pianoAsync setPiano;
 	ProgressDialog dialog;
+	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle;
+	private String tut;
+	private int tutLevel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,12 @@ public class TutorialMSActivity extends Activity {
 
 		/********/
 		Bundle bundle = getIntent().getExtras();
-		String tutLevel = bundle.getString(LevelActivity.mSelected);
+		tut = bundle.getString(LevelActivity.mSelected);
+		Log.i("tutlevel", "tutlvl" + tut);
+		tut = tut.substring(6, tut.indexOf(":"));
+		Log.i("tutlevel", "new tutlvl" + tut);
+		tutLevel = Integer.parseInt(tut);
+		Log.i("tutlevel", "parsed tutlvl" + tut);
 		/********/
 
 		// ClefSymbol.LoadImages(this);
@@ -141,10 +146,6 @@ public class TutorialMSActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		try {
-			ProgressBar progressBar = new ProgressBar(this, null,
-					android.R.attr.progressBarStyleSmall);
-//			progressBar.animate();
-			// if (tutLevel.equals(values[0]))
 			setPiano = new pianoAsync();
 			setPiano.execute();
 
@@ -751,14 +752,40 @@ public class TutorialMSActivity extends Activity {
 
 		/********** Mary had a little lamb **************/
 
-		final int[] llNote = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8, 6, 5, 4,
-				5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
-		int lambsize = llNote.length;
-		littlelamb = new NotePlay[lambsize];
-		for (int i = 0; i < littlelamb.length; i++)
-			littlelamb[i] = new NotePlay(llDur[i], llNote[i]);
+		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
+		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
+
+		final int[] llNote2 = { 6, 5, 4, 5, 6, 6, 6 };
+		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 2 };
+
+		final int[] llNote3 = { 5, 5, 6, 5, 4 };
+		final int[] llDur3 = { 1, 1, 1, 1, 4 };
+
+		int lambsize1 = llNote1.length;
+		int lambsize2 = llNote2.length;
+		int lambsize3 = llNote3.length;
+		littlelamb1 = new NotePlay[lambsize1];
+		littlelamb2 = new NotePlay[lambsize2];
+		littlelamb3 = new NotePlay[lambsize3];
+
+		for (int i = 0; i < littlelamb1.length; i++)
+			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
+		for (int i = 0; i < littlelamb2.length; i++)
+			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
+		for (int i = 0; i < littlelamb3.length; i++)
+			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
+
+		/*
+		 * set the main to be the one we want to play
+		 */
+		switch (tutLevel) {
+		case 0:
+			// main = littlelamb1;
+		case 1:
+			// main= littlelamb2;
+		default:
+			break;
+		}
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -766,86 +793,36 @@ public class TutorialMSActivity extends Activity {
 		 * 
 		 * array (play, next, previous restart)
 		 */
-		OnClickListener myPlay2 = new OnClickListener() {
 
+		OnClickListener myPlay0 = new OnClickListener() {
 			@Override
-			public void onClick(View arg0) {
-				onClickHandler(2);
-				
+			public void onClick(View v) {
+				onClickHandler(0);
 			}
-
-
-		
-		};
-		OnClickListener myPlay3 = new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				onClickHandler(3);
-				
-			}
-
-
-		
-		};
-		OnClickListener myPlay4 = new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				onClickHandler(3);
-				
-			}
-
-
-		
 		};
 		OnClickListener myPlay1 = new OnClickListener() {
-
 			@Override
-			public void onClick(View arg0) {
-				Log.e("numclicks", "the cliks: " + numClicks);
-				if (playNote.getId() == ((Button) arg0).getId())
-					Log.i("asdf", "playnote");
-				// numClicks++;
-				if (nextTut.getId() == ((Button) arg0).getId()) {
-					numClicks++;
-					Log.i("asdf", "nexttut");
-				}
-				if (backTut.getId() == ((Button) arg0).getId()) {
-					Log.i("asdf", "backttut");
-					if (numClicks > 0)
-						numClicks--;
-				}
-				if (restartTut.getId() == ((Button) arg0).getId()) {
-					Log.i("asdf", "restart");
-					numClicks = 0;
-				}
-				switch (numClicks) {
-				case 0:
-					piano.playSong(littlelamb);
-					break;
-				case 1:
-					piano.tutorialNote(playDescending);
-					break;
-				case 2:
-					piano.playSong(np);
-					break;
-				case 3:
-					// piano.tutorialNote(blinkNotes[3]);
-					break;
-				case 5:
-					numClicks = 0;
-					break;
-				default:
-					piano.toggleShade();
-				}
-
+			public void onClick(View v) {
+				onClickHandler(1);
 			}
 		};
-		playNote.setOnClickListener(myPlay1);
-		nextTut.setOnClickListener(myPlay2);
-		backTut.setOnClickListener(myPlay3);
-		restartTut.setOnClickListener(myPlay4);
+		OnClickListener myPlay2 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(2);
+			}
+		};
+		OnClickListener myPlay3 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(3);
+			}
+		};
+
+		playNote.setOnClickListener(myPlay0);
+		nextTut.setOnClickListener(myPlay1);
+		backTut.setOnClickListener(myPlay2);
+		restartTut.setOnClickListener(myPlay3);
 
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
@@ -886,16 +863,45 @@ public class TutorialMSActivity extends Activity {
 		// player.SetPiano(piano);
 		layout.requestLayout();
 	}
-	private void onClickHandler(int clicked) {
 
-		switch(clicked) {
-		case 0:
-		case 1:
-			
-		}
+	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
-		
+
+		if (button == 0) {
+			Log.i("asdf", "playnote");
+			// No increment
+		} else if (button == 1) {
+			Log.i("asdf", "nextTut");
+			numClicks++;
+		} else if (button == 2) {
+			Log.i("asdf", "backTut");
+			numClicks--;
+		} else if (button == 3) {
+			Log.i("asdf", "restartTut");
+			numClicks = 0;
+		} else {
+			Log.e("OOB", "button out of bounds");
+			numClicks = 0;
+		}
+
+		switch (numClicks) {
+		case 0:
+			piano.playSong(littlelamb1);
+			break;
+		case 1:
+			piano.playSong(littlelamb2);
+			break;
+		case 2:
+			piano.playSong(littlelamb3);
+			break;
+		case 3:
+			numClicks = 0;
+			break;
+		default:
+			piano.toggleShade();
+		}
 	}
+
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
 		// Raw height and width of image
@@ -1017,7 +1023,8 @@ public class TutorialMSActivity extends Activity {
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
 			super.onPreExecute();
-			dialog = ProgressDialog.show(retContext(), "Loading...", "Go Town and Country!", true);
+			dialog = ProgressDialog.show(retContext(), "Loading...",
+					"Go Town and Country!", true);
 		}
 
 		@Override
