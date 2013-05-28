@@ -112,7 +112,7 @@ public class TutorialMSActivity extends Activity {
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
 
-	private NotePlay[] np, littlelamb1, littlelamb2, twinkle;
+	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -742,25 +742,62 @@ public class TutorialMSActivity extends Activity {
 		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
 		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
 		
-		final int[] llNote2 = {	6, 5, 4, 5, 6, 6, 6, 6, 5, 5, 6, 5, 4 };
-		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 };
+		final int[] llNote2 = {	6, 5, 4, 5, 6, 6, 6 };
+		final int[] llDur2 = {  1, 1, 1, 1, 1, 1, 2 };
+		
+		final int[] llNote3 = { 5, 5, 6, 5, 4 };
+		final int[] llDur3 = {  1, 1, 1, 1, 4 };
 		
 		int lambsize1 = llNote1.length;
 		int lambsize2 = llNote2.length;
+		int lambsize3 = llNote3.length;
 		littlelamb1 = new NotePlay[lambsize1];
 		littlelamb2 = new NotePlay[lambsize2];
+		littlelamb3 = new NotePlay[lambsize3];
 		
 		for (int i = 0; i < littlelamb1.length; i++)
 			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
 		for (int i = 0; i < littlelamb2.length; i++)
 			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
+		for (int i = 0; i < littlelamb3.length; i++)
+			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
 		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
 		 * N]); to stop, setTutUnShade = -1
 		 * 
+		 * # - 0 playnote, 1 nextTut, 2 backTut, 3 restartTut
 		 */
+		
+		
+		
+		OnClickListener myPlay0 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(0);
+			}
+		};
+		OnClickListener myPlay1 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(1);
+			}
+		};
+		OnClickListener myPlay2 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(2);
+			}
+		};
+		OnClickListener myPlay3 = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickHandler(3);
+			}
+		};
+		
+/*		
 		OnClickListener myPlay = new OnClickListener() {
 
 			@Override
@@ -806,11 +843,13 @@ public class TutorialMSActivity extends Activity {
 
 			}
 		};
+*/		
 		
-		playNote.setOnClickListener(myPlay);
-		nextTut.setOnClickListener(myPlay);
-		backTut.setOnClickListener(myPlay);
-		restartTut.setOnClickListener(myPlay);
+		
+		playNote.setOnClickListener(myPlay0);
+		nextTut.setOnClickListener(myPlay1);
+		backTut.setOnClickListener(myPlay2);
+		restartTut.setOnClickListener(myPlay3);
 
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
@@ -850,6 +889,48 @@ public class TutorialMSActivity extends Activity {
 		setContentView(layout);
 		// player.SetPiano(piano);
 		layout.requestLayout();
+	}
+
+	protected void onClickHandler(int button) {
+		// TODO Auto-generated method stub
+		
+		if(button == 0){
+			Log.i("asdf", "playnote");
+			//No increment
+		}
+		else if(button == 1) {
+			Log.i("asdf", "nextTut");
+			numClicks++;
+		}
+		else if(button == 2) {
+			Log.i("asdf", "backTut");
+			numClicks--;
+		}
+		else if(button == 3) {
+			Log.i("asdf", "restartTut");
+			numClicks=0;
+		}
+		else{
+			Log.e("OOB", "button out of bounds");
+			numClicks=0;
+		}
+		
+		switch (numClicks) {
+		case 0:
+			piano.playSong(littlelamb1);
+			break;
+		case 1:
+			piano.playSong(littlelamb2);
+			break;
+		case 2:
+			piano.playSong(littlelamb3);
+			break;
+		case 3:
+			numClicks = 0;
+			break;
+		default:
+			piano.toggleShade();
+		}			
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
