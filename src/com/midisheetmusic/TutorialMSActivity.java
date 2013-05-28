@@ -118,9 +118,9 @@ public class TutorialMSActivity extends Activity {
 
 	private pianoAsync setPiano;
 	ProgressDialog dialog;
-	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle;
 	private String tut;
 	private int tutLevel;
+	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle1, twinkle2, twinkle3, twinkle4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -745,10 +745,10 @@ public class TutorialMSActivity extends Activity {
 		/****** Cmajor scale ******/
 		int size = 8;
 		np = new NotePlay[size];
-		final int[] npNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		final int[] npDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
+		final int[] cNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		final int[] cDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
 		for (int i = 0; i < np.length; i++)
-			np[i] = new NotePlay(npDur[i], npNote[i]);
+			np[i] = new NotePlay(cDur[i], cNote[i]);
 
 		/********** Mary had a little lamb **************/
 
@@ -775,17 +775,39 @@ public class TutorialMSActivity extends Activity {
 		for (int i = 0; i < littlelamb3.length; i++)
 			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
 
-		/*
-		 * set the main to be the one we want to play
-		 */
-		switch (tutLevel) {
-		case 0:
-			// main = littlelamb1;
-		case 1:
-			// main= littlelamb2;
-		default:
-			break;
-		}
+		
+		/***********Twinkle Twinkle Little Stars **************/
+		
+		final int[] ttNote1 = { 0, 0, 4, 4, 5, 5, 4 };
+		final int[] ttDur1 = {  1, 1, 1, 1, 1, 1, 2 };
+		
+		final int[] ttNote2 = { 3, 3, 2, 2, 1, 1, 0 };
+		final int[] ttDur2 = {  1, 1, 1, 1, 1, 1, 2 };
+		
+		final int[] ttNote3 = { 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1 };
+		final int[] ttDur3 = {  1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };		
+		
+		final int[] ttNote4 = { 3, 3, 2, 2, 1, 4, 0 };
+		final int[] ttDur4 = {  1, 1, 1, 1, 1, 1, 2 };
+		
+		int ttsize1 = ttNote1.length;
+		int ttsize2 = ttNote2.length;
+		int ttsize3 = ttNote3.length;
+		int ttsize4 = ttNote4.length;
+		twinkle1 = new NotePlay[ttsize1];
+		twinkle2 = new NotePlay[ttsize2];
+		twinkle3 = new NotePlay[ttsize3];
+		twinkle4 = new NotePlay[ttsize4];
+		
+		for (int i = 0; i < ttsize1; i++)
+			twinkle1[i] = new NotePlay(ttDur1[i], ttNote1[i]);
+		for (int i = 0; i < ttsize2; i++)
+			twinkle2[i] = new NotePlay(ttDur2[i], ttNote2[i]);
+		for (int i = 0; i < ttsize3; i++)
+			twinkle3[i] = new NotePlay(ttDur3[i], ttNote3[i]);
+		for (int i = 0; i < ttsize4; i++)
+			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
+		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -866,8 +888,8 @@ public class TutorialMSActivity extends Activity {
 
 	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
-
-		if (button == 0) {
+		
+		if(button == 0) {
 			Log.i("asdf", "playnote");
 			// No increment
 		} else if (button == 1) {
