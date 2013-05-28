@@ -120,7 +120,7 @@ public class TutorialMSActivity extends Activity {
 	ProgressDialog dialog;
 	private String tut;
 	private int tutLevel;
-	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle1, twinkle2, twinkle3, twinkle4;
+	private NotePlay[] cmajor1, cmajor2, littlelamb1, littlelamb2, littlelamb3, twinkle1, twinkle2, twinkle3, twinkle4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -744,11 +744,17 @@ public class TutorialMSActivity extends Activity {
 
 		/****** Cmajor scale ******/
 		int size = 8;
-		np = new NotePlay[size];
-		final int[] cNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		final int[] cDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
-		for (int i = 0; i < np.length; i++)
-			np[i] = new NotePlay(cDur[i], cNote[i]);
+		cmajor1 = new NotePlay[size];
+		cmajor2 = new NotePlay[size];
+		final int[] cNote1 = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		final int[] cDur1 = {  2, 2, 2, 2, 2, 2, 2, 2 };
+		final int[] cNote2 = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		final int[] cDur2 = {  2, 2, 2, 2, 2, 2, 2, 2 };
+		
+		for (int i = 0; i < cmajor1.length; i++)
+			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
+		for (int i = 0; i < cmajor2.length; i++)
+			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);		
 
 		/********** Mary had a little lamb **************/
 
@@ -906,21 +912,67 @@ public class TutorialMSActivity extends Activity {
 			numClicks = 0;
 		}
 
-		switch (numClicks) {
-		case 0:
-			piano.playSong(littlelamb1);
-			break;
-		case 1:
-			piano.playSong(littlelamb2);
-			break;
-		case 2:
-			piano.playSong(littlelamb3);
-			break;
-		case 3:
-			numClicks = 0;
-			break;
-		default:
-			piano.toggleShade();
+		//Level 1 - C Major Scale
+		if(tutLevel == 1) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(cmajor1);
+				break;
+			case 1:
+				piano.playSong(cmajor2);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		//Level 2 - Twinkle Twinkle
+		if(tutLevel == 2){
+			switch (numClicks) {
+			case 0:
+				piano.playSong(twinkle1);
+				break;
+			case 1:
+				piano.playSong(twinkle2);
+				break;
+			case 2:
+				piano.playSong(twinkle3);
+				break;
+			case 3:
+				piano.playSong(twinkle1);
+				break;
+			case 4:
+				piano.playSong(twinkle4);
+				break;
+			case 5:
+				numClicks=0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		//Level 3 - Mary had a Little Lamb
+		if(tutLevel == 3){
+			switch (numClicks) {
+			case 0:
+				piano.playSong(littlelamb1);
+				break;
+			case 1:
+				piano.playSong(littlelamb2);
+				break;
+			case 2:
+				piano.playSong(littlelamb3);
+				break;
+			case 3:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
 		}
 	}
 
