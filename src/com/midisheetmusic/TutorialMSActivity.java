@@ -120,7 +120,8 @@ public class TutorialMSActivity extends Activity {
 	ProgressDialog dialog;
 	private String tut;
 	private int tutLevel;
-	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle1, twinkle2, twinkle3, twinkle4;
+	private NotePlay[] np, littlelamb1, littlelamb2, littlelamb3, twinkle1,
+			twinkle2, twinkle3, twinkle4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -741,73 +742,8 @@ public class TutorialMSActivity extends Activity {
 		 * final NotePlay[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 }; final
 		 * NotePlay[] playDescending = { 7, 6, 5, 4, 3, 2, 1, 0 };
 		 */
+		initSongs();
 
-		/****** Cmajor scale ******/
-		int size = 8;
-		np = new NotePlay[size];
-		final int[] cNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
-		final int[] cDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
-		for (int i = 0; i < np.length; i++)
-			np[i] = new NotePlay(cDur[i], cNote[i]);
-
-		/********** Mary had a little lamb **************/
-
-		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
-		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
-
-		final int[] llNote2 = { 6, 5, 4, 5, 6, 6, 6 };
-		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 2 };
-
-		final int[] llNote3 = { 5, 5, 6, 5, 4 };
-		final int[] llDur3 = { 1, 1, 1, 1, 4 };
-
-		int lambsize1 = llNote1.length;
-		int lambsize2 = llNote2.length;
-		int lambsize3 = llNote3.length;
-		littlelamb1 = new NotePlay[lambsize1];
-		littlelamb2 = new NotePlay[lambsize2];
-		littlelamb3 = new NotePlay[lambsize3];
-
-		for (int i = 0; i < littlelamb1.length; i++)
-			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
-		for (int i = 0; i < littlelamb2.length; i++)
-			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
-		for (int i = 0; i < littlelamb3.length; i++)
-			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
-
-		
-		/***********Twinkle Twinkle Little Stars **************/
-		
-		final int[] ttNote1 = { 0, 0, 4, 4, 5, 5, 4 };
-		final int[] ttDur1 = {  1, 1, 1, 1, 1, 1, 2 };
-		
-		final int[] ttNote2 = { 3, 3, 2, 2, 1, 1, 0 };
-		final int[] ttDur2 = {  1, 1, 1, 1, 1, 1, 2 };
-		
-		final int[] ttNote3 = { 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1 };
-		final int[] ttDur3 = {  1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };		
-		
-		final int[] ttNote4 = { 3, 3, 2, 2, 1, 4, 0 };
-		final int[] ttDur4 = {  1, 1, 1, 1, 1, 1, 2 };
-		
-		int ttsize1 = ttNote1.length;
-		int ttsize2 = ttNote2.length;
-		int ttsize3 = ttNote3.length;
-		int ttsize4 = ttNote4.length;
-		twinkle1 = new NotePlay[ttsize1];
-		twinkle2 = new NotePlay[ttsize2];
-		twinkle3 = new NotePlay[ttsize3];
-		twinkle4 = new NotePlay[ttsize4];
-		
-		for (int i = 0; i < ttsize1; i++)
-			twinkle1[i] = new NotePlay(ttDur1[i], ttNote1[i]);
-		for (int i = 0; i < ttsize2; i++)
-			twinkle2[i] = new NotePlay(ttDur2[i], ttNote2[i]);
-		for (int i = 0; i < ttsize3; i++)
-			twinkle3[i] = new NotePlay(ttDur3[i], ttNote3[i]);
-		for (int i = 0; i < ttsize4; i++)
-			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
-		
 		/**
 		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
@@ -886,20 +822,92 @@ public class TutorialMSActivity extends Activity {
 		layout.requestLayout();
 	}
 
+	private void initSongs() {
+		/****** Cmajor scale ******/
+		int size = 8;
+		np = new NotePlay[size];
+		final int[] cNote = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		final int[] cDur = { 2, 2, 2, 2, 2, 2, 2, 2 };
+		for (int i = 0; i < np.length; i++)
+			np[i] = new NotePlay(cDur[i], cNote[i]);
+
+		/********** Mary had a little lamb **************/
+
+		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
+		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
+
+		final int[] llNote2 = { 6, 5, 4, 5, 6, 6, 6 };
+		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 2 };
+
+		final int[] llNote3 = { 5, 5, 6, 5, 4 };
+		final int[] llDur3 = { 1, 1, 1, 1, 4 };
+
+		int lambsize1 = llNote1.length;
+		int lambsize2 = llNote2.length;
+		int lambsize3 = llNote3.length;
+		littlelamb1 = new NotePlay[lambsize1];
+		littlelamb2 = new NotePlay[lambsize2];
+		littlelamb3 = new NotePlay[lambsize3];
+
+		for (int i = 0; i < littlelamb1.length; i++)
+			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
+		for (int i = 0; i < littlelamb2.length; i++)
+			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
+		for (int i = 0; i < littlelamb3.length; i++)
+			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
+
+		/*********** Twinkle Twinkle Little Stars **************/
+
+		final int[] ttNote1 = { 0, 0, 4, 4, 5, 5, 4 };
+		final int[] ttDur1 = { 1, 1, 1, 1, 1, 1, 2 };
+
+		final int[] ttNote2 = { 3, 3, 2, 2, 1, 1, 0 };
+		final int[] ttDur2 = { 1, 1, 1, 1, 1, 1, 2 };
+
+		final int[] ttNote3 = { 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1 };
+		final int[] ttDur3 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };
+
+		final int[] ttNote4 = { 3, 3, 2, 2, 1, 4, 0 };
+		final int[] ttDur4 = { 1, 1, 1, 1, 1, 1, 2 };
+
+		int ttsize1 = ttNote1.length;
+		int ttsize2 = ttNote2.length;
+		int ttsize3 = ttNote3.length;
+		int ttsize4 = ttNote4.length;
+		twinkle1 = new NotePlay[ttsize1];
+		twinkle2 = new NotePlay[ttsize2];
+		twinkle3 = new NotePlay[ttsize3];
+		twinkle4 = new NotePlay[ttsize4];
+
+		for (int i = 0; i < ttsize1; i++)
+			twinkle1[i] = new NotePlay(ttDur1[i], ttNote1[i]);
+		for (int i = 0; i < ttsize2; i++)
+			twinkle2[i] = new NotePlay(ttDur2[i], ttNote2[i]);
+		for (int i = 0; i < ttsize3; i++)
+			twinkle3[i] = new NotePlay(ttDur3[i], ttNote3[i]);
+		for (int i = 0; i < ttsize4; i++)
+			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
+	}
+
 	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
-		
-		if(button == 0) {
+
+		if (button == 0) {
 			Log.i("asdf", "playnote");
+			initSongs();
 			// No increment
 		} else if (button == 1) {
 			Log.i("asdf", "nextTut");
+			//initSongs();
 			numClicks++;
 		} else if (button == 2) {
 			Log.i("asdf", "backTut");
+			initSongs();
 			numClicks--;
 		} else if (button == 3) {
 			Log.i("asdf", "restartTut");
+			initSongs();
+			// initnotes
 			numClicks = 0;
 		} else {
 			Log.e("OOB", "button out of bounds");
