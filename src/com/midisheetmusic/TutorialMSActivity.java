@@ -2,6 +2,8 @@ package com.midisheetmusic;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -30,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -114,9 +117,10 @@ public class TutorialMSActivity extends Activity {
 	RelativeLayout rl;
 	AnimatorSet set1, set2, set3, set4;
 
-	private NotePlay[] np, littlelamb, twinkle;
+	private NotePlay[] np, littlelamb, twinkle, main;
 
 	private pianoAsync setPiano;
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,15 +133,17 @@ public class TutorialMSActivity extends Activity {
 		String tutLevel = bundle.getString(LevelActivity.mSelected);
 		/********/
 
-		ClefSymbol.LoadImages(this);
-		TimeSigSymbol.LoadImages(this);
-		MidiPlayer.LoadImages(this);
+		// ClefSymbol.LoadImages(this);
+		// TimeSigSymbol.LoadImages(this);
+		// MidiPlayer.LoadImages(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setUpSound();
-		setUpAnimation();
+
 		try {
+			ProgressBar progressBar = new ProgressBar(this, null,
+					android.R.attr.progressBarStyleSmall);
+//			progressBar.animate();
 			// if (tutLevel.equals(values[0]))
 			setPiano = new pianoAsync();
 			setPiano.execute();
@@ -758,8 +764,42 @@ public class TutorialMSActivity extends Activity {
 		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
 		 * N]); to stop, setTutUnShade = -1
 		 * 
+		 * array (play, next, previous restart)
 		 */
-		OnClickListener myPlay = new OnClickListener() {
+		OnClickListener myPlay2 = new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				onClickHandler(2);
+				
+			}
+
+
+		
+		};
+		OnClickListener myPlay3 = new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				onClickHandler(3);
+				
+			}
+
+
+		
+		};
+		OnClickListener myPlay4 = new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				onClickHandler(3);
+				
+			}
+
+
+		
+		};
+		OnClickListener myPlay1 = new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -776,9 +816,8 @@ public class TutorialMSActivity extends Activity {
 					if (numClicks > 0)
 						numClicks--;
 				}
-				if (restartTut.getId() == ((Button) arg0).getId())
-				{
-					Log.i("asdf","restart");
+				if (restartTut.getId() == ((Button) arg0).getId()) {
+					Log.i("asdf", "restart");
 					numClicks = 0;
 				}
 				switch (numClicks) {
@@ -803,10 +842,10 @@ public class TutorialMSActivity extends Activity {
 
 			}
 		};
-		playNote.setOnClickListener(myPlay);
-		nextTut.setOnClickListener(myPlay);
-		backTut.setOnClickListener(myPlay);
-		restartTut.setOnClickListener(myPlay);
+		playNote.setOnClickListener(myPlay1);
+		nextTut.setOnClickListener(myPlay2);
+		backTut.setOnClickListener(myPlay3);
+		restartTut.setOnClickListener(myPlay4);
 
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
@@ -847,7 +886,16 @@ public class TutorialMSActivity extends Activity {
 		// player.SetPiano(piano);
 		layout.requestLayout();
 	}
+	private void onClickHandler(int clicked) {
 
+		switch(clicked) {
+		case 0:
+		case 1:
+			
+		}
+		// TODO Auto-generated method stub
+		
+	}
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
 		// Raw height and width of image
@@ -896,16 +944,18 @@ public class TutorialMSActivity extends Activity {
 		builder.setMessage(message);
 		builder.setTitle("Piano Tutorial");
 		builder.setCancelable(false);
-		builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				
-			}
-		});
-		builder.setNegativeButton("Restart", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				
-			}
-		});
+		builder.setPositiveButton("Finished",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+
+					}
+				});
+		builder.setNegativeButton("Restart",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+
+					}
+				});
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
@@ -957,15 +1007,25 @@ public class TutorialMSActivity extends Activity {
 		//
 	}
 
+	private Context retContext() {
+		return this;
+	}
+
 	public class pianoAsync extends AsyncTask<Void, Void, Boolean> {
 		boolean running = false;
+
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			dialog = ProgressDialog.show(retContext(), "Loading...", "Go Town and Country!", true);
+		}
 
 		@Override
 		protected Boolean doInBackground(Void... arg0) {
 			Log.e("noteFallTask", "BackExecute");
 			try {
-				createViewOnlyPiano();
-
+				setUpSound();
+				setUpAnimation();
 				return true;
 			} catch (Exception ex) {
 				return false;
@@ -975,11 +1035,10 @@ public class TutorialMSActivity extends Activity {
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			// finish?
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method
 			Log.e("noteFallTask", "PostExecute");
-			if (false)
-				System.out.println("failed");
-
+			createViewOnlyPiano();
+			dialog.dismiss();
 			// Log.e("noteFallTask", "PostExecute");
 		}
 
