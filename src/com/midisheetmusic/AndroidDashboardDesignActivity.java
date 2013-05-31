@@ -11,16 +11,10 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.facebook.android.AsyncFacebookRunner;
-import com.facebook.android.DialogError;
-import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
+
 
 public class AndroidDashboardDesignActivity extends Activity {
-	Facebook facebook;
 	AsyncTask<Void, ?, ?> wait;
-	AsyncFacebookRunner mFacebookRunner;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -117,7 +111,6 @@ public class AndroidDashboardDesignActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		facebook.authorizeCallback(requestCode, resultCode, data);
 
 	}
 
