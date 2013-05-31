@@ -123,7 +123,8 @@ public class TutorialMSActivity extends Activity {
 	private String tut;
 	private int tutLevel;
 	private NotePlay[] cmajor1, cmajor2, littlelamb1, littlelamb2, littlelamb3,
-			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3, biebs4, biebs5;
+			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3,
+			biebs4, biebs5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -901,23 +902,27 @@ public class TutorialMSActivity extends Activity {
 		for (int i = 0; i < ttsize4; i++)
 			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
 
-		/**************Justin Biebs*************/
-		
-		final int[] jbNote1 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7 };
-		final int[] jbDur1 = {  1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2 };
-		
-		final int[] jbNote2 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9, 8, 9, 9, 9, 9, 8 };
-		final int[] jbDur2 = {  1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2 };
-		
+		/************** Justin Biebs *************/
+
+		final int[] jbNote1 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
+				8, 8, 7, 8, 8, 8, 7, 7 };
+		final int[] jbDur1 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
+				1, 1, 1, 2, 2, 2, 1, 2 };
+
+		final int[] jbNote2 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
+				8, 9, 9, 9, 9, 8 };
+		final int[] jbDur2 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
+				2, 1, 1, 1, 1, 2 };
+
 		final int[] jbNote3 = { 7, 7, 7, 11, 11, 11, 10, 9, 10, 9 };
-		final int[] jbDur3 = {  1, 1, 1, 2,  2,  2,  1,  1, 1,  4 };
+		final int[] jbDur3 = { 1, 1, 1, 2, 2, 2, 1, 1, 1, 4 };
 
 		final int[] jbNote4 = { 7, 7, 11, 10, 9, 8, 7 };
-		final int[] jbDur4 = {  1, 1, 2,  2,  2, 2, 6 };
-		
+		final int[] jbDur4 = { 1, 1, 2, 2, 2, 2, 6 };
+
 		final int[] jbNote5 = { 7, 7, 11, 10, 9, 8, 7, 8, 9, 10, 9 };
-		final int[] jbDur5 = {  1, 1, 2,  2,  2, 2, 3, 1, 1, 1,  4 };
-		
+		final int[] jbDur5 = { 1, 1, 2, 2, 2, 2, 3, 1, 1, 1, 4 };
+
 		int jbsize1 = jbNote1.length;
 		int jbsize2 = jbNote2.length;
 		int jbsize3 = jbNote3.length;
@@ -928,16 +933,16 @@ public class TutorialMSActivity extends Activity {
 		biebs3 = new NotePlay[jbsize3];
 		biebs4 = new NotePlay[jbsize4];
 		biebs5 = new NotePlay[jbsize5];
-		
+
 		for (int i = 0; i < jbsize1; i++)
 			biebs1[i] = new NotePlay(jbDur1[i], jbNote1[i]);
-		for (int i = 0; i < jbsize1; i++)
+		for (int i = 0; i < jbsize2; i++)
 			biebs2[i] = new NotePlay(jbDur2[i], jbNote2[i]);
-		for (int i = 0; i < jbsize1; i++)
+		for (int i = 0; i < jbsize3; i++)
 			biebs3[i] = new NotePlay(jbDur3[i], jbNote3[i]);
-		for (int i = 0; i < jbsize1; i++)
+		for (int i = 0; i < jbsize4; i++)
 			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
-		for (int i = 0; i < jbsize1; i++)
+		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
 	}
 
@@ -970,10 +975,10 @@ public class TutorialMSActivity extends Activity {
 		if (tutLevel == 1) {
 			switch (numClicks) {
 			case 0:
-				piano.playSong(cmajor1);
+				piano.playSong(cmajor1, 150);
 				break;
 			case 1:
-				piano.playSong(cmajor2);
+				piano.playSong(cmajor2, 150);
 				break;
 			case 2:
 				numClicks = 0;
@@ -987,19 +992,19 @@ public class TutorialMSActivity extends Activity {
 		if (tutLevel == 2) {
 			switch (numClicks) {
 			case 0:
-				piano.playSong(twinkle1);
+				piano.playSong(twinkle1, 150);
 				break;
 			case 1:
-				piano.playSong(twinkle2);
+				piano.playSong(twinkle2, 150);
 				break;
 			case 2:
-				piano.playSong(twinkle3);
+				piano.playSong(twinkle3, 150);
 				break;
 			case 3:
-				piano.playSong(twinkle1);
+				piano.playSong(twinkle1, 150);
 				break;
 			case 4:
-				piano.playSong(twinkle4);
+				piano.playSong(twinkle4, 150);
 				break;
 			case 5:
 				numClicks = 0;
@@ -1013,13 +1018,13 @@ public class TutorialMSActivity extends Activity {
 		if (tutLevel == 3) {
 			switch (numClicks) {
 			case 0:
-				piano.playSong(littlelamb1);
+				piano.playSong(littlelamb1, 125);
 				break;
 			case 1:
-				piano.playSong(littlelamb2);
+				piano.playSong(littlelamb2, 125);
 				break;
 			case 2:
-				piano.playSong(littlelamb3);
+				piano.playSong(littlelamb3, 125);
 				break;
 			case 3:
 				numClicks = 0;
@@ -1028,24 +1033,24 @@ public class TutorialMSActivity extends Activity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 4 - Justin Biebs
 		if (tutLevel == 4) {
 			switch (numClicks) {
 			case 0:
-				piano.playSong(biebs1);
+				piano.playSong(biebs1, 130);
 				break;
 			case 1:
-				piano.playSong(biebs2);
+				piano.playSong(biebs2, 130);
 				break;
 			case 2:
-				piano.playSong(biebs3);
+				piano.playSong(biebs3, 130);
 				break;
 			case 3:
-				piano.playSong(biebs4);
+				piano.playSong(biebs4, 130);
 				break;
 			case 4:
-				piano.playSong(biebs5);
+				piano.playSong(biebs5, 130);
 				break;
 			case 5:
 				numClicks = 0;

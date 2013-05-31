@@ -936,7 +936,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	 * note][sharp # or N]
 	 */
 	// (NotePlay[] notes)
-	public void playSong(NotePlay[] notes) {
+	public void playSong(NotePlay[] notes, int speed) {
 		if (!surfaceReady || bufferBitmap == null) {
 			Log.e("Shade", "fail");
 			return;
@@ -1031,7 +1031,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				return true;
 			}
 
-		}, 500, 200);
+		}, 500, speed);
 
 	}
 
