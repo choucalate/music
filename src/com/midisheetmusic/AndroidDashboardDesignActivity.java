@@ -1,17 +1,28 @@
 package com.midisheetmusic;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
 
 public class AndroidDashboardDesignActivity extends Activity {
+	Facebook facebook;
+	AsyncTask<Void, ?, ?> wait;
+	AsyncFacebookRunner mFacebookRunner;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,16 +31,40 @@ public class AndroidDashboardDesignActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.dashboard_layout);
-/*		LinearLayout layout = (LinearLayout) findViewById(R.id.home_root);
-		Bitmap bmImg = decodeSampledBitmapFromResource(getResources(),
-				R.drawable.pianobckgd1, 768, 469);
-		BitmapDrawable background = new BitmapDrawable(bmImg);
-		int sdk = android.os.Build.VERSION.SDK_INT;
-		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-			layout.setBackgroundDrawable(background);
-		} else {
-			layout.setBackground(background);
-		}*/
+		wait = new waitUp();
+		wait.execute((Void) null);
+		/*
+		 * facebook = new Facebook("544056102317137"); mFacebookRunner = new
+		 * AsyncFacebookRunner(facebook); // facebook.setAccessToken(token);
+		 * facebook.setAccessToken(facebook.getAccessToken()); if
+		 * (facebook.isSessionValid()) { Log.e("async", "session valid"); wait =
+		 * new waitUp(); wait.execute((Void) null); } else {
+		 * facebook.authorize(this, new String[] { "publish_actions" }, new
+		 * DialogListener() {
+		 * 
+		 * @Override public void onComplete(Bundle values) { Log.e("async",
+		 * "fb"); wait = new waitUp(); wait.execute((Void) null); }
+		 * 
+		 * @Override public void onFacebookError(FacebookError error) {
+		 * 
+		 * Log.e("async", "fberr" + error); wait = new waitUp();
+		 * wait.execute((Void) null); }
+		 * 
+		 * @Override public void onError(DialogError e) { Log.e("async", "err");
+		 * wait = new waitUp(); wait.execute((Void) null); }
+		 * 
+		 * @Override public void onCancel() { Log.e("async", "cancel"); wait =
+		 * new waitUp(); wait.execute((Void) null); } }); }
+		 */
+		/*
+		 * LinearLayout layout = (LinearLayout) findViewById(R.id.home_root);
+		 * Bitmap bmImg = decodeSampledBitmapFromResource(getResources(),
+		 * R.drawable.pianobckgd1, 768, 469); BitmapDrawable background = new
+		 * BitmapDrawable(bmImg); int sdk = android.os.Build.VERSION.SDK_INT; if
+		 * (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+		 * layout.setBackgroundDrawable(background); } else {
+		 * layout.setBackground(background); }
+		 */
 		/*
 		 * setContentView(layout); // player.SetPiano(piano);
 		 * layout.requestLayout();
@@ -76,5 +111,37 @@ public class AndroidDashboardDesignActivity extends Activity {
 		// Decode bitmap with inSampleSize set
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeResource(res, resId, options);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		facebook.authorizeCallback(requestCode, resultCode, data);
+
+	}
+
+	public class waitUp extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			// TODO Auto-generated method stub
+			try {
+				Log.e("async", "pre");
+				Thread.sleep(8000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			Log.e("async", "post");
+			Intent i = new Intent(getApplicationContext(), LevelActivity.class);
+			startActivity(i);
+		}
+
 	}
 }
