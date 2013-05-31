@@ -1100,7 +1100,7 @@ public class TutorialMSActivity extends Activity {
 	}
 
 	public class pianoAsync extends AsyncTask<Void, Void, Boolean> {
-		boolean running = false;
+		boolean running = true;
 
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
@@ -1115,6 +1115,10 @@ public class TutorialMSActivity extends Activity {
 			try {
 				setUpSound();
 				setUpAnimation();
+				while(running)
+				{
+					
+				}
 				return true;
 			} catch (Exception ex) {
 				return false;
