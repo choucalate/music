@@ -1,5 +1,7 @@
 package com.midisheetmusic;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -774,6 +776,11 @@ public class TutorialMSActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				onClickHandler(3);
+				ArrayList<Integer> logshade = piano.retLogShade();
+				for (int i = 0; i < logshade.size(); i++) {
+					Log.e("logshade", "the notes i: " + i + " at notes: "
+							+ logshade.get(i));
+				}
 			}
 		};
 
@@ -1115,10 +1122,7 @@ public class TutorialMSActivity extends Activity {
 			try {
 				setUpSound();
 				setUpAnimation();
-				while(running)
-				{
-					
-				}
+
 				return true;
 			} catch (Exception ex) {
 				return false;

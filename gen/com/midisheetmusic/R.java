@@ -277,6 +277,7 @@ containing a value of this type.
         public static final int treble=0x7f020051;
         public static final int twelve=0x7f020052;
         public static final int two=0x7f020053;
+        public static final int unlocked=0x7f020054;
     }
     public static final class id {
         public static final int Compose_Choice=0x7f060035;

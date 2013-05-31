@@ -100,6 +100,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	private int blackHeightY = 150;
 	ArrayList<Integer> toUnShade = new ArrayList<Integer>();
 	ArrayList<Integer> xyPointer = new ArrayList<Integer>();
+	ArrayList<Integer> logTouch = new ArrayList<Integer>();
 
 	final int[] black = { 25, 27, 30, 32, 34, 37, 39, 42, 44, 46 };
 	final int[] white = { 24, 26, 28, 29, 31, 33, 35, 36, 38, 40, 41, 43, 45,
@@ -925,6 +926,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
+	public ArrayList<Integer> retLogShade() {
+		return logTouch;
+	}
+
 	/**
 	 * for the tutorial note to enter: Black {C#, D#, F#, G#, A#, C#, D#, F#,
 	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
@@ -1065,26 +1070,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return key;
 	}
 
-	/** When the Piano is touched, pause the midi player */
+	/** When the Piano is touched */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// MotionEvent reports input details from the touch screen
-		// and other input controls. In this case, you are only
-		// interested in events where the touch position changed.
-		// Log.i("coord","X: " + x + " Y: "+ y + " whitkeywdith "+
-		// (WhiteKeyWidth + (margin_val[0] + WhiteKeyWidth + BlackBorder))); //
-		// if (x < (margin_val[0] + WhiteKeyWidth))
-		// {
-		// Log.i("coord", " margin +width " + (margin_val[0] + WhiteKeyWidth +
-		// BlackBorder));
-		// val 66
 
-		// MAKE ARRAY LIST OF HASH TABLE MAPPING X,Y OF VALUES FOR EACH POINTER
-		// INDEX
-
-		// int lastMoved; // purpose: so that doesn't just call remove when i
-		// lift
-		// off finger
 		float x = event.getX();
 		float y = event.getY();
 		PointerCoords pCord;
@@ -1094,7 +1083,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		if (event.getActionMasked() == android.view.MotionEvent.ACTION_DOWN) {
 			// Log.d("TouchTest", "Touch down");
 			toUnShade.add(ShadeRandom(x, y, false));
-
+			logTouch.add(toUnShade.get(toUnShade.size() - 1));
 		} else if (event.getActionMasked() == android.view.MotionEvent.ACTION_UP) {
 			int size = toUnShade.size();
 			try {
@@ -1120,6 +1109,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					Log.d("TouchTest", "comes here! for sense");
 					toUnShade.add(ShadeRandom(event.getX(2), event.getY(2),
 							true));
+					logTouch.add(toUnShade.get(toUnShade.size() - 1));
 					// on insert- > first clear the item and then insert it
 					// xy3.put((int) event.getX(2), (int) event.getY(2));
 					xyPointer.set(2, toUnShade.get(toUnShade.size() - 1));
@@ -1137,6 +1127,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					Log.d("TouchTest", "comes here! for sense");
 					toUnShade.add(ShadeRandom(event.getX(1), event.getY(1),
 							true));
+					logTouch.add(toUnShade.get(toUnShade.size() - 1));
 					// on insert- > first clear the item and then insert it
 					// xy3.put((int) event.getX(2), (int) event.getY(2));
 					xyPointer.set(1, toUnShade.get(toUnShade.size() - 1));
@@ -1151,6 +1142,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					// Log.d("TouchTest", "comes here! for sense");
 					toUnShade.add(ShadeRandom(event.getX(0), event.getY(0),
 							true));
+					logTouch.add(toUnShade.get(toUnShade.size() - 1));
 					// on insert- > first clear the item and then insert it
 					// xy3.put((int) event.getX(2), (int) event.getY(2));
 					xyPointer.set(0, toUnShade.get(toUnShade.size() - 1));
@@ -1183,6 +1175,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			// Log.d("TouchTest", "new Pointer's x: " + pCord.x + " y: " +
 			// pCord.y);
 			toUnShade.add(ShadeRandom(pCord.x, pCord.y, false));
+			logTouch.add(toUnShade.get(toUnShade.size() - 1));
 		} else if (event.getActionMasked() == android.view.MotionEvent.ACTION_POINTER_UP) {
 			int size = toUnShade.size();
 			for (int i = 0; i < size; i++) {

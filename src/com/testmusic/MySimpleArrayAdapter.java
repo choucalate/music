@@ -1,6 +1,7 @@
 package com.testmusic;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +32,14 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 		textView.setText(values[position]);
 		// Change the icon for Windows and iPhone
 		String s = values[position];
-		imageView.setImageResource(R.drawable.locked);
-		
-
+		s = s.substring(6, s.indexOf(":"));
+		Log.i("tutlevel", "new tutlvl" + s);
+		int tutLevel = Integer.parseInt(s);
+		Log.i("tutlevel", "parsed tutlvl" + s);
+		if (tutLevel != 1)
+			imageView.setImageResource(R.drawable.locked);
+		else
+			imageView.setImageResource(R.drawable.unlocked);
 		return rowView;
 	}
 }

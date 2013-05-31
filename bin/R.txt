@@ -134,6 +134,7 @@ int drawable three 0x7f020050
 int drawable treble 0x7f020051
 int drawable twelve 0x7f020052
 int drawable two 0x7f020053
+int drawable unlocked 0x7f020054
 int id Compose_Choice 0x7f060035
 int id Tutorials 0x7f060036
 int id browse_files 0x7f060041
