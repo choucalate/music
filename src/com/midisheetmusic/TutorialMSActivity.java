@@ -830,20 +830,24 @@ public class TutorialMSActivity extends Activity {
 		layout.requestLayout();
 	}
 
+	/**
+	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5
+	 *                        C#   D#   F#  G#    A#   C#  D#    F#  G#    A#
+	 */
 	private void initSongs() {
 		/************* C-major scale init *******************/
 		int size = 8;
 		cmajor1 = new NotePlay[size];
 		cmajor2 = new NotePlay[size];
-		final int[] cNote1 = { 0, 1, 2, 3, 4, 5, 6, 7 };
+		final double[] cNote1 = { 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 };
 		final int[] cDur1 = { 2, 2, 2, 2, 2, 2, 2, 2 };
-		final int[] cNote2 = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		final double[] cNote2 = { 7, 6, 5, 4, 3, 2, 1, 0 };
 		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < cmajor1.length; i++)
 			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
 		for (int i = 0; i < cmajor2.length; i++)
-			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);
+			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);	
 
 		/********** Mary had a little lamb **************/
 

@@ -218,7 +218,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		BlackBorder = WhiteKeyWidth / 2;
 		if (pianoType) {
 			WhiteKeyHeight = (int) (WhiteKeyWidth * 5.2);
-			blackHeightY = 200;
+			blackHeightY = (WhiteKeyHeight * 11 / 18);
 		} else
 			WhiteKeyHeight = (int) (WhiteKeyWidth * 3.5);
 		BlackKeyWidth = (int) (WhiteKeyWidth * .65);
@@ -834,97 +834,97 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	 * note][sharp # or N]
 	 */
 	// (NotePlay[] notes)
-	public void tutorialNote(int[] note) {
-		// Log.e("coord", " THE COORD I WANT IS : " + (WhiteKeyWidth * 6 +
-		// (margin_val[0] + WhiteKeyWidth + BlackBorder)));
-		// make it blink
-		if (!surfaceReady || bufferBitmap == null) {
-			Log.e("Shade", "fail");
-			return;
-		}
-
-		noteArr = note;
-		boolean isBlack; // either black or white
-		/*
-		 * if (note == "") return; else { // turn from [note][Sharp or flat][1
-		 * or 2] into black[] or white[] // array int letter =
-		 * Integer.parseInt(note.charAt(0) + ""); // get the note String sharp =
-		 * note.charAt(1) + ""; isBlack = (sharp.equals("N")) ? false : true; if
-		 * (isBlack) { Log.i("black", "is balck"); noteToShade = black[letter];
-		 * } else { Log.i("black", "is white"); noteToShade = white[letter]; } }
-		 */
-		blinkShade = 1; // 1=unshade
-
-		try {
-			unShade(noteToShade);
-			time.cancel();
-		} catch (Exception ex) {
-		}
-		time = new Timer();
-		if (tutUnShade == false) {
-			unShade(noteToShade);
-			time.cancel();
-			return;
-		}
-		time.scheduleAtFixedRate(new TimerTask() {
-
-			@Override
-			public void run() {
-
-				/*
-				 * if (TutorialMSActivity.getCallBack() == noteToShade) {
-				 * cancel(); unShade(noteToShade); }
-				 */
-				// Shade and play note
-				if (blinkShade == 1) {
-					SurfaceHolder holder = getHolder();
-					Canvas canvas = holder.lockCanvas();
-					if (canvas == null) {
-						Log.e("Shade", "fail in timer scheduling");
-						time.cancel();
-						return;
-					}
-					bufferCanvas.translate(margin + BlackBorder, margin
-							+ BlackBorder);
-					noteToShade = white[noteArr[curr]]; // noteArr[curr].getNote()
-					ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
-					String toPlaySound = noteToShadetoPlayConverter(
-							noteToShade, true);
-					soundPool.playNote(toPlaySound, 1);
-					bufferCanvas.translate(-(margin + BlackBorder),
-							-(margin + BlackBorder));
-					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
-					DrawNoteLetters(canvas);
-					holder.unlockCanvasAndPost(canvas);
-					blinkShade = 0;
-					numBlinks++;
-				} else if (blinkShade == 0) {
-					unShade(noteToShade);
-					blinkShade = 1;
-					if (curr >= noteArr.length - 1) {
-						curr = 0;
-						cancel();
-					} else
-						curr++;
-				}
-				if (!tutUnShade) {
-					unShade(noteToShade);
-					blinkShade = 2;
-					return;
-				}
-			}
-
-			@Override
-			public boolean cancel() {
-				super.cancel();
-				Log.e("timer", "canceled");
-				unShade(noteToShade);
-				return true;
-			}
-
-		}, 500, 200);
-
-	}
+	// public void tutorialNote(int[] note) {
+	// // Log.e("coord", " THE COORD I WANT IS : " + (WhiteKeyWidth * 6 +
+	// // (margin_val[0] + WhiteKeyWidth + BlackBorder)));
+	// // make it blink
+	// if (!surfaceReady || bufferBitmap == null) {
+	// Log.e("Shade", "fail");
+	// return;
+	// }
+	//
+	// noteArr = note;
+	// boolean isBlack; // either black or white
+	// /*
+	// * if (note == "") return; else { // turn from [note][Sharp or flat][1
+	// * or 2] into black[] or white[] // array int letter =
+	// * Integer.parseInt(note.charAt(0) + ""); // get the note String sharp =
+	// * note.charAt(1) + ""; isBlack = (sharp.equals("N")) ? false : true; if
+	// * (isBlack) { Log.i("black", "is balck"); noteToShade = black[letter];
+	// * } else { Log.i("black", "is white"); noteToShade = white[letter]; } }
+	// */
+	// blinkShade = 1; // 1=unshade
+	//
+	// try {
+	// unShade(noteToShade);
+	// time.cancel();
+	// } catch (Exception ex) {
+	// }
+	// time = new Timer();
+	// if (tutUnShade == false) {
+	// unShade(noteToShade);
+	// time.cancel();
+	// return;
+	// }
+	// time.scheduleAtFixedRate(new TimerTask() {
+	//
+	// @Override
+	// public void run() {
+	//
+	// /*
+	// * if (TutorialMSActivity.getCallBack() == noteToShade) {
+	// * cancel(); unShade(noteToShade); }
+	// */
+	// // Shade and play note
+	// if (blinkShade == 1) {
+	// SurfaceHolder holder = getHolder();
+	// Canvas canvas = holder.lockCanvas();
+	// if (canvas == null) {
+	// Log.e("Shade", "fail in timer scheduling");
+	// time.cancel();
+	// return;
+	// }
+	// bufferCanvas.translate(margin + BlackBorder, margin
+	// + BlackBorder);
+	// noteToShade = white[noteArr[curr]]; // noteArr[curr].getNote()
+	// ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
+	// String toPlaySound = noteToShadetoPlayConverter(
+	// noteToShade, true);
+	// soundPool.playNote(toPlaySound, 1);
+	// bufferCanvas.translate(-(margin + BlackBorder),
+	// -(margin + BlackBorder));
+	// canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+	// DrawNoteLetters(canvas);
+	// holder.unlockCanvasAndPost(canvas);
+	// blinkShade = 0;
+	// numBlinks++;
+	// } else if (blinkShade == 0) {
+	// unShade(noteToShade);
+	// blinkShade = 1;
+	// if (curr >= noteArr.length - 1) {
+	// curr = 0;
+	// cancel();
+	// } else
+	// curr++;
+	// }
+	// if (!tutUnShade) {
+	// unShade(noteToShade);
+	// blinkShade = 2;
+	// return;
+	// }
+	// }
+	//
+	// @Override
+	// public boolean cancel() {
+	// super.cancel();
+	// Log.e("timer", "canceled");
+	// unShade(noteToShade);
+	// return true;
+	// }
+	//
+	// }, 500, 200);
+	//
+	// }
 
 	public ArrayList<Integer> retLogShade() {
 		return logTouch;
@@ -976,7 +976,16 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 						noteToShade = -1;
 						toPlaySound = "";
 					} else {
-						noteToShade = white[songArr[curr].getNote()]; // noteArr[curr].getNote()
+						double note = songArr[curr].getNote();
+						if (note % 1 == 0) {
+							noteToShade = white[(int) note]; // noteArr[curr].getNote()
+							Log.i("noteShade", "noteToShade white: "
+									+ noteToShade);
+						} else {
+							noteToShade = black[(int) Math.round(note) - 1];
+							Log.i("noteShade", "noteToShade black: "
+									+ noteToShade);
+						}
 						ShadeOneNote(bufferCanvas, noteToShade, Color.LTGRAY);
 						toPlaySound = noteToShadetoPlayConverter(noteToShade,
 								true);
@@ -1035,25 +1044,52 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
+	/**
+	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 
+	 *                          C# D# F# G# A# C# D# F# G# A#
+	 */
 	private String noteToShadetoPlayConverter(int noteToShade,
 			boolean blackorwhite) {
 		// final int[] black = { 25, 27, 30, 32, 34, 37, 39, 42, 44, 46 };
 		// final int[] white = { 24, 26, 28, 29, 31, 33, 35, 36, 38, 40, 41, 43,
-		// 45,
-		// 47 };
+		// 45, 47 };
 		// find index first, then convert index to note from c = index 0, d =
 		// index 1
 		int index = 0;
+		boolean iswhite = false;
 		for (int i = 0; i < white.length; i++) {
 			if (white[i] == noteToShade) {
 				index = i;
 				Log.i("found the index at index:", "index: " + i);
+				iswhite = true;
 			}
 		}
+		if (!iswhite) {
+			for (int i = 0; i < black.length; i++) {
+				if (black[i] == noteToShade) {
+					index = i;
+					Log.i("found the index at index:", "index: " + i);
+				}
+			}
+			if(index >= 2) {
+				index++;
+			}
+			if(index >= 6) {
+				index++;
+			}
+			if(index >= 9) {
+				index++;
+			}
+			
+		}
+
+		/* stuff to init for assembling string */
 		String key = "key";
 		char note = 'c';
+		/* and other stuff */
+
 		note = (char) (note + index);
-		Log.i("current not:", " the note is " + note);
+		Log.i("current note:", " the note is " + note);
 		if (note > 'g') {
 			note = 'a';
 			note = (char) (note + (index - 5));
@@ -1065,7 +1101,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			key = key + note + "3";
 		else
 			key = key + note + "4";
-		Log.i("changed into", "note: " + key);
+
+		if (!iswhite) {
+			key += "s";
+		}
+		Log.i("current note:", "note: " + key);
 
 		return key;
 	}
