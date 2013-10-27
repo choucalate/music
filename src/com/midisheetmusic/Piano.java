@@ -941,7 +941,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			Log.e("Shade", "fail");
 			return;
 		}
-
+        for(int i = 0; i < notes.length; i++) {
+        	Log.i("NOTEPLAY", "THE NOTES ARRAY: " + notes[i].getNote());
+        }
 		songArr = notes;
 		blinkShade = 1; // 1=unshade
 		curr = 0;
@@ -1093,6 +1095,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		if (note > 'g') {
 			note = 'a';
 			note = (char) (note + (index - 5));
+			if(note > 'g') note = 'a';
 		} else
 			Log.i("current note:", "the note is :" + note);
 		// if index > something change to 3 otherwise 4
