@@ -770,7 +770,8 @@ public class TutorialMSActivity extends Activity {
 		OnClickListener myPlay2 = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onClickHandler(2);
+				//onClickHandler(2);
+				piano.playBeat();
 			}
 		};
 		OnClickListener myPlay3 = new OnClickListener() {
