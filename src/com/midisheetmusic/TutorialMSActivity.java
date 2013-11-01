@@ -644,7 +644,7 @@ public class TutorialMSActivity extends Activity {
 		layout.addView(rlPiano);
 
 		setContentView(layout);
-		// player.SetPiano(piano);
+		// player.SetPiano(piano); 
 		layout.requestLayout();
 		/**
 		 * LASTLY: MAKE A BUTTON SO THAT WHEN WE PRESS IT, IT WILL USE VIEWFLIP
@@ -948,6 +948,9 @@ public class TutorialMSActivity extends Activity {
 			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
 		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
+		/***************************************************/
+		
+		
 	}
 
 	protected void onClickHandler(int button) {

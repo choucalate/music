@@ -19,6 +19,7 @@ public class SPPlayer {
 	private int priority;
 	private String lastNote;
 	long justP = 0, newP = 0;
+	// beat1.ogg
 	private String[] oggArr = { "piano_A4_sharp.ogg", "piano_A4.ogg",
 			"piano_B4.ogg", "piano_C4_sharp.ogg", "piano_D4_sharp.ogg",
 			"piano_D4.ogg", "piano_E4.ogg", "piano_F4_sharp.ogg",
@@ -27,7 +28,11 @@ public class SPPlayer {
 			"piano_B3.ogg", "piano_C3_sharp.ogg", "piano_D3_sharp.ogg",
 			"piano_D3.ogg", "piano_E3.ogg", "piano_F3_sharp.ogg",
 			"piano_F3.ogg", "piano_G3_sharp.ogg", "piano_G3.ogg",
-			"piano_C3.ogg" };
+			"piano_C3.ogg" }; 
+	//add beat1.ogg
+	private String[] beatsArr = {
+			"beat1.ogg"
+	};
 	private int a4S = 0, a4 = 0, b4 = 0, c4S = 0, d4S = 0, d4 = 0, e4 = 0,
 			f4S = 0, f4 = 0, g4S = 0, g4 = 0, c4 = 0;
 	private int a3S = 0, a3 = 0, b3 = 0, c3S = 0, d3S = 0, d3 = 0, e3 = 0,
@@ -72,6 +77,9 @@ public class SPPlayer {
 				pianog4, pianoc4, pianoa3S, pianoa3, pianob3, pianoc3S,
 				pianod3S, pianod3, pianoe3, pianof3S, pianof3, pianog3S,
 				pianog3, pianoc3 };
+		
+		AssetFileDescriptor beat1 = null;
+		AssetFileDescriptor[] beats = { beat1 };
 
 		try {
 			for (int i = 0; i < piano.length; i++) {
@@ -84,6 +92,12 @@ public class SPPlayer {
 				mapKeys.put(keyArr[i], soundID_Arr[i]);
 				mapPriority.put(keyArr[i], priority);
 			}
+			/*for(int j = 0; j < beats.length; j++) {
+				beats[j] = am.openFd(beatsArr[j]);
+				priority = j+1;
+
+			}*/
+			/*add 2nd for loop*/
 		} catch (Exception ex) {
 			Log.e("SP", "FAILED TO LOAD");
 		}
@@ -101,7 +115,7 @@ public class SPPlayer {
 		// needa lastnote & delta for each note
 		long delta = Math.abs(justP - System.currentTimeMillis());
 		// Log.i("SP", "delta time: " + delta);
-		if (lastNote != note) {
+		if (lastNote != note) {z
 			try {
 				float actualVolume = (float) audio
 						.getStreamVolume(AudioManager.STREAM_MUSIC);
