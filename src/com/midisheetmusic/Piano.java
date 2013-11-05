@@ -1675,6 +1675,15 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return lastShaded;
 
 	}
+	
+	
+	public void playBeat()
+	{
+		soundPool.playNote("beat1", 1);
+	}
+	
+	
+	
 	/*
 	 * Shade the given note with the given brush. We only draw notes from
 	 * notenumber 24 to 96. (Middle-C is 60).

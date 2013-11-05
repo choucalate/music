@@ -97,8 +97,6 @@ public final class R {
         public static final int btn_news_feed=0x7f0a0018;
         public static final int btn_photos=0x7f0a001d;
         public static final int btn_places=0x7f0a001b;
-        public static final int button1=0x7f0a0015;
-        public static final int button2=0x7f0a0016;
         public static final int buttonA=0x7f0a0009;
         public static final int buttonAflat=0x7f0a0005;
         public static final int buttonB=0x7f0a000b;
@@ -116,6 +114,8 @@ public final class R {
         public static final int choose_song_name=0x7f0a0012;
         public static final int color_preference_widget=0x7f0a0013;
         public static final int directory=0x7f0a0017;
+        public static final int goplay=0x7f0a0016;
+        public static final int gotut=0x7f0a0015;
         public static final int help=0x7f0a002f;
         public static final int help_webview=0x7f0a001e;
         public static final int home_root=0x7f0a0014;

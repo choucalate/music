@@ -24,13 +24,13 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/gotut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Go to Tutorials" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/goplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Just Play Around" />

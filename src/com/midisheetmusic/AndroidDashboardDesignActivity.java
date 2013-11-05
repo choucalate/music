@@ -8,8 +8,11 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 
 
@@ -25,44 +28,31 @@ public class AndroidDashboardDesignActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.dashboard_layout);
-		wait = new waitUp();
-		wait.execute((Void) null);
-		/*
-		 * facebook = new Facebook("544056102317137"); mFacebookRunner = new
-		 * AsyncFacebookRunner(facebook); // facebook.setAccessToken(token);
-		 * facebook.setAccessToken(facebook.getAccessToken()); if
-		 * (facebook.isSessionValid()) { Log.e("async", "session valid"); wait =
-		 * new waitUp(); wait.execute((Void) null); } else {
-		 * facebook.authorize(this, new String[] { "publish_actions" }, new
-		 * DialogListener() {
-		 * 
-		 * @Override public void onComplete(Bundle values) { Log.e("async",
-		 * "fb"); wait = new waitUp(); wait.execute((Void) null); }
-		 * 
-		 * @Override public void onFacebookError(FacebookError error) {
-		 * 
-		 * Log.e("async", "fberr" + error); wait = new waitUp();
-		 * wait.execute((Void) null); }
-		 * 
-		 * @Override public void onError(DialogError e) { Log.e("async", "err");
-		 * wait = new waitUp(); wait.execute((Void) null); }
-		 * 
-		 * @Override public void onCancel() { Log.e("async", "cancel"); wait =
-		 * new waitUp(); wait.execute((Void) null); } }); }
-		 */
-		/*
-		 * LinearLayout layout = (LinearLayout) findViewById(R.id.home_root);
-		 * Bitmap bmImg = decodeSampledBitmapFromResource(getResources(),
-		 * R.drawable.pianobckgd1, 768, 469); BitmapDrawable background = new
-		 * BitmapDrawable(bmImg); int sdk = android.os.Build.VERSION.SDK_INT; if
-		 * (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-		 * layout.setBackgroundDrawable(background); } else {
-		 * layout.setBackground(background); }
-		 */
-		/*
-		 * setContentView(layout); // player.SetPiano(piano);
-		 * layout.requestLayout();
-		 */
+		// wait = new waitUp();
+		// wait.execute((Void) null);
+		Button tut = (Button) findViewById(R.id.gotut);
+		Button play = (Button) findViewById(R.id.goplay);
+		tut.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(), LevelActivity.class);
+				startActivity(i);
+				
+			}
+			
+		});
+
+		play.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(), PlayAroundActivity.class);
+				startActivity(i);
+				
+			}
+			
+		});
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,

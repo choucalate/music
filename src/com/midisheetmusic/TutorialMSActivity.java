@@ -38,12 +38,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.model.NotePlay;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-
 public class TutorialMSActivity extends Activity {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
@@ -93,7 +87,6 @@ public class TutorialMSActivity extends Activity {
 	Animation animF2;
 	Animation anim1;
 	Animation anim2, anim3, anim4, anim5, anim6, anim7;
-	Animator animation1, animation2;
 	int i = 0;// random
 	int c1Count = 0;
 	int d1Count = 0;
@@ -116,7 +109,6 @@ public class TutorialMSActivity extends Activity {
 	static int callBack = 0;
 
 	RelativeLayout rl;
-	AnimatorSet set1, set2, set3, set4;
 
 	private pianoAsync setPiano;
 	ProgressDialog dialog;
@@ -191,175 +183,6 @@ public class TutorialMSActivity extends Activity {
 		NBNodes() {
 
 		}
-	}
-
-	private void animatev2() {
-		class TranslateAnim extends TranslateAnimation {
-
-			public TranslateAnim(float fromXDelta, float toXDelta,
-					float fromYDelta, float toYDelta) {
-				super(fromXDelta, toXDelta, fromYDelta, toYDelta);
-				// TODO Auto-generated constructor stub
-			}
-
-			private long mElapsedAtPause = 0;
-			private boolean mPaused = false;
-
-			@Override
-			public boolean getTransformation(long currentTime,
-					Transformation outTransformation) {
-				if (mPaused && mElapsedAtPause == 0) {
-					mElapsedAtPause = currentTime - getStartTime();
-				}
-				if (mPaused)
-					setStartTime(currentTime - mElapsedAtPause);
-				return super.getTransformation(currentTime, outTransformation);
-			}
-
-			public void pause() {
-				mElapsedAtPause = 0;
-				mPaused = true;
-			}
-
-			public void resume() {
-				mPaused = false;
-			}
-		}
-		try {
-			AnimationSet set = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			final AnimationSet set2 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			AnimationSet set3 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			AnimationSet set4 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-
-			TranslateAnim ta1 = new TranslateAnim(0, 0, -140, 300);
-			ta1.setDuration(2000);
-			TranslateAnim ta2 = new TranslateAnim(0, 0, -140, 300);
-			ta2.setDuration(2000);
-			ta2.setStartOffset(500);
-			TranslateAnim ta3 = new TranslateAnim(0, 0, -140, 300);
-			ta3.setDuration(2000);
-			ta3.setStartOffset(500);
-			TranslateAnim ta4 = new TranslateAnim(0, 0, -140, 300);
-			ta4.setDuration(2000);
-			ta4.setStartOffset(500);
-
-			set.addAnimation(ta1);
-			set2.addAnimation(ta2);
-			set3.addAnimation(ta3);
-			set4.addAnimation(ta4);
-			// set.setFillAfter(false);
-			// set2.setFillAfter(false);
-			// set3.setFillAfter(false);
-			// set4.setFillAfter(false);
-			set.setRepeatCount(Animation.INFINITE);
-			set2.setRepeatCount(Animation.INFINITE);
-			set3.setRepeatCount(Animation.INFINITE);
-			set4.setRepeatCount(Animation.INFINITE);
-			set.setRepeatMode(Animation.RESTART);
-			set2.setRepeatMode(Animation.RESTART);
-			set3.setRepeatMode(Animation.RESTART);
-			set4.setRepeatMode(Animation.RESTART);
-
-			set.setAnimationListener(new AnimationListener() {
-
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					set2.startNow();
-					Log.i("animation", "END");
-				}
-
-				@Override
-				public void onAnimationRepeat(Animation animation) {
-					// TODO Auto-generated method stub
-					Log.i("animation", "repeat");
-				}
-
-				@Override
-				public void onAnimationStart(Animation animation) {
-					// TODO Auto-generated method stub
-					Log.i("animation", "start");
-				}
-
-			});
-			noteC1A.startAnimation(set);
-			noteD1A.startAnimation(set2);
-			noteE1A.startAnimation(set3);
-			noteF1A.startAnimation(set4);
-			ObjectAnimator oa = ObjectAnimator.ofFloat(noteG1A, "translationY",
-					0, 90);
-			oa.start();
-
-		} catch (Exception ex) {
-			Log.e("error", ex.toString());
-		}
-		// AnimatorSet s= new AnimatorSet();
-		// ObjectAnimator a = ObjectAnimator.ofFloat(noteC1A, "scaleX", 0f, 1f);
-	}
-
-	private void animatev3() {
-		set1 = new AnimatorSet();
-		set1.setInterpolator(new LinearInterpolator());
-		set2 = new AnimatorSet();
-		set2.setInterpolator(new LinearInterpolator());
-		set3 = new AnimatorSet();
-		set3.setInterpolator(new LinearInterpolator());
-		set4 = new AnimatorSet();
-		set4.setInterpolator(new LinearInterpolator());
-		// set interpolator?
-		ValueAnimator ta1 = ObjectAnimator.ofFloat(noteB1A, "translationY",
-				-140, 300);
-		ta1.setDuration(2500);
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta1.setRepeatMode(ValueAnimator.RESTART);
-
-		ValueAnimator ta2 = ObjectAnimator.ofFloat(noteA1A, "translationY",
-				-140, 300);
-		ta2.setDuration(2500);
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta2.setRepeatMode(ValueAnimator.RESTART);
-
-		final ValueAnimator ta3 = ObjectAnimator.ofFloat(noteG1A,
-				"translationY", -140, 300);
-		ta3.setDuration(2500);
-
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta3.setRepeatMode(ValueAnimator.RESTART);
-		set1.play(ta1);
-		set1.play(ta2).after(500);
-		set1.play(ta3).after(1000);
-
-		set1.start();
-
-		set2.play(ta2);
-		set2.play(ta1).after(500);
-		set1.addListener(new AnimatorListener() {
-
-			@Override
-			public void onAnimationStart(Animator animation) {
-				Log.i("ta3", "delay: " + ta3.getStartDelay());
-				set2.setStartDelay(ta3.getStartDelay());
-				set2.start();
-			}
-
-			@Override
-			public void onAnimationEnd(Animator animation) {
-
-			}
-
-			@Override
-			public void onAnimationCancel(Animator animation) {
-			}
-
-			@Override
-			public void onAnimationRepeat(Animator animation) {
-			}
-
-		});
 	}
 
 	public void animate() {
@@ -604,7 +427,6 @@ public class TutorialMSActivity extends Activity {
 				// piano.toggleShade();
 				// }
 				// piano.tutorialNote("3#");
-				animatev3();
 				// if (click) {
 				// Log.i("Click", "BUTTON IS CLICKED");
 				// popUp.showAtLocation(layout, Gravity.LEFT, 8, 4);
@@ -771,6 +593,7 @@ public class TutorialMSActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				onClickHandler(2);
+				//piano.playBeat();
 			}
 		};
 		OnClickListener myPlay3 = new OnClickListener() {
