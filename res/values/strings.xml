@@ -44,6 +44,7 @@
     <string name="title_activity_test">testActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tutorial_ms">TutorialMSActivity</string>
+     <string name="playaround">Playing Around</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_test_anim">TestAnim</string>
     <string name="title_activity_hit">HitActivity</string>

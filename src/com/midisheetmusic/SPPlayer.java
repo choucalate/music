@@ -28,8 +28,8 @@ public class SPPlayer {
 			"piano_B3.ogg", "piano_C3_sharp.ogg", "piano_D3_sharp.ogg",
 			"piano_D3.ogg", "piano_E3.ogg", "piano_F3_sharp.ogg",
 			"piano_F3.ogg", "piano_G3_sharp.ogg", "piano_G3.ogg",
-			"piano_C3.ogg" }; 
-	private String[] beatsArr = { "Beat1.ogg" };
+			"piano_C3.ogg" };
+	private String[] beatsArr = { "Beat1.ogg", "Beat2.ogg", "Beat3.ogg" };
 	private int a4S = 0, a4 = 0, b4 = 0, c4S = 0, d4S = 0, d4 = 0, e4 = 0,
 			f4S = 0, f4 = 0, g4S = 0, g4 = 0, c4 = 0;
 	private int a3S = 0, a3 = 0, b3 = 0, c3S = 0, d3S = 0, d3 = 0, e3 = 0,
@@ -47,7 +47,7 @@ public class SPPlayer {
 	private String[] keyArr = { keya4s, keya4, keyb4, keyc4s, keyd4s, keyd4,
 			keye4, keyf4s, keyf4, keyg4s, keyg4, keyc4, keya3s, keya3, keyb3,
 			keyc3s, keyd3s, keyd3, keye3, keyf3s, keyf3, keyg3s, keyg3, keyc3 };
-	private String[] beatLoopsArr = { "beat1" };
+	private String[] beatLoopsArr = { "beat1", "beat2", "beat3" };
 	private Map<String, Integer> mapKeys = new HashMap<String, Integer>();
 	private Map<String, Integer> mapPriority = new HashMap<String, Integer>();
 
@@ -75,8 +75,8 @@ public class SPPlayer {
 				pianog4, pianoc4, pianoa3S, pianoa3, pianob3, pianoc3S,
 				pianod3S, pianod3, pianoe3, pianof3S, pianof3, pianog3S,
 				pianog3, pianoc3 };
-		AssetFileDescriptor beat1 = null; 
-		AssetFileDescriptor[] beats = { beat1 };
+		AssetFileDescriptor beat1 = null, beat2 = null, beat3 = null; 
+		AssetFileDescriptor[] beats = { beat1, beat2, beat3 };
 		try {
 			for (int i = 0; i < piano.length; i++) {
 
@@ -89,10 +89,12 @@ public class SPPlayer {
 				mapPriority.put(keyArr[i], priority);
 			}
 			
-			beats[0] = am.openFd(beatsArr[0]);
-			priority = 1;
-			mapKeys.put(beatLoopsArr[0], soundPool.load(beats[0], priority));
-			mapPriority.put(beatLoopsArr[0], priority);
+			for (int i = 0; i < beats.length; i++) {
+				beats[i] = am.openFd(beatsArr[i]);
+				priority = i + 1;
+				mapKeys.put(beatLoopsArr[i], soundPool.load(beats[i], priority));
+				mapPriority.put(beatLoopsArr[i], priority);
+			}
 			
 		} catch (Exception ex) {
 			Log.e("SP", "FAILED TO LOAD");

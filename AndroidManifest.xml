@@ -50,6 +50,12 @@
             android:label="@string/title_activity_tutorial_ms"
             android:screenOrientation="landscape" >
         </activity>
+                <activity
+            android:name="com.midisheetmusic.PlayAroundActivity"
+            android:configChanges="orientation"
+            android:label="@string/playaround"
+            android:screenOrientation="landscape" >
+        </activity>
         <activity
             android:name="com.midisheetmusic.NotesExperimentActivity"
             android:label="@string/title_activity_main" >

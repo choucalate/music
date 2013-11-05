@@ -186,6 +186,7 @@ public final class R {
         public static final int play_measures_in_loop_end=0x7f070022;
         public static final int play_measures_in_loop_start=0x7f070021;
         public static final int play_measures_in_loop_title=0x7f07001f;
+        public static final int playaround=0x7f07002b;
         public static final int restore_defaults=0x7f07000a;
         public static final int right_hand_color=0x7f07001c;
         public static final int save_images_descr_str=0x7f070007;
@@ -206,10 +207,10 @@ public final class R {
         public static final int split_to_two_staffs=0x7f070015;
         public static final int split_to_two_staffs_summary=0x7f070016;
         public static final int time_signature=0x7f070019;
-        public static final int title_activity_hit=0x7f07002d;
-        public static final int title_activity_main=0x7f07002b;
+        public static final int title_activity_hit=0x7f07002e;
+        public static final int title_activity_main=0x7f07002c;
         public static final int title_activity_test=0x7f070028;
-        public static final int title_activity_test_anim=0x7f07002c;
+        public static final int title_activity_test_anim=0x7f07002d;
         public static final int title_activity_tutorial_ms=0x7f07002a;
         public static final int transpose=0x7f070017;
     }

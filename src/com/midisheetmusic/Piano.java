@@ -1676,10 +1676,10 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 	
-	
-	public void playBeat()
+    public static String[] beatArrss = {"beat1", "beat2", "beat3"};
+	public void playBeat(int i)
 	{
-		soundPool.playNote("beat1", 1);
+		soundPool.playNote(beatArrss[i], 1);
 	}
 	
 	
