@@ -38,6 +38,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.model.NotePlay;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+
 public class TutorialMSActivity extends Activity {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
@@ -87,6 +93,7 @@ public class TutorialMSActivity extends Activity {
 	Animation animF2;
 	Animation anim1;
 	Animation anim2, anim3, anim4, anim5, anim6, anim7;
+	Animator animation1, animation2;
 	int i = 0;// random
 	int c1Count = 0;
 	int d1Count = 0;
@@ -109,14 +116,16 @@ public class TutorialMSActivity extends Activity {
 	static int callBack = 0;
 
 	RelativeLayout rl;
+	AnimatorSet set1, set2, set3, set4;
 
 	private pianoAsync setPiano;
 	ProgressDialog dialog;
 	private String tut;
 	private int tutLevel;
-	private NotePlay[] cmajor1, cmajor2, littlelamb1, littlelamb2, littlelamb3,
+	private NotePlay[] cmajor1, cmajor2, dmajor1, dmajor2, gmajor1, gmajor2, amajor1, amajor2, emajor1, emajor2, fsharp_major1, fsharp_major2, littlelamb1, littlelamb2, littlelamb3,
 			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3,
-			biebs4, biebs5;
+			biebs4, biebs5, dflat1, dflat2, aflat1, aflat2, eflat1, eflat2, bflat1, bflat2, fmajor1, fmajor2, 
+			bmajor1, bmajor2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +192,175 @@ public class TutorialMSActivity extends Activity {
 		NBNodes() {
 
 		}
+	}
+
+	private void animatev2() {
+		class TranslateAnim extends TranslateAnimation {
+
+			public TranslateAnim(float fromXDelta, float toXDelta,
+					float fromYDelta, float toYDelta) {
+				super(fromXDelta, toXDelta, fromYDelta, toYDelta);
+				// TODO Auto-generated constructor stub
+			}
+
+			private long mElapsedAtPause = 0;
+			private boolean mPaused = false;
+
+			@Override
+			public boolean getTransformation(long currentTime,
+					Transformation outTransformation) {
+				if (mPaused && mElapsedAtPause == 0) {
+					mElapsedAtPause = currentTime - getStartTime();
+				}
+				if (mPaused)
+					setStartTime(currentTime - mElapsedAtPause);
+				return super.getTransformation(currentTime, outTransformation);
+			}
+
+			public void pause() {
+				mElapsedAtPause = 0;
+				mPaused = true;
+			}
+
+			public void resume() {
+				mPaused = false;
+			}
+		}
+		try {
+			AnimationSet set = new AnimationSet(true);
+			set.setInterpolator(new LinearInterpolator());
+			final AnimationSet set2 = new AnimationSet(true);
+			set.setInterpolator(new LinearInterpolator());
+			AnimationSet set3 = new AnimationSet(true);
+			set.setInterpolator(new LinearInterpolator());
+			AnimationSet set4 = new AnimationSet(true);
+			set.setInterpolator(new LinearInterpolator());
+
+			TranslateAnim ta1 = new TranslateAnim(0, 0, -140, 300);
+			ta1.setDuration(2000);
+			TranslateAnim ta2 = new TranslateAnim(0, 0, -140, 300);
+			ta2.setDuration(2000);
+			ta2.setStartOffset(500);
+			TranslateAnim ta3 = new TranslateAnim(0, 0, -140, 300);
+			ta3.setDuration(2000);
+			ta3.setStartOffset(500);
+			TranslateAnim ta4 = new TranslateAnim(0, 0, -140, 300);
+			ta4.setDuration(2000);
+			ta4.setStartOffset(500);
+
+			set.addAnimation(ta1);
+			set2.addAnimation(ta2);
+			set3.addAnimation(ta3);
+			set4.addAnimation(ta4);
+			// set.setFillAfter(false);
+			// set2.setFillAfter(false);
+			// set3.setFillAfter(false);
+			// set4.setFillAfter(false);
+			set.setRepeatCount(Animation.INFINITE);
+			set2.setRepeatCount(Animation.INFINITE);
+			set3.setRepeatCount(Animation.INFINITE);
+			set4.setRepeatCount(Animation.INFINITE);
+			set.setRepeatMode(Animation.RESTART);
+			set2.setRepeatMode(Animation.RESTART);
+			set3.setRepeatMode(Animation.RESTART);
+			set4.setRepeatMode(Animation.RESTART);
+
+			set.setAnimationListener(new AnimationListener() {
+
+				@Override
+				public void onAnimationEnd(Animation arg0) {
+					// TODO Auto-generated method stub
+					set2.startNow();
+					Log.i("animation", "END");
+				}
+
+				@Override
+				public void onAnimationRepeat(Animation animation) {
+					// TODO Auto-generated method stub
+					Log.i("animation", "repeat");
+				}
+
+				@Override
+				public void onAnimationStart(Animation animation) {
+					// TODO Auto-generated method stub
+					Log.i("animation", "start");
+				}
+
+			});
+			noteC1A.startAnimation(set);
+			noteD1A.startAnimation(set2);
+			noteE1A.startAnimation(set3);
+			noteF1A.startAnimation(set4);
+			ObjectAnimator oa = ObjectAnimator.ofFloat(noteG1A, "translationY",
+					0, 90);
+			oa.start();
+
+		} catch (Exception ex) {
+			Log.e("error", ex.toString());
+		}
+		// AnimatorSet s= new AnimatorSet();
+		// ObjectAnimator a = ObjectAnimator.ofFloat(noteC1A, "scaleX", 0f, 1f);
+	}
+
+	private void animatev3() {
+		set1 = new AnimatorSet();
+		set1.setInterpolator(new LinearInterpolator());
+		set2 = new AnimatorSet();
+		set2.setInterpolator(new LinearInterpolator());
+		set3 = new AnimatorSet();
+		set3.setInterpolator(new LinearInterpolator());
+		set4 = new AnimatorSet();
+		set4.setInterpolator(new LinearInterpolator());
+		// set interpolator?
+		ValueAnimator ta1 = ObjectAnimator.ofFloat(noteB1A, "translationY",
+				-140, 300);
+		ta1.setDuration(2500);
+		// ta.setRepeatCount(ValueAnimator.INFINITE);
+		// ta1.setRepeatMode(ValueAnimator.RESTART);
+
+		ValueAnimator ta2 = ObjectAnimator.ofFloat(noteA1A, "translationY",
+				-140, 300);
+		ta2.setDuration(2500);
+		// ta.setRepeatCount(ValueAnimator.INFINITE);
+		// ta2.setRepeatMode(ValueAnimator.RESTART);
+
+		final ValueAnimator ta3 = ObjectAnimator.ofFloat(noteG1A,
+				"translationY", -140, 300);
+		ta3.setDuration(2500);
+
+		// ta.setRepeatCount(ValueAnimator.INFINITE);
+		// ta3.setRepeatMode(ValueAnimator.RESTART);
+		set1.play(ta1);
+		set1.play(ta2).after(500);
+		set1.play(ta3).after(1000);
+
+		set1.start();
+
+		set2.play(ta2);
+		set2.play(ta1).after(500);
+		set1.addListener(new AnimatorListener() {
+
+			@Override
+			public void onAnimationStart(Animator animation) {
+				Log.i("ta3", "delay: " + ta3.getStartDelay());
+				set2.setStartDelay(ta3.getStartDelay());
+				set2.start();
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation) {
+
+			}
+
+			@Override
+			public void onAnimationCancel(Animator animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(Animator animation) {
+			}
+
+		});
 	}
 
 	public void animate() {
@@ -427,6 +605,7 @@ public class TutorialMSActivity extends Activity {
 				// piano.toggleShade();
 				// }
 				// piano.tutorialNote("3#");
+				animatev3();
 				// if (click) {
 				// Log.i("Click", "BUTTON IS CLICKED");
 				// popUp.showAtLocation(layout, Gravity.LEFT, 8, 4);
@@ -466,7 +645,7 @@ public class TutorialMSActivity extends Activity {
 		layout.addView(rlPiano);
 
 		setContentView(layout);
-		// player.SetPiano(piano); 
+		// player.SetPiano(piano);
 		layout.requestLayout();
 		/**
 		 * LASTLY: MAKE A BUTTON SO THAT WHEN WE PRESS IT, IT WILL USE VIEWFLIP
@@ -593,7 +772,6 @@ public class TutorialMSActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				onClickHandler(2);
-				//piano.playBeat();
 			}
 		};
 		OnClickListener myPlay3 = new OnClickListener() {
@@ -659,18 +837,172 @@ public class TutorialMSActivity extends Activity {
 	 */
 	private void initSongs() {
 		/************* C-major scale init *******************/
-		int size = 10;
+		int size = 8;
 		cmajor1 = new NotePlay[size];
 		cmajor2 = new NotePlay[size];
-		final double[] cNote1 = { 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 };
+		final double[] cNote1 = { 0, 1, 2, 3, 4, 5, 6, 7};
 		final int[] cDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] cNote2 = { 9.5, 8.5, 7.5, 6.5, 5.5, 4.5,3.5, 2.5, 1.5, 0.5 };
+		final double[] cNote2 = {7, 6, 5, 4, 3, 2, 1, 0 };
 		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
 
 		for (int i = 0; i < cmajor1.length; i++)
 			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
 		for (int i = 0; i < cmajor2.length; i++)
 			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);	
+		
+		/************* D-major scale init *******************/
+		int d_size = 8;
+		dmajor1 = new NotePlay[d_size];
+		dmajor2 = new NotePlay[d_size];
+		final double[] dNote1 = { 1, 2, 2.5, 4, 5, 6, 5.5, 8 };
+		final int[] dDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] dNote2 = { 8, 5.5, 6, 5, 4, 2.5, 2, 1};
+		final int[] dDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < dmajor1.length; i++)
+			dmajor1[i] = new NotePlay(dDur1[i], dNote1[i]);
+		for (int i = 0; i < dmajor2.length; i++)
+			dmajor2[i] = new NotePlay(dDur2[i], dNote2[i]);	
+		
+		/************* G-major scale init *******************/
+		int g_size = 8;
+		gmajor1 = new NotePlay[g_size];
+		gmajor2 = new NotePlay[g_size];
+		final double[] gNote1 = { 4, 5, 6, 7, 8, 9, 7.5, 11 };
+		final int[] gDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] gNote2 = { 11, 7.5, 9, 8, 7, 6, 5, 4};
+		final int[] gDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < gmajor1.length; i++)
+			gmajor1[i] = new NotePlay(gDur1[i], gNote1[i]);
+		for (int i = 0; i < gmajor2.length; i++)
+			gmajor2[i] = new NotePlay(gDur2[i], gNote2[i]);	
+		
+		/************* A-major scale init *******************/
+		int a_size = 8;
+		amajor1 = new NotePlay[a_size];
+		amajor2 = new NotePlay[a_size];
+		final double[] aNote1 = { 5, 6, 5.5, 8, 9, 7.5, 8.5, 12 };
+		final int[] aDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] aNote2 = { 12, 8.5, 7.5, 9, 8, 5.5, 6, 5};
+		final int[] aDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < amajor1.length; i++)
+			amajor1[i] = new NotePlay(aDur1[i], aNote1[i]);
+		for (int i = 0; i < amajor2.length; i++)
+			amajor2[i] = new NotePlay(aDur2[i], aNote2[i]);	
+		
+		/************* E-major scale init *******************/
+		int e_size = 8;
+		emajor1 = new NotePlay[e_size];
+		emajor2 = new NotePlay[e_size];
+		final double[] eNote1 = { 2, 2.5, 3.5, 5, 6, 5.5, 6.5, 9 };
+		final int[] eDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] eNote2 = { 9, 6.5, 5.5, 6, 5, 3.5, 2.5, 2};
+		final int[] eDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < emajor1.length; i++)
+			emajor1[i] = new NotePlay(eDur1[i], eNote1[i]);
+		for (int i = 0; i < emajor2.length; i++)
+			emajor2[i] = new NotePlay(eDur2[i], eNote2[i]);	
+		
+		/************* F#-major scale init *******************/
+		int fsm_size = 8;
+		fsharp_major1 = new NotePlay[fsm_size];
+		fsharp_major2 = new NotePlay[fsm_size];
+		final double[] fsmNote1 = { 2.5, 3.5, 4.5, 6, 5.5, 6.5, 10, 7.5 };
+		final int[] fsmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] fsmNote2 = { 7.5, 10, 6.5, 5.5, 6, 4.5, 3.5, 2.5};
+		final int[] fsmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < fsharp_major1.length; i++)
+			fsharp_major1[i] = new NotePlay(fsmDur1[i], fsmNote1[i]);
+		for (int i = 0; i < fsharp_major2.length; i++)
+			fsharp_major2[i] = new NotePlay(fsmDur2[i], fsmNote2[i]);	
+		
+		/************* D Flat-major scale init *******************/
+		int dfm_size = 8;
+		dflat1 = new NotePlay[dfm_size];
+	    dflat2 = new NotePlay[dfm_size];
+		final double[] dfmNote1 = { 0.5, 1.5, 3, 2.5, 3.5, 4.5, 7, 5.5 };
+		final int[] dfmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] dfmNote2 = { 5.5, 7, 4.5, 3.5, 2.5, 3, 1.5, 0.5};
+		final int[] dfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < dflat1.length; i++)
+			dflat1[i] = new NotePlay(dfmDur1[i], dfmNote1[i]);
+		for (int i = 0; i < dflat2.length; i++)
+			dflat2[i] = new NotePlay(dfmDur2[i], dfmNote2[i]);	
+		
+		/************* A Flat-major scale init *******************/
+		int afm_size = 8;
+		aflat1 = new NotePlay[afm_size];
+	    aflat2 = new NotePlay[afm_size];
+		final double[] afmNote1 = { 3.5, 4.5, 7, 5.5, 6.5, 10, 11, 8.5 };
+		final int[] afmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] afmNote2 = { 8.5, 11, 10, 6.5, 5.5, 7, 4.5, 3.5};
+		final int[] afmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < aflat1.length; i++)
+			aflat1[i] = new NotePlay(afmDur1[i], afmNote1[i]);
+		for (int i = 0; i < aflat2.length; i++)
+			aflat2[i] = new NotePlay(afmDur2[i], afmNote2[i]);	
+		
+		/************* E Flat-major scale init *******************/
+		int efm_size = 8;
+		eflat1 = new NotePlay[efm_size];
+	    eflat2 = new NotePlay[efm_size];
+		final double[] efmNote1 = { 1.5, 3, 4, 3.5, 4.5, 7, 8, 6.5 };
+		final int[] efmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] efmNote2 = { 6.5, 8, 7, 4.5, 3.5, 4, 3, 1.5};
+		final int[] efmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < eflat1.length; i++)
+			eflat1[i] = new NotePlay(efmDur1[i], efmNote1[i]);
+		for (int i = 0; i < eflat2.length; i++)
+			eflat2[i] = new NotePlay(efmDur2[i], efmNote2[i]);	
+		
+		/************* B Flat-major scale init *******************/
+		int bfm_size = 8;
+		bflat1 = new NotePlay[bfm_size];
+	    bflat2 = new NotePlay[bfm_size];
+		final double[] bfmNote1 = { 4.5, 7, 8, 6.5, 10, 11, 12, 9.5 };
+		final int[] bfmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] bfmNote2 = { 9.5, 12, 11, 10, 6.5, 8, 7, 4.5};
+		final int[] bfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < bflat1.length; i++)
+			bflat1[i] = new NotePlay(bfmDur1[i], bfmNote1[i]);
+		for (int i = 0; i < bflat2.length; i++)
+			bflat2[i] = new NotePlay(bfmDur2[i], bfmNote2[i]);	
+		
+		/************* F-major scale init *******************/
+		int f_size = 8;
+		fmajor1 = new NotePlay[f_size];
+	    fmajor2 = new NotePlay[f_size];
+		final double[] fNote1 = { 3, 4, 5, 4.5, 7, 8, 9, 10 };
+		final int[] fDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] fNote2 = { 10, 9, 8, 7, 4.5, 5, 4, 3};
+		final int[] fDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < fmajor1.length; i++)
+			fmajor1[i] = new NotePlay(fDur1[i], fNote1[i]);
+		for (int i = 0; i < fmajor2.length; i++)
+			fmajor2[i] = new NotePlay(fDur2[i], fNote2[i]);	
+		
+		/************* B-major scale init *******************/
+		int b_size = 8;
+		bmajor1 = new NotePlay[b_size];
+	    bmajor2 = new NotePlay[b_size];
+		final double[] bNote1 = { 6, 5.5, 6.5, 9, 7.5, 8.5, 9.5, 13 };
+		final int[] bDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+		final double[] bNote2 = { 13, 9.5, 8.5, 7.5, 9, 6.5, 5.5, 6};
+		final int[] bDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+
+		for (int i = 0; i < bmajor1.length; i++)
+			bmajor1[i] = new NotePlay(bDur1[i], bNote1[i]);
+		for (int i = 0; i < bmajor2.length; i++)
+			bmajor2[i] = new NotePlay(bDur2[i], bNote2[i]);	
 
 		/********** Mary had a little lamb **************/
 
@@ -771,9 +1103,6 @@ public class TutorialMSActivity extends Activity {
 			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
 		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
-		/***************************************************/
-		
-		
 	}
 
 	protected void onClickHandler(int button) {
@@ -817,6 +1146,203 @@ public class TutorialMSActivity extends Activity {
 				piano.toggleShade();
 			}
 		}
+		
+		// Level 5 - D Major Scale
+		if (tutLevel == 5) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(dmajor1, 150);
+				break;
+			case 1:
+				piano.playSong(dmajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		// Level 6 - G Major Scale
+		if (tutLevel == 6) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(gmajor1, 150);
+				break;
+			case 1:
+				piano.playSong(gmajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		// Level 7 - A Major Scale
+		if (tutLevel == 7) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(amajor1, 150);
+				break;
+			case 1:
+				piano.playSong(amajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		// Level 8 - E Major Scale
+		if (tutLevel == 8) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(emajor1, 150);
+				break;
+			case 1:
+				piano.playSong(emajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		// Level 9 - F# Major Scale
+				if (tutLevel == 9) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(fsharp_major1, 150);
+						break;
+					case 1:
+						piano.playSong(fsharp_major2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 10 - D Flat Major Scale
+				if (tutLevel == 10) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(dflat1, 150);
+						break;
+					case 1:
+						piano.playSong(dflat2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 11 - A Flat Major Scale
+				if (tutLevel == 11) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(aflat1, 150);
+						break;
+					case 1:
+						piano.playSong(aflat2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 12 - E Flat Major Scale
+				if (tutLevel == 12) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(eflat1, 150);
+						break;
+					case 1:
+						piano.playSong(eflat2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 13 - B Flat Major Scale
+				if (tutLevel == 13) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(bflat1, 150);
+						break;
+					case 1:
+						piano.playSong(bflat2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 14 - F-Major Scale
+				if (tutLevel == 14) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(fmajor1, 150);
+						break;
+					case 1:
+						piano.playSong(fmajor2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+				
+				// Level 15 - B-Major Scale
+				if (tutLevel == 15) {
+					switch (numClicks) {
+					case 0:
+						piano.playSong(bmajor1, 150);
+						break;
+					case 1:
+						piano.playSong(bmajor2, 150);
+						break;
+					case 2:
+						numClicks = 0;
+						break;
+					default:
+						piano.toggleShade();
+					}
+				}
+		
+		
+		
+		
+		
+				
+				
+		
+		
+
 
 		// Level 2 - Twinkle Twinkle
 		if (tutLevel == 2) {
