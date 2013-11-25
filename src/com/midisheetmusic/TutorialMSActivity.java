@@ -125,7 +125,7 @@ public class TutorialMSActivity extends Activity {
 	private NotePlay[] cmajor1, cmajor2, dmajor1, dmajor2, gmajor1, gmajor2, amajor1, amajor2, emajor1, emajor2, fsharp_major1, fsharp_major2, littlelamb1, littlelamb2, littlelamb3,
 			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3,
 			biebs4, biebs5, dflat1, dflat2, aflat1, aflat2, eflat1, eflat2, bflat1, bflat2, fmajor1, fmajor2, 
-			bmajor1, bmajor2;
+			bmajor1, bmajor2, thriftshop1, thriftshop2, thriftshop3, thriftshop4, thriftshop5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -1103,7 +1103,44 @@ public class TutorialMSActivity extends Activity {
 			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
 		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
+		
+	
+		/*********** Thrift Shop **************/
+		final double[] tsNote1 = { 3.5, 3.5, 3.5, 1.5, 0.5, 3.5, 6.5, 6, 3.5 };
+		final int[] tsDur1 = { 2, 1, 1, 2, 2, 3, 1, 2, 2 };
+		final double[] tsNote2 = { 3.5, 6.5, 6.5, 5.5, 6, 3.5 };
+		final int[] tsDur2 = { 2, 1, 1, 2, 2, 4 };
+		final double[] tsNote3 = { 3.5, 6, 6.5, 6.5, 6.5, 6.5, 5.5, 6, 6.5, 5.5 };
+		final int[] tsDur3 = { 2, 2, 1, 1, 1, 1, 2, 2, 2, 6 };
+		final double[] tsNote4 = { 6.5, 6.5, 5.5, 6, 6.5, 6.5, 6.5, 6.5, 5.5, 6 };
+		final int[] tsDur4 = { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2 };
+		final double[] tsNote5 = { 6.5, 6.5, 5.5, 6, 3.5, 3.5 };
+		final int[] tsDur5 = { 2, 2, 2, 2, 2, 6 };
+		
+		int tssize1 = tsNote1.length;
+		int tssize2 = tsNote2.length;
+		int tssize3 = tsNote3.length;
+		int tssize4 = tsNote4.length;
+		int tssize5 = tsNote5.length;
+		thriftshop1 = new NotePlay[tssize1];
+		thriftshop2 = new NotePlay[tssize2];
+		thriftshop3 = new NotePlay[tssize3];
+		thriftshop4 = new NotePlay[tssize4];
+		thriftshop5 = new NotePlay[tssize5];
+		for (int i = 0; i < tssize1; i++)
+			thriftshop1[i] = new NotePlay(tsDur1[i], tsNote1[i]);
+		for (int i = 0; i < tssize2; i++)
+			thriftshop2[i] = new NotePlay(tsDur2[i], tsNote2[i]);
+		for (int i = 0; i < tssize3; i++)
+			thriftshop3[i] = new NotePlay(tsDur3[i], tsNote3[i]);
+		for (int i = 0; i < tssize4; i++)
+			thriftshop4[i] = new NotePlay(tsDur4[i], tsNote4[i]);
+		for (int i = 0; i < tssize5; i++)
+			thriftshop5[i] = new NotePlay(tsDur5[i], tsNote5[i]);
+		
 	}
+	
+	
 
 	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
@@ -1407,6 +1444,34 @@ public class TutorialMSActivity extends Activity {
 				break;
 			case 4:
 				piano.playSong(biebs5, 130);
+				break;
+			case 5:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
+		
+		
+		// Level 16 - Thrift Shop
+		int thriftspeed = 100;
+		if (tutLevel == 16) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(thriftshop1, thriftspeed);
+				break;
+			case 1:
+				piano.playSong(thriftshop2, thriftspeed);
+				break;
+			case 2:
+				piano.playSong(thriftshop3, thriftspeed);
+				break;
+			case 3:
+				piano.playSong(thriftshop4, thriftspeed);
+				break;
+			case 4:
+				piano.playSong(thriftshop5, thriftspeed);
 				break;
 			case 5:
 				numClicks = 0;

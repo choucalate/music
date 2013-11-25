@@ -20,7 +20,7 @@ public class LevelActivity extends ListActivity {
 			"Level 7: A-Major Scales & Practice", "Level 8: E-Major Scales & Practice", "Level 9: F#-Major Scales & Practice", 
 			"Level 10: D Flat-Major Scales & Practice", "Level 11: A Flat-Major Scales & Practice", 
 			"Level 12: E Flat-Major Scales & Practice", "Level 13: B Flat-Major Scales & Practice", "Level 14: F-Major Scales & Practice", 
-			"Level 15: B-Major Scales & Practice"};
+			"Level 15: B-Major Scales & Practice", "Level 16: Thrift Shop"};
 	public void onCreate(Bundle icicle) {
 	    super.onCreate(icicle);
 	    MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, values);
