@@ -13,6 +13,7 @@
 package com.midisheetmusic;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +31,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.model.NotePlay;
+import com.model.RecNotes;
 
 /**
  * @class Piano
@@ -116,6 +118,21 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	private Timer time, songTime;
 	private int numBlinks = 0;
 	private boolean wantTutCall;
+
+	/* recording stuffs */
+	private boolean recStart;
+	private ArrayList<RecNotes> myRec = new ArrayList<RecNotes>();
+	public ArrayList<RecNotes> getMyRec() {
+		return myRec;
+	}
+
+	public void setMyRec(ArrayList<RecNotes> myRec) {
+		this.myRec = myRec;
+	}
+
+	private Calendar startTime;
+
+	/* end recording stuffs */
 
 	/** Create a new Piano. */
 	public Piano(Context context) {
@@ -930,6 +947,90 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return logTouch;
 	}
 
+	static int offset = 0; /*
+							 * offset for replaying should equal amount of time
+							 * it takes to generate the notes into scheduler
+							 */
+
+	/* a method solely for replaying the recorded stuff */
+	public void playBack(int speed) {
+		/* myrec arraylist */
+		if (!surfaceReady || bufferBitmap == null) {
+			Log.e("Shade", "fail");
+			return;
+		}
+
+		time = new Timer();
+		Calendar mycal = Calendar.getInstance();
+		Calendar copy = Calendar.getInstance();
+
+		String start = "print myRec: [";
+		for (int i = 0; i < myRec.size(); i++) {
+			start += myRec.get(i).getNoteToPlay() + " : " + myRec.get(i).getCurrTime()
+					+ ", ";
+		}
+		start += "]";
+		Log.i("recstart", start);
+
+		for (int i = 0; i < myRec.size(); i++) {
+
+			mycal = copy;
+			if (i == 0) {
+				mycal.add(Calendar.MILLISECOND,
+						(int) (myRec.get(i).getCurrTime() + offset));
+			} else {
+				mycal.add(Calendar.MILLISECOND, (int) (myRec.get(i).getCurrTime()
+						+ offset - myRec.get(i - 1).getCurrTime()));
+			}
+			Log.i("recstart",
+					"going to play it at: "
+							+ (mycal.getTimeInMillis() - copy.getTimeInMillis())
+							+ " with the offset: "
+							+ (int) myRec.get(i).getCurrTime());
+			final int index = i;
+			time.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					SurfaceHolder holder = getHolder();
+					Canvas canvas = holder.lockCanvas();
+					if (canvas == null) {
+						Log.e("recstart", "fail2");
+						return;
+					}
+
+					bufferCanvas.translate(margin + BlackBorder, margin
+							+ BlackBorder);
+					
+					ShadeOneNote(bufferCanvas, myRec.get(index).getNoteshade(), Color.LTGRAY);
+
+					bufferCanvas.translate(-(margin + BlackBorder),
+							-(margin + BlackBorder));
+					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+					DrawNoteLetters(canvas);
+					holder.unlockCanvasAndPost(canvas);
+					
+					Log.i("recstart", "about to play note: "
+							+ myRec.get(index).getNoteToPlay());
+					soundPool.playNote(myRec.get(index).getNoteToPlay(), 1);
+					
+					time.schedule(new TimerTask() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							Log.i("recstart", " unshading myrec");
+							unShade(myRec.get(index).getNoteshade());
+						}
+						
+					}, 100);
+				}
+
+			}, mycal.getTime());
+		}
+	}
+
 	/**
 	 * for the tutorial note to enter: Black {C#, D#, F#, G#, A#, C#, D#, F#,
 	 * G#, A#} White {C, D, E, F, G, A, B, C, D, E, F, G, A, B} encode as [# of
@@ -941,9 +1042,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			Log.e("Shade", "fail");
 			return;
 		}
-        for(int i = 0; i < notes.length; i++) {
-        	Log.i("NOTEPLAY", "THE NOTES ARRAY: " + notes[i].getNote());
-        }
+		for (int i = 0; i < notes.length; i++) {
+			Log.i("NOTEPLAY", "THE NOTES ARRAY: " + notes[i].getNote());
+		}
 		songArr = notes;
 		blinkShade = 1; // 1=unshade
 		curr = 0;
@@ -1047,8 +1148,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	/**
-	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 
-	 *                          C# D# F# G# A# C# D# F# G# A#
+	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 C#
+	 * D# F# G# A# C# D# F# G# A#
 	 */
 	private String noteToShadetoPlayConverter(int noteToShade,
 			boolean blackorwhite) {
@@ -1073,16 +1174,16 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 					Log.i("found the index at index:", "index: " + i);
 				}
 			}
-			if(index >= 2) {
+			if (index >= 2) {
 				index++;
 			}
-			if(index >= 6) {
+			if (index >= 6) {
 				index++;
 			}
-			if(index >= 9) {
+			if (index >= 9) {
 				index++;
 			}
-			
+
 		}
 
 		/* stuff to init for assembling string */
@@ -1095,7 +1196,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		if (note > 'g') {
 			note = 'a';
 			note = (char) (note + (index - 5));
-			if(note > 'g') note = 'a';
+			if (note > 'g')
+				note = 'a';
 		} else
 			Log.i("current note:", "the note is :" + note);
 		// if index > something change to 3 otherwise 4
@@ -1526,10 +1628,53 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			// "the note is " +
 			// key);
 
+			if (recStart) {
+				/**
+				 * if the key not equal to previous key or current time minus
+				 * the last 1 by 100 milliseconds
+				 */
+				if (myRec.size() != 0) {
+					long st = ((Calendar.getInstance().getTimeInMillis() - startTime
+							.getTimeInMillis()) - myRec.get(myRec.size() - 1).getCurrTime());
+					Log.i("recstart",
+							"time diff from last: "
+									+ st
+									+ " diff? : "
+									+ key.equals(myRec.get(myRec.size() - 1).getNoteToPlay()));
+					if (!key.equals(myRec.get(myRec.size() - 1).getNoteToPlay())
+							|| (st > 100)) {
+						Log.i("recstart",
+								"going to start recording for note: "
+										+ key
+										+ " lastnote: "
+										+ myRec.get(myRec.size() - 1).getNoteToPlay()
+										+ " with st: " + st);
+						myRec.add(new RecNotes((Calendar.getInstance()
+								.getTimeInMillis() - startTime
+								.getTimeInMillis()), key, lastShaded));
+					}
+				} else {
+					Log.i("recstart", "going to start recording for note: "
+							+ key);
+					myRec.add(new RecNotes((Calendar.getInstance()
+							.getTimeInMillis() - startTime.getTimeInMillis()),
+							key, lastShaded));
+				}
+			}
+
 			soundPool.playNote(key, 1);
 			return lastShaded;
 		}
 
+	}
+
+	public void startRec() {
+		recStart = !recStart;
+
+		if (recStart) {
+			myRec = new ArrayList<RecNotes>(); /* clear the old one */
+			startTime = Calendar.getInstance();
+		}
 	}
 
 	private int getMyNote(float x, float y) {
@@ -1675,15 +1820,13 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		return lastShaded;
 
 	}
-	
-    public static String[] beatArrss = {"beat1", "beat2", "beat3"};
-	public void playBeat(int i)
-	{
+
+	public static String[] beatArrss = { "beat1", "beat2", "beat3", "clap", "snare" };
+
+	public void playBeat(int i) {
 		soundPool.playNote(beatArrss[i], 1);
 	}
-	
-	
-	
+
 	/*
 	 * Shade the given note with the given brush. We only draw notes from
 	 * notenumber 24 to 96. (Middle-C is 60).

@@ -1,5 +1,6 @@
 package com.midisheetmusic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -18,26 +19,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.model.NotePlay;
+import com.model.RecManager;
+import com.model.RecNotes;
 
 public class PlayAroundActivity extends Activity {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
@@ -65,6 +70,8 @@ public class PlayAroundActivity extends Activity {
 
 	/* button to guide image falling process */
 	Button playNote, backTut, nextTut, restartTut;
+	Spinner beats;
+	Spinner save_list;
 	/**
 	 * "note" + "key" + "1|2 position" +
 	 * "1st primary or 2nd secondary imageview"
@@ -118,12 +125,20 @@ public class PlayAroundActivity extends Activity {
 			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3,
 			biebs4, biebs5;
 
+	/* recording file */
+	private final static String filename = "Rec.txt";
+	ArrayList<ArrayList<RecNotes>> rn = null;
+
+	final Context mctx = this;
+	RecManager rm;
+	private int beatstate = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		popUpCount = 0;
 		ivArray = new ImageView[2];
-
+		rm = new RecManager(this);
 		/********/
 		// Bundle bundle = getIntent().getExtras();
 		// tut = bundle.getString(LevelActivity.mSelected);
@@ -288,191 +303,7 @@ public class PlayAroundActivity extends Activity {
 	}
 
 	/* Create the MidiPlayer and Piano views */
-	private void createView() {
-
-		Display display = getWindowManager().getDefaultDisplay();
-		// Point size = new Point();
-		int width = display.getWidth();
-		int height = display.getHeight();
-		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-
-		layout = new LinearLayout(this);
-		layout.setOrientation(LinearLayout.VERTICAL);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-		/* for the button */
-		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		rl = new RelativeLayout(this);
-
-		/* note 1 */
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 2 */
-		RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 3 */
-		RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 4 */
-		RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 5 */
-		RelativeLayout.LayoutParams lp5 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 6 */
-		RelativeLayout.LayoutParams lp6 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 6 */
-		RelativeLayout.LayoutParams lp7 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-
-		playNote = new Button(this);
-		playNote.setText("fall!");
-		playNote.setLayoutParams(layoutParams2);
-		rl.addView(playNote);
-
-		noteC1A = new ImageView(this);
-		noteD1A = new ImageView(this);
-		noteE1A = new ImageView(this);
-		noteF1A = new ImageView(this);
-		noteG1A = new ImageView(this);
-		noteA1A = new ImageView(this);
-		noteB1A = new ImageView(this);
-		noteC1B = new ImageView(this);
-		noteD1B = new ImageView(this);
-		noteE1B = new ImageView(this);
-		noteF1B = new ImageView(this);
-		noteG1B = new ImageView(this);
-		noteA1B = new ImageView(this);
-		noteB1B = new ImageView(this);
-		noteC1A.setImageResource(R.drawable.orange_note);
-		noteD1A.setImageResource(R.drawable.blue_note);
-		noteE1A.setImageResource(R.drawable.orange_note);
-		noteF1A.setImageResource(R.drawable.blue_note);
-		noteG1A.setImageResource(R.drawable.orange_note);
-		noteA1A.setImageResource(R.drawable.blue_note);
-		noteB1A.setImageResource(R.drawable.orange_note);
-		noteC1B.setImageResource(R.drawable.orange_note);
-		noteD1B.setImageResource(R.drawable.blue_note);
-		noteE1B.setImageResource(R.drawable.orange_note);
-		noteF1B.setImageResource(R.drawable.blue_note);
-		noteG1B.setImageResource(R.drawable.orange_note);
-		noteA1B.setImageResource(R.drawable.blue_note);
-		noteB1B.setImageResource(R.drawable.orange_note);
-
-		// noteOr.setVisibility(View.INVISIBLE);
-		// noteOr2.setVisibility(View.INVISIBLE);
-
-		/**
-		 * Margins- 35- C3 115- D3 195 275 355 435 515
-		 */
-		lp.setMargins(35, 0, 0, 300);
-		lp2.setMargins(110, 0, 0, 300);
-		lp3.setMargins(185, 0, 0, 300);
-		lp4.setMargins(225, 0, 0, 300);
-		lp5.setMargins(305, 0, 0, 300);
-		lp6.setMargins(385, 0, 0, 300);
-		lp7.setMargins(430, 0, 0, 300);
-		rl.addView(noteC1A, lp);
-		rl.addView(noteD1A, lp2);
-		rl.addView(noteE1A, lp3);
-		rl.addView(noteF1A, lp4);
-		rl.addView(noteG1A, lp5);
-		rl.addView(noteA1A, lp6);
-		rl.addView(noteB1A, lp7);
-		rl.addView(noteC1B, lp);
-		rl.addView(noteD1B, lp2);
-		rl.addView(noteE1B, lp3);
-		rl.addView(noteF1B, lp4);
-		rl.addView(noteG1B, lp5);
-		rl.addView(noteA1B, lp6);
-		rl.addView(noteB1B, lp7);
-
-		// noteOr.setVisibility(View.INVISIBLE);
-		// noteOr2.setVisibility(View.INVISIBLE);
-
-		layout.addView(rl, layoutParams);
-
-		popupLayout = new LinearLayout(this);
-		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
-
-		textview = new TextView(this);
-		textview.setText("Hi this is a sample text for popup window");
-		popUp = new PopupWindow(this);
-
-		/**
-		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
-		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
-		 * N]); to stop, setTutUnShade = -1
-		 * 
-		 */
-		playNote.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				numClicks++;
-
-				// if(numClicks%2 == 0 && numClicks != 0)
-				// {
-				// Log.i("numClicks", "num: " + numClicks);
-				// piano.toggleShade();
-				// }
-				// piano.tutorialNote("3#");
-				// if (click) {
-				// Log.i("Click", "BUTTON IS CLICKED");
-				// popUp.showAtLocation(layout, Gravity.LEFT, 8, 4);
-				// popUp.update(50, 50, 300, 100);
-				// click = false;
-				// } else {
-				// popUp.dismiss();
-				// click = true;
-				// }
-			}
-		});
-		popupLayout.addView(textview, params);
-		popUp.setContentView(popupLayout);
-
-		// tableLayout.addView(tableRow);
-		// layout.addView(tableLayout);
-		/** DONE ***/
-		int[] marginVal = new int[4];
-		marginVal[0] = (int) (width / 200);
-		marginVal[1] = (int) (height / 10);
-		int right = 0;
-		int left = 0;
-		marginVal[2] = right;
-		marginVal[3] = left;
-		layoutParams.setMargins(0, 0, 0, 0);
-
-		RelativeLayout rlPiano = new RelativeLayout(this);
-		RelativeLayout.LayoutParams lpPiano = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		piano = new Piano(this, marginVal, sp, false);
-		/*** SET BUTTON WIDTH AND HEIGHT FROM PIANO KEY WIDTH AND HEIGHTS **/
-		// noteOr.setMinimumWidth(piano.getKeyWidths("white")); //change to
-		// public static later
-		/*** PIANO.FIREDISPLAY(NOTEKEY) ***/
-		rlPiano.addView(piano, lpPiano);
-		layout.addView(rlPiano);
-
-		setContentView(layout);
-		// player.SetPiano(piano);
-		layout.requestLayout();
-		/**
-		 * LASTLY: MAKE A BUTTON SO THAT WHEN WE PRESS IT, IT WILL USE VIEWFLIP
-		 * TO CHANGE TO THE SAME PIANO VIEW BUT SCROLLED UP ONE OCTAVE
-		 */
-	}
+	//
 
 	public static int getCallBack() {
 		return callBack;
@@ -493,22 +324,32 @@ public class PlayAroundActivity extends Activity {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-		/* for the button play */
+		/* for the button record */
 		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
-		/* for the button next */
+		/* for the button replay */
 		LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-		/* for the button restart */
+		/* for the button beat1 */
 		LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
-		/* for the button back */
+		/* for the button beat2 */
 		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+
+		/* for the spinner beat set */
+		LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+
+		/* for the spinner context menu */
+		LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 		LinearLayout rl = new LinearLayout(this);
@@ -520,7 +361,7 @@ public class PlayAroundActivity extends Activity {
 		 * For the button to start that tutorial
 		 */
 		playNote = new Button(this);
-		playNote.setText("Record/Stop");
+		playNote.setText("Record");
 		playNote.setLayoutParams(layoutParams2);
 
 		/*
@@ -544,10 +385,83 @@ public class PlayAroundActivity extends Activity {
 		restartTut.setText("Beat2");
 		restartTut.setLayoutParams(layoutParams5);
 
+		/* spinners- beats has beat sets, save_list is the context menu */
+		beats = new Spinner(this);
+		save_list = new Spinner(this);
+		// Create an ArrayAdapter using the string array and a default spinner
+		// layout
+		ArrayList<String> beatset_arr = new ArrayList<String>();
+		beatset_arr.add("Beat 1");
+		beatset_arr.add("Beat 2");
+
+		ArrayList<String> context_arr = new ArrayList<String>();
+		context_arr.add("Save Rec");
+		context_arr.add("List Rec");
+
+		beats.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int pos, long id) {
+				// TODO Auto-generated method stub
+				Log.i("spinner", "in beats with pos: " + pos);
+				beatstate = pos;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
+		save_list.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int pos, long id) {
+				// TODO Auto-generated method stub
+				Log.i("spinner", "in save_list with pos: " + pos);
+				switch (pos) {
+				case 0:
+					option_save(rm);
+					break;
+				case 1:
+					option_list(rm);
+					break;
+				default:
+					break;
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
+		ArrayAdapter<String> beatArrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, beatset_arr);
+		ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.simple_spinner_dropdown_item,
+				context_arr);
+
+		beats.setAdapter(beatArrayAdapter);
+		beats.setLayoutParams(layoutParams6);
+
+		save_list.setAdapter(contextArrayAdapter);
+		save_list.setLayoutParams(layoutParams7);
+
 		rl.addView(playNote);
 		rl.addView(nextTut);
 		rl.addView(backTut);
 		rl.addView(restartTut);
+
+		rl.addView(beats);
+		rl.addView(save_list);
 
 		layout.addView(rl, layoutParams);
 
@@ -580,27 +494,40 @@ public class PlayAroundActivity extends Activity {
 		OnClickListener myPlay0 = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onClickHandler(0);
+				/* onClickHandler(0); */
+				piano.startRec();
 			}
 		};
 		OnClickListener myPlay1 = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onClickHandler(1);
+				// onClickHandler(1);
+				piano.playBack(1);
 			}
 		};
+		/* using beats 0, 1, 3, 4 */
 		OnClickListener myPlay2 = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (beatstate == 0) {
+					piano.playBeat(0);
+				} else {
+					piano.playBeat(3);
+				}
+				// mctx.openOptionsMenu();
 				// onClickHandler(2);
-				piano.playBeat(0);
+				// piano.playBeat(0);
 			}
 		};
 		OnClickListener myPlay3 = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// onClickHandler(3);
-				piano.playBeat(2);
+				if (beatstate == 0) {
+					piano.playBeat(1);
+				} else {
+					piano.playBeat(4);
+				}
 			}
 		};
 
@@ -889,8 +816,100 @@ public class PlayAroundActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
+		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case R.id.save_rec:
+			return option_save(rm);
+		case R.id.list_rec:
+			return option_list(rm);
+		default:
+			return true;
+		}
+	}
+
+	private boolean option_save(RecManager rm) {
+		if (piano.getMyRec().size() == 0) {
+			Toast.makeText(this, "no recording found", Toast.LENGTH_SHORT)
+					.show();
+			return true;
+		}
+		Log.i("option", "saving rec option");
+		Toast.makeText(this, "saving your recording", Toast.LENGTH_SHORT)
+				.show();
+		saveRec(rn, rm);
+		return true;
+	}
+
+	private boolean option_list(RecManager rm) {
+
+		rn = loadRec(rn, rm);
+		CharSequence[] items = new CharSequence[rn.size()];
+		for (int i = 0; i < items.length; i++) {
+			items[i] = "Recording " + i;
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Play Your Recordings");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int item) {
+
+				piano.setMyRec(rn.get(item));
+				Toast.makeText(mctx, "Hit Play!", Toast.LENGTH_SHORT).show();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+		return true;
+	}
+
+	private ArrayList<ArrayList<RecNotes>> loadRec(
+			ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
+		try {
+			rn = rm.getSerialized(filename);
+			for (int i = 0; i < rn.size(); i++) {
+				Log.i("option", "printing rn: " + rn.toString());
+			}
+			return rn;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return (new ArrayList<ArrayList<RecNotes>>());
+		}
+	}
+
+	private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
+
+		try {
+			rn = rm.getSerialized(filename);
+
+			if (rn == null) {
+				Log.i("option", "rn was null, making new");
+				rn = new ArrayList<ArrayList<RecNotes>>();
+			}
+			rn.add(piano.getMyRec());
+			rm.setSerialized(filename, rn);
+		} catch (IOException e) {
+			if (rn == null) {
+				Log.i("option", "rn was null, making new");
+				rn = new ArrayList<ArrayList<RecNotes>>();
+			}
+			rn.add(piano.getMyRec());
+			try {
+				rm.setSerialized(filename, rn);
+			} catch (IOException e1) {
+				Log.e("option", "failed to even set serialize??");
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			// TODO Auto-generated catch block
+			Log.e("option", "failed to get serialized");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -957,4 +976,189 @@ public class PlayAroundActivity extends Activity {
 			running = val;
 		}
 	}
+	// private void createView() {
+	//
+	// Display display = getWindowManager().getDefaultDisplay();
+	// // Point size = new Point();
+	// int width = display.getWidth();
+	// int height = display.getHeight();
+	// // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+	//
+	// layout = new LinearLayout(this);
+	// layout.setOrientation(LinearLayout.VERTICAL);
+	// LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+	// LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
+	// /* for the button */
+	// LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+	// LinearLayout.LayoutParams.WRAP_CONTENT,
+	// LinearLayout.LayoutParams.WRAP_CONTENT);
+	// rl = new RelativeLayout(this);
+	//
+	// /* note 1 */
+	// RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 2 */
+	// RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 3 */
+	// RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 4 */
+	// RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 5 */
+	// RelativeLayout.LayoutParams lp5 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 6 */
+	// RelativeLayout.LayoutParams lp6 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	// /* note 6 */
+	// RelativeLayout.LayoutParams lp7 = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.WRAP_CONTENT,
+	// RelativeLayout.LayoutParams.MATCH_PARENT);
+	//
+	// playNote = new Button(this);
+	// playNote.setText("fall!");
+	// playNote.setLayoutParams(layoutParams2);
+	// rl.addView(playNote);
+	//
+	// noteC1A = new ImageView(this);
+	// noteD1A = new ImageView(this);
+	// noteE1A = new ImageView(this);
+	// noteF1A = new ImageView(this);
+	// noteG1A = new ImageView(this);
+	// noteA1A = new ImageView(this);
+	// noteB1A = new ImageView(this);
+	// noteC1B = new ImageView(this);
+	// noteD1B = new ImageView(this);
+	// noteE1B = new ImageView(this);
+	// noteF1B = new ImageView(this);
+	// noteG1B = new ImageView(this);
+	// noteA1B = new ImageView(this);
+	// noteB1B = new ImageView(this);
+	// noteC1A.setImageResource(R.drawable.orange_note);
+	// noteD1A.setImageResource(R.drawable.blue_note);
+	// noteE1A.setImageResource(R.drawable.orange_note);
+	// noteF1A.setImageResource(R.drawable.blue_note);
+	// noteG1A.setImageResource(R.drawable.orange_note);
+	// noteA1A.setImageResource(R.drawable.blue_note);
+	// noteB1A.setImageResource(R.drawable.orange_note);
+	// noteC1B.setImageResource(R.drawable.orange_note);
+	// noteD1B.setImageResource(R.drawable.blue_note);
+	// noteE1B.setImageResource(R.drawable.orange_note);
+	// noteF1B.setImageResource(R.drawable.blue_note);
+	// noteG1B.setImageResource(R.drawable.orange_note);
+	// noteA1B.setImageResource(R.drawable.blue_note);
+	// noteB1B.setImageResource(R.drawable.orange_note);
+	//
+	// // noteOr.setVisibility(View.INVISIBLE);
+	// // noteOr2.setVisibility(View.INVISIBLE);
+	//
+	// /**
+	// * Margins- 35- C3 115- D3 195 275 355 435 515
+	// */
+	// lp.setMargins(35, 0, 0, 300);
+	// lp2.setMargins(110, 0, 0, 300);
+	// lp3.setMargins(185, 0, 0, 300);
+	// lp4.setMargins(225, 0, 0, 300);
+	// lp5.setMargins(305, 0, 0, 300);
+	// lp6.setMargins(385, 0, 0, 300);
+	// lp7.setMargins(430, 0, 0, 300);
+	// rl.addView(noteC1A, lp);
+	// rl.addView(noteD1A, lp2);
+	// rl.addView(noteE1A, lp3);
+	// rl.addView(noteF1A, lp4);
+	// rl.addView(noteG1A, lp5);
+	// rl.addView(noteA1A, lp6);
+	// rl.addView(noteB1A, lp7);
+	// rl.addView(noteC1B, lp);
+	// rl.addView(noteD1B, lp2);
+	// rl.addView(noteE1B, lp3);
+	// rl.addView(noteF1B, lp4);
+	// rl.addView(noteG1B, lp5);
+	// rl.addView(noteA1B, lp6);
+	// rl.addView(noteB1B, lp7);
+	//
+	// // noteOr.setVisibility(View.INVISIBLE);
+	// // noteOr2.setVisibility(View.INVISIBLE);
+	//
+	// layout.addView(rl, layoutParams);
+	//
+	// popupLayout = new LinearLayout(this);
+	// params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+	// LayoutParams.WRAP_CONTENT);
+	//
+	// textview = new TextView(this);
+	// textview.setText("Hi this is a sample text for popup window");
+	// popUp = new PopupWindow(this);
+	//
+	// /**
+	// * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
+	// * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
+	// * N]); to stop, setTutUnShade = -1
+	// *
+	// */
+	// playNote.setOnClickListener(new Button.OnClickListener() {
+	// @Override
+	// public void onClick(View arg0) {
+	// numClicks++;
+	//
+	// // if(numClicks%2 == 0 && numClicks != 0)
+	// // {
+	// // Log.i("numClicks", "num: " + numClicks);
+	// // piano.toggleShade();
+	// // }
+	// // piano.tutorialNote("3#");
+	// // if (click) {
+	// // Log.i("Click", "BUTTON IS CLICKED");
+	// // popUp.showAtLocation(layout, Gravity.LEFT, 8, 4);
+	// // popUp.update(50, 50, 300, 100);
+	// // click = false;
+	// // } else {
+	// // popUp.dismiss();
+	// // click = true;
+	// // }
+	// }
+	// });
+	// popupLayout.addView(textview, params);
+	// popUp.setContentView(popupLayout);
+	//
+	// // tableLayout.addView(tableRow);
+	// // layout.addView(tableLayout);
+	// /** DONE ***/
+	// int[] marginVal = new int[4];
+	// marginVal[0] = (int) (width / 200);
+	// marginVal[1] = (int) (height / 10);
+	// int right = 0;
+	// int left = 0;
+	// marginVal[2] = right;
+	// marginVal[3] = left;
+	// layoutParams.setMargins(0, 0, 0, 0);
+	//
+	// RelativeLayout rlPiano = new RelativeLayout(this);
+	// RelativeLayout.LayoutParams lpPiano = new RelativeLayout.LayoutParams(
+	// RelativeLayout.LayoutParams.MATCH_PARENT,
+	// RelativeLayout.LayoutParams.WRAP_CONTENT);
+	// piano = new Piano(this, marginVal, sp, false);
+	// /*** SET BUTTON WIDTH AND HEIGHT FROM PIANO KEY WIDTH AND HEIGHTS **/
+	// // noteOr.setMinimumWidth(piano.getKeyWidths("white")); //change to
+	// // public static later
+	// /*** PIANO.FIREDISPLAY(NOTEKEY) ***/
+	// rlPiano.addView(piano, lpPiano);
+	// layout.addView(rlPiano);
+	//
+	// setContentView(layout);
+	// // player.SetPiano(piano);
+	// layout.requestLayout();
+	// /**
+	// * LASTLY: MAKE A BUTTON SO THAT WHEN WE PRESS IT, IT WILL USE VIEWFLIP
+	// * TO CHANGE TO THE SAME PIANO VIEW BUT SCROLLED UP ONE OCTAVE
+	// */
+	// }
 }
