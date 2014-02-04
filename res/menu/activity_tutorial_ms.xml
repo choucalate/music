@@ -4,6 +4,12 @@
         android:id="@+id/menu_settings"
         android:orderInCategory="100"
         android:title="@string/menu_settings"/>
+    
+    
+        <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:title="@string/menu_settings"/>
     <item
         android:id="@+id/list_rec"
         android:checkable="false"
@@ -14,5 +20,34 @@
         android:checkable="false"
         android:orderInCategory="300"
         android:title="Save Recording"/>
+    
+    
+    
+    
+    
+     <item
+        android:id="@+id/play_icon" 
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:icon="@drawable/play_icon"
+        android:title="@string/play_icon"/>
+        <item
+        android:id="@+id/next_icon" 
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:icon="@drawable/next_icon"
+        android:title="@string/next_icon"/>
+           <item
+        android:id="@+id/previous_icon" 
+        android:orderInCategory="3"
+        android:showAsAction="always"
+        android:icon="@drawable/previous_icon"
+        android:title="@string/previous_icon"/>
+              <item
+        android:id="@+id/replay_icon" 
+        android:orderInCategory="4"
+        android:showAsAction="always"
+        android:icon="@drawable/replay_icon"
+        android:title="@string/replay_icon"/>
 
 </menu>

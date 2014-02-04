@@ -1,10 +1,15 @@
 package com.midisheetmusic;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import android.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,22 +21,45 @@ import android.widget.Button;
 
 
 
-public class AndroidDashboardDesignActivity extends Activity {
+
+//
+
+public class AndroidDashboardDesignActivity extends SherlockActivity {
 	AsyncTask<Void, ?, ?> wait;
 
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+	    
 		Log.e("create", "NOF ACEBOOK");
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.dashboard_layout);
+		setTitle("Some title or no title");
+
 		// wait = new waitUp();
 		// wait.execute((Void) null);
+		
 		Button tut = (Button) findViewById(R.id.gotut);
 		Button play = (Button) findViewById(R.id.goplay);
+		Button beats = (Button) findViewById(R.id.gobeats);
+
+		beats.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(), Beats_Activity.class);
+				startActivity(i);
+				
+			}
+			
+		});
+
+		//
 		tut.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -53,6 +81,15 @@ public class AndroidDashboardDesignActivity extends Activity {
 			}
 			
 		});
+		
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+        getSupportMenuInflater().inflate(R.menu.levelactivity_menu, menu);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(100,54,183)));
+        return true;
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
@@ -104,6 +141,7 @@ public class AndroidDashboardDesignActivity extends Activity {
 
 	}
 
+
 	public class waitUp extends AsyncTask<Void, Void, Void> {
 
 		@Override
@@ -125,6 +163,6 @@ public class AndroidDashboardDesignActivity extends Activity {
 			Intent i = new Intent(getApplicationContext(), LevelActivity.class);
 			startActivity(i);
 		}
-
+		
 	}
 }
