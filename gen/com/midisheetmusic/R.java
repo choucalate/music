@@ -153,8 +153,9 @@ public final class R {
         public static final int help=0x7f03000b;
         public static final int main=0x7f03000c;
         public static final int mspiano=0x7f03000d;
-        public static final int rowlayout=0x7f03000e;
-        public static final int save_images_dialog=0x7f03000f;
+        public static final int recordslist_layout=0x7f03000e;
+        public static final int rowlayout=0x7f03000f;
+        public static final int save_images_dialog=0x7f030010;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
