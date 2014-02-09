@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.midisheetmusic"
     android:versionCode="8"
     android:versionName="2.5.1" >
@@ -50,7 +51,7 @@
             android:label="@string/title_activity_tutorial_ms"
             android:screenOrientation="landscape" >
         </activity>
-                <activity
+        <activity
             android:name="com.midisheetmusic.PlayAroundActivity"
             android:configChanges="orientation"
             android:label="@string/playaround"
@@ -63,6 +64,10 @@
         <activity
             android:name="com.testmusic.SoundPoolExample"
             android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.midisheetmusic.Beats_Activity"
+            android:label="@string/title_activity_beats_" >
         </activity>
     </application>
 

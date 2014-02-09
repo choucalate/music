@@ -2,11 +2,11 @@ package com.midisheetmusic;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,7 +17,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
+//import android.view.Menu;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+
+import android.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -37,6 +42,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.model.NotePlay;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
@@ -44,7 +50,7 @@ import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 
-public class TutorialMSActivity extends Activity {
+public class TutorialMSActivity extends SherlockActivity {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
 			"Level 3: Actual Songs" };
@@ -146,10 +152,14 @@ public class TutorialMSActivity extends Activity {
 		// ClefSymbol.LoadImages(this);
 		// TimeSigSymbol.LoadImages(this);
 		// MidiPlayer.LoadImages(this);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+	    			WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		 //setTitle("Some title or no title");
+
+	     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		try {
 			setPiano = new pianoAsync();
 			setPiano.execute();
@@ -1571,10 +1581,59 @@ public class TutorialMSActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
+		getSupportMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
 		return true;
 	}
+	 @Override
+	 public boolean onOptionsItemSelected(MenuItem item) {
+		 switch (item.getItemId()) {
+	
+		 case 16908332:
+    
+	     {
+	    	 Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
+        	 startActivity(i);
+        	return true	;
+	     }
 
+         case R.id.play_icon :
+         {
+        	 Log.i("asdf", "playnote");
+        	 onClickHandler(0);
+        	 System.err.println("In here");
+         }
+
+         case R.id.next_icon:
+         {
+        	 Log.i("asdf", "nextTut");
+        	 onClickHandler(1);
+        	 numClicks++;	   	
+         }
+
+
+         case R.id.replay_icon:
+         {
+        	 Log.i("asdf", "backTut");
+        	 onClickHandler(2);
+        	 numClicks--;	
+         }
+         case R.id.previous_icon:
+         {
+        	 Log.i("asdf", "restartTut");
+        	 initSongs();
+        	 onClickHandler(3);
+        	 numClicks = 0;  	
+         }
+	
+         default:{
+	
+        	 Log.e("OOB", "button out of boundsssss");
+        	 numClicks = 0;
+         }
+         return false; 
+
+		 }
+	 }
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
