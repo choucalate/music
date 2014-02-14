@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class RecManager {
 	Context mCtx;
-    private String filename = "Rec.txt";
+    private String filename = "Rec1.txt";
 	public RecManager(Context ctx) {
 		mCtx = ctx;
 	}
@@ -108,6 +108,7 @@ public class RecManager {
 	public void saveRec(ArrayList<RecNotes> newrec) {
 		HashMap<String, ArrayList<RecNotes>> database = new HashMap<String, ArrayList<RecNotes>>();
 		try {
+			Log.e("serialize", "starting serializing");
 			database = getSerialized(filename);
             String dfnam = "MyJam " + (database.size() + 1); 
 			/*if (rn == null) {
@@ -116,6 +117,7 @@ public class RecManager {
 			}*/	
 			database.put(dfnam, newrec);
 			setSerialized(filename, database);
+			Log.e("serialize", "finished serializing");
 		} catch (IOException e) {
 //			if (database == null) {
 //				Log.i("option", "rn was null, making new");

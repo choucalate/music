@@ -71,7 +71,6 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	private boolean useTwoColors;
 	/** If true, use two colors for highlighting */
-	private ArrayList<MidiNote> notes;
 	/** The Midi notes for shading */
 	private int maxShadeDuration;
 	/** The maximum duration we'll shade a note for */
@@ -85,7 +84,6 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	/** The bitmap for double-buffering */
 	private Canvas bufferCanvas;
 	/** The canvas for double-buffering */
-	private MidiPlayer player;
 
 	/** Used to find margin */
 	private int[] margin_val;
@@ -279,48 +277,7 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		super.onSizeChanged(newwidth, newheight, oldwidth, oldheight);
 	}
 
-	/**
-	 * Set the MidiFile to use. Save the list of midi notes. Each midi note
-	 * includes the note Number and StartTime (in pulses), so we know which
-	 * notes to shade given the current pulse time.
-	 */
-	public void SetMidiFile(MidiFile midifile, MidiOptions options,
-			MidiPlayer player) {
-		if (midifile == null) {
-			notes = null;
-			useTwoColors = false;
-			return;
-		}
-		this.player = player;
-		ArrayList<MidiTrack> tracks = midifile.ChangeMidiNotes(options);
-		MidiTrack track = MidiFile.CombineToSingleTrack(tracks);
-		notes = track.getNotes();
 
-		maxShadeDuration = midifile.getTime().getQuarter() * 2;
-
-		/*
-		 * We want to know which track the note came from. Use the 'channel'
-		 * field to store the track.
-		 */
-		for (int tracknum = 0; tracknum < tracks.size(); tracknum++) {
-			for (MidiNote note : tracks.get(tracknum).getNotes()) {
-				note.setChannel(tracknum);
-			}
-		}
-
-		/*
-		 * When we have exactly two tracks, we assume this is a piano song, and
-		 * we use different colors for highlighting the left hand and right hand
-		 * notes.
-		 */
-		useTwoColors = false;
-		if (tracks.size() == 2) {
-			useTwoColors = true;
-		}
-
-		showNoteLetters = options.showNoteLetters;
-		this.invalidate();
-	}
 
 	/** Set the colors to use for shading */
 	public void SetShadeColors(int c1, int c2) {
@@ -524,147 +481,6 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		// }
 	}
 
-	/**
-	 * Find the MidiNote with the startTime closest to the given time. Return
-	 * the index of the note. Use a binary search method.
-	 */
-	private int FindClosestStartTime(int pulseTime) {
-		int left = 0;
-		int right = notes.size() - 1;
-
-		while (right - left > 1) {
-			int i = (right + left) / 2;
-			if (notes.get(left).getStartTime() == pulseTime)
-				break;
-			else if (notes.get(i).getStartTime() <= pulseTime)
-				left = i;
-			else
-				right = i;
-		}
-		while (left >= 1
-				&& (notes.get(left - 1).getStartTime() == notes.get(left)
-						.getStartTime())) {
-			left--;
-		}
-		return left;
-	}
-
-	/**
-	 * Return the next StartTime that occurs after the MidiNote at offset i,
-	 * that is also in the same track/channel.
-	 */
-	private int NextStartTimeSameTrack(int i) {
-		int start = notes.get(i).getStartTime();
-		int end = notes.get(i).getEndTime();
-		int track = notes.get(i).getChannel();
-
-		while (i < notes.size()) {
-			if (notes.get(i).getChannel() != track) {
-				i++;
-				continue;
-			}
-			if (notes.get(i).getStartTime() > start) {
-				return notes.get(i).getStartTime();
-			}
-			end = Math.max(end, notes.get(i).getEndTime());
-			i++;
-		}
-		return end;
-	}
-
-	/**
-	 * Return the next StartTime that occurs after the MidiNote at offset i. If
-	 * all the subsequent notes have the same StartTime, then return the largest
-	 * EndTime.
-	 */
-	private int NextStartTime(int i) {
-		int start = notes.get(i).getStartTime();
-		int end = notes.get(i).getEndTime();
-
-		while (i < notes.size()) {
-			if (notes.get(i).getStartTime() > start) {
-				return notes.get(i).getStartTime();
-			}
-			end = Math.max(end, notes.get(i).getEndTime());
-			i++;
-		}
-		return end;
-	}
-
-	/**
-	 * Find the Midi notes that occur in the current time. Shade those notes on
-	 * the piano displayed. Un-shade the those notes played in the previous
-	 * time.
-	 */
-	public void ShadeNotes(int currentPulseTime, int prevPulseTime) {
-		if (notes == null || notes.size() == 0 || !surfaceReady
-				|| bufferBitmap == null) {
-			return;
-		}
-		SurfaceHolder holder = getHolder();
-		Canvas canvas = holder.lockCanvas();
-		if (canvas == null) {
-			return;
-		}
-
-		bufferCanvas.translate(margin + BlackBorder, margin + BlackBorder);
-
-		/*
-		 * Loop through the Midi notes. Unshade notes where StartTime <=
-		 * prevPulseTime < next StartTime Shade notes where StartTime <=
-		 * currentPulseTime < next StartTime
-		 */
-		int lastShadedIndex = FindClosestStartTime(prevPulseTime
-				- maxShadeDuration * 2);
-		for (int i = lastShadedIndex; i < notes.size(); i++) {
-			int start = notes.get(i).getStartTime();
-			int end = notes.get(i).getEndTime();
-			int notenumber = notes.get(i).getNumber();
-			int nextStart = NextStartTime(i);
-			int nextStartTrack = NextStartTimeSameTrack(i);
-			end = Math.max(end, nextStartTrack);
-			end = Math.min(end, start + maxShadeDuration - 1);
-
-			/* If we've past the previous and current times, we're done. */
-			if ((start > prevPulseTime) && (start > currentPulseTime)) {
-				break;
-			}
-
-			/* If shaded notes are the same, we're done */
-			if ((start <= currentPulseTime) && (currentPulseTime < nextStart)
-					&& (currentPulseTime < end) && (start <= prevPulseTime)
-					&& (prevPulseTime < nextStart) && (prevPulseTime < end)) {
-				break;
-			}
-
-			/* If the note is in the current time, shade it */
-			if ((start <= currentPulseTime) && (currentPulseTime < end)) {
-				if (useTwoColors) {
-					if (notes.get(i).getChannel() == 1) {
-						ShadeOneNote(bufferCanvas, notenumber, shade2);
-					} else {
-						ShadeOneNote(bufferCanvas, notenumber, shade1);
-					}
-				} else {
-					ShadeOneNote(bufferCanvas, notenumber, shade1);
-				}
-			}
-
-			/* If the note is in the previous time, un-shade it, draw it white. */
-			else if ((start <= prevPulseTime) && (prevPulseTime < end)) {
-				int num = notenumber % 12;
-				if (num == 1 || num == 3 || num == 6 || num == 8 || num == 10) {
-					ShadeOneNote(bufferCanvas, notenumber, gray1);
-				} else {
-					ShadeOneNote(bufferCanvas, notenumber, Color.WHITE);
-				}
-			}
-		}
-		bufferCanvas
-				.translate(-(margin + BlackBorder), -(margin + BlackBorder));
-		canvas.drawBitmap(bufferBitmap, 0, 0, paint);
-		holder.unlockCanvasAndPost(canvas);
-	}
 
 	/*
 	 * Shade the given note with the given brush. We only draw notes from

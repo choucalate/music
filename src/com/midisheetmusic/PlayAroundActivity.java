@@ -58,12 +58,8 @@ public class PlayAroundActivity extends Activity {
 	public static final String MidiTitleID = "MidiTitleID";
 	public static final int settingsRequestCode = 1;
 
-	private MidiPlayer player; /* The play/stop/rewind toolbar */
 	private Piano piano; /* The piano at the top */
-	private SheetMusic sheet; /* The sheet music */
 	private LinearLayout layout; /* THe layout */
-	private MidiFile midifile; /* The midi file to play */
-	private MidiOptions options; /* The options for sheet music and sound */
 	private long midiCRC; /* CRC of the midi bytes */
 	private LevelActivity tutorialActivityLevel;
 
@@ -825,7 +821,7 @@ public class PlayAroundActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
+		getMenuInflater().inflate(R.menu.activity_playaround, menu);
 		return true;
 	}
 

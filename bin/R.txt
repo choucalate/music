@@ -474,17 +474,19 @@ int layout fragment_layout 0x7f030020
 int layout help 0x7f030021
 int layout main 0x7f030022
 int layout mspiano 0x7f030023
-int layout rowlayout 0x7f030024
-int layout save_images_dialog 0x7f030025
-int layout sherlock_spinner_dropdown_item 0x7f030026
-int layout sherlock_spinner_item 0x7f030027
+int layout recordslist_layout 0x7f030024
+int layout rowlayout 0x7f030025
+int layout save_images_dialog 0x7f030026
+int layout sherlock_spinner_dropdown_item 0x7f030027
+int layout sherlock_spinner_item 0x7f030028
 int menu activity_main 0x7f0e0000
-int menu activity_test 0x7f0e0001
-int menu activity_tutorial_ms 0x7f0e0002
-int menu beats_ 0x7f0e0003
-int menu choose_song_menu 0x7f0e0004
-int menu levelactivity_menu 0x7f0e0005
-int menu sheet_menu 0x7f0e0006
+int menu activity_playaround 0x7f0e0001
+int menu activity_test 0x7f0e0002
+int menu activity_tutorial_ms 0x7f0e0003
+int menu beats_ 0x7f0e0004
+int menu choose_song_menu 0x7f0e0005
+int menu levelactivity_menu 0x7f0e0006
+int menu sheet_menu 0x7f0e0007
 int raw pianoc4 0x7f050000
 int string Beats_Page 0x7f0b0049
 int string Compose_Choice 0x7f0b0010
@@ -729,7 +731,7 @@ int styleable SherlockSearchView_android_inputType 1
 int styleable SherlockSearchView_android_maxWidth 0
 int styleable SherlockSearchView_iconifiedByDefault 3
 int styleable SherlockSearchView_queryHint 4
-int[] styleable SherlockSpinner { 0x010100af, 0x01010175, 0x01010176, 0x0101017b, 0x01010262, 0x010102ac, 0x010102ad, 0x0101043a }
+int[] styleable SherlockSpinner { 0x010100af, 0x01010175, 0x01010176, 0x0101017b, 0x01010262, 0x010102ac, 0x010102ad, 0x0101041f }
 int styleable SherlockSpinner_android_dropDownHorizontalOffset 5
 int styleable SherlockSpinner_android_dropDownSelector 1
 int styleable SherlockSpinner_android_dropDownVerticalOffset 6

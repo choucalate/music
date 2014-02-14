@@ -58,12 +58,8 @@ public class TutorialMSActivity extends SherlockActivity {
 	public static final String MidiTitleID = "MidiTitleID";
 	public static final int settingsRequestCode = 1;
 
-	private MidiPlayer player; /* The play/stop/rewind toolbar */
 	private Piano piano; /* The piano at the top */
-	private SheetMusic sheet; /* The sheet music */
 	private LinearLayout layout; /* THe layout */
-	private MidiFile midifile; /* The midi file to play */
-	private MidiOptions options; /* The options for sheet music and sound */
 	private long midiCRC; /* CRC of the midi bytes */
 	private LevelActivity tutorialActivityLevel;
 
