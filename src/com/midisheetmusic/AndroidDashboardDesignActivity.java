@@ -44,43 +44,43 @@ public class AndroidDashboardDesignActivity extends SherlockActivity {
 		// wait = new waitUp();
 		// wait.execute((Void) null);
 		
-		Button tut = (Button) findViewById(R.id.gotut);
-		Button play = (Button) findViewById(R.id.goplay);
-		Button beats = (Button) findViewById(R.id.gobeats);
-
-		beats.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), Beats_Activity.class);
-				startActivity(i);
-				
-			}
-			
-		});
-
-		//
-		tut.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), LevelActivity.class);
-				startActivity(i);
-				
-			}
-			
-		});
-
-		play.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), PlayAroundActivity.class);
-				startActivity(i);
-				
-			}
-			
-		});
+//		Button tut = (Button) findViewById(R.id.gotut);
+//		Button play = (Button) findViewById(R.id.goplay);
+//		Button beats = (Button) findViewById(R.id.gobeats);
+//
+//		beats.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent i = new Intent(getApplicationContext(), Beats_Activity.class);
+//				startActivity(i);
+//				
+//			}
+//			
+//		});
+//
+//		//
+//		tut.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent i = new Intent(getApplicationContext(), LevelActivity.class);
+//				startActivity(i);
+//				
+//			}
+//			
+//		});
+//
+//		play.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent i = new Intent(getApplicationContext(), PlayAroundActivity.class);
+//				startActivity(i);
+//				
+//			}
+//			
+//		});
 		
 	}
 	@Override

@@ -26,9 +26,9 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-		rowView.setMinimumHeight(100);
+		rowView.setMinimumHeight(200);
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+//		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		textView.setText(values[position]);
 		// Change the icon for Windows and iPhone
 		String s = values[position];
@@ -36,10 +36,10 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 		Log.i("tutlevel", "new tutlvl" + s);
 		int tutLevel = Integer.parseInt(s);
 		Log.i("tutlevel", "parsed tutlvl" + s);
-		if (tutLevel != 1)
-			imageView.setImageResource(R.drawable.locked);
-		else
-			imageView.setImageResource(R.drawable.unlocked);
+//		if (tutLevel != 1)
+//			imageView.setImageResource(R.drawable.locked);
+//		else
+//			imageView.setImageResource(R.drawable.unlocked);
 		return rowView;
 	}
 }
