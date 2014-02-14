@@ -44,9 +44,27 @@
     <string name="title_activity_test">testActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_tutorial_ms">TutorialMSActivity</string>
-     <string name="playaround">Playing Around</string>
+    <string name="playaround">Playing Around</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_test_anim">TestAnim</string>
     <string name="title_activity_hit">HitActivity</string>
-
+    <string name="home_icon">Home</string>
+    <string name="submenu_item1">Option A</string>
+    <string name="submenu_item2">Option B</string>
+    <string name="submenu_item3">Option C</string>
+    <string name="previous_icon">Previous</string>
+    <string name="next_icon">Next</string>
+    <string name="replay_icon">Replay</string>
+    <string name="play_icon">Play</string>
+    <string name="title_activity_beats_">Beats_Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="piano_icon">Piano</string>
+    <string name="loop_icon">Loop Duration</string>
+    <string name="toggle">Beats/One Shots</string>
+    <string name="Beats_Page">Beats Page</string>
+    <string name="Loop1">Two Bars </string>
+    <string name="Loop2">Four Bars</string>
+    <string name="Loop3">Eight Bars</string>
+    <string name="Loop4">Ill change later</string>
+    
 </resources>

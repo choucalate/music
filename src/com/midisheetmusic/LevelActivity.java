@@ -2,17 +2,28 @@ package com.midisheetmusic;
 
 import java.util.ArrayList;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+//import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
 import com.testmusic.MySimpleArrayAdapter;
 
-public class LevelActivity extends ListActivity {
+public class LevelActivity extends SherlockListActivity {
 	ArrayList<String> levels = new ArrayList<String>();
 	public final static String mSelected = "The Level";
 	String[] values = new String[] { "Level 1: C-Major Scales & Practice" ,"Level 2: Twinkle Twinkle Little Stars",
@@ -23,8 +34,13 @@ public class LevelActivity extends ListActivity {
 			"Level 15: B-Major Scales & Practice", "Level 16: Thrift Shop"};
 	public void onCreate(Bundle icicle) {
 	    super.onCreate(icicle);
+        setTitle("Some title or no title");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	    
 	    MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, values);
 	    setListAdapter(adapter);
+
 	  }
 	@Override
 	protected void onListItemClick(ListView parent, View view, int position,
@@ -41,9 +57,11 @@ public class LevelActivity extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.choose_song_menu, menu);
-		return true;
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+        getSupportMenuInflater().inflate(R.menu.levelactivity_menu, menu);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
+        return true;
 	}
 
 	public String getKey(String item) {
@@ -52,7 +70,21 @@ public class LevelActivity extends ListActivity {
 		else
 			return "";
 	}
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        switch (item.getItemId()) {
+	        case 16908332:
+	         
+	        {
+	            Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
+	            startActivity(i);
+	            return true	;
+	        }
+	        
+	        default:
+	        return false; 
+	    }
+	}
 	
-	
-
 }
+

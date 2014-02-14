@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_sub" android:icon="@drawable/submenu_icon" android:showAsAction="always" android:visible="true" android:menuCategory="container" android:orderInCategory="2">
+        <menu>
+            <item 
+            android:id="@+id/item1" 
+            android:orderInCategory="1"
+            android:title="@string/submenu_item1"
+            android:showAsAction="ifRoom|withText">
+    </item>
+            <item 
+            android:id="@+id/item2" 
+            android:orderInCategory="2"
+            android:title="@string/submenu_item2"
+            android:showAsAction="ifRoom|withText">
+    </item>
+           <item 
+            android:id="@+id/item3" 
+            android:orderInCategory="3"
+            android:title="@string/submenu_item3"
+            android:showAsAction="ifRoom|withText">
+    </item> 
+    
+        </menu>
+    </item>
+    
+
+ 
+       
+     
+</menu>

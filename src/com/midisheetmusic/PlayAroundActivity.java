@@ -2,9 +2,13 @@ package com.midisheetmusic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,12 +32,14 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -127,7 +133,9 @@ public class PlayAroundActivity extends Activity {
 
 	/* recording file */
 	private final static String filename = "Rec.txt";
-	ArrayList<ArrayList<RecNotes>> rn = null;
+	//ArrayList<ArrayList<RecNotes>> rn = null;
+	//HashMap implementation
+	HashMap<String, ArrayList<RecNotes>> rn = null;
 
 	final Context mctx = this;
 	RecManager rm;
@@ -829,6 +837,7 @@ public class PlayAroundActivity extends Activity {
 			return option_save(rm);
 		case R.id.list_rec:
 			return option_list(rm);
+			//add rename and erase
 		default:
 			return true;
 		}
@@ -843,23 +852,65 @@ public class PlayAroundActivity extends Activity {
 		Log.i("option", "saving rec option");
 		Toast.makeText(this, "saving your recording", Toast.LENGTH_SHORT)
 				.show();
-		saveRec(rn, rm);
+		rm.saveRec(piano.getMyRec());
 		return true;
 	}
 
 	private boolean option_list(RecManager rm) {
 
-		rn = loadRec(rn, rm);
+		//call recordListActivity
+		
+		rn = rm.loadRec();
 		CharSequence[] items = new CharSequence[rn.size()];
-		for (int i = 0; i < items.length; i++) {
-			items[i] = "Recording " + i;
+		Set<String> rnKeys = rn.keySet();
+		
+		//for (int i = 0; i < items.length; i++) {
+		//	items[i] = "Recording " + i;
+		//}
+		int i = 0;
+		for (String st : rnKeys) {
+			items[i] = st;
+			i++;
 		}
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Play Your Recordings");
+//		
+//		ListView modeList = new ListView(this);
+//		String[] stringArray = (String[])rn.keySet().toArray();
+//		modeList.setOnItemClickListener(new OnItemClickListener(){
+//			
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		
+		
+//		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, stringArray);
+//		modeList.setAdapter(modeAdapter);
+//
+//		builder.setView(modeList);
+//		final Dialog dialog = builder.create();
+//		
+//		dialog.show();
+	
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
-
-				piano.setMyRec(rn.get(item));
+                Set<String> re = rn.keySet();
+                int i = 0;
+                String elem = "";
+                for( String st : re){
+                	if(i == item){
+                	  elem = st;
+                	  break;
+                	}
+                	i++;
+                }
+				piano.setMyRec(rn.get(elem));
 				Toast.makeText(mctx, "Hit Play!", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -867,9 +918,9 @@ public class PlayAroundActivity extends Activity {
 		alert.show();
 		return true;
 	}
-
-	private ArrayList<ArrayList<RecNotes>> loadRec(
-			ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
+   //ArrayList<RecNotes> is ONE recording
+	//the serialized object ArrayList<ArrayList<RecNotes>> is in Serializable and Deserialize
+	/*private ArrayList<ArrayList<RecNotes>> loadRec( RecManager rm) {
 		try {
 			rn = rm.getSerialized(filename);
 			for (int i = 0; i < rn.size(); i++) {
@@ -881,37 +932,112 @@ public class PlayAroundActivity extends Activity {
 			return (new ArrayList<ArrayList<RecNotes>>());
 		}
 	}
-
-	private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
-
-		try {
-			rn = rm.getSerialized(filename);
-
-			if (rn == null) {
-				Log.i("option", "rn was null, making new");
-				rn = new ArrayList<ArrayList<RecNotes>>();
-			}
-			rn.add(piano.getMyRec());
-			rm.setSerialized(filename, rn);
-		} catch (IOException e) {
-			if (rn == null) {
-				Log.i("option", "rn was null, making new");
-				rn = new ArrayList<ArrayList<RecNotes>>();
-			}
-			rn.add(piano.getMyRec());
-			try {
-				rm.setSerialized(filename, rn);
-			} catch (IOException e1) {
-				Log.e("option", "failed to even set serialize??");
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			// TODO Auto-generated catch block
-			Log.e("option", "failed to get serialized");
-			e.printStackTrace();
-		}
-	}
-
+	*/
+	//loading tracks in HashMap data structure
+   
+	//read
+//	private HashMap<String, ArrayList<RecNotes>> loadRec( RecManager rm){
+//		//String name = ""+rn.size();
+//		//HashMap<String, ArrayList<RecNotes>> db = new HashMap<String, ArrayList<RecNotes>>();
+//		try {
+//			rn = rm.getSerialized(filename);
+//			Set<String> rnkeys = rn.keySet();
+//			for (String st : rnkeys)
+//				Log.i("option", "printing rn: "+ st + " " +rn.get(rnkeys));
+//			return rn;	
+//		}catch (Exception e){
+//			e.printStackTrace();
+//			return new HashMap<String, ArrayList<RecNotes>>();
+//		}
+//	}
+	
+//	private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
+//
+//		try {
+//			rn = rm.getSerialized(filename);
+//
+//			if (rn == null) {
+//				Log.i("option", "rn was null, making new");
+//				rn = new ArrayList<ArrayList<RecNotes>>();
+//			}
+//			rn.add(piano.getMyRec());
+//			rm.setSerialized(filename, rn);
+//		} catch (IOException e) {
+//			if (rn == null) {
+//				Log.i("option", "rn was null, making new");
+//				rn = new ArrayList<ArrayList<RecNotes>>();
+//			}
+//			rn.add(piano.getMyRec());
+//			try {
+//				rm.setSerialized(filename, rn);
+//			} catch (IOException e1) {
+//				Log.e("option", "failed to even set serialize??");
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			// TODO Auto-generated catch block
+//			Log.e("option", "failed to get serialized");
+//			e.printStackTrace();
+//		}
+//	}
+	//create
+//	private void saveRec(HashMap<String, ArrayList<RecNotes>> rn, RecManager rm) {
+//
+//		try {
+//			rn = rm.getSerialized(filename);
+//            String dfnam = "MyRecording " + (rn.size() + 1); 
+//			/*if (rn == null) {
+//				Log.i("option", "rn was null, making new");
+//				rn = new HashMap<String, ArrayList<RecNotes>>();
+//			}*/	
+//			rn.put(dfnam, piano.getMyRec());
+//			rm.setSerialized(filename, rn);
+//		} catch (IOException e) {
+//			if (rn == null) {
+//				Log.i("option", "rn was null, making new");
+//				rn = new HashMap<String, ArrayList<RecNotes>>();
+//			}
+//			String dfnam = "MyRecording" + (rn.size() + 1);
+//			rn.put(dfnam, piano.getMyRec());
+//			try {
+//				rm.setSerialized(filename, rn);
+//			} catch (IOException e1) {
+//				Log.e("option", "failed to even set serialize??");
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			// TODO Auto-generated catch block
+//			Log.e("option", "failed to get serialized");
+//			e.printStackTrace();
+//		}
+//	}
+	
+//	//update
+//	private void renamRec (String newnam, String oldnam){
+//		ArrayList<RecNotes> recording = rn.get(oldnam);
+//		rn.remove(oldnam);
+//		rn.put(newnam, recording);
+//		try {
+//			rm.setSerialized(filename, rn);
+//		} catch (IOException e1) {
+//			Log.e("option", "failed to even set serialize??");
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
+//	
+//	//delete
+//	private void delRec (String target){
+//		rn.remove(target);
+//		try {
+//			rm.setSerialized(filename, rn);
+//		} catch (IOException e1) {
+//			Log.e("option", "failed to even set serialize??");
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
+//asynctask
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
