@@ -11,7 +11,9 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -145,17 +147,11 @@ public class TutorialMSActivity extends SherlockActivity {
 		Log.i("tutlevel", "parsed tutlvl" + tut);
 		/********/
 
-		// ClefSymbol.LoadImages(this);
-		// TimeSigSymbol.LoadImages(this);
-		// MidiPlayer.LoadImages(this);
-		//requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 	    			WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		 //setTitle("Some title or no title");
+		setTitle("Piano Tutorials");
 
-	     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		try {
 			setPiano = new pianoAsync();
 			setPiano.execute();
@@ -855,7 +851,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
 		for (int i = 0; i < cmajor2.length; i++)
 			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);	
-		
+
 		/************* D-major scale init *******************/
 		int d_size = 8;
 		dmajor1 = new NotePlay[d_size];
@@ -869,7 +865,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			dmajor1[i] = new NotePlay(dDur1[i], dNote1[i]);
 		for (int i = 0; i < dmajor2.length; i++)
 			dmajor2[i] = new NotePlay(dDur2[i], dNote2[i]);	
-		
+
 		/************* G-major scale init *******************/
 		int g_size = 8;
 		gmajor1 = new NotePlay[g_size];
@@ -883,7 +879,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			gmajor1[i] = new NotePlay(gDur1[i], gNote1[i]);
 		for (int i = 0; i < gmajor2.length; i++)
 			gmajor2[i] = new NotePlay(gDur2[i], gNote2[i]);	
-		
+
 		/************* A-major scale init *******************/
 		int a_size = 8;
 		amajor1 = new NotePlay[a_size];
@@ -897,7 +893,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			amajor1[i] = new NotePlay(aDur1[i], aNote1[i]);
 		for (int i = 0; i < amajor2.length; i++)
 			amajor2[i] = new NotePlay(aDur2[i], aNote2[i]);	
-		
+
 		/************* E-major scale init *******************/
 		int e_size = 8;
 		emajor1 = new NotePlay[e_size];
@@ -911,7 +907,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			emajor1[i] = new NotePlay(eDur1[i], eNote1[i]);
 		for (int i = 0; i < emajor2.length; i++)
 			emajor2[i] = new NotePlay(eDur2[i], eNote2[i]);	
-		
+
 		/************* F#-major scale init *******************/
 		int fsm_size = 8;
 		fsharp_major1 = new NotePlay[fsm_size];
@@ -925,7 +921,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			fsharp_major1[i] = new NotePlay(fsmDur1[i], fsmNote1[i]);
 		for (int i = 0; i < fsharp_major2.length; i++)
 			fsharp_major2[i] = new NotePlay(fsmDur2[i], fsmNote2[i]);	
-		
+
 		/************* D Flat-major scale init *******************/
 		int dfm_size = 8;
 		dflat1 = new NotePlay[dfm_size];
@@ -939,7 +935,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			dflat1[i] = new NotePlay(dfmDur1[i], dfmNote1[i]);
 		for (int i = 0; i < dflat2.length; i++)
 			dflat2[i] = new NotePlay(dfmDur2[i], dfmNote2[i]);	
-		
+
 		/************* A Flat-major scale init *******************/
 		int afm_size = 8;
 		aflat1 = new NotePlay[afm_size];
@@ -953,7 +949,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			aflat1[i] = new NotePlay(afmDur1[i], afmNote1[i]);
 		for (int i = 0; i < aflat2.length; i++)
 			aflat2[i] = new NotePlay(afmDur2[i], afmNote2[i]);	
-		
+
 		/************* E Flat-major scale init *******************/
 		int efm_size = 8;
 		eflat1 = new NotePlay[efm_size];
@@ -967,7 +963,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			eflat1[i] = new NotePlay(efmDur1[i], efmNote1[i]);
 		for (int i = 0; i < eflat2.length; i++)
 			eflat2[i] = new NotePlay(efmDur2[i], efmNote2[i]);	
-		
+
 		/************* B Flat-major scale init *******************/
 		int bfm_size = 8;
 		bflat1 = new NotePlay[bfm_size];
@@ -981,7 +977,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			bflat1[i] = new NotePlay(bfmDur1[i], bfmNote1[i]);
 		for (int i = 0; i < bflat2.length; i++)
 			bflat2[i] = new NotePlay(bfmDur2[i], bfmNote2[i]);	
-		
+
 		/************* F-major scale init *******************/
 		int f_size = 8;
 		fmajor1 = new NotePlay[f_size];
@@ -995,7 +991,7 @@ public class TutorialMSActivity extends SherlockActivity {
 			fmajor1[i] = new NotePlay(fDur1[i], fNote1[i]);
 		for (int i = 0; i < fmajor2.length; i++)
 			fmajor2[i] = new NotePlay(fDur2[i], fNote2[i]);	
-		
+
 		/************* B-major scale init *******************/
 		int b_size = 8;
 		bmajor1 = new NotePlay[b_size];
@@ -1109,8 +1105,8 @@ public class TutorialMSActivity extends SherlockActivity {
 			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
 		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
-		
-	
+
+
 		/*********** Thrift Shop **************/
 		final double[] tsNote1 = { 3.5, 3.5, 3.5, 1.5, 0.5, 3.5, 6.5, 6, 3.5 };
 		final int[] tsDur1 = { 2, 1, 1, 2, 2, 3, 1, 2, 2 };
@@ -1122,7 +1118,7 @@ public class TutorialMSActivity extends SherlockActivity {
 		final int[] tsDur4 = { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2 };
 		final double[] tsNote5 = { 6.5, 6.5, 5.5, 6, 3.5, 3.5 };
 		final int[] tsDur5 = { 2, 2, 2, 2, 2, 6 };
-		
+
 		int tssize1 = tsNote1.length;
 		int tssize2 = tsNote2.length;
 		int tssize3 = tsNote3.length;
@@ -1143,10 +1139,10 @@ public class TutorialMSActivity extends SherlockActivity {
 			thriftshop4[i] = new NotePlay(tsDur4[i], tsNote4[i]);
 		for (int i = 0; i < tssize5; i++)
 			thriftshop5[i] = new NotePlay(tsDur5[i], tsNote5[i]);
-		
+
 	}
-	
-	
+
+
 
 	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
@@ -1189,7 +1185,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 5 - D Major Scale
 		if (tutLevel == 5) {
 			switch (numClicks) {
@@ -1206,7 +1202,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 6 - G Major Scale
 		if (tutLevel == 6) {
 			switch (numClicks) {
@@ -1223,7 +1219,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 7 - A Major Scale
 		if (tutLevel == 7) {
 			switch (numClicks) {
@@ -1240,7 +1236,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 8 - E Major Scale
 		if (tutLevel == 8) {
 			switch (numClicks) {
@@ -1257,7 +1253,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
+
 		// Level 9 - F# Major Scale
 				if (tutLevel == 9) {
 					switch (numClicks) {
@@ -1274,7 +1270,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 10 - D Flat Major Scale
 				if (tutLevel == 10) {
 					switch (numClicks) {
@@ -1291,7 +1287,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 11 - A Flat Major Scale
 				if (tutLevel == 11) {
 					switch (numClicks) {
@@ -1308,7 +1304,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 12 - E Flat Major Scale
 				if (tutLevel == 12) {
 					switch (numClicks) {
@@ -1325,7 +1321,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 13 - B Flat Major Scale
 				if (tutLevel == 13) {
 					switch (numClicks) {
@@ -1342,7 +1338,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 14 - F-Major Scale
 				if (tutLevel == 14) {
 					switch (numClicks) {
@@ -1359,7 +1355,7 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-				
+
 				// Level 15 - B-Major Scale
 				if (tutLevel == 15) {
 					switch (numClicks) {
@@ -1376,15 +1372,15 @@ public class TutorialMSActivity extends SherlockActivity {
 						piano.toggleShade();
 					}
 				}
-		
-		
-		
-		
-		
-				
-				
-		
-		
+
+
+
+
+
+
+
+
+
 
 
 		// Level 2 - Twinkle Twinkle
@@ -1458,8 +1454,8 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
-		
-		
+
+
 		// Level 16 - Thrift Shop
 		int thriftspeed = 100;
 		if (tutLevel == 16) {
@@ -1578,12 +1574,13 @@ public class TutorialMSActivity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
 		return true;
 	}
 	 @Override
 	 public boolean onOptionsItemSelected(MenuItem item) {
 		 switch (item.getItemId()) {
-	
+
 		 case 16908332:
     
 	     {
@@ -1620,9 +1617,9 @@ public class TutorialMSActivity extends SherlockActivity {
         	 onClickHandler(3);
         	 numClicks = 0;  	
          }
-	
+
          default:{
-	
+
         	 Log.e("OOB", "button out of boundsssss");
         	 numClicks = 0;
          }

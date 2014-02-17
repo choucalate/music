@@ -1,14 +1,13 @@
 package com.midisheetmusic;
 
-import com.actionbarsherlock.R.drawable;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class Beats_Activity extends SherlockActivity {
 	boolean check = true ; 
@@ -17,7 +16,7 @@ public class Beats_Activity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_beats_);
-		setTitle("");
+		setTitle("Beats");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -26,7 +25,7 @@ public class Beats_Activity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.beats_, menu);
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(54,127,63)));
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
 	     
 		return true;
 	}
@@ -34,44 +33,42 @@ public class Beats_Activity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item )
 	{
-        switch (item.getItemId()) {
-        case 16908332:
+		if(16908332 == item.getItemId())
         
         {
         	Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
         	startActivity(i);
         	return true	;
         }
-        case R.id.piano_icon:
+		else if (item.getItemId() == R.id.piano_icon)
         {
         	Intent i=new Intent(this, PlayAroundActivity.class);
         	startActivity(i);
         	return true;
         }
-        case R.id.loop_icon:
+		else if (item.getItemId() == R.id.loop_icon)
         {
         	return true;
         }
-        case R.id.toggle:{
+		else if (item.getItemId() == R.id.toggle){
         	if(check)
         	{
         		//change to beats 
-        		item.setIcon(R.drawable.beats_letters);
+        		item.setTitle(R.string.toggleBeats);
+        		setTitle("Beats");
         	    check = false; 
 
         	}
         	else
         	{
-        		item.setIcon(R.drawable.one_shots);
-             //   item.setTitle(
+        		item.setTitle(R.string.toggleShots);
+        		setTitle("One Shots");
         		check = true; ; 
 
         	}
         	return true;
         }
     
-        default:
-        	return false;  
-        }
+		else return false;
 	}
 }

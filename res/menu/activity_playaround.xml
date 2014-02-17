@@ -14,8 +14,87 @@
         android:id="@+id/save_rec"
         android:checkable="false"
         android:orderInCategory="300"
-        android:title="Save Recording"/>
+        android:title="Save Recording">
+        </item>
+        
+        <item 
+  	    android:id="@+id/play_icon"
+  	    android:orderInCategory="1"
+  	    android:showAsAction="always"
+  	    android:icon="@drawable/play_icon"
+  	    android:title="@string/play_icon"/>
+    <item 
+        android:id="@+id/record_icon" 
+        android:orderInCategory="2" 
+        android:title="@string/record_icon"
+        android:icon="@drawable/record_icon" 
+        android:showAsAction="always"/>
     
+    
+    <item 
+        android:id="@+id/beat1"
+        android:orderInCategory="3"
+        android:showAsAction="always|withText" 
+        android:visible="false"
+        android:title="@string/beat1"/>
+ 	<item 
+        android:id="@+id/beat2"
+        android:orderInCategory="4"
+        android:showAsAction="always|withText" 
+        android:visible="false"      
+        android:title="@string/beat2"/>
+ 	<item 
+        android:id="@+id/beat3"
+        android:orderInCategory="5"
+        android:visible="false"
+        android:showAsAction="always|withText" 
+        android:title="@string/beat3"/>
+ 	<item 
+        android:id="@+id/beat4"
+        android:orderInCategory="6"
+        android:visible="false"
+        android:showAsAction="always|withText" 
+        android:title="@string/beat4"/>
+          
+	<item 
+	    android:id="@+id/menu_sub"
+	    android:menuCategory="container"
+        android:title="@string/menu"
+        android:icon="@drawable/submenu_icon"
+        android:orderInCategory="7"
+        android:showAsAction="always">
+        <menu>
+         	
+         		<item 
+         	    	android:id="@+id/submenu1"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/beats"
+         	    	android:orderInCategory="8"/>
+    
+  	    		<item 
+         	    	android:id="@+id/submenu2"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/save"
+         	   	 	android:orderInCategory="9"/>
+  	    		<item 
+         	    	android:id="@+id/submenu3"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/list"
+         	    	android:orderInCategory="10"/>
+  	    		<item 
+         	    	android:id="@+id/submenu4"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/settings"
+         	    	android:orderInCategory="11"/>
+  	    		<item 
+         	    	android:id="@+id/submenu5"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/Spare"
+         	    	android:orderInCategory="12"/>
+  	    	</menu>
+  	    	</item>
+  	    
+
     
 
 

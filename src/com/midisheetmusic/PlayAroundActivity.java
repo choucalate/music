@@ -12,18 +12,20 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -46,11 +48,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.model.NotePlay;
 import com.model.RecManager;
 import com.model.RecNotes;
 
-public class PlayAroundActivity extends Activity {
+public class PlayAroundActivity extends SherlockActivity {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
 			"Level 3: Actual Songs" };
@@ -69,6 +74,8 @@ public class PlayAroundActivity extends Activity {
 	/* for note playing */
 	private SPPlayer sp;
 	private boolean loaded = false;
+	/*To be able to collapse items with beats */
+	Menu mymenu;
 
 	/* button to guide image falling process */
 	Button playNote, backTut, nextTut, restartTut;
@@ -156,9 +163,11 @@ public class PlayAroundActivity extends Activity {
 		// ClefSymbol.LoadImages(this);
 		// TimeSigSymbol.LoadImages(this);
 		// MidiPlayer.LoadImages(this);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		setTitle("Music Studio");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		try {
 			setPiano = new pianoAsync();
@@ -821,22 +830,86 @@ public class PlayAroundActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.activity_playaround, menu);
+		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
+		mymenu=menu;
+
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		switch (item.getItemId()) {
-		case R.id.save_rec:
-			return option_save(rm);
-		case R.id.list_rec:
-			return option_list(rm);
-			//add rename and erase
-		default:
+		switch(item.getItemId()){
+		 case 16908332:
+			    
+	     {
+	    	 Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
+        	 startActivity(i);
+        	return true	;
+	     }
+
+		case R.id.play_icon :{
 			return true;
 		}
+		case R.id.record_icon:{
+			return true;
+		}
+		case R.id.beat1:{
+			return true;
+		}
+		case R.id.beat2:{
+			return true;
+		}
+		case R.id.beat3:{
+			return true;
+		}
+		case R.id.beat4:{
+			return true;
+		}
+		case R.id.submenu1:{
+			mymenu.getItem(2).setVisible(false);
+			mymenu.getItem(3).setVisible(false);
+			mymenu.getItem(4).setVisible(false);
+			mymenu.getItem(5).setVisible(false);
+
+			return true;
+		}
+		case R.id.submenu2:{
+			mymenu.getItem(2).setVisible(true);
+			mymenu.getItem(3).setVisible(false);
+			mymenu.getItem(4).setVisible(false);
+			mymenu.getItem(5).setVisible(false);
+			
+			return true;
+		}
+		case R.id.submenu3:{
+			mymenu.getItem(2).setVisible(true);
+			mymenu.getItem(3).setVisible(true);
+			mymenu.getItem(4).setVisible(false);
+			mymenu.getItem(5).setVisible(false);
+			
+			return true;
+		}
+		case R.id.submenu4:{
+			mymenu.getItem(2).setVisible(true);
+			mymenu.getItem(3).setVisible(true);
+			mymenu.getItem(4).setVisible(true);
+			mymenu.getItem(5).setVisible(false);
+			
+			return true;
+		}
+		case R.id.submenu5:{
+			mymenu.getItem(2).setVisible(true);
+			mymenu.getItem(3).setVisible(true);
+			mymenu.getItem(4).setVisible(true);
+			mymenu.getItem(5).setVisible(true);
+        
+			return true;
+		}
+
+		}
+		return false;
 	}
 
 	private boolean option_save(RecManager rm) {
@@ -855,11 +928,11 @@ public class PlayAroundActivity extends Activity {
 	private boolean option_list(RecManager rm) {
 
 		//call recordListActivity
-		
+
 		rn = rm.loadRec();
 		CharSequence[] items = new CharSequence[rn.size()];
 		Set<String> rnKeys = rn.keySet();
-		
+
 		//for (int i = 0; i < items.length; i++) {
 		//	items[i] = "Recording " + i;
 		//}
@@ -868,7 +941,7 @@ public class PlayAroundActivity extends Activity {
 			items[i] = st;
 			i++;
 		}
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Play Your Recordings");
 //		
@@ -884,8 +957,8 @@ public class PlayAroundActivity extends Activity {
 //				
 //			}
 //		});
-		
-		
+
+
 //		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, stringArray);
 //		modeList.setAdapter(modeAdapter);
 //
@@ -893,7 +966,7 @@ public class PlayAroundActivity extends Activity {
 //		final Dialog dialog = builder.create();
 //		
 //		dialog.show();
-	
+
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
                 Set<String> re = rn.keySet();
@@ -946,7 +1019,7 @@ public class PlayAroundActivity extends Activity {
 //			return new HashMap<String, ArrayList<RecNotes>>();
 //		}
 //	}
-	
+
 //	private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
 //
 //		try {
@@ -1007,7 +1080,7 @@ public class PlayAroundActivity extends Activity {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 //	//update
 //	private void renamRec (String newnam, String oldnam){
 //		ArrayList<RecNotes> recording = rn.get(oldnam);

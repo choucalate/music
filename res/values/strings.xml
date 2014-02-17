@@ -61,10 +61,31 @@
     <string name="piano_icon">Piano</string>
     <string name="loop_icon">Loop Duration</string>
     <string name="toggle">Beats/One Shots</string>
+    <string name="toggleBeats">Beats</string>
+    <string name="toggleShots">One Shots</string>
     <string name="Beats_Page">Beats Page</string>
     <string name="Loop1">Two Bars </string>
     <string name="Loop2">Four Bars</string>
     <string name="Loop3">Eight Bars</string>
     <string name="Loop4">Ill change later</string>
+    <string name="tutorial_icon">Tutorials</string>
+    <string name="beats_icon">Beats/Shots</string>
+    <string name="recnote_icon">Recorded Beats</string>
+    <string name="pianointro_icon">Piano Free Style</string>
+    <string name="beat1">Beat1</string>
+    <string name="beat2">Beat2</string>
+    <string name="beat3">Beat3</string>
+    <string name="beat4">Beat4</string>
+    <string name="record_icon">Record</string>
+    <string name="menu">Menu</string>
+    <string name="beats">Beats...show 0</string>
+    <string name="save">Save....show1</string>
+    <string name="list">List...show2</string>
+    <string name="settings">Settings...show3</string>
+    <string name="Spare">spare...show4</string>
+    <string name="title_activity_soon_to_be">SoonToBe</string>
+    <string name="rename">Rename</string>
+    <string name="trash_icon">Trash</string>
     
+
 </resources>

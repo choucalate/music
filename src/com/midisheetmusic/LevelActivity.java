@@ -34,7 +34,7 @@ public class LevelActivity extends SherlockListActivity {
 			"Level 15: B-Major Scales & Practice", "Level 16: Thrift Shop"};
 	public void onCreate(Bundle icicle) {
 	    super.onCreate(icicle);
-        setTitle("Some title or no title");
+        setTitle("Tutorials");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	    

@@ -2,6 +2,7 @@ package com.midisheetmusic;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
+
 import android.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import android.content.Intent;
@@ -20,10 +21,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 
-
-
-//
-
 public class AndroidDashboardDesignActivity extends SherlockActivity {
 	AsyncTask<Void, ?, ?> wait;
 
@@ -31,65 +28,53 @@ public class AndroidDashboardDesignActivity extends SherlockActivity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-	    
-		Log.e("create", "NOF ACEBOOK");
-		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.dashboard_layout);
-		setTitle("Some title or no title");
-
-		// wait = new waitUp();
-		// wait.execute((Void) null);
+		super.onCreate(savedInstanceState);    
 		
-//		Button tut = (Button) findViewById(R.id.gotut);
-//		Button play = (Button) findViewById(R.id.goplay);
-//		Button beats = (Button) findViewById(R.id.gobeats);
-//
-//		beats.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(getApplicationContext(), Beats_Activity.class);
-//				startActivity(i);
-//				
-//			}
-//			
-//		});
-//
-//		//
-//		tut.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(getApplicationContext(), LevelActivity.class);
-//				startActivity(i);
-//				
-//			}
-//			
-//		});
-//
-//		play.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(getApplicationContext(), PlayAroundActivity.class);
-//				startActivity(i);
-//				
-//			}
-//			
-//		});
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+	    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+
+		setContentView(R.layout.dashboard_layout);
+
+		setTitle("Town and Country");
+		
 		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		// the .png file makes it appear with the yellow underline, but if we want it completely 
+	    // removed, setBackgroundDrawable(null)
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-        getSupportMenuInflater().inflate(R.menu.levelactivity_menu, menu);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(100,54,183)));
+        getSupportMenuInflater().inflate(R.menu.dashboard_menu, menu);
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.transp_y));
         return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		if(R.id.tutorial_icon==item.getItemId()){
+			
+			Intent i= new Intent(this,LevelActivity.class );
+			startActivity(i);
+			return true;
+		}
+		else if(item.getItemId()==R.id.recnote_icon){
+			Intent i = new Intent(this, SoonToBe.class);
+			startActivity(i);
+			return true;
+		}
+		else if(item.getItemId()==R.id.beats_icon){
+			Intent i = new Intent(this, Beats_Activity.class);
+			startActivity(i);
+			return true;
+		}
+		else if(item.getItemId()==R.id.pianointro_icon){
+			Intent i = new Intent(this,PlayAroundActivity.class);
+			startActivity(i);
+			return true;
+		}
+		return false;
+		
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
