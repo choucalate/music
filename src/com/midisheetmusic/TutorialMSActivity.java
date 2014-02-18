@@ -71,9 +71,12 @@ public class TutorialMSActivity extends SherlockActivity {
 	/* for note playing */
 	private SPPlayer sp;
 	private boolean loaded = false;
+	private Menu mymenu;
 
 	/* button to guide image falling process */
 	Button playNote, backTut, nextTut, restartTut;
+	static MenuItem[] mybuts = new MenuItem[4];
+	private static boolean unlock = true;
 	/**
 	 * "note" + "key" + "1|2 position" +
 	 * "1st primary or 2nd secondary imageview"
@@ -126,10 +129,13 @@ public class TutorialMSActivity extends SherlockActivity {
 	ProgressDialog dialog;
 	private String tut;
 	private int tutLevel;
-	private NotePlay[] cmajor1, cmajor2, dmajor1, dmajor2, gmajor1, gmajor2, amajor1, amajor2, emajor1, emajor2, fsharp_major1, fsharp_major2, littlelamb1, littlelamb2, littlelamb3,
-			twinkle1, twinkle2, twinkle3, twinkle4, biebs1, biebs2, biebs3,
-			biebs4, biebs5, dflat1, dflat2, aflat1, aflat2, eflat1, eflat2, bflat1, bflat2, fmajor1, fmajor2, 
-			bmajor1, bmajor2, thriftshop1, thriftshop2, thriftshop3, thriftshop4, thriftshop5;
+	private NotePlay[] cmajor1, cmajor2, dmajor1, dmajor2, gmajor1, gmajor2,
+			amajor1, amajor2, emajor1, emajor2, fsharp_major1, fsharp_major2,
+			littlelamb1, littlelamb2, littlelamb3, twinkle1, twinkle2,
+			twinkle3, twinkle4, biebs1, biebs2, biebs3, biebs4, biebs5, dflat1,
+			dflat2, aflat1, aflat2, eflat1, eflat2, bflat1, bflat2, fmajor1,
+			fmajor2, bmajor1, bmajor2, thriftshop1, thriftshop2, thriftshop3,
+			thriftshop4, thriftshop5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -148,10 +154,10 @@ public class TutorialMSActivity extends SherlockActivity {
 		/********/
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-	    			WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setTitle("Piano Tutorials");
 
-	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		try {
 			setPiano = new pianoAsync();
 			setPiano.execute();
@@ -187,473 +193,6 @@ public class TutorialMSActivity extends SherlockActivity {
 		sp = new SPPlayer(am, audioManager);
 	}
 
-	class NBNodes {
-		String note;
-		int duration;
-
-		NBNodes() {
-
-		}
-	}
-
-	private void animatev2() {
-		class TranslateAnim extends TranslateAnimation {
-
-			public TranslateAnim(float fromXDelta, float toXDelta,
-					float fromYDelta, float toYDelta) {
-				super(fromXDelta, toXDelta, fromYDelta, toYDelta);
-				// TODO Auto-generated constructor stub
-			}
-
-			private long mElapsedAtPause = 0;
-			private boolean mPaused = false;
-
-			@Override
-			public boolean getTransformation(long currentTime,
-					Transformation outTransformation) {
-				if (mPaused && mElapsedAtPause == 0) {
-					mElapsedAtPause = currentTime - getStartTime();
-				}
-				if (mPaused)
-					setStartTime(currentTime - mElapsedAtPause);
-				return super.getTransformation(currentTime, outTransformation);
-			}
-
-			public void pause() {
-				mElapsedAtPause = 0;
-				mPaused = true;
-			}
-
-			public void resume() {
-				mPaused = false;
-			}
-		}
-		try {
-			AnimationSet set = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			final AnimationSet set2 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			AnimationSet set3 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-			AnimationSet set4 = new AnimationSet(true);
-			set.setInterpolator(new LinearInterpolator());
-
-			TranslateAnim ta1 = new TranslateAnim(0, 0, -140, 300);
-			ta1.setDuration(2000);
-			TranslateAnim ta2 = new TranslateAnim(0, 0, -140, 300);
-			ta2.setDuration(2000);
-			ta2.setStartOffset(500);
-			TranslateAnim ta3 = new TranslateAnim(0, 0, -140, 300);
-			ta3.setDuration(2000);
-			ta3.setStartOffset(500);
-			TranslateAnim ta4 = new TranslateAnim(0, 0, -140, 300);
-			ta4.setDuration(2000);
-			ta4.setStartOffset(500);
-
-			set.addAnimation(ta1);
-			set2.addAnimation(ta2);
-			set3.addAnimation(ta3);
-			set4.addAnimation(ta4);
-			// set.setFillAfter(false);
-			// set2.setFillAfter(false);
-			// set3.setFillAfter(false);
-			// set4.setFillAfter(false);
-			set.setRepeatCount(Animation.INFINITE);
-			set2.setRepeatCount(Animation.INFINITE);
-			set3.setRepeatCount(Animation.INFINITE);
-			set4.setRepeatCount(Animation.INFINITE);
-			set.setRepeatMode(Animation.RESTART);
-			set2.setRepeatMode(Animation.RESTART);
-			set3.setRepeatMode(Animation.RESTART);
-			set4.setRepeatMode(Animation.RESTART);
-
-			set.setAnimationListener(new AnimationListener() {
-
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					set2.startNow();
-					Log.i("animation", "END");
-				}
-
-				@Override
-				public void onAnimationRepeat(Animation animation) {
-					// TODO Auto-generated method stub
-					Log.i("animation", "repeat");
-				}
-
-				@Override
-				public void onAnimationStart(Animation animation) {
-					// TODO Auto-generated method stub
-					Log.i("animation", "start");
-				}
-
-			});
-			noteC1A.startAnimation(set);
-			noteD1A.startAnimation(set2);
-			noteE1A.startAnimation(set3);
-			noteF1A.startAnimation(set4);
-			ObjectAnimator oa = ObjectAnimator.ofFloat(noteG1A, "translationY",
-					0, 90);
-			oa.start();
-
-		} catch (Exception ex) {
-			Log.e("error", ex.toString());
-		}
-		// AnimatorSet s= new AnimatorSet();
-		// ObjectAnimator a = ObjectAnimator.ofFloat(noteC1A, "scaleX", 0f, 1f);
-	}
-
-	private void animatev3() {
-		set1 = new AnimatorSet();
-		set1.setInterpolator(new LinearInterpolator());
-		set2 = new AnimatorSet();
-		set2.setInterpolator(new LinearInterpolator());
-		set3 = new AnimatorSet();
-		set3.setInterpolator(new LinearInterpolator());
-		set4 = new AnimatorSet();
-		set4.setInterpolator(new LinearInterpolator());
-		// set interpolator?
-		ValueAnimator ta1 = ObjectAnimator.ofFloat(noteB1A, "translationY",
-				-140, 300);
-		ta1.setDuration(2500);
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta1.setRepeatMode(ValueAnimator.RESTART);
-
-		ValueAnimator ta2 = ObjectAnimator.ofFloat(noteA1A, "translationY",
-				-140, 300);
-		ta2.setDuration(2500);
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta2.setRepeatMode(ValueAnimator.RESTART);
-
-		final ValueAnimator ta3 = ObjectAnimator.ofFloat(noteG1A,
-				"translationY", -140, 300);
-		ta3.setDuration(2500);
-
-		// ta.setRepeatCount(ValueAnimator.INFINITE);
-		// ta3.setRepeatMode(ValueAnimator.RESTART);
-		set1.play(ta1);
-		set1.play(ta2).after(500);
-		set1.play(ta3).after(1000);
-
-		set1.start();
-
-		set2.play(ta2);
-		set2.play(ta1).after(500);
-		set1.addListener(new AnimatorListener() {
-
-			@Override
-			public void onAnimationStart(Animator animation) {
-				Log.i("ta3", "delay: " + ta3.getStartDelay());
-				set2.setStartDelay(ta3.getStartDelay());
-				set2.start();
-			}
-
-			@Override
-			public void onAnimationEnd(Animator animation) {
-
-			}
-
-			@Override
-			public void onAnimationCancel(Animator animation) {
-			}
-
-			@Override
-			public void onAnimationRepeat(Animator animation) {
-			}
-
-		});
-	}
-
-	public void animate() {
-		/**
-		 * Data structure encoding into SQL Lite DB param 1- tempo param 2-
-		 * ArrayList of NBNodes NBNodes contain 1 - full note, 2 - half 4-
-		 * quarter 8- 8th ... etc. and the note for each
-		 * 
-		 * Ex: Mary had a little lamb
-		 * [B/4][A/4][G/4][A/4][B/4][B/4][B/2][A/4][A/
-		 * 4][A/2][B/4][D/4][D/2][B/4][A/4][G/4][A/4][B/4][B/4]
-		 * [B/4][B/4][A/4][A/4][B/4][A/4][G/1] Tempo scales the startoffset
-		 */
-
-		ImageView[] noteArr = { noteB1A, noteA1A, noteG1A, noteA1A, noteB1B };
-		anim1.setAnimationListener(new AnimationListener() {
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				// anim1.reset();
-				// anim1.setStartOffset(1000);
-				// anim1.startNow();
-				// anim2.setStartOffset(1000);
-				// noteBl.startAnimation(anim2);
-				Log.e("animlist", "end1" + anim2.getStartOffset());
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-				Log.e("animlist", "repeat1");
-			}
-
-			@Override
-			public void onAnimationStart(Animation animation) {
-				Log.e("animlist", "start1");
-				anim2.setStartOffset(200);
-				noteA1A.startAnimation(anim2);
-			}
-		});
-		anim2.setAnimationListener(new AnimationListener() {
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				// anim1.reset();
-				// anim1.setStartOffset(1000);
-				// anim1.startNow();
-				// anim2.setStartOffset(1000);
-				// noteBl.startAnimation(anim2);
-				Log.e("animlist", "end2" + anim2.getStartOffset());
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-				Log.e("animlist", "repeat1");
-			}
-
-			@Override
-			public void onAnimationStart(Animation animation) {
-				Log.e("animlist", "start2");
-				if (!anim1.hasEnded())
-					Log.e("animlist", "ANIM1 HAS NOTENDED YET");
-				anim3.setStartOffset(500);
-				noteG1A.startAnimation(anim3);
-			}
-		});
-		anim3.setAnimationListener(new AnimationListener() {
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				anim1.setStartOffset(200);
-				noteA1A.startAnimation(anim1);
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onAnimationStart(Animation arg0) {
-				// anim1.setStartOffset(2000);
-				// noteC1B.startAnimation(anim1);
-
-			}
-
-		});
-		// AnimatorSet s = new AnimatorSet();
-		// s.play(anim1).before(anim2);
-		// s.play(anim2).before(anim3);
-		// noteB1A.startAnimation(anim1);
-		// anim1.setStartOffset(1000);
-		// aSet.addAnimation(anim1);
-		// anim1.setRepeatCount(Animation.INFINITE);
-		// anim1.setRepeatMode(Animation.RESTART);
-		// anim2.setRepeatCount(Animation.INFINITE);
-		// anim2.setRepeatMode(Animation.RESTART);
-
-		// noteBl.startAnimation(anim1);
-		// noteOr2.startAnimation(anim2);
-		// noteBl2.startAnimation(anim2);
-		// noteOr3.startAnimation(anim3);
-		// noteBl3.startAnimation(anim3);
-
-	}
-
-	/* Create the MidiPlayer and Piano views */
-	private void createView() {
-
-		Display display = getWindowManager().getDefaultDisplay();
-		// Point size = new Point();
-		int width = display.getWidth();
-		int height = display.getHeight();
-		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-
-		layout = new LinearLayout(this);
-		layout.setOrientation(LinearLayout.VERTICAL);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
-		/* for the button */
-		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT);
-		rl = new RelativeLayout(this);
-
-		/* note 1 */
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 2 */
-		RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 3 */
-		RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 4 */
-		RelativeLayout.LayoutParams lp4 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 5 */
-		RelativeLayout.LayoutParams lp5 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 6 */
-		RelativeLayout.LayoutParams lp6 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		/* note 6 */
-		RelativeLayout.LayoutParams lp7 = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-
-		playNote = new Button(this);
-		playNote.setText("fall!");
-		playNote.setLayoutParams(layoutParams2);
-		rl.addView(playNote);
-
-		noteC1A = new ImageView(this);
-		noteD1A = new ImageView(this);
-		noteE1A = new ImageView(this);
-		noteF1A = new ImageView(this);
-		noteG1A = new ImageView(this);
-		noteA1A = new ImageView(this);
-		noteB1A = new ImageView(this);
-		noteC1B = new ImageView(this);
-		noteD1B = new ImageView(this);
-		noteE1B = new ImageView(this);
-		noteF1B = new ImageView(this);
-		noteG1B = new ImageView(this);
-		noteA1B = new ImageView(this);
-		noteB1B = new ImageView(this);
-		noteC1A.setImageResource(R.drawable.orange_note);
-		noteD1A.setImageResource(R.drawable.blue_note);
-		noteE1A.setImageResource(R.drawable.orange_note);
-		noteF1A.setImageResource(R.drawable.blue_note);
-		noteG1A.setImageResource(R.drawable.orange_note);
-		noteA1A.setImageResource(R.drawable.blue_note);
-		noteB1A.setImageResource(R.drawable.orange_note);
-		noteC1B.setImageResource(R.drawable.orange_note);
-		noteD1B.setImageResource(R.drawable.blue_note);
-		noteE1B.setImageResource(R.drawable.orange_note);
-		noteF1B.setImageResource(R.drawable.blue_note);
-		noteG1B.setImageResource(R.drawable.orange_note);
-		noteA1B.setImageResource(R.drawable.blue_note);
-		noteB1B.setImageResource(R.drawable.orange_note);
-
-		// noteOr.setVisibility(View.INVISIBLE);
-		// noteOr2.setVisibility(View.INVISIBLE);
-
-		/**
-		 * Margins- 35- C3 115- D3 195 275 355 435 515
-		 */
-		lp.setMargins(35, 0, 0, 300);
-		lp2.setMargins(110, 0, 0, 300);
-		lp3.setMargins(185, 0, 0, 300);
-		lp4.setMargins(225, 0, 0, 300);
-		lp5.setMargins(305, 0, 0, 300);
-		lp6.setMargins(385, 0, 0, 300);
-		lp7.setMargins(430, 0, 0, 300);
-		rl.addView(noteC1A, lp);
-		rl.addView(noteD1A, lp2);
-		rl.addView(noteE1A, lp3);
-		rl.addView(noteF1A, lp4);
-		rl.addView(noteG1A, lp5);
-		rl.addView(noteA1A, lp6);
-		rl.addView(noteB1A, lp7);
-		rl.addView(noteC1B, lp);
-		rl.addView(noteD1B, lp2);
-		rl.addView(noteE1B, lp3);
-		rl.addView(noteF1B, lp4);
-		rl.addView(noteG1B, lp5);
-		rl.addView(noteA1B, lp6);
-		rl.addView(noteB1B, lp7);
-
-		// noteOr.setVisibility(View.INVISIBLE);
-		// noteOr2.setVisibility(View.INVISIBLE);
-
-		layout.addView(rl, layoutParams);
-
-		popupLayout = new LinearLayout(this);
-		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
-
-		textview = new TextView(this);
-		textview.setText("Hi this is a sample text for popup window");
-		popUp = new PopupWindow(this);
-
-		/**
-		 * Black {C#, D#, F#, G#, A#, C#, D#, F#, G#, A#} White {C, D, E, F, G,
-		 * A, B, C, D, E, F, G, A, B} piano.tutorialNote([# of note][sharp # or
-		 * N]); to stop, setTutUnShade = -1
-		 * 
-		 */
-		playNote.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				numClicks++;
-
-				// if(numClicks%2 == 0 && numClicks != 0)
-				// {
-				// Log.i("numClicks", "num: " + numClicks);
-				// piano.toggleShade();
-				// }
-				// piano.tutorialNote("3#");
-				animatev3();
-				// if (click) {
-				// Log.i("Click", "BUTTON IS CLICKED");
-				// popUp.showAtLocation(layout, Gravity.LEFT, 8, 4);
-				// popUp.update(50, 50, 300, 100);
-				// click = false;
-				// } else {
-				// popUp.dismiss();
-				// click = true;
-				// }
-			}
-		});
-		popupLayout.addView(textview, params);
-		popUp.setContentView(popupLayout);
-
-		// tableLayout.addView(tableRow);
-		// layout.addView(tableLayout);
-		/** DONE ***/
-		int[] marginVal = new int[4];
-		marginVal[0] = (int) (width / 200);
-		marginVal[1] = (int) (height / 10);
-		int right = 0;
-		int left = 0;
-		marginVal[2] = right;
-		marginVal[3] = left;
-		layoutParams.setMargins(0, 0, 0, 0);
-
-		RelativeLayout rlPiano = new RelativeLayout(this);
-		RelativeLayout.LayoutParams lpPiano = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		piano = new Piano(this, marginVal, sp, false);
-		/*** SET BUTTON WIDTH AND HEIGHT FROM PIANO KEY WIDTH AND HEIGHTS **/
-		// noteOr.setMinimumWidth(piano.getKeyWidths("white")); //change to
-		// public static later
-		/*** PIANO.FIREDISPLAY(NOTEKEY) ***/
-		rlPiano.addView(piano, lpPiano);
-		layout.addView(rlPiano);
-
-		setContentView(layout);
-		// player.SetPiano(piano);
-		layout.requestLayout();
-		/**
-		 * LASTLY: MAKE A BUTTON SO THAT WHEN WE PRESS IT, IT WILL USE VIEWFLIP
-		 * TO CHANGE TO THE SAME PIANO VIEW BUT SCROLLED UP ONE OCTAVE
-		 */
-	}
 
 	public static int getCallBack() {
 		return callBack;
@@ -725,10 +264,10 @@ public class TutorialMSActivity extends SherlockActivity {
 		restartTut.setText("Restart!");
 		restartTut.setLayoutParams(layoutParams5);
 
-		rl.addView(playNote);
-		rl.addView(nextTut);
-		rl.addView(backTut);
-		rl.addView(restartTut);
+		// rl.addView(playNote);
+		// rl.addView(nextTut);
+		// rl.addView(backTut);
+		// rl.addView(restartTut);
 
 		layout.addView(rl, layoutParams);
 
@@ -834,23 +373,23 @@ public class TutorialMSActivity extends SherlockActivity {
 	}
 
 	/**
-	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5
-	 *                        C#   D#   F#  G#    A#   C#  D#    F#  G#    A#
+	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 C#
+	 * D# F# G# A# C# D# F# G# A#
 	 */
 	private void initSongs() {
 		/************* C-major scale init *******************/
 		int size = 8;
 		cmajor1 = new NotePlay[size];
 		cmajor2 = new NotePlay[size];
-		final double[] cNote1 = { 0, 1, 2, 3, 4, 5, 6, 7};
+		final double[] cNote1 = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		final int[] cDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] cNote2 = {7, 6, 5, 4, 3, 2, 1, 0 };
-		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] cNote2 = { 7, 6, 5, 4, 3, 2, 1, 0 };
+		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < cmajor1.length; i++)
 			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
 		for (int i = 0; i < cmajor2.length; i++)
-			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);	
+			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);
 
 		/************* D-major scale init *******************/
 		int d_size = 8;
@@ -858,13 +397,13 @@ public class TutorialMSActivity extends SherlockActivity {
 		dmajor2 = new NotePlay[d_size];
 		final double[] dNote1 = { 1, 2, 2.5, 4, 5, 6, 5.5, 8 };
 		final int[] dDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] dNote2 = { 8, 5.5, 6, 5, 4, 2.5, 2, 1};
-		final int[] dDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] dNote2 = { 8, 5.5, 6, 5, 4, 2.5, 2, 1 };
+		final int[] dDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < dmajor1.length; i++)
 			dmajor1[i] = new NotePlay(dDur1[i], dNote1[i]);
 		for (int i = 0; i < dmajor2.length; i++)
-			dmajor2[i] = new NotePlay(dDur2[i], dNote2[i]);	
+			dmajor2[i] = new NotePlay(dDur2[i], dNote2[i]);
 
 		/************* G-major scale init *******************/
 		int g_size = 8;
@@ -872,13 +411,13 @@ public class TutorialMSActivity extends SherlockActivity {
 		gmajor2 = new NotePlay[g_size];
 		final double[] gNote1 = { 4, 5, 6, 7, 8, 9, 7.5, 11 };
 		final int[] gDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] gNote2 = { 11, 7.5, 9, 8, 7, 6, 5, 4};
-		final int[] gDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] gNote2 = { 11, 7.5, 9, 8, 7, 6, 5, 4 };
+		final int[] gDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < gmajor1.length; i++)
 			gmajor1[i] = new NotePlay(gDur1[i], gNote1[i]);
 		for (int i = 0; i < gmajor2.length; i++)
-			gmajor2[i] = new NotePlay(gDur2[i], gNote2[i]);	
+			gmajor2[i] = new NotePlay(gDur2[i], gNote2[i]);
 
 		/************* A-major scale init *******************/
 		int a_size = 8;
@@ -886,13 +425,13 @@ public class TutorialMSActivity extends SherlockActivity {
 		amajor2 = new NotePlay[a_size];
 		final double[] aNote1 = { 5, 6, 5.5, 8, 9, 7.5, 8.5, 12 };
 		final int[] aDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] aNote2 = { 12, 8.5, 7.5, 9, 8, 5.5, 6, 5};
-		final int[] aDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] aNote2 = { 12, 8.5, 7.5, 9, 8, 5.5, 6, 5 };
+		final int[] aDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < amajor1.length; i++)
 			amajor1[i] = new NotePlay(aDur1[i], aNote1[i]);
 		for (int i = 0; i < amajor2.length; i++)
-			amajor2[i] = new NotePlay(aDur2[i], aNote2[i]);	
+			amajor2[i] = new NotePlay(aDur2[i], aNote2[i]);
 
 		/************* E-major scale init *******************/
 		int e_size = 8;
@@ -900,13 +439,13 @@ public class TutorialMSActivity extends SherlockActivity {
 		emajor2 = new NotePlay[e_size];
 		final double[] eNote1 = { 2, 2.5, 3.5, 5, 6, 5.5, 6.5, 9 };
 		final int[] eDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] eNote2 = { 9, 6.5, 5.5, 6, 5, 3.5, 2.5, 2};
-		final int[] eDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] eNote2 = { 9, 6.5, 5.5, 6, 5, 3.5, 2.5, 2 };
+		final int[] eDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < emajor1.length; i++)
 			emajor1[i] = new NotePlay(eDur1[i], eNote1[i]);
 		for (int i = 0; i < emajor2.length; i++)
-			emajor2[i] = new NotePlay(eDur2[i], eNote2[i]);	
+			emajor2[i] = new NotePlay(eDur2[i], eNote2[i]);
 
 		/************* F#-major scale init *******************/
 		int fsm_size = 8;
@@ -914,97 +453,97 @@ public class TutorialMSActivity extends SherlockActivity {
 		fsharp_major2 = new NotePlay[fsm_size];
 		final double[] fsmNote1 = { 2.5, 3.5, 4.5, 6, 5.5, 6.5, 10, 7.5 };
 		final int[] fsmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] fsmNote2 = { 7.5, 10, 6.5, 5.5, 6, 4.5, 3.5, 2.5};
-		final int[] fsmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] fsmNote2 = { 7.5, 10, 6.5, 5.5, 6, 4.5, 3.5, 2.5 };
+		final int[] fsmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < fsharp_major1.length; i++)
 			fsharp_major1[i] = new NotePlay(fsmDur1[i], fsmNote1[i]);
 		for (int i = 0; i < fsharp_major2.length; i++)
-			fsharp_major2[i] = new NotePlay(fsmDur2[i], fsmNote2[i]);	
+			fsharp_major2[i] = new NotePlay(fsmDur2[i], fsmNote2[i]);
 
 		/************* D Flat-major scale init *******************/
 		int dfm_size = 8;
 		dflat1 = new NotePlay[dfm_size];
-	    dflat2 = new NotePlay[dfm_size];
+		dflat2 = new NotePlay[dfm_size];
 		final double[] dfmNote1 = { 0.5, 1.5, 3, 2.5, 3.5, 4.5, 7, 5.5 };
 		final int[] dfmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] dfmNote2 = { 5.5, 7, 4.5, 3.5, 2.5, 3, 1.5, 0.5};
-		final int[] dfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] dfmNote2 = { 5.5, 7, 4.5, 3.5, 2.5, 3, 1.5, 0.5 };
+		final int[] dfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < dflat1.length; i++)
 			dflat1[i] = new NotePlay(dfmDur1[i], dfmNote1[i]);
 		for (int i = 0; i < dflat2.length; i++)
-			dflat2[i] = new NotePlay(dfmDur2[i], dfmNote2[i]);	
+			dflat2[i] = new NotePlay(dfmDur2[i], dfmNote2[i]);
 
 		/************* A Flat-major scale init *******************/
 		int afm_size = 8;
 		aflat1 = new NotePlay[afm_size];
-	    aflat2 = new NotePlay[afm_size];
+		aflat2 = new NotePlay[afm_size];
 		final double[] afmNote1 = { 3.5, 4.5, 7, 5.5, 6.5, 10, 11, 8.5 };
 		final int[] afmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] afmNote2 = { 8.5, 11, 10, 6.5, 5.5, 7, 4.5, 3.5};
-		final int[] afmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] afmNote2 = { 8.5, 11, 10, 6.5, 5.5, 7, 4.5, 3.5 };
+		final int[] afmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < aflat1.length; i++)
 			aflat1[i] = new NotePlay(afmDur1[i], afmNote1[i]);
 		for (int i = 0; i < aflat2.length; i++)
-			aflat2[i] = new NotePlay(afmDur2[i], afmNote2[i]);	
+			aflat2[i] = new NotePlay(afmDur2[i], afmNote2[i]);
 
 		/************* E Flat-major scale init *******************/
 		int efm_size = 8;
 		eflat1 = new NotePlay[efm_size];
-	    eflat2 = new NotePlay[efm_size];
+		eflat2 = new NotePlay[efm_size];
 		final double[] efmNote1 = { 1.5, 3, 4, 3.5, 4.5, 7, 8, 6.5 };
 		final int[] efmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] efmNote2 = { 6.5, 8, 7, 4.5, 3.5, 4, 3, 1.5};
-		final int[] efmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] efmNote2 = { 6.5, 8, 7, 4.5, 3.5, 4, 3, 1.5 };
+		final int[] efmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < eflat1.length; i++)
 			eflat1[i] = new NotePlay(efmDur1[i], efmNote1[i]);
 		for (int i = 0; i < eflat2.length; i++)
-			eflat2[i] = new NotePlay(efmDur2[i], efmNote2[i]);	
+			eflat2[i] = new NotePlay(efmDur2[i], efmNote2[i]);
 
 		/************* B Flat-major scale init *******************/
 		int bfm_size = 8;
 		bflat1 = new NotePlay[bfm_size];
-	    bflat2 = new NotePlay[bfm_size];
+		bflat2 = new NotePlay[bfm_size];
 		final double[] bfmNote1 = { 4.5, 7, 8, 6.5, 10, 11, 12, 9.5 };
 		final int[] bfmDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] bfmNote2 = { 9.5, 12, 11, 10, 6.5, 8, 7, 4.5};
-		final int[] bfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] bfmNote2 = { 9.5, 12, 11, 10, 6.5, 8, 7, 4.5 };
+		final int[] bfmDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < bflat1.length; i++)
 			bflat1[i] = new NotePlay(bfmDur1[i], bfmNote1[i]);
 		for (int i = 0; i < bflat2.length; i++)
-			bflat2[i] = new NotePlay(bfmDur2[i], bfmNote2[i]);	
+			bflat2[i] = new NotePlay(bfmDur2[i], bfmNote2[i]);
 
 		/************* F-major scale init *******************/
 		int f_size = 8;
 		fmajor1 = new NotePlay[f_size];
-	    fmajor2 = new NotePlay[f_size];
+		fmajor2 = new NotePlay[f_size];
 		final double[] fNote1 = { 3, 4, 5, 4.5, 7, 8, 9, 10 };
 		final int[] fDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] fNote2 = { 10, 9, 8, 7, 4.5, 5, 4, 3};
-		final int[] fDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] fNote2 = { 10, 9, 8, 7, 4.5, 5, 4, 3 };
+		final int[] fDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < fmajor1.length; i++)
 			fmajor1[i] = new NotePlay(fDur1[i], fNote1[i]);
 		for (int i = 0; i < fmajor2.length; i++)
-			fmajor2[i] = new NotePlay(fDur2[i], fNote2[i]);	
+			fmajor2[i] = new NotePlay(fDur2[i], fNote2[i]);
 
 		/************* B-major scale init *******************/
 		int b_size = 8;
 		bmajor1 = new NotePlay[b_size];
-	    bmajor2 = new NotePlay[b_size];
+		bmajor2 = new NotePlay[b_size];
 		final double[] bNote1 = { 6, 5.5, 6.5, 9, 7.5, 8.5, 9.5, 13 };
 		final int[] bDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		final double[] bNote2 = { 13, 9.5, 8.5, 7.5, 9, 6.5, 5.5, 6};
-		final int[] bDur2 = { 2, 2, 2, 2, 2, 2, 2, 2,2 ,2 };
+		final double[] bNote2 = { 13, 9.5, 8.5, 7.5, 9, 6.5, 5.5, 6 };
+		final int[] bDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 
 		for (int i = 0; i < bmajor1.length; i++)
 			bmajor1[i] = new NotePlay(bDur1[i], bNote1[i]);
 		for (int i = 0; i < bmajor2.length; i++)
-			bmajor2[i] = new NotePlay(bDur2[i], bNote2[i]);	
+			bmajor2[i] = new NotePlay(bDur2[i], bNote2[i]);
 
 		/********** Mary had a little lamb **************/
 
@@ -1106,7 +645,6 @@ public class TutorialMSActivity extends SherlockActivity {
 		for (int i = 0; i < jbsize5; i++)
 			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
 
-
 		/*********** Thrift Shop **************/
 		final double[] tsNote1 = { 3.5, 3.5, 3.5, 1.5, 0.5, 3.5, 6.5, 6, 3.5 };
 		final int[] tsDur1 = { 2, 1, 1, 2, 2, 3, 1, 2, 2 };
@@ -1142,11 +680,10 @@ public class TutorialMSActivity extends SherlockActivity {
 
 	}
 
-
-
 	protected void onClickHandler(int button) {
 		// TODO Auto-generated method stub
-
+		unlock = false;
+		System.err.println("within onclickhandler: " + button);
 		if (button == 0) {
 			Log.i("asdf", "playnote");
 			initSongs();
@@ -1255,133 +792,123 @@ public class TutorialMSActivity extends SherlockActivity {
 		}
 
 		// Level 9 - F# Major Scale
-				if (tutLevel == 9) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(fsharp_major1, 150);
-						break;
-					case 1:
-						piano.playSong(fsharp_major2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		if (tutLevel == 9) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(fsharp_major1, 150);
+				break;
+			case 1:
+				piano.playSong(fsharp_major2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 10 - D Flat Major Scale
-				if (tutLevel == 10) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(dflat1, 150);
-						break;
-					case 1:
-						piano.playSong(dflat2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		// Level 10 - D Flat Major Scale
+		if (tutLevel == 10) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(dflat1, 150);
+				break;
+			case 1:
+				piano.playSong(dflat2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 11 - A Flat Major Scale
-				if (tutLevel == 11) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(aflat1, 150);
-						break;
-					case 1:
-						piano.playSong(aflat2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		// Level 11 - A Flat Major Scale
+		if (tutLevel == 11) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(aflat1, 150);
+				break;
+			case 1:
+				piano.playSong(aflat2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 12 - E Flat Major Scale
-				if (tutLevel == 12) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(eflat1, 150);
-						break;
-					case 1:
-						piano.playSong(eflat2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		// Level 12 - E Flat Major Scale
+		if (tutLevel == 12) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(eflat1, 150);
+				break;
+			case 1:
+				piano.playSong(eflat2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 13 - B Flat Major Scale
-				if (tutLevel == 13) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(bflat1, 150);
-						break;
-					case 1:
-						piano.playSong(bflat2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		// Level 13 - B Flat Major Scale
+		if (tutLevel == 13) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(bflat1, 150);
+				break;
+			case 1:
+				piano.playSong(bflat2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 14 - F-Major Scale
-				if (tutLevel == 14) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(fmajor1, 150);
-						break;
-					case 1:
-						piano.playSong(fmajor2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
+		// Level 14 - F-Major Scale
+		if (tutLevel == 14) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(fmajor1, 150);
+				break;
+			case 1:
+				piano.playSong(fmajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
-				// Level 15 - B-Major Scale
-				if (tutLevel == 15) {
-					switch (numClicks) {
-					case 0:
-						piano.playSong(bmajor1, 150);
-						break;
-					case 1:
-						piano.playSong(bmajor2, 150);
-						break;
-					case 2:
-						numClicks = 0;
-						break;
-					default:
-						piano.toggleShade();
-					}
-				}
-
-
-
-
-
-
-
-
-
-
+		// Level 15 - B-Major Scale
+		if (tutLevel == 15) {
+			switch (numClicks) {
+			case 0:
+				piano.playSong(bmajor1, 150);
+				break;
+			case 1:
+				piano.playSong(bmajor2, 150);
+				break;
+			case 2:
+				numClicks = 0;
+				break;
+			default:
+				piano.toggleShade();
+			}
+		}
 
 		// Level 2 - Twinkle Twinkle
 		if (tutLevel == 2) {
@@ -1455,7 +982,6 @@ public class TutorialMSActivity extends SherlockActivity {
 			}
 		}
 
-
 		// Level 16 - Thrift Shop
 		int thriftspeed = 100;
 		if (tutLevel == 16) {
@@ -1482,6 +1008,7 @@ public class TutorialMSActivity extends SherlockActivity {
 				piano.toggleShade();
 			}
 		}
+//		unlockAll();
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
@@ -1548,85 +1075,96 @@ public class TutorialMSActivity extends SherlockActivity {
 		alert.show();
 	}
 
-	//
-	// public void playNote(String note) {
-	// sp.playNote();
-	// }
-
-	/** Create the SheetMusic view with the given options */
-	// private void createSheetMusic(/* MidiOptions options */) {
-	// // if (!options.showPiano) {
-	// // piano.setVisibility(View.GONE);
-	// // } else {
-	// // piano.setVisibility(View.VISIBLE);
-	// // }
-	// sheet = new SheetMusic(this);
-	// // sheet.initDefault(options);
-	// // sheet.setPlayer(player);
-	// layout.addView(sheet);
-	// // piano.SetMidiFile(midifile, options, player);
-	// // piano.SetShadeColors(options.shade1Color, options.shade2Color);
-	// layout.requestLayout();
-	// sheet.callOnDraw();
-	// }
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
+		getSupportActionBar().setBackgroundDrawable(
+				new ColorDrawable(Color.rgb(223, 160, 23)));
+		mymenu = menu;
+
+		for (int i = 0; i < mybuts.length; i++) {
+			System.err.println("TITLE: " + i + " is: "
+					+ mymenu.getItem(i).getTitle());
+			mybuts[i] = mymenu.getItem(i);
+		}
 		return true;
 	}
-	 @Override
-	 public boolean onOptionsItemSelected(MenuItem item) {
-		 switch (item.getItemId()) {
 
-		 case 16908332:
-    
-	     {
-	    	 Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
-        	 startActivity(i);
-        	return true	;
-	     }
+	private void lockOthers(int button) {
+		for (int i = 0; i < mybuts.length; i++) {
+			// if (i != button)
+			mybuts[i].setEnabled(false);
+		}
+		System.err.println("set all to false");
+	}
 
-         case R.id.play_icon :
-         {
-        	 Log.i("asdf", "playnote");
-        	 onClickHandler(0);
-        	 System.err.println("In here");
-         }
+	public static void unlockAll() {
+		for (int i = 0; i < mybuts.length; i++) {
+			mybuts[i].setEnabled(true);
+		}
+		System.err.println("set all to true");
+	}
 
-         case R.id.next_icon:
-         {
-        	 Log.i("asdf", "nextTut");
-        	 onClickHandler(1);
-        	 numClicks++;	   	
-         }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(!unlock) return false;
+		switch (item.getItemId()) {
 
+		case 16908332:
 
-         case R.id.replay_icon:
-         {
-        	 Log.i("asdf", "backTut");
-        	 onClickHandler(2);
-        	 numClicks--;	
-         }
-         case R.id.previous_icon:
-         {
-        	 Log.i("asdf", "restartTut");
-        	 initSongs();
-        	 onClickHandler(3);
-        	 numClicks = 0;  	
-         }
+		{
+			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
+			startActivity(i);
+			return true;
+		}
 
-         default:{
+		case R.id.play_icon: {
+			Log.i("asdf", "playnote");
+			onClickHandler(0);
 
-        	 Log.e("OOB", "button out of boundsssss");
-        	 numClicks = 0;
-         }
-         return false; 
+			System.err.println("In here");
+			break;
+		}
 
-		 }
-	 }
+		case R.id.next_icon: {
+			Log.i("asdf", "nextTut");
+
+			onClickHandler(1);
+//			lockOthers(1);
+			break;
+			// numClicks++;
+		}
+
+		case R.id.replay_icon: {
+			Log.i("asdf", "backTut");
+			onClickHandler(2);
+//			lockOthers(2);
+
+			break;
+			// numClicks--;
+		}
+		case R.id.previous_icon: {
+			Log.i("asdf", "restartTut");
+			// initSongs();
+			onClickHandler(3);
+//			lockOthers(3);
+
+			break;
+			// numClicks = 0;
+		}
+
+		default: {
+
+			Log.e("OOB", "button out of boundsssss");
+			numClicks = 0;
+		}
+			return false;
+
+		}
+		return false;
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -1690,5 +1228,10 @@ public class TutorialMSActivity extends SherlockActivity {
 		private void setRunning(boolean val) {
 			running = val;
 		}
+	}
+
+	public static void setUnlock(boolean b) {
+		// TODO Auto-generated method stub
+		unlock = true;
 	}
 }

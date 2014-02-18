@@ -956,6 +956,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				super.cancel();
 				Log.e("timer", "canceled");
 				unShade(noteToShade);
+				TutorialMSActivity.setUnlock(true);
+				
 				return true;
 			}
 
