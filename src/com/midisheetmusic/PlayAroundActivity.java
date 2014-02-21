@@ -2,6 +2,7 @@ package com.midisheetmusic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -74,7 +75,7 @@ public class PlayAroundActivity extends SherlockActivity {
 	/* for note playing */
 	private SPPlayer sp;
 	private boolean loaded = false;
-	/*To be able to collapse items with beats */
+	/* To be able to collapse items with beats */
 	Menu mymenu;
 
 	/* button to guide image falling process */
@@ -136,8 +137,8 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	/* recording file */
 	private final static String filename = "Rec.txt";
-	//ArrayList<ArrayList<RecNotes>> rn = null;
-	//HashMap implementation
+	// ArrayList<ArrayList<RecNotes>> rn = null;
+	// HashMap implementation
 	HashMap<String, ArrayList<RecNotes>> rn = null;
 
 	final Context mctx = this;
@@ -831,8 +832,9 @@ public class PlayAroundActivity extends SherlockActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
-		mymenu=menu;
+		getSupportActionBar().setBackgroundDrawable(
+				new ColorDrawable(Color.rgb(223, 160, 23)));
+		mymenu = menu;
 
 		return true;
 	}
@@ -840,34 +842,52 @@ public class PlayAroundActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		switch(item.getItemId()){
-		 case 16908332:
-			    
-	     {
-	    	 Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
-        	 startActivity(i);
-        	return true	;
-	     }
+		switch (item.getItemId()) {
+		case 16908332:
 
-		case R.id.play_icon :{
+		{
+			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
+			startActivity(i);
 			return true;
 		}
-		case R.id.record_icon:{
+
+		case R.id.play_icon: {
+			piano.playBack(1);
 			return true;
 		}
-		case R.id.beat1:{
+		case R.id.record_icon: {
+			piano.startRec();
 			return true;
 		}
-		case R.id.beat2:{
+		case R.id.beat1: {
+			piano.addToRec(new RecNotes(
+					(Calendar.getInstance().getTimeInMillis() - piano
+							.getStartTime().getTimeInMillis()), 0));
+			piano.playBeat(0);
 			return true;
 		}
-		case R.id.beat3:{
+		case R.id.beat2: {
+			piano.addToRec(new RecNotes(
+					(Calendar.getInstance().getTimeInMillis() - piano
+							.getStartTime().getTimeInMillis()), 1));
+			piano.playBeat(1);
 			return true;
 		}
-		case R.id.beat4:{
+		case R.id.beat3: {
+			piano.addToRec(new RecNotes(
+					(Calendar.getInstance().getTimeInMillis() - piano
+							.getStartTime().getTimeInMillis()), 2));
+			piano.playBeat(2);
 			return true;
 		}
-		case R.id.submenu1:{
+		case R.id.beat4: {
+			piano.addToRec(new RecNotes(
+					(Calendar.getInstance().getTimeInMillis() - piano
+							.getStartTime().getTimeInMillis()), 3));
+			piano.playBeat(3);
+			return true;
+		}
+		case R.id.submenu1: {
 			mymenu.getItem(2).setVisible(false);
 			mymenu.getItem(3).setVisible(false);
 			mymenu.getItem(4).setVisible(false);
@@ -875,39 +895,42 @@ public class PlayAroundActivity extends SherlockActivity {
 
 			return true;
 		}
-		case R.id.submenu2:{
+		case R.id.submenu2: {
 			mymenu.getItem(2).setVisible(true);
 			mymenu.getItem(3).setVisible(false);
 			mymenu.getItem(4).setVisible(false);
 			mymenu.getItem(5).setVisible(false);
-			
+
 			return true;
 		}
-		case R.id.submenu3:{
+		case R.id.submenu3: {
 			mymenu.getItem(2).setVisible(true);
 			mymenu.getItem(3).setVisible(true);
 			mymenu.getItem(4).setVisible(false);
 			mymenu.getItem(5).setVisible(false);
-			
+
 			return true;
 		}
-		case R.id.submenu4:{
+		case R.id.submenu4: {
 			mymenu.getItem(2).setVisible(true);
 			mymenu.getItem(3).setVisible(true);
 			mymenu.getItem(4).setVisible(true);
 			mymenu.getItem(5).setVisible(false);
-			
+
 			return true;
 		}
-		case R.id.submenu5:{
+		case R.id.submenu5: {
 			mymenu.getItem(2).setVisible(true);
 			mymenu.getItem(3).setVisible(true);
 			mymenu.getItem(4).setVisible(true);
 			mymenu.getItem(5).setVisible(true);
-        
+
 			return true;
 		}
-
+		case R.id.save_rec:
+			return option_save(rm);
+		case R.id.list_rec:
+			return option_list(rm);
 		}
 		return false;
 	}
@@ -927,15 +950,15 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	private boolean option_list(RecManager rm) {
 
-		//call recordListActivity
+		// call recordListActivity
 
 		rn = rm.loadRec();
 		CharSequence[] items = new CharSequence[rn.size()];
 		Set<String> rnKeys = rn.keySet();
 
-		//for (int i = 0; i < items.length; i++) {
-		//	items[i] = "Recording " + i;
-		//}
+		// for (int i = 0; i < items.length; i++) {
+		// items[i] = "Recording " + i;
+		// }
 		int i = 0;
 		for (String st : rnKeys) {
 			items[i] = st;
@@ -944,41 +967,42 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Play Your Recordings");
-//		
-//		ListView modeList = new ListView(this);
-//		String[] stringArray = (String[])rn.keySet().toArray();
-//		modeList.setOnItemClickListener(new OnItemClickListener(){
-//			
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+		//
+		// ListView modeList = new ListView(this);
+		// String[] stringArray = (String[])rn.keySet().toArray();
+		// modeList.setOnItemClickListener(new OnItemClickListener(){
+		//
+		//
+		// @Override
+		// public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		// long arg3) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 
-
-//		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, stringArray);
-//		modeList.setAdapter(modeAdapter);
-//
-//		builder.setView(modeList);
-//		final Dialog dialog = builder.create();
-//		
-//		dialog.show();
+		// ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, android.R.id.text1,
+		// stringArray);
+		// modeList.setAdapter(modeAdapter);
+		//
+		// builder.setView(modeList);
+		// final Dialog dialog = builder.create();
+		//
+		// dialog.show();
 
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
-                Set<String> re = rn.keySet();
-                int i = 0;
-                String elem = "";
-                for( String st : re){
-                	if(i == item){
-                	  elem = st;
-                	  break;
-                	}
-                	i++;
-                }
+				Set<String> re = rn.keySet();
+				int i = 0;
+				String elem = "";
+				for (String st : re) {
+					if (i == item) {
+						elem = st;
+						break;
+					}
+					i++;
+				}
 				piano.setMyRec(rn.get(elem));
 				Toast.makeText(mctx, "Hit Play!", Toast.LENGTH_SHORT).show();
 			}
@@ -987,126 +1011,124 @@ public class PlayAroundActivity extends SherlockActivity {
 		alert.show();
 		return true;
 	}
-   //ArrayList<RecNotes> is ONE recording
-	//the serialized object ArrayList<ArrayList<RecNotes>> is in Serializable and Deserialize
-	/*private ArrayList<ArrayList<RecNotes>> loadRec( RecManager rm) {
-		try {
-			rn = rm.getSerialized(filename);
-			for (int i = 0; i < rn.size(); i++) {
-				Log.i("option", "printing rn: " + rn.toString());
-			}
-			return rn;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return (new ArrayList<ArrayList<RecNotes>>());
-		}
-	}
-	*/
-	//loading tracks in HashMap data structure
-   
-	//read
-//	private HashMap<String, ArrayList<RecNotes>> loadRec( RecManager rm){
-//		//String name = ""+rn.size();
-//		//HashMap<String, ArrayList<RecNotes>> db = new HashMap<String, ArrayList<RecNotes>>();
-//		try {
-//			rn = rm.getSerialized(filename);
-//			Set<String> rnkeys = rn.keySet();
-//			for (String st : rnkeys)
-//				Log.i("option", "printing rn: "+ st + " " +rn.get(rnkeys));
-//			return rn;	
-//		}catch (Exception e){
-//			e.printStackTrace();
-//			return new HashMap<String, ArrayList<RecNotes>>();
-//		}
-//	}
 
-//	private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
-//
-//		try {
-//			rn = rm.getSerialized(filename);
-//
-//			if (rn == null) {
-//				Log.i("option", "rn was null, making new");
-//				rn = new ArrayList<ArrayList<RecNotes>>();
-//			}
-//			rn.add(piano.getMyRec());
-//			rm.setSerialized(filename, rn);
-//		} catch (IOException e) {
-//			if (rn == null) {
-//				Log.i("option", "rn was null, making new");
-//				rn = new ArrayList<ArrayList<RecNotes>>();
-//			}
-//			rn.add(piano.getMyRec());
-//			try {
-//				rm.setSerialized(filename, rn);
-//			} catch (IOException e1) {
-//				Log.e("option", "failed to even set serialize??");
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			// TODO Auto-generated catch block
-//			Log.e("option", "failed to get serialized");
-//			e.printStackTrace();
-//		}
-//	}
-	//create
-//	private void saveRec(HashMap<String, ArrayList<RecNotes>> rn, RecManager rm) {
-//
-//		try {
-//			rn = rm.getSerialized(filename);
-//            String dfnam = "MyRecording " + (rn.size() + 1); 
-//			/*if (rn == null) {
-//				Log.i("option", "rn was null, making new");
-//				rn = new HashMap<String, ArrayList<RecNotes>>();
-//			}*/	
-//			rn.put(dfnam, piano.getMyRec());
-//			rm.setSerialized(filename, rn);
-//		} catch (IOException e) {
-//			if (rn == null) {
-//				Log.i("option", "rn was null, making new");
-//				rn = new HashMap<String, ArrayList<RecNotes>>();
-//			}
-//			String dfnam = "MyRecording" + (rn.size() + 1);
-//			rn.put(dfnam, piano.getMyRec());
-//			try {
-//				rm.setSerialized(filename, rn);
-//			} catch (IOException e1) {
-//				Log.e("option", "failed to even set serialize??");
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			// TODO Auto-generated catch block
-//			Log.e("option", "failed to get serialized");
-//			e.printStackTrace();
-//		}
-//	}
+	// ArrayList<RecNotes> is ONE recording
+	// the serialized object ArrayList<ArrayList<RecNotes>> is in Serializable
+	// and Deserialize
+	/*
+	 * private ArrayList<ArrayList<RecNotes>> loadRec( RecManager rm) { try { rn
+	 * = rm.getSerialized(filename); for (int i = 0; i < rn.size(); i++) {
+	 * Log.i("option", "printing rn: " + rn.toString()); } return rn; } catch
+	 * (Exception e) { e.printStackTrace(); return (new
+	 * ArrayList<ArrayList<RecNotes>>()); } }
+	 */
+	// loading tracks in HashMap data structure
 
-//	//update
-//	private void renamRec (String newnam, String oldnam){
-//		ArrayList<RecNotes> recording = rn.get(oldnam);
-//		rn.remove(oldnam);
-//		rn.put(newnam, recording);
-//		try {
-//			rm.setSerialized(filename, rn);
-//		} catch (IOException e1) {
-//			Log.e("option", "failed to even set serialize??");
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//	}
-//	
-//	//delete
-//	private void delRec (String target){
-//		rn.remove(target);
-//		try {
-//			rm.setSerialized(filename, rn);
-//		} catch (IOException e1) {
-//			Log.e("option", "failed to even set serialize??");
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//	}
-//asynctask
+	// read
+	// private HashMap<String, ArrayList<RecNotes>> loadRec( RecManager rm){
+	// //String name = ""+rn.size();
+	// //HashMap<String, ArrayList<RecNotes>> db = new HashMap<String,
+	// ArrayList<RecNotes>>();
+	// try {
+	// rn = rm.getSerialized(filename);
+	// Set<String> rnkeys = rn.keySet();
+	// for (String st : rnkeys)
+	// Log.i("option", "printing rn: "+ st + " " +rn.get(rnkeys));
+	// return rn;
+	// }catch (Exception e){
+	// e.printStackTrace();
+	// return new HashMap<String, ArrayList<RecNotes>>();
+	// }
+	// }
+
+	// private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
+	//
+	// try {
+	// rn = rm.getSerialized(filename);
+	//
+	// if (rn == null) {
+	// Log.i("option", "rn was null, making new");
+	// rn = new ArrayList<ArrayList<RecNotes>>();
+	// }
+	// rn.add(piano.getMyRec());
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e) {
+	// if (rn == null) {
+	// Log.i("option", "rn was null, making new");
+	// rn = new ArrayList<ArrayList<RecNotes>>();
+	// }
+	// rn.add(piano.getMyRec());
+	// try {
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e1) {
+	// Log.e("option", "failed to even set serialize??");
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// // TODO Auto-generated catch block
+	// Log.e("option", "failed to get serialized");
+	// e.printStackTrace();
+	// }
+	// }
+	// create
+	// private void saveRec(HashMap<String, ArrayList<RecNotes>> rn, RecManager
+	// rm) {
+	//
+	// try {
+	// rn = rm.getSerialized(filename);
+	// String dfnam = "MyRecording " + (rn.size() + 1);
+	// /*if (rn == null) {
+	// Log.i("option", "rn was null, making new");
+	// rn = new HashMap<String, ArrayList<RecNotes>>();
+	// }*/
+	// rn.put(dfnam, piano.getMyRec());
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e) {
+	// if (rn == null) {
+	// Log.i("option", "rn was null, making new");
+	// rn = new HashMap<String, ArrayList<RecNotes>>();
+	// }
+	// String dfnam = "MyRecording" + (rn.size() + 1);
+	// rn.put(dfnam, piano.getMyRec());
+	// try {
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e1) {
+	// Log.e("option", "failed to even set serialize??");
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// // TODO Auto-generated catch block
+	// Log.e("option", "failed to get serialized");
+	// e.printStackTrace();
+	// }
+	// }
+
+	// //update
+	// private void renamRec (String newnam, String oldnam){
+	// ArrayList<RecNotes> recording = rn.get(oldnam);
+	// rn.remove(oldnam);
+	// rn.put(newnam, recording);
+	// try {
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e1) {
+	// Log.e("option", "failed to even set serialize??");
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// }
+	//
+	// //delete
+	// private void delRec (String target){
+	// rn.remove(target);
+	// try {
+	// rm.setSerialized(filename, rn);
+	// } catch (IOException e1) {
+	// Log.e("option", "failed to even set serialize??");
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	// }
+	// asynctask
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
