@@ -70,7 +70,7 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	private LevelActivity mTuts;/* to get the string */
 	private String pos;
-
+	private boolean stop = false;
 	/* for note playing */
 	private SPPlayer sp;
 	private boolean loaded = false;
@@ -373,16 +373,16 @@ public class PlayAroundActivity extends SherlockActivity {
 		/*
 		 * For the button to start that tutorial
 		 */
-		playNote = new Button(this);
-		playNote.setText("Record");
-		playNote.setLayoutParams(layoutParams2);
+//		playNote = new Button(this);
+//		playNote.setText("Record");
+//		playNote.setLayoutParams(layoutParams2);
 
 		/*
 		 * For the button to play the next tutorial
 		 */
-		nextTut = new Button(this);
-		nextTut.setText("Replay");
-		nextTut.setLayoutParams(layoutParams3);
+//		nextTut = new Button(this);
+//		nextTut.setText("Replay");
+//		nextTut.setLayoutParams(layoutParams3);
 
 		/*
 		 * For the button to play the back tutorial
@@ -400,16 +400,16 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		/* spinners- beats has beat sets, save_list is the context menu */
 		beats = new Spinner(this);
-		save_list = new Spinner(this);
+//		save_list = new Spinner(this);
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
 		ArrayList<String> beatset_arr = new ArrayList<String>();
 		beatset_arr.add("Beat 1");
 		beatset_arr.add("Beat 2");
 
-		ArrayList<String> context_arr = new ArrayList<String>();
-		context_arr.add("Save Rec");
-		context_arr.add("List Rec");
+//		ArrayList<String> context_arr = new ArrayList<String>();
+//		context_arr.add("Save Rec");
+//		context_arr.add("List Rec");
 
 		beats.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -421,32 +421,32 @@ public class PlayAroundActivity extends SherlockActivity {
 				beatstate = pos;
 			}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		save_list.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				// TODO Auto-generated method stub
-				Log.i("spinner", "in save_list with pos: " + pos);
-				switch (pos) {
-				case 0:
-					option_save(rm);
-					break;
-				case 1:
-					option_list(rm);
-					break;
-				default:
-					break;
-				}
-			}
+//			@Override
+//			public void onNothingSelected(AdapterView<?> arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//		});
+//
+//		save_list.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> parent, View view,
+//					int pos, long id) {
+//				// TODO Auto-generated method stub
+//				Log.i("spinner", "in save_list with pos: " + pos);
+//				switch (pos) {
+//				case 0:
+//					option_save(rm);
+//					break;
+//				case 1:
+//					option_list(rm);
+//					break;
+//				default:
+//					break;
+//				}
+//			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -458,23 +458,23 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		ArrayAdapter<String> beatArrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_dropdown_item, beatset_arr);
-		ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_dropdown_item,
-				context_arr);
+//		ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
+//				this, android.R.layout.simple_spinner_dropdown_item,
+//				context_arr);
 
 		beats.setAdapter(beatArrayAdapter);
 		beats.setLayoutParams(layoutParams6);
 
-		save_list.setAdapter(contextArrayAdapter);
-		save_list.setLayoutParams(layoutParams7);
+//		save_list.setAdapter(contextArrayAdapter);
+//		save_list.setLayoutParams(layoutParams7);
 
-		rl.addView(playNote);
-		rl.addView(nextTut);
-		rl.addView(backTut);
-		rl.addView(restartTut);
+//		rl.addView(playNote);
+//		rl.addView(nextTut);
+//		rl.addView(backTut);
+//		rl.addView(restartTut);
 
 		rl.addView(beats);
-		rl.addView(save_list);
+//		rl.addView(save_list);
 
 		layout.addView(rl, layoutParams);
 
@@ -504,20 +504,21 @@ public class PlayAroundActivity extends SherlockActivity {
 		 * array (play, next, previous restart)
 		 */
 
-		OnClickListener myPlay0 = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				/* onClickHandler(0); */
-				piano.startRec();
-			}
-		};
-		OnClickListener myPlay1 = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// onClickHandler(1);
-				piano.playBack(1);
-			}
-		};
+//		OnClickListener myPlay0 = new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				/* onClickHandler(0); */
+//				piano.startRec();
+//			}
+//		};
+//		OnClickListener myPlay1 = new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				// onClickHandler(1);
+//				piano.playBack(1);
+//				Log.i("PlayAround", "OLD PLAY BUTTON PRESSED");
+//			}
+//		};
 		/* using beats 0, 1, 3, 4 */
 		OnClickListener myPlay2 = new OnClickListener() {
 			@Override
@@ -544,8 +545,8 @@ public class PlayAroundActivity extends SherlockActivity {
 			}
 		};
 
-		playNote.setOnClickListener(myPlay0);
-		nextTut.setOnClickListener(myPlay1);
+//		playNote.setOnClickListener(myPlay0);
+//		nextTut.setOnClickListener(myPlay1);
 		backTut.setOnClickListener(myPlay2);
 		restartTut.setOnClickListener(myPlay3);
 
@@ -832,7 +833,7 @@ public class PlayAroundActivity extends SherlockActivity {
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(223,160,23)));
-		mymenu=menu;
+		mymenu = menu;
 
 		return true;
 	}
@@ -844,15 +845,29 @@ public class PlayAroundActivity extends SherlockActivity {
 		 case 16908332:
 			    
 	     {
-	    	 Intent i=new Intent(this, AndroidDashboardDesignActivity.class);
-        	 startActivity(i);
+	    	 Intent home =new Intent(this, AndroidDashboardDesignActivity.class);
+        	 startActivity(home);
         	return true	;
 	     }
 
 		case R.id.play_icon :{
+			piano.playBack(1);
 			return true;
 		}
 		case R.id.record_icon:{
+			stop = !stop; //perhaps use to change the icon from record to pause and viceversa?
+			//if(!stop)
+			piano.startRec();
+			if(stop)
+				Toast.makeText(this, "Recording Jam", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(this, "Stop Recording", Toast.LENGTH_SHORT).show();
+			//
+				//stop = !stop;
+			//else
+				//option_save(rm);
+				//stop = !stop;
+				
 			return true;
 		}
 		case R.id.beat1:{
@@ -880,14 +895,22 @@ public class PlayAroundActivity extends SherlockActivity {
 			mymenu.getItem(3).setVisible(false);
 			mymenu.getItem(4).setVisible(false);
 			mymenu.getItem(5).setVisible(false);
-			
+			option_save(rm);
+			Toast.makeText(this, "Jam Saved!", Toast.LENGTH_SHORT).show();
 			return true;
 		}
-		case R.id.submenu3:{
+		case R.id.submenu3:{  // List show
 			mymenu.getItem(2).setVisible(true);
 			mymenu.getItem(3).setVisible(true);
 			mymenu.getItem(4).setVisible(false);
 			mymenu.getItem(5).setVisible(false);
+			
+			Intent goListRec = new Intent(this, SoonToBe.class);
+			Log.i("Intent", "go recordList activity");
+			//Bundle bund;
+			
+			//goListRec.putExtra("DATABASE", new Gson().toJson(rm));
+			startActivity(goListRec);
 			
 			return true;
 		}
@@ -925,68 +948,69 @@ public class PlayAroundActivity extends SherlockActivity {
 		return true;
 	}
 
-	private boolean option_list(RecManager rm) {
-
-		//call recordListActivity
-
-		rn = rm.loadRec();
-		CharSequence[] items = new CharSequence[rn.size()];
-		Set<String> rnKeys = rn.keySet();
-
-		//for (int i = 0; i < items.length; i++) {
-		//	items[i] = "Recording " + i;
-		//}
-		int i = 0;
-		for (String st : rnKeys) {
-			items[i] = st;
-			i++;
-		}
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Play Your Recordings");
-//		
-//		ListView modeList = new ListView(this);
-//		String[] stringArray = (String[])rn.keySet().toArray();
-//		modeList.setOnItemClickListener(new OnItemClickListener(){
-//			
+//	private boolean option_list(RecManager rm) {
 //
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
+//		//call recordListActivity
+//
+//		rn = rm.loadRec();
+//		CharSequence[] items = new CharSequence[rn.size()];
+//		Set<String> rnKeys = rn.keySet();
+//
+//		//for (int i = 0; i < items.length; i++) {
+//		//	items[i] = "Recording " + i;
+//		//}
+//		int i = 0;
+//		for (String st : rnKeys) {
+//			items[i] = st;
+//			i++;
+//		}
+//
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//		builder.setTitle("Play Your Recordings");
+////		
+////		ListView modeList = new ListView(this);
+////		String[] stringArray = (String[])rn.keySet().toArray();
+////		modeList.setOnItemClickListener(new OnItemClickListener(){
+////			
+////
+////			@Override
+////			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+////					long arg3) {
+////				// TODO Auto-generated method stub
+////				
+////			}
+////		});
+//
+//
+////		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, stringArray);
+////		modeList.setAdapter(modeAdapter);
+////
+////		builder.setView(modeList);
+////		final Dialog dialog = builder.create();
+////		
+////		dialog.show();
+//
+//		builder.setItems(items, new DialogInterface.OnClickListener() {
+//			//
+//			public void onClick(DialogInterface dialog, int item) {
+//                Set<String> re = rn.keySet();
+//                int i = 0;
+//                String elem = "";
+//                for( String st : re){
+//                	if(i == item){
+//                	  elem = st;
+//                	  break;
+//                	}
+//                	i++;
+//                }
+//				piano.setMyRec(rn.get(elem));
+//				Toast.makeText(mctx, "Hit Play!", Toast.LENGTH_SHORT).show();
 //			}
 //		});
-
-
-//		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, stringArray);
-//		modeList.setAdapter(modeAdapter);
-//
-//		builder.setView(modeList);
-//		final Dialog dialog = builder.create();
-//		
-//		dialog.show();
-
-		builder.setItems(items, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int item) {
-                Set<String> re = rn.keySet();
-                int i = 0;
-                String elem = "";
-                for( String st : re){
-                	if(i == item){
-                	  elem = st;
-                	  break;
-                	}
-                	i++;
-                }
-				piano.setMyRec(rn.get(elem));
-				Toast.makeText(mctx, "Hit Play!", Toast.LENGTH_SHORT).show();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
-		return true;
-	}
+//		AlertDialog alert = builder.create();
+//		alert.show();
+//		return true;
+//	}
    //ArrayList<RecNotes> is ONE recording
 	//the serialized object ArrayList<ArrayList<RecNotes>> is in Serializable and Deserialize
 	/*private ArrayList<ArrayList<RecNotes>> loadRec( RecManager rm) {
