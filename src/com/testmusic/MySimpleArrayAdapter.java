@@ -16,7 +16,7 @@ import com.midisheetmusic.R;
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final String[] values;
-	private final ArrayList<String> entries;
+	private final String[] entries;
 	private final boolean listRec;
 	
 	public MySimpleArrayAdapter(Context context, String[] values) {
@@ -28,20 +28,19 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 	}
 	
 
-	public MySimpleArrayAdapter(Context context, ArrayList<String> entries, boolean listRec) {
+	public MySimpleArrayAdapter(Context context, String[] entries, boolean listRec) {
 		super(context, R.layout.rowlayout, entries);
 		this.context = context;
-		this.values = null;
+		this.values = entries;
 		this.listRec = listRec;
-		this.entries = entries;
+		this.entries = null;
 	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-		rowView.setMinimumHeight(90);
-		
+		rowView.setMinimumHeight(150);
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
 //		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		

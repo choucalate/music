@@ -24,7 +24,17 @@ public class RecNotes implements Serializable {
 
 	private long currTime;
 	private String noteToPlay;
+	private int beat;
 	private int noteshade;
+	private boolean isBeat;
+   
+	public int getBeat() {
+		return beat;
+	}
+	
+	public boolean isBeat() {
+		return isBeat;
+	}
 
 	public int getNoteshade() {
 		return noteshade;
@@ -38,5 +48,15 @@ public class RecNotes implements Serializable {
 		this.currTime = l;
 		this.noteToPlay = key;
 		this.noteshade = noteshade;
+		this.isBeat = false;
+	}
+
+	/**
+	 * The constructor for a beat Recnote
+	 */
+	public RecNotes(long l, int beat) {
+		this.isBeat = true;
+		this.beat = beat;
+		this.currTime = l;
 	}
 }

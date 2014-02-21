@@ -120,10 +120,14 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	/* recording stuffs */
 	private boolean recStart;
 	private ArrayList<RecNotes> myRec = new ArrayList<RecNotes>();
+
 	public ArrayList<RecNotes> getMyRec() {
 		return myRec;
 	}
 
+	public void addToRec(RecNotes rn) {
+		this.myRec.add(rn);
+	}
 	public void setMyRec(ArrayList<RecNotes> myRec) {
 		this.myRec = myRec;
 		
@@ -300,8 +304,6 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			int oldheight) {
 		super.onSizeChanged(newwidth, newheight, oldwidth, oldheight);
 	}
-
-
 
 	/** Set the colors to use for shading */
 	public void SetShadeColors(int c1, int c2) {
@@ -504,7 +506,6 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		DrawNoteLetters(canvas);
 		// }
 	}
-
 
 	/*
 	 * Shade the given note with the given brush. We only draw notes from
@@ -885,23 +886,24 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		Calendar mycal = Calendar.getInstance();
 		Calendar copy = Calendar.getInstance();
 
-		String start = "print myRec: [";
-		for (int i = 0; i < myRec.size(); i++) {
-			start += myRec.get(i).getNoteToPlay() + " : " + myRec.get(i).getCurrTime()
-					+ ", ";
-		}
-		start += "]";
-		Log.i("recstart", start);
+		// String start = "print myRec: [";
+		// for (int i = 0; i < myRec.size(); i++) {
+		// start += myRec.get(i).getNoteToPlay() + " : "
+		// + myRec.get(i).getCurrTime() + ", ";
+		// }
+		// start += "]";
+		Log.i("recstart", "size: " + myRec.size());
 
 		for (int i = 0; i < myRec.size(); i++) {
 
 			mycal = copy;
 			if (i == 0) {
-				mycal.add(Calendar.MILLISECOND,
-						(int) (myRec.get(i).getCurrTime() + offset));
+				mycal.add(Calendar.MILLISECOND, (int) (myRec.get(i)
+						.getCurrTime() + offset));
 			} else {
-				mycal.add(Calendar.MILLISECOND, (int) (myRec.get(i).getCurrTime()
-						+ offset - myRec.get(i - 1).getCurrTime()));
+				mycal.add(Calendar.MILLISECOND, (int) (myRec.get(i)
+						.getCurrTime() + offset - myRec.get(i - 1)
+						.getCurrTime()));
 			}
 			Log.i("recstart",
 					"going to play it at: "
@@ -913,39 +915,48 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
-					SurfaceHolder holder = getHolder();
-					Canvas canvas = holder.lockCanvas();
-					if (canvas == null) {
-						Log.e("recstart", "fail2");
-						return;
-					}
-
-					bufferCanvas.translate(margin + BlackBorder, margin
-							+ BlackBorder);
-					
-					ShadeOneNote(bufferCanvas, myRec.get(index).getNoteshade(), Color.LTGRAY);
-
-					bufferCanvas.translate(-(margin + BlackBorder),
-							-(margin + BlackBorder));
-					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
-					DrawNoteLetters(canvas);
-					holder.unlockCanvasAndPost(canvas);
-					
-					Log.i("recstart", "about to play note: "
-							+ myRec.get(index).getNoteToPlay());
-					soundPool.playNote(myRec.get(index).getNoteToPlay(), 1);
-					
-					time.schedule(new TimerTask() {
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							Log.i("recstart", " unshading myrec");
-							unShade(myRec.get(index).getNoteshade());
+					// TODO Auto-generated method stubx`
+					if (!myRec.get(index).isBeat()) {
+						SurfaceHolder holder = getHolder();
+						Canvas canvas = holder.lockCanvas();
+						if (canvas == null) {
+							Log.e("recstart", "fail2");
+							return;
 						}
-						
-					}, 100);
+
+						bufferCanvas.translate(margin + BlackBorder, margin
+								+ BlackBorder);
+
+						ShadeOneNote(bufferCanvas, myRec.get(index)
+								.getNoteshade(), Color.LTGRAY);
+
+						bufferCanvas.translate(-(margin + BlackBorder),
+								-(margin + BlackBorder));
+						canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+						DrawNoteLetters(canvas);
+						holder.unlockCanvasAndPost(canvas);
+
+						Log.i("recstart",
+								"about to play note: "
+										+ myRec.get(index).getNoteToPlay());
+						soundPool.playNote(myRec.get(index).getNoteToPlay(), 1);
+
+						time.schedule(new TimerTask() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								Log.i("recstart", " unshading myrec");
+								if (!myRec.get(index).isBeat())
+									unShade(myRec.get(index).getNoteshade());
+							}
+
+						}, 100);
+					} else {
+						//is beat
+						playBeat(myRec.get(index).getBeat());
+						Log.i("recstart", "is a beat! playing beat: " + myRec.get(index).getBeat());
+					}
 				}
 
 			}, mycal.getTime());
@@ -1061,6 +1072,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				super.cancel();
 				Log.e("timer", "canceled");
 				unShade(noteToShade);
+				TutorialMSActivity.setUnlock(true);
+
 				return true;
 			}
 
@@ -1556,20 +1569,23 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 				 */
 				if (myRec.size() != 0) {
 					long st = ((Calendar.getInstance().getTimeInMillis() - startTime
-							.getTimeInMillis()) - myRec.get(myRec.size() - 1).getCurrTime());
+							.getTimeInMillis()) - myRec.get(myRec.size() - 1)
+							.getCurrTime());
 					Log.i("recstart",
 							"time diff from last: "
 									+ st
 									+ " diff? : "
-									+ key.equals(myRec.get(myRec.size() - 1).getNoteToPlay()));
+									+ key.equals(myRec.get(myRec.size() - 1)
+											.getNoteToPlay()));
 					if (!key.equals(myRec.get(myRec.size() - 1).getNoteToPlay())
 							|| (st > 100)) {
 						Log.i("recstart",
 								"going to start recording for note: "
 										+ key
 										+ " lastnote: "
-										+ myRec.get(myRec.size() - 1).getNoteToPlay()
-										+ " with st: " + st);
+										+ myRec.get(myRec.size() - 1)
+												.getNoteToPlay() + " with st: "
+										+ st);
 						myRec.add(new RecNotes((Calendar.getInstance()
 								.getTimeInMillis() - startTime
 								.getTimeInMillis()), key, lastShaded));
@@ -1596,6 +1612,9 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 			myRec = new ArrayList<RecNotes>(); /* clear the old one */
 			startTime = Calendar.getInstance();
 		}
+	}
+	public Calendar getStartTime() {
+		return startTime;
 	}
 
 	private int getMyNote(float x, float y) {
@@ -1742,154 +1761,11 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
-	public static String[] beatArrss = { "beat1", "beat2", "beat3", "clap", "snare" };
+	public static String[] beatArrss = { "beat1", "beat2", "beat3", "clap",
+			"snare" };
 
 	public void playBeat(int i) {
 		soundPool.playNote(beatArrss[i], 1);
 	}
 
-	/*
-	 * Shade the given note with the given brush. We only draw notes from
-	 * notenumber 24 to 96. (Middle-C is 60).
-	 */
-	// private void ShadeLineNote(Canvas canvas, int notenumber, int color,
-	// float x, float y) {
-	// Log.e("Shade", " first here");
-	// int octave = notenumber / 12;
-	// int notescale = notenumber % 12;
-	//
-	// octave -= 2;
-	// if (octave < 0 || octave >= MaxOctave) {
-	// Log.e("Shade", " octave " + octave + " MaxOctave " + MaxOctave);
-	// return;
-	// }
-	// paint.setColor(color);
-	// paint.setStyle(Paint.Style.FILL);
-	// canvas.translate(octave * WhiteKeyWidth * KeysPerOctave, 0);
-	// int x1, x2, x3;
-	//
-	// int bottomHalfHeight = WhiteKeyHeight - (BlackKeyHeight + 3);
-	//
-	// /* notescale goes from 0 to 11, from C to B. */
-	// switch (notescale) {
-	// case 0: /* C */
-	// canvas.drawLine(x, y, x, (y + 100), paint);
-	// x1 = 2;
-	// x2 = blackKeyOffsets[0] - 2;
-	// canvas.drawRect(x1, 0, x1 + x2 - x1, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 1: /* C# */
-	// x1 = blackKeyOffsets[0];
-	// x2 = blackKeyOffsets[1];
-	// canvas.drawRect(x1, 0, x1 + x2 - x1, 0 + BlackKeyHeight, paint);
-	// if (color == gray1) {
-	// paint.setColor(gray2);
-	// canvas.drawRect(x1 + 1, BlackKeyHeight - BlackKeyHeight / 8, x1
-	// + 1 + BlackKeyWidth - 2, BlackKeyHeight
-	// - BlackKeyHeight / 8 + BlackKeyHeight / 8, paint);
-	// }
-	// break;
-	// case 2: /* D */
-	// x1 = WhiteKeyWidth + 2;
-	// x2 = blackKeyOffsets[1] + 3;
-	// x3 = blackKeyOffsets[2] - 2;
-	// canvas.drawRect(x2, 0, x2 + x3 - x2, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 3: /* D# */
-	// x1 = blackKeyOffsets[2];
-	// x2 = blackKeyOffsets[3];
-	// canvas.drawRect(x1, 0, x1 + BlackKeyWidth, 0 + BlackKeyHeight,
-	// paint);
-	// if (color == gray1) {
-	// paint.setColor(gray2);
-	// canvas.drawRect(x1 + 1, BlackKeyHeight - BlackKeyHeight / 8, x1
-	// + 1 + BlackKeyWidth - 2, BlackKeyHeight
-	// - BlackKeyHeight / 8 + BlackKeyHeight / 8, paint);
-	// }
-	// break;
-	// case 4: /* E */
-	// x1 = WhiteKeyWidth * 2 + 2;
-	// x2 = blackKeyOffsets[3] + 3;
-	// x3 = WhiteKeyWidth * 3 - 1;
-	// canvas.drawRect(x2, 0, x2 + x3 - x2, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 5: /* F */
-	// x1 = WhiteKeyWidth * 3 + 2;
-	// x2 = blackKeyOffsets[4] - 2;
-	// x3 = WhiteKeyWidth * 4 - 2;
-	// canvas.drawRect(x1, 0, x1 + x2 - x1, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 6: /* F# */
-	// x1 = blackKeyOffsets[4];
-	// x2 = blackKeyOffsets[5];
-	// canvas.drawRect(x1, 0, x1 + BlackKeyWidth, 0 + BlackKeyHeight,
-	// paint);
-	// if (color == gray1) {
-	// paint.setColor(gray2);
-	// canvas.drawRect(x1 + 1, BlackKeyHeight - BlackKeyHeight / 8, x1
-	// + 1 + BlackKeyWidth - 2, BlackKeyHeight
-	// - BlackKeyHeight / 8 + BlackKeyHeight / 8, paint);
-	// }
-	// break;
-	// case 7: /* G */
-	// x1 = WhiteKeyWidth * 4 + 2;
-	// x2 = blackKeyOffsets[5] + 3;
-	// x3 = blackKeyOffsets[6] - 2;
-	// canvas.drawRect(x2, 0, x2 + x3 - x2, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 8: /* G# */
-	// x1 = blackKeyOffsets[6];
-	// x2 = blackKeyOffsets[7];
-	// canvas.drawRect(x1, 0, x1 + BlackKeyWidth, 0 + BlackKeyHeight,
-	// paint);
-	// if (color == gray1) {
-	// paint.setColor(gray2);
-	// canvas.drawRect(x1 + 1, BlackKeyHeight - BlackKeyHeight / 8, x1
-	// + 1 + BlackKeyWidth - 2, BlackKeyHeight
-	// - BlackKeyHeight / 8 + BlackKeyHeight / 8, paint);
-	// }
-	// break;
-	// case 9: /* A */
-	// x1 = WhiteKeyWidth * 5 + 2;
-	// x2 = blackKeyOffsets[7] + 3;
-	// x3 = blackKeyOffsets[8] - 2;
-	// canvas.drawRect(x2, 0, x2 + x3 - x2, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// case 10: /* A# */
-	// x1 = blackKeyOffsets[8];
-	// x2 = blackKeyOffsets[9];
-	// canvas.drawRect(x1, 0, x1 + BlackKeyWidth, 0 + BlackKeyHeight,
-	// paint);
-	// if (color == gray1) {
-	// paint.setColor(gray2);
-	// canvas.drawRect(x1 + 1, BlackKeyHeight - BlackKeyHeight / 8, x1
-	// + 1 + BlackKeyWidth - 2, BlackKeyHeight
-	// - BlackKeyHeight / 8 + BlackKeyHeight / 8, paint);
-	// }
-	// break;
-	// case 11: /* B */
-	// x1 = WhiteKeyWidth * 6 + 2;
-	// x2 = blackKeyOffsets[9] + 3;
-	// x3 = WhiteKeyWidth * KeysPerOctave - 1;
-	// canvas.drawRect(x2, 0, x2 + x3 - x2, 0 + BlackKeyHeight + 3, paint);
-	// canvas.drawRect(x1, BlackKeyHeight + 3, x1 + WhiteKeyWidth - 3,
-	// BlackKeyHeight + 3 + bottomHalfHeight, paint);
-	// break;
-	// default:
-	// break;
-	// }
-	// canvas.translate(-(octave * WhiteKeyWidth * KeysPerOctave), 0);
-	// }
 }
