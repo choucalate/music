@@ -71,7 +71,7 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	private LevelActivity mTuts;/* to get the string */
 	private String pos;
-
+	private boolean stop = false;
 	/* for note playing */
 	private SPPlayer sp;
 	private boolean loaded = false;
@@ -374,16 +374,16 @@ public class PlayAroundActivity extends SherlockActivity {
 		/*
 		 * For the button to start that tutorial
 		 */
-		playNote = new Button(this);
-		playNote.setText("Record");
-		playNote.setLayoutParams(layoutParams2);
+//		playNote = new Button(this);
+//		playNote.setText("Record");
+//		playNote.setLayoutParams(layoutParams2);
 
 		/*
 		 * For the button to play the next tutorial
 		 */
-		nextTut = new Button(this);
-		nextTut.setText("Replay");
-		nextTut.setLayoutParams(layoutParams3);
+//		nextTut = new Button(this);
+//		nextTut.setText("Replay");
+//		nextTut.setLayoutParams(layoutParams3);
 
 		/*
 		 * For the button to play the back tutorial
@@ -401,16 +401,16 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		/* spinners- beats has beat sets, save_list is the context menu */
 		beats = new Spinner(this);
-		save_list = new Spinner(this);
+//		save_list = new Spinner(this);
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
 		ArrayList<String> beatset_arr = new ArrayList<String>();
 		beatset_arr.add("Beat 1");
 		beatset_arr.add("Beat 2");
 
-		ArrayList<String> context_arr = new ArrayList<String>();
-		context_arr.add("Save Rec");
-		context_arr.add("List Rec");
+//		ArrayList<String> context_arr = new ArrayList<String>();
+//		context_arr.add("Save Rec");
+//		context_arr.add("List Rec");
 
 		beats.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -422,32 +422,32 @@ public class PlayAroundActivity extends SherlockActivity {
 				beatstate = pos;
 			}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		save_list.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int pos, long id) {
-				// TODO Auto-generated method stub
-				Log.i("spinner", "in save_list with pos: " + pos);
-				switch (pos) {
-				case 0:
-					option_save(rm);
-					break;
-				case 1:
-					option_list(rm);
-					break;
-				default:
-					break;
-				}
-			}
+//			@Override
+//			public void onNothingSelected(AdapterView<?> arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//		});
+//
+//		save_list.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> parent, View view,
+//					int pos, long id) {
+//				// TODO Auto-generated method stub
+//				Log.i("spinner", "in save_list with pos: " + pos);
+//				switch (pos) {
+//				case 0:
+//					option_save(rm);
+//					break;
+//				case 1:
+//					option_list(rm);
+//					break;
+//				default:
+//					break;
+//				}
+//			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -459,23 +459,23 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		ArrayAdapter<String> beatArrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_dropdown_item, beatset_arr);
-		ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_dropdown_item,
-				context_arr);
+//		ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
+//				this, android.R.layout.simple_spinner_dropdown_item,
+//				context_arr);
 
 		beats.setAdapter(beatArrayAdapter);
 		beats.setLayoutParams(layoutParams6);
 
-		save_list.setAdapter(contextArrayAdapter);
-		save_list.setLayoutParams(layoutParams7);
+//		save_list.setAdapter(contextArrayAdapter);
+//		save_list.setLayoutParams(layoutParams7);
 
-		rl.addView(playNote);
-		rl.addView(nextTut);
-		rl.addView(backTut);
-		rl.addView(restartTut);
+//		rl.addView(playNote);
+//		rl.addView(nextTut);
+//		rl.addView(backTut);
+//		rl.addView(restartTut);
 
 		rl.addView(beats);
-		rl.addView(save_list);
+//		rl.addView(save_list);
 
 		layout.addView(rl, layoutParams);
 
@@ -505,20 +505,21 @@ public class PlayAroundActivity extends SherlockActivity {
 		 * array (play, next, previous restart)
 		 */
 
-		OnClickListener myPlay0 = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				/* onClickHandler(0); */
-				piano.startRec();
-			}
-		};
-		OnClickListener myPlay1 = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// onClickHandler(1);
-				piano.playBack(1);
-			}
-		};
+//		OnClickListener myPlay0 = new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				/* onClickHandler(0); */
+//				piano.startRec();
+//			}
+//		};
+//		OnClickListener myPlay1 = new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				// onClickHandler(1);
+//				piano.playBack(1);
+//				Log.i("PlayAround", "OLD PLAY BUTTON PRESSED");
+//			}
+//		};
 		/* using beats 0, 1, 3, 4 */
 		OnClickListener myPlay2 = new OnClickListener() {
 			@Override
@@ -545,8 +546,8 @@ public class PlayAroundActivity extends SherlockActivity {
 			}
 		};
 
-		playNote.setOnClickListener(myPlay0);
-		nextTut.setOnClickListener(myPlay1);
+//		playNote.setOnClickListener(myPlay0);
+//		nextTut.setOnClickListener(myPlay1);
 		backTut.setOnClickListener(myPlay2);
 		restartTut.setOnClickListener(myPlay3);
 
@@ -832,6 +833,7 @@ public class PlayAroundActivity extends SherlockActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
+
 		getSupportActionBar().setBackgroundDrawable(
 				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;
@@ -841,6 +843,7 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+
 
 		switch (item.getItemId()) {
 		case 16908332:
@@ -856,7 +859,13 @@ public class PlayAroundActivity extends SherlockActivity {
 			return true;
 		}
 		case R.id.record_icon: {
+			stop = !stop; //perhaps use to change the icon from record to pause and viceversa?
+			//if(!stop)
 			piano.startRec();
+			if(stop)
+				Toast.makeText(this, "Recording Jam", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(this, "Stop Recording", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		case R.id.beat1: {
@@ -908,7 +917,14 @@ public class PlayAroundActivity extends SherlockActivity {
 			mymenu.getItem(3).setVisible(true);
 			mymenu.getItem(4).setVisible(false);
 			mymenu.getItem(5).setVisible(false);
-
+			
+			Intent goListRec = new Intent(this, SoonToBe.class);
+			Log.i("Intent", "go recordList activity");
+			//Bundle bund;
+			
+			//goListRec.putExtra("DATABASE", new Gson().toJson(rm));
+			startActivity(goListRec);
+			
 			return true;
 		}
 		case R.id.submenu4: {
@@ -1012,123 +1028,7 @@ public class PlayAroundActivity extends SherlockActivity {
 		return true;
 	}
 
-	// ArrayList<RecNotes> is ONE recording
-	// the serialized object ArrayList<ArrayList<RecNotes>> is in Serializable
-	// and Deserialize
-	/*
-	 * private ArrayList<ArrayList<RecNotes>> loadRec( RecManager rm) { try { rn
-	 * = rm.getSerialized(filename); for (int i = 0; i < rn.size(); i++) {
-	 * Log.i("option", "printing rn: " + rn.toString()); } return rn; } catch
-	 * (Exception e) { e.printStackTrace(); return (new
-	 * ArrayList<ArrayList<RecNotes>>()); } }
-	 */
-	// loading tracks in HashMap data structure
 
-	// read
-	// private HashMap<String, ArrayList<RecNotes>> loadRec( RecManager rm){
-	// //String name = ""+rn.size();
-	// //HashMap<String, ArrayList<RecNotes>> db = new HashMap<String,
-	// ArrayList<RecNotes>>();
-	// try {
-	// rn = rm.getSerialized(filename);
-	// Set<String> rnkeys = rn.keySet();
-	// for (String st : rnkeys)
-	// Log.i("option", "printing rn: "+ st + " " +rn.get(rnkeys));
-	// return rn;
-	// }catch (Exception e){
-	// e.printStackTrace();
-	// return new HashMap<String, ArrayList<RecNotes>>();
-	// }
-	// }
-
-	// private void saveRec(ArrayList<ArrayList<RecNotes>> rn, RecManager rm) {
-	//
-	// try {
-	// rn = rm.getSerialized(filename);
-	//
-	// if (rn == null) {
-	// Log.i("option", "rn was null, making new");
-	// rn = new ArrayList<ArrayList<RecNotes>>();
-	// }
-	// rn.add(piano.getMyRec());
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e) {
-	// if (rn == null) {
-	// Log.i("option", "rn was null, making new");
-	// rn = new ArrayList<ArrayList<RecNotes>>();
-	// }
-	// rn.add(piano.getMyRec());
-	// try {
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e1) {
-	// Log.e("option", "failed to even set serialize??");
-	// // TODO Auto-generated catch block
-	// e1.printStackTrace();
-	// }
-	// // TODO Auto-generated catch block
-	// Log.e("option", "failed to get serialized");
-	// e.printStackTrace();
-	// }
-	// }
-	// create
-	// private void saveRec(HashMap<String, ArrayList<RecNotes>> rn, RecManager
-	// rm) {
-	//
-	// try {
-	// rn = rm.getSerialized(filename);
-	// String dfnam = "MyRecording " + (rn.size() + 1);
-	// /*if (rn == null) {
-	// Log.i("option", "rn was null, making new");
-	// rn = new HashMap<String, ArrayList<RecNotes>>();
-	// }*/
-	// rn.put(dfnam, piano.getMyRec());
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e) {
-	// if (rn == null) {
-	// Log.i("option", "rn was null, making new");
-	// rn = new HashMap<String, ArrayList<RecNotes>>();
-	// }
-	// String dfnam = "MyRecording" + (rn.size() + 1);
-	// rn.put(dfnam, piano.getMyRec());
-	// try {
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e1) {
-	// Log.e("option", "failed to even set serialize??");
-	// // TODO Auto-generated catch block
-	// e1.printStackTrace();
-	// }
-	// // TODO Auto-generated catch block
-	// Log.e("option", "failed to get serialized");
-	// e.printStackTrace();
-	// }
-	// }
-
-	// //update
-	// private void renamRec (String newnam, String oldnam){
-	// ArrayList<RecNotes> recording = rn.get(oldnam);
-	// rn.remove(oldnam);
-	// rn.put(newnam, recording);
-	// try {
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e1) {
-	// Log.e("option", "failed to even set serialize??");
-	// // TODO Auto-generated catch block
-	// e1.printStackTrace();
-	// }
-	// }
-	//
-	// //delete
-	// private void delRec (String target){
-	// rn.remove(target);
-	// try {
-	// rm.setSerialized(filename, rn);
-	// } catch (IOException e1) {
-	// Log.e("option", "failed to even set serialize??");
-	// // TODO Auto-generated catch block
-	// e1.printStackTrace();
-	// }
-	// }
-	// asynctask
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

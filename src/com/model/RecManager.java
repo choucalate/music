@@ -80,6 +80,7 @@ public class RecManager {
 		HashMap<String, ArrayList<RecNotes>> simpleClass = null;
 		try {
 			simpleClass = (HashMap<String, ArrayList<RecNotes>>) is.readObject();
+			//can this^^be a problem???
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

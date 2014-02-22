@@ -130,6 +130,8 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	public void setMyRec(ArrayList<RecNotes> myRec) {
 		this.myRec = myRec;
+		
+		Log.i("Piano", "setRecording to playback " + (myRec != null));
 	}
 
 	private Calendar startTime;
@@ -153,8 +155,30 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 		showNoteLetters = MidiOptions.NoteNameNone;
 		SurfaceHolder holder = getHolder();
 		holder.addCallback(this);
+		//soundPool  = new SPPlayer();
 	}
 
+	//constructor to play audio only
+	public Piano(Context context, SPPlayer sp) {
+		super(context);
+
+		WhiteKeyWidth = 0;
+		blackKeyOffsets = null;
+		paint = new Paint();
+		paint.setAntiAlias(false);
+		paint.setTextSize(9.0f);
+		gray1 = Color.rgb(16, 16, 16);
+		gray2 = Color.rgb(90, 90, 90);
+		gray3 = Color.rgb(200, 200, 200);
+		shade1 = Color.rgb(210, 205, 220);
+		shade2 = Color.rgb(150, 200, 220);
+		showNoteLetters = MidiOptions.NoteNameNone;
+		SurfaceHolder holder = getHolder();
+		holder.addCallback(this);
+		soundPool  = sp;
+	}
+	
+	
 	public Piano(Context context, int[] valMargin, SPPlayer sp, boolean type) {
 		super(context);
 		xyPointer.add(0);
@@ -769,7 +793,88 @@ public class Piano extends SurfaceView implements SurfaceHolder.Callback {
 							 * it takes to generate the notes into scheduler
 							 */
 
+/* a method solely for replaying the recorded stuff */
+	
+	public void playBackAudioOnly(int speed) {
+		/* myrec arraylist */
+//		if (!surfaceReady || bufferBitmap == null) {
+//			Log.e("Shade", "fail");
+//			return;
+//		}
+		Log.i("Piano", "about to play audio only");
+		time = new Timer();
+		Calendar mycal = Calendar.getInstance();
+		Calendar copy = Calendar.getInstance();
+
+		String start = "print myRec: [";
+		for (int i = 0; i < myRec.size(); i++) {
+			start += myRec.get(i).getNoteToPlay() + " : " + myRec.get(i).getCurrTime()
+					+ ", ";
+		}
+		start += "]";
+		Log.i("recstart", start);
+
+		for (int i = 0; i < myRec.size(); i++) {
+
+			mycal = copy;
+			if (i == 0) {
+				mycal.add(Calendar.MILLISECOND,
+						(int) (myRec.get(i).getCurrTime() + offset));
+			} else {
+				mycal.add(Calendar.MILLISECOND, (int) (myRec.get(i).getCurrTime()
+						+ offset - myRec.get(i - 1).getCurrTime()));
+			}
+			Log.i("recstart",
+					"going to play it at: "
+							+ (mycal.getTimeInMillis() - copy.getTimeInMillis())
+							+ " with the offset: "
+							+ (int) myRec.get(i).getCurrTime());
+			final int index = i;
+			time.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+//					SurfaceHolder holder = getHolder();
+//					Canvas canvas = holder.lockCanvas();
+//					if (canvas == null) {
+//						Log.e("recstart", "fail2");
+//						return;
+//					}
+//
+//					bufferCanvas.translate(margin + BlackBorder, margin
+//							+ BlackBorder);
+//					
+//					ShadeOneNote(bufferCanvas, myRec.get(index).getNoteshade(), Color.LTGRAY);
+//
+//					bufferCanvas.translate(-(margin + BlackBorder),
+//							-(margin + BlackBorder));
+//					canvas.drawBitmap(bufferBitmap, 0, 0, paint);
+//					DrawNoteLetters(canvas);
+//					holder.unlockCanvasAndPost(canvas);
+//					
+//					Log.i("recstart", "about to play note: "
+//							+ myRec.get(index).getNoteToPlay());
+					soundPool.playNote(myRec.get(index).getNoteToPlay(), 1);
+					
+//					time.schedule(new TimerTask() {
+//
+//						@Override
+//						public void run() {
+//							// TODO Auto-generated method stub
+//							Log.i("recstart", " unshading myrec");
+////							unShade(myRec.get(index).getNoteshade());
+//						}
+//						
+//					}, 100);
+				}
+
+			}, mycal.getTime());
+		}
+	}
+	
 	/* a method solely for replaying the recorded stuff */
+	
 	public void playBack(int speed) {
 		/* myrec arraylist */
 		if (!surfaceReady || bufferBitmap == null) {
