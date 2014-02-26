@@ -11,7 +11,7 @@
      
  <item
         android:id="@+id/loop_icon" 
-        android:orderInCategory="2"
+        android:orderInCategory="15"
         android:showAsAction="always"
         android:visible="true"
         android:icon="@drawable/loop_icon"
@@ -40,12 +40,60 @@
      
         </menu>
     </item>
-  <item
+     <item 
+	    android:id="@+id/menu_sub"
+	    android:menuCategory="container"
+        android:title="@string/savedbeats"
+        android:showAsAction="always|withText"
+        android:orderInCategory="7">
+        <menu>
+         	
+         		<item 
+         	    	android:id="@+id/submenu1"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/beat1"
+         	        android:visible="false"         	    	
+         	    	android:orderInCategory="8"/>
+    
+  	    		<item 
+         	    	android:id="@+id/submenu2"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/beat2"
+         	        android:visible="false"         	    	
+         	   	 	android:orderInCategory="9"/>
+  	    		<item 
+         	    	android:id="@+id/submenu3"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/beat3"
+         	        android:visible="false"        	    	
+        	    	android:orderInCategory="10"/>
+  	    		<item 
+         	    	android:id="@+id/submenu4"
+         	    	android:showAsAction="ifRoom|withText"
+         	    	android:title="@string/beat4"
+         	        android:visible="false"
+         	    	android:orderInCategory="11"/>
+  	    		<item 
+         	    	android:id="@+id/submenu5"
+         	    	android:showAsAction="ifRoom|withText"
+         	        android:visible="true"         	    	
+         	    	android:title="@string/none"
+         	    	android:orderInCategory="12"/>
+  	    	</menu>
+  	    	</item>
+ 
+  	<item
         android:id="@+id/toggle" 
         android:orderInCategory="6"
         android:showAsAction="always|withText"
-        android:title="@string/toggleShots" /> 
-          <item
+        android:title="@string/toggleShots" />
+  	<item
+        android:id="@+id/trash_icon" 
+        android:orderInCategory="7"
+        android:showAsAction="always|withText"
+        android:title="@string/trash_icon" />
+  
+	<item
         android:id="@+id/list_rec"
         android:checkable="false"
         android:orderInCategory="200"

@@ -85,7 +85,10 @@
     <string name="Spare">spare...show4</string>
     <string name="title_activity_soon_to_be">SoonToBe</string>
     <string name="rename">Rename</string>
-    <string name="trash_icon">Trash</string>
+    <string name="trash_icon">Delete</string>
+    <string name="savedbeats">Saved Beats</string>
+    <string name="none">No Saved Beats</string>
+    
     
 
 </resources>

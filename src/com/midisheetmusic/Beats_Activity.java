@@ -1,8 +1,10 @@
 package com.midisheetmusic;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -15,22 +17,23 @@ import com.actionbarsherlock.view.MenuItem;
 public class Beats_Activity extends SherlockActivity {
 	boolean check = true ;
 	Menu mymenu; 
-
+    private SPPlayer sp; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_beats_);
 		setTitle("Beats");
+	    setUpSound(); 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final MediaPlayer sound1; 
-        final MediaPlayer sound2; 
-        final MediaPlayer sound3;
-        final MediaPlayer sound4; 
-        sound1= MediaPlayer.create(this,R.raw.beat1);
-        sound2= MediaPlayer.create(this,R.raw.beat2);
-        sound3= MediaPlayer.create(this,R.raw.snare);
-        sound4= MediaPlayer.create(this,R.raw.clap1);
+     //   final MediaPlayer sound1; 
+      //  final MediaPlayer sound2; 
+       // final MediaPlayer sound3;
+       // final MediaPlayer sound4; 
+       // sound1= MediaPlayer.create(this,R.raw.beat1);
+       // sound2= MediaPlayer.create(this,R.raw.beat2);
+       // sound3= MediaPlayer.create(this,R.raw.snare);
+       // sound4= MediaPlayer.create(this,R.raw.clap1);
 
         /**
          * Creating all buttons instances
@@ -52,11 +55,7 @@ public class Beats_Activity extends SherlockActivity {
          
         // Dashboard Photos button
         Button beat6 = (Button) findViewById(R.id.button6);
-        // Dashboard Photos button
-        Button beat7 = (Button) findViewById(R.id.button7);
-         
-        // Dashboard Photos button
-        Button beat8 = (Button) findViewById(R.id.button8);
+
          
          
         // Listening to News Feed button click
@@ -64,11 +63,13 @@ public class Beats_Activity extends SherlockActivity {
              
             @Override
             public void onClick(View view) {
+            	System.out.println("INSIDE button1 ");
+
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound3.start();
+            		playBeat(6);
             	}
             	else {
-            		sound1.start();
+            		playBeat(0);
             	}
             }
         });
@@ -78,12 +79,15 @@ public class Beats_Activity extends SherlockActivity {
              
             @Override
             public void onClick(View view) {
+            	System.out.println("INSIDE button2 ");
+
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound4.start();
+            		playBeat(7);
             		
             	}
             	else 
-            		sound2.start();
+            		//sound2.start();
+            		playBeat(1);
             
             }
         });
@@ -93,11 +97,12 @@ public class Beats_Activity extends SherlockActivity {
              
             @Override
             public void onClick(View view) {
+            	System.out.println("INSIDE button3 ");
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound3.start();
+            		playBeat(8);
             	}
             	else 
-            		sound1.start();
+        		playBeat(2);
 
             }
         });
@@ -108,10 +113,10 @@ public class Beats_Activity extends SherlockActivity {
             @Override
             public void onClick(View view) {
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound4.start();
+            		playBeat(9);
             	}
             	else 
-            		sound2.start();
+            		playBeat(3);
            
             }
         });
@@ -122,10 +127,10 @@ public class Beats_Activity extends SherlockActivity {
             @Override
             public void onClick(View view) {
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound3.start();
+            		playBeat(10);
             	}
             	else 
-            		sound1.start();
+            		playBeat(4);
             }	
         });
          
@@ -135,40 +140,14 @@ public class Beats_Activity extends SherlockActivity {
             @Override
             public void onClick(View view) {
             	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound4.start();
+            		playBeat(11);
             	}
             	else 
-            		sound2.start();
+            		playBeat(5);
             }
         });
         
-        // Listening to Photos button click
-        beat7.setOnClickListener(new View.OnClickListener() {
-             
-            @Override
-            public void onClick(View view) {
-            	if(mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound3.start();
-            	}
-            	else 
-            		sound1.start();
-         
-            }
-        });
-        
-        // Listening to Photos button click
-        beat8.setOnClickListener(new View.OnClickListener() {
-             
-            @Override
-            public void onClick(View view) {
-            	if( mymenu.getItem(1).getTitle().equals("One Shots")){
-            		sound4.start();
-            	}
-            	else 
-            		sound2.start();
-         
-            }
-        });
+    
 	}
     
 
@@ -209,6 +188,8 @@ public class Beats_Activity extends SherlockActivity {
         		//change to beats 
         		item.setTitle(R.string.toggleBeats);
         		setTitle("One Shots");
+        		//item.getItemId(R.id.loop_icon).setVisible(false);
+        		//((Menu) item).getItem(1).setVisible(false);
         	    check = false; 
 
         	}
@@ -224,4 +205,20 @@ public class Beats_Activity extends SherlockActivity {
     
 		else return false;
 	}
+	
+	private void setUpSound() {
+		// Log.e("SP", "FAILED ON ONCREATE");
+		AssetManager am = getAssets();
+		// activity only stuff
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		this.sp = new SPPlayer(am, audioManager);
+	}
+	public static String[] beatArrss = { "beat1", "beat2", "beat3", "beat4", "beat5", "beat6",
+		"clap","snare", "oneshot3", "oneshot4", "oneshot5", "oneshot6" };
+
+	public void playBeat(int i) {
+		sp.playNote(beatArrss[i], 1);
+}
 }
