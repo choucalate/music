@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/buttonEflat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonC"
+        android:text="Eflat" />
+
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonF"
+        android:layout_marginTop="32dp"
+        android:text="C" />
+
+    <Button
+        android:id="@+id/buttonF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/buttonGflat"
+        android:text="F" />
+
+    <Button
+        android:id="@+id/buttonD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/buttonAflat"
+        android:text="D" />
+
+    <Button
+        android:id="@+id/buttonG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonGflat"
+        android:layout_toRightOf="@+id/buttonD"
+        android:text="G" />
+
+    <Button
+        android:id="@+id/buttonE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonC"
+        android:layout_toRightOf="@+id/buttonF"
+        android:text="E" />
+
+    <Button
+        android:id="@+id/buttonDflat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="69dp"
+        android:layout_toLeftOf="@+id/buttonG"
+        android:text="Dflat" />
+
+    <Button
+        android:id="@+id/buttonAflat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonGflat"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@+id/buttonE"
+        android:text="Aflat" />
+
+    <Button
+        android:id="@+id/buttonGflat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonDflat"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="62dp"
+        android:text="GFlat" />
+
+    <Button
+        android:id="@+id/buttonA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonDflat"
+        android:layout_alignBottom="@+id/buttonDflat"
+        android:layout_alignParentLeft="true"
+        android:text="A" />
+
+    <Button
+        android:id="@+id/buttonBflat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Bflat" />
+
+    <Button
+        android:id="@+id/buttonB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonE"
+        android:layout_alignTop="@+id/buttonGflat"
+        android:layout_marginTop="22dp"
+        android:text="B" />
+
+    <TextView
+        android:id="@+id/textView234"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonC"
+        android:layout_alignBottom="@+id/buttonC"
+        android:layout_toLeftOf="@+id/buttonDflat"
+        android:text="TextView" />
+
+</RelativeLayout>

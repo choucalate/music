@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:title="@string/menu_settings"/>
+    <item
+        android:id="@+id/play_icon"
+        android:icon="@drawable/play_icon"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/play_icon"/>
+    <item
+        android:id="@+id/next_icon"
+        android:icon="@drawable/next_icon"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/next_icon"/>
+    <item
+        android:id="@+id/previous_icon"
+        android:icon="@drawable/previous_icon"
+        android:orderInCategory="3"
+        android:showAsAction="always"
+        android:title="@string/previous_icon"/>
+    <item
+        android:id="@+id/replay_icon"
+        android:icon="@drawable/replay_icon"
+        android:orderInCategory="4"
+        android:showAsAction="always"
+        android:title="@string/replay_icon"/>
+
+</menu><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/menu/activity_tutorial_ms.xml -->

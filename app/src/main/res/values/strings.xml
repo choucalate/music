@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Welcome_Text">Welcome to Music Learner</string>
+    <string name="app_name">TnC Music Studio</string>
+    <string name="choose_song">Choose Song</string>
+    <string name="Compose_Choice">Compose</string>
+    <string name="Tutorials">Tutorials</string>
+    <string name="song_settings_str">Song Settings</string>
+    <string name="save_images_str">Save As Images</string>
+    <string name="save_images_descr_str">Save the sheet music as images, in the directory /Pictures/MidiSheetMusic, with the following filename</string>
+    <string name="help_str">Help</string>
+    <string name="sheet_prefs_title">Sheet Music Preferences</string>
+    <string name="restore_defaults">Restore Default Settings</string>
+    <string name="select_tracks_to_display">Select Tracks to Display</string>
+    <string name="select_tracks_to_mute">Select Tracks to Mute</string>
+    <string name="select_instruments_per_track">Select Instruments For Each Track</string>
+    <string name="set_all_to_piano">Set All Instruments to Piano</string>
+    <string name="scroll_vertically">Scroll Vertically</string>
+    <string name="show_piano">Show the Piano</string>
+    <string name="show_lyrics">Show Lyrics</string>
+    <string name="show_note_letters">Show Note Letters</string>
+    <string name="combine_to_two_staffs">Combine To Two Staffs</string>
+    <string name="combine_to_two_staffs_summary">Combine all the tracks into two staffs (left hand and right hand staffs). </string>
+    <string name="split_to_two_staffs">Split Track Into Two Staffs</string>
+    <string name="split_to_two_staffs_summary">Split the single track into two staffs (left hand and right hand staffs).</string>
+    <string name="transpose">Transpose Notes</string>
+    <string name="key_signature">Key Signature</string>
+    <string name="time_signature">Time Signature</string>
+    <string name="combine_interval">Combine Interval</string>
+    <string name="combine_interval_summary">Notes within the given interval (in milliseconds) are combined into a single chord</string>
+    <string name="right_hand_color">Right Hand Color</string>
+    <string name="left_hand_color">Left Hand Color</string>
+    <string name="show_measures">Show Measure Numbers</string>
+    <string name="play_measures_in_loop_title">Settings for Play Measures in a Loop</string>
+    <string name="play_measures_in_loop">Play Measures in a Loop</string>
+    <string name="play_measures_in_loop_start">Start Measure</string>
+    <string name="play_measures_in_loop_end">End Measure</string>
+    <string name="scan_button_title">Scan SD Card for MIDI files</string>
+    <string name="scan_files_str">Scan for MIDI Files</string>
+    <string name="browse_files_str">Browse for MIDI Files</string>
+    <string name="choose_level">Choose a Level!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_test">testActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_tutorial_ms">TutorialMSActivity</string>
+    <string name="title_activity_Mic_Test">Microphone Activity</string>
+    
+    <string name="playaround">Playing Around</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_test_anim">TestAnim</string>
+    <string name="title_activity_hit">HitActivity</string>
+    <string name="home_icon">Home</string>
+    <string name="submenu_item1">Option A</string>
+    <string name="submenu_item2">Option B</string>
+    <string name="submenu_item3">Option C</string>
+    <string name="previous_icon">Previous</string>
+    <string name="next_icon">Next</string>
+    <string name="replay_icon">Replay</string>
+    <string name="play_icon">Play</string>
+    <string name="title_activity_beats_">Beats_Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="piano_icon">Piano</string>
+    <string name="loop_icon">Loop Duration</string>
+    <string name="toggle">Beats/One Shots</string>
+    <string name="toggleBeats">Beats</string>
+    <string name="toggleShots">One Shots</string>
+    <string name="Beats_Page">Beats Page</string>
+    <string name="Loop1">Two Bars </string>
+    <string name="Loop2">Four Bars</string>
+    <string name="Loop3">Eight Bars</string>
+    <string name="Loop4">Ill change later</string>
+    <string name="tutorial_icon">Tutorials</string>
+    <string name="beats_icon">Beats/Shots</string>
+    <string name="recnote_icon">Recorded Beats</string>
+    <string name="pianointro_icon">Piano Free Style</string>
+    <string name="beat1">Beat1</string>
+    <string name="beat2">Beat2</string>
+    <string name="beat3">Beat3</string>
+    <string name="beat4">Beat4</string>
+    <string name="record_icon">Record</string>
+    <string name="menu">Menu</string>
+    <string name = "mode_save">Mode: Save</string>
+        <string name = "mode_play">Mode: Play</string>
+    
+    <string name="beats">Go to Beats</string>
+    <string name="save">Save Recording</string>
+    <string name="list">List Recordings</string>
+    <string name="settings">Settings...show3</string>
+    <string name="replay">Replay Recordings</string>
+    <string name="title_activity_soon_to_be">SoonToBe</string>
+    <string name="title_activity_soon_to_beat">SoonToBeat</string>
+    <string name="rename">Rename</string>
+    
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="trash_icon">Delete</string>
+    <string name="savedbeats">Saved Beats</string>
+    <string name="none">No Saved Beats</string>
+    <string name="mic_icon">Record</string>
+    <string name="save_icon">Save</string>
+    
+    
+
+</resources>

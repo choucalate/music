@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/piano_icon"
+        android:icon="@drawable/piano_icon"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/piano_icon"/>
+    <item
+        android:id="@+id/loop_icon"
+        android:icon="@drawable/loop_icon"
+        android:menuCategory="container"
+        android:orderInCategory="15"
+        android:showAsAction="always"
+        android:title="@string/loop_icon"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/menu_sub"
+        android:orderInCategory="7"
+        android:showAsAction="always|withText"
+        android:title="@string/mode_save">
+    </item>
+    <item
+        android:id="@+id/toggle"
+        android:orderInCategory="6"
+        android:showAsAction="always|withText"
+        android:title="@string/toggleShots"/>
+    <item
+        android:id="@+id/list_rec"
+        android:checkable="false"
+        android:orderInCategory="200"
+        android:title="List Files"/>
+    <item
+        android:id="@+id/save_rec"
+        android:checkable="false"
+        android:orderInCategory="300"
+        android:title="Save Recording"/>
+
+</menu><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/menu/beats_.xml -->

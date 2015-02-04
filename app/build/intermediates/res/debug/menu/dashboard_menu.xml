@@ -1,0 +1,43 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+       <item
+        android:id="@+id/recnote_icon" 
+        android:orderInCategory="4"
+        android:showAsAction="always"
+        android:icon="@drawable/recnote_icon"
+        android:title="@string/recnote_icon"/>
+        <item
+        android:id="@+id/pianointro_icon" 
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:icon="@drawable/pianointro_icon"
+        android:title="@string/pianointro_icon"/>
+        
+        <item
+        android:id="@+id/tutorial_icon" 
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:icon="@drawable/tutorial_icon"
+        android:title="@string/tutorial_icon"/>
+        <item
+        android:id="@+id/beats_icon" 
+        android:orderInCategory="3"
+        android:showAsAction="always"
+        android:icon="@drawable/beats_icon"
+        android:title="@string/beats_icon"/>
+        <item
+        android:id="@+id/mic_icon"
+        android:orderInCategory="5"
+        android:showAsAction="always"
+        android:icon="@drawable/mic_icon"
+        android:title="@string/mic_icon"/>
+        
+        
+        
+
+        
+       
+    	          	        
+        
+    </menu>
+<!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/menu/dashboard_menu.xml -->
