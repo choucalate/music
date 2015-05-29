@@ -7,10 +7,16 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.Context;
+//import android.view.MenuInflater;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+import com.testmusic.ListArrayAdapter;
 import com.tncmusicstudio.R;
 import com.model.RecManager;
 import com.model.RecNotes;
@@ -30,7 +36,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SoonToBe extends SherlockListActivity {
+public class SoonToBe extends SherlockListFragment{//Activity {
 
 	private RecManager rm;
 	private String filename = "Rec1.txt";
@@ -41,7 +47,7 @@ public class SoonToBe extends SherlockListActivity {
 	private String elem;
 	private boolean renam = false;
 	private static SPPlayer sp;
-	private MySimpleArrayAdapter listadapter;
+	private ListArrayAdapter listadapter;
 	static ArrayList<RecNotes> myRec;
 	static int offset = 0;
 	//private static SPPlayer soundPool;
@@ -49,19 +55,19 @@ public class SoonToBe extends SherlockListActivity {
 	//private String origin = "_PIANO";
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_soon_to_be);
 
-		setTitle("My Jams");
+		//setTitle("My Jams");
 		Log.i("recordList", "inside recordList activity");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		rm = new RecManager(this);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		rm = new RecManager(getActivity().getApplicationContext());
 		setUpSound();
 		//piano = new Piano(this, sp);
 		getDataBase();
 		Log.i("recordList", "recKeys size: " + recKeys.length);
-		listadapter = new MySimpleArrayAdapter(this, recKeys, true);
+		listadapter = new ListArrayAdapter(getActivity().getApplicationContext(), recKeys, true);
 
 		setListAdapter(listadapter);
 		Log.i("recordList", "fill out ListView with Keys");
@@ -89,16 +95,16 @@ public class SoonToBe extends SherlockListActivity {
 
 	private void setUpSound() {
 		// Log.e("SP", "FAILED ON ONCREATE");
-		AssetManager am = getAssets();
+		AssetManager am = getActivity().getAssets();
 		// activity only stuff
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 		sp = new SPPlayer(am, audioManager);
 	}
 
 	@Override
-	protected void onListItemClick(ListView parent, View view, int position,
+	public void onListItemClick(ListView parent, View view, int position,
 			long id) {
 		super.onListItemClick(parent, view, position, id);
 		elem = recKeys[position];
@@ -106,25 +112,27 @@ public class SoonToBe extends SherlockListActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.soon_to_be, menu);
-		getSupportActionBar().setBackgroundDrawable(
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.soon_to_be, menu);
+		//getActivity().getActionBar().show();
+		getActivity().getActionBar().setBackgroundDrawable(
 				new ColorDrawable(Color.rgb(223, 160, 23)));
-		return true;
+		//return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 
-		case 16908332:
-
-		{
-			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
-			startActivity(i);
-			return true;
-		}
+//		case 16908332:
+//
+//		{
+//			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
+//			startActivity(i);
+//			return true;
+//		}
 
 		case R.id.play_icon: {
 			// do stuf
@@ -141,12 +149,12 @@ public class SoonToBe extends SherlockListActivity {
 			if (elem == null)
 				return true;
 			Log.i("recordList", "rename");
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getApplicationContext());
 			alert.setTitle("Rename your Jam");
 			alert.setMessage(elem);
 
 			// Set an EditText view to get user input
-			final EditText input = new EditText(this);
+			final EditText input = new EditText(getActivity().getApplicationContext());
 			alert.setView(input);
 
 			alert.setPositiveButton("Ok",
@@ -159,7 +167,7 @@ public class SoonToBe extends SherlockListActivity {
 							renam = true;
 							if (renam) {
 
-								Toast.makeText(getApplicationContext(),
+								Toast.makeText(getActivity().getApplicationContext(),
 										"Jam Renamed!", Toast.LENGTH_SHORT)
 										.show();
 								getDataBase();
@@ -187,7 +195,7 @@ public class SoonToBe extends SherlockListActivity {
 			if (elem == null)
 				return true;
 			rm.delRec(elem);
-			Toast.makeText(this, "Jam Deleted!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity().getApplicationContext(), "Jam Deleted!", Toast.LENGTH_SHORT).show();
 			getDataBase();
 			listadapter.changeArray(recKeys);
 
@@ -195,11 +203,11 @@ public class SoonToBe extends SherlockListActivity {
 
 			return true;
 		}
-		case R.id.piano_icon: {
-			Intent i = new Intent(this, PlayAroundActivity.class);
-			startActivity(i);
-			return true;
-		}
+//		case R.id.piano_icon: {
+//			Intent i = new Intent(this, PlayAroundActivity.class);
+//			startActivity(i);
+//			return true;
+//		}
 
 		default: {
 			// insert something

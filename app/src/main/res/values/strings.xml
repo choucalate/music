@@ -98,7 +98,8 @@
     <string name="none">No Saved Beats</string>
     <string name="mic_icon">Record</string>
     <string name="save_icon">Save</string>
-    
-    
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 </resources>

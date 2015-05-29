@@ -1,6 +1,15 @@
 package com.tncmusicstudio;
 
+import android.content.res.Configuration;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 
 import android.view.MenuInflater;
@@ -21,12 +30,24 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import com.testmusic.ListArrayAdapter;
+import com.testmusic.MySimpleArrayAdapter;
 
 
-public class AndroidDashboardDesignActivity extends SherlockActivity {
+public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 	AsyncTask<Void, ?, ?> wait;
 
-	
+	DrawerLayout mDrawerLayout;
+	ListView mDrawerList;
+	ActionBarDrawerToggle mDrawerToggle;
+	ListArrayAdapter mMenuAdapter;
+	String[] title, subtitle;
+	int[] icon;
+	Fragment fragment1 = new HomeFragment();
+	Fragment fragment4 = new SoonToBe();
+	//Fragment fragment3 = new Fragment3();
+	private CharSequence mDrawerTitle;
+	private CharSequence mTitle;
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,25 +57,57 @@ public class AndroidDashboardDesignActivity extends SherlockActivity {
 	    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 
-		setContentView(R.layout.dashboard_layout);
+		setContentView(R.layout.drawer_main);
 
 		setTitle("Town and Country");
-		
-		
+
+		title = new String[] {"Home","Tutorial", "Piano", "Beatbox","My Beats","Mic"};
+		icon = new int[]{R.drawable.home32, R.drawable.tutorial_icon, R.drawable.piano_icon,
+		       R.drawable.beats_icon, R.drawable.recnote_icon, R.drawable.mic_icon};
+		mDrawerLayout =(DrawerLayout)findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) findViewById(R.id.listview_drawer);
+		mMenuAdapter = new ListArrayAdapter(AndroidDashboardDesignActivity.this, title, icon);
+		mDrawerList.setAdapter(mMenuAdapter);
+		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
+			public void onDrawerClosed(View view){
+				super.onDrawerClosed(view);
+			}
+			public void onDrawerOpened(View view){
+				getSupportActionBar().setTitle(mDrawerTitle);
+				super.onDrawerOpened(view);
+			}
+		};
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		if(savedInstanceState == null)
+			selectItem(0);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// the .png file makes it appear with the yellow underline, but if we want it completely 
+		// the .png file makes it appear with the yellow underline, but if we want it completely
 	    // removed, setBackgroundDrawable(null)
-		
+
 		// Inflate the menu; this adds items to the action bar if it is present.
-        getSupportMenuInflater().inflate(R.menu.dashboard_menu, menu);
+       // getSupportMenuInflater().inflate(R.menu.dashboard_menu, menu);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.transp_y));
+
         return true;
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
-		if(R.id.tutorial_icon==item.getItemId()){
+		if (item.getItemId() == android.R.id.home) {
+
+			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+				mDrawerLayout.closeDrawer(mDrawerList);
+			} else {
+				mDrawerLayout.openDrawer(mDrawerList);
+			}
+		}
+
+		return super.onOptionsItemSelected(item);
+		/*if(R.id.tutorial_icon==item.getItemId()){
 			
 			Intent i= new Intent(this,LevelActivity.class );
 			startActivity(i);
@@ -79,9 +132,71 @@ public class AndroidDashboardDesignActivity extends SherlockActivity {
 			Intent i = new Intent(this,Mic_Test.class);
 			startActivity(i);
 			return true;
-		}
-		return false;
+		}*/
+		//return false;
 		
+	}
+
+	private class DrawerItemClickListener implements
+			ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+								long id) {
+			selectItem(position);
+		}
+	}
+
+	private void selectItem(int position) {
+
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		// Locate Position
+		switch (position) {
+			case 0:
+				ft.replace(R.id.content_frame, fragment1);
+				break;
+			case 1:
+				//ft.replace(R.id.content_frame, fragment2);
+				break;
+			case 2:
+				//ft.replace(R.id.content_frame, fragment3);
+				break;
+			case 3:
+				//ft.replace(R.id.content_frame, fragment3);
+				break;
+			case 4:
+				ft.replace(R.id.content_frame, fragment4);
+				break;
+			case 5:
+				//ft.replace(R.id.content_frame, fragment3);
+				break;
+		}
+		ft.commit();
+		mDrawerList.setItemChecked(position, true);
+
+		// Get the title followed by the position
+		setTitle(title[position]);
+		// Close drawer
+		mDrawerLayout.closeDrawer(mDrawerList);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Pass any configuration change to the drawer toggles
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		mTitle = title;
+		getSupportActionBar().setTitle(mTitle);
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,

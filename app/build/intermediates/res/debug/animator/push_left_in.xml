@@ -17,4 +17,4 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
   <translate android:fromXDelta="100%p" android:toXDelta="0" android:duration="300"/>
   <alpha android:fromAlpha="0.0" android:toAlpha="1.0" android:duration="300" />
-</set><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/animator/push_left_in.xml -->
+</set><!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/animator/push_left_in.xml -->
