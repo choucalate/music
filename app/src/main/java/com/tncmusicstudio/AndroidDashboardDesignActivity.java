@@ -1,5 +1,6 @@
 package com.tncmusicstudio;
 
+import android.app.ActionBar;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -55,7 +56,7 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 	    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		//requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 
 		setContentView(R.layout.drawer_main);
 
@@ -71,31 +72,48 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.transp_y));
+		//getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
 			public void onDrawerClosed(View view){
 				super.onDrawerClosed(view);
+				getSupportActionBar().setTitle(mTitle);
+				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
 			}
 			public void onDrawerOpened(View view){
-				getSupportActionBar().setTitle(mDrawerTitle);
 				super.onDrawerOpened(view);
+				getSupportActionBar().setTitle(mDrawerTitle);
+				//requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+				invalidateOptionsMenu();
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		if(savedInstanceState == null)
 			selectItem(0);
 	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// the .png file makes it appear with the yellow underline, but if we want it completely
+//	    // removed, setBackgroundDrawable(null)
+//
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//       // getSupportMenuInflater().inflate(R.menu.dashboard_menu, menu);
+//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.transp_y));
+//
+//        return true;
+//	}
+
+	/* Called whenever we call invalidateOptionsMenu() */
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// the .png file makes it appear with the yellow underline, but if we want it completely
-	    // removed, setBackgroundDrawable(null)
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-       // getSupportMenuInflater().inflate(R.menu.dashboard_menu, menu);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.transp_y));
-
-        return true;
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// If the nav drawer is open, hide action items related to the content view
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		//menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
+
 	public boolean onOptionsItemSelected(MenuItem item){
 		if (item.getItemId() == android.R.id.home) {
 
@@ -177,6 +195,7 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		setTitle(title[position]);
 		// Close drawer
 		mDrawerLayout.closeDrawer(mDrawerList);
+		//this.invalidateOptionsMenu();
 	}
 
 	@Override

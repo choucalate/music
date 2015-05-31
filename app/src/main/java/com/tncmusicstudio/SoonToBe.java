@@ -58,7 +58,7 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_soon_to_be);
-
+		setHasOptionsMenu(true);
 		//setTitle("My Jams");
 		Log.i("recordList", "inside recordList activity");
 		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -115,12 +115,23 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu, inflater);
+		//menu.clear();
 		inflater.inflate(R.menu.soon_to_be, menu);
 		//getActivity().getActionBar().show();
-		getActivity().getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.rgb(223, 160, 23)));
+		//getActivity().getActionBar().setBackgroundDrawable(
+				//new ColorDrawable(Color.rgb(223, 160, 23)));
 		//return true;
 	}
+
+
+//	@Override
+//	public void onPrepareOptionsMenu(Menu menu) {
+//		selectMenu(menu);
+//	}
+//
+//	private void selectMenu(Menu menu) {
+//		//getActivity().getMenuInflater().inflate(R.menu.soon_to_be, menu);
+//	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
