@@ -45,8 +45,11 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 	String[] title, subtitle;
 	int[] icon;
 	Fragment fragment1 = new HomeFragment();
-	Fragment fragment4 = new SoonToBe();
-	//Fragment fragment3 = new Fragment3();
+	Fragment fragment2 = new TutorialMSActivity();
+	Fragment fragment3 = new PlayAroundActivity();
+	Fragment fragment4 = new Beats_Activity();
+	Fragment fragment5 = new SoonToBe();
+	Fragment fragment6 = new Mic_Test();
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	@SuppressWarnings("deprecation")
@@ -170,22 +173,22 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		// Locate Position
 		switch (position) {
 			case 0:
-				ft.replace(R.id.content_frame, fragment1);
+				ft.replace(R.id.content_frame, fragment1); // Home
 				break;
 			case 1:
-				//ft.replace(R.id.content_frame, fragment2);
+				ft.replace(R.id.content_frame, fragment2); // Tutorial
 				break;
 			case 2:
-				//ft.replace(R.id.content_frame, fragment3);
+				ft.replace(R.id.content_frame, fragment3); // Piano
 				break;
 			case 3:
-				//ft.replace(R.id.content_frame, fragment3);
+				ft.replace(R.id.content_frame, fragment4); // Beats
 				break;
 			case 4:
-				ft.replace(R.id.content_frame, fragment4);
+				ft.replace(R.id.content_frame, fragment5); // Recordings
 				break;
 			case 5:
-				//ft.replace(R.id.content_frame, fragment3);
+				ft.replace(R.id.content_frame, fragment6); // Mic
 				break;
 		}
 		ft.commit();
