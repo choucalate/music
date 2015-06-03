@@ -7,266 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="723d03bd-f16a-4d71-a559-ee2250f8525d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/home32.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu_white_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/musical_note.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/HomeFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/drawer_main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/listviewtxtimg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/simplelayout.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-590a1eb7a92075d5a1fbf369088825500b98bd57.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-a8a8a37669816f0566a27e1dbb1b957941051282.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-dd8b4a8de63620756f49db2dcd6720e8f64c750f.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-bca9cd8c8082330ef7549e0398af852faae531fd.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/music1.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/AndroidDashboardDesignActivity$waitUp.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/AndroidDashboardDesignActivity$waitUp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/AndroidDashboardDesignActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/AndroidDashboardDesignActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Beats_Activity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Beats_Activity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Beats_Activity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Beats_Activity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/BuildConfig.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/BuildConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorDialog$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorDialog$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorDialog.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorPreference.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorPreference.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorView.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/ColorView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/DashboardLayout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/DashboardLayout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/HelpActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/HelpActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/LevelActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/LevelActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/LevelArrayAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/LevelArrayAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Mic_Test.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/testmusic/MySimpleArrayAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/testmusic/MySimpleArrayAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/NotesExperimentActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/NotesExperimentActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/NotesExperimentActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/NotesExperimentActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$2$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/Piano.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/testmusic/PianoThread.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/testmusic/PianoThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$NBNodes.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$NBNodes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$pianoAsync.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity$pianoAsync.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/PlayAroundActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$bool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/actionbarsherlock/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/actionbarsherlock/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$raw.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$raw.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/model/RecManager.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/model/RecManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SPPlayer$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SPPlayer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SPPlayer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SPPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$3$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$3$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBe.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/SoonToBeat.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/Thumbs.db" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$pianoAsync.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity$pianoAsync.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$pianoAsync.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity$pianoAsync.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/midisheetmusic/TutorialMSActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/TutorialMSActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-12edd377a9601b08d265aadc7e342f347a376089.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-12edd377a9601b08d265aadc7e342f347a376089.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/mural.png" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/mural.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/mural.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/mural.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/tncmusicstudio/recordListActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/title.png" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/title.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/title.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/title.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/AndroidDashboardDesignActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/AndroidDashboardDesignActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/tncmusicstudio/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/tncmusicstudio/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Mic_Test.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Mic_Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/PlayAroundActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/PlayAroundActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/actionbarsherlock/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/actionbarsherlock/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/tncmusicstudio/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/tncmusicstudio/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/SoonToBe.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/SoonToBe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/TutorialMSActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/TutorialMSActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_tab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_tab_bar_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_bar_title_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_menu_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_menu_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_mode_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__action_mode_close_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-large-v4/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-large-v4/abs__action_mode_close_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__activated_background_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__activated_background_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__activity_chooser_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__activity_chooser_view_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__btn_cab_done_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__btn_cab_done_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_clear.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_clear_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__item_background_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__item_background_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_checkbox.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__list_menu_item_radio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_background_transition_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__list_selector_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__popup_menu_item_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_disable_only_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_disable_only_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/color/abs__primary_text_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_horizontal_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_horizontal_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__progress_medium_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable-v11/abs__progress_medium_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_action_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-xlarge-v4/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-xlarge-v4/abs__screen_action_bar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_action_bar_overlay.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-xlarge-v4/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-xlarge-v4/abs__screen_action_bar_overlay.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_simple.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__screen_simple_overlay_action_mode.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__search_dropdown_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__search_dropdown_item_icons_2line.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__search_dropdown_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__search_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/abs__simple_dropdown_hint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__spinner_ab_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__spinner_ab_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__tab_indicator_ab_holo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/abs__textfield_searchview_right_holo_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_beats_.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_beats_.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_mic.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_mic.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_mic.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_mic.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_playaround.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_playaround.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_soon_to_be.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_soon_to_be.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_soon_to_beat.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_soon_to_beat.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_test.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_test.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_tutorial_ms.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/activity_tutorial_ms.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_tutorial_ms.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/activity_tutorial_ms.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/beats_.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/beats_.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_events.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_events.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_friends.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_friends.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_messages.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_messages.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_newsfeed.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_newsfeed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_photos.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_photos.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_places.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/btn_places.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/buttona.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/drawable/buttona.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/choose_song.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/choose_song.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/choose_song_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/choose_song_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/choose_song_menu.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/choose_song_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/color_preference.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/color_preference.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/dashboard_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/dashboard_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/dashboard_menu.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/dashboard_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/fade_in.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/fade_in.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/fade_out.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/fade_out.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/falling.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/falling.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/file_browser.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/file_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/help.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/help.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/hyperspace_in.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/hyperspace_in.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/hyperspace_out.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/hyperspace_out.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/levelactivity_menu.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/levelactivity_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeAssets/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeResources/debug/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/mictest_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/mictest_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/mspiano.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/mspiano.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_left_in.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_left_in.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_left_out.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_left_out.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_up_in.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_up_in.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_up_out.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/animator/push_up_out.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/recordslist_layout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/recordslist_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/rowlayout.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/rowlayout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/save_images_dialog.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/save_images_dialog.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/settings.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/sheet_menu.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/sheet_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sherlock_spinner_dropdown_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-v14/sherlock_spinner_dropdown_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/sherlock_spinner_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout-v14/sherlock_spinner_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/soon_to_be.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/menu/soon_to_be.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_20_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_20_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_20_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_20_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-land/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-land/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-hdpi-1024x600-v4/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-hdpi-1024x600-v4/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-land-hdpi-1024x600-v4/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-land-hdpi-1024x600-v4/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-land-mdpi-1024x600-v4/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-land-mdpi-1024x600-v4/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-mdpi-1024x600-v4/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-large-mdpi-1024x600-v4/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-sw600dp-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-sw600dp-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-sw720dp-land-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-sw720dp-land-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-v11/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-v11/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-v14/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-v14/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w360dp-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w360dp-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w480dp-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w480dp-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w500dp-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w500dp-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w600dp-v13/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-w600dp-v13/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-xlarge-v4/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/values-xlarge-v4/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java" />
     </list>
     <ignored path="music1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -296,16 +37,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AndroidDashboardDesignActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AndroidDashboardDesignActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/AndroidDashboardDesignActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50757575">
+            <state vertical-scroll-proportion="0.0">
               <caret line="169" column="52" selection-start-line="169" selection-start-column="52" selection-end-line="169" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3601#3621#0" expanded="true" />
                 <element signature="e#3623#3644#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListArrayAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6969697">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1612,6 +1363,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/SoonToBe.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/PlayAroundActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/AndroidDashboardDesignActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java" />
       </list>
     </option>
   </component>
@@ -1697,6 +1449,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tncmusicstudio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music1" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testmusic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2060,13 +1834,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/AndroidDashboardDesignActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50757575">
+        <state vertical-scroll-proportion="0.0">
           <caret line="169" column="52" selection-start-line="169" selection-start-column="52" selection-end-line="169" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3601#3621#0" expanded="true" />
             <element signature="e#3623#3644#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/testmusic/ListArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6969697">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
