@@ -715,6 +715,7 @@
     <string name="submenu_item1">Option A</string>
     <string name="submenu_item2">Option B</string>
     <string name="submenu_item3">Option C</string>
+    <string name="sync">Sync</string>
     <string name="time_signature">Time Signature</string>
     <string name="title_activity_Mic_Test">Microphone Activity</string>
     <string name="title_activity_beats_">Beats_Activity</string>

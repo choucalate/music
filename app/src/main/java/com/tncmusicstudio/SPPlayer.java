@@ -1,16 +1,14 @@
 package com.tncmusicstudio;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.util.Log;
-import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SPPlayer {
 	private boolean loaded = false;
@@ -20,7 +18,7 @@ public class SPPlayer {
 	private String lastNote;
 	long justP = 0, newP = 0;
 	// beat1.ogg
-	private String[] oggArr = { "piano_A4_sharp.ogg", "piano_A4.ogg",
+	private static String[] oggArr = { "piano_A4_sharp.ogg", "piano_A4.ogg",
 			"piano_B4.ogg", "piano_C4_sharp.ogg", "piano_D4_sharp.ogg",
 			"piano_D4.ogg", "piano_E4.ogg", "piano_F4_sharp.ogg",
 			"piano_F4.ogg", "piano_G4_sharp.ogg", "piano_G4.ogg",
@@ -45,7 +43,7 @@ public class SPPlayer {
 	public static String keyc3s = "keyc3s", keyd3s = "keyd3s", keyd3 = "keyd3";
 	public static String keye3 = "keye3", keyf3s = "keyf3s", keyf3 = "keyf3";
 	public static String keyg3s = "keyg3s", keyg3 = "keyg3", keyc3 = "keyc3";
-	private String[] keyArr = { keya4s, keya4, keyb4, keyc4s, keyd4s, keyd4,
+	private static String[] keyArr = { keya4s, keya4, keyb4, keyc4s, keyd4s, keyd4,
 			keye4, keyf4s, keyf4, keyg4s, keyg4, keyc4, keya3s, keya3, keyb3,
 			keyc3s, keyd3s, keyd3, keye3, keyf3s, keyf3, keyg3s, keyg3, keyc3 };
 	private String[] beatLoopsArr = { "beat1", "beat2", "beat3", "beat4", "beat5", "beat6",
@@ -105,6 +103,15 @@ public class SPPlayer {
 		}
 		// set up aud manager
 	}
+    public static String keyArrayToOgg(String key) {
+        int index = 0;
+        for(int i = 0; i < keyArr.length; i++) {
+            if(keyArr[i].equals(key)) {
+                index = i;
+            }
+        }
+        return oggArr[index];
+    }
 
 	public boolean isLoaded() {
 		return loaded;

@@ -3,8 +3,8 @@
     version="2"
     xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" >
 
-    <dataSet config="21.0.0-rc1" >
-        <source path="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0-rc1/res" />
+    <dataSet config="20.0.0" >
+        <source path="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/res" />
     </dataSet>
     <dataSet config="4.4.0" >
         <source path="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res" >
@@ -4538,6 +4538,11 @@ false
                 qualifiers=""
                 type="drawable" />
             <file
+                name="noun_2888_cc"
+                path="/Users/choucalate/workspace/music1/app/src/main/res/drawable/noun_2888_cc.png"
+                qualifiers=""
+                type="drawable" />
+            <file
                 name="orange"
                 path="/Users/choucalate/workspace/music1/app/src/main/res/drawable/orange.png"
                 qualifiers=""
@@ -5641,6 +5646,8 @@ Down 12 notes
                 <string name="submenu_item2" >Option B
                 </string>
                 <string name="submenu_item3" >Option C
+                </string>
+                <string name="sync" >Sync
                 </string>
                 <string name="settings" >Settings...show3
                 </string>

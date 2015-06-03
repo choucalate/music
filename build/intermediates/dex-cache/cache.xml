@@ -14,6 +14,12 @@
         revision="20.0.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
+        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-12edd377a9601b08d265aadc7e342f347a376089.jar"
+        jar="/Users/choucalate/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.5/77bf7cacf9cefe19dc105e5425d2eb1bb5285881/android-async-http-1.4.5.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881"/>
+    <item
         dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/classes-a8a8a37669816f0566a27e1dbb1b957941051282.jar"
         jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
         jumboMode="false"
