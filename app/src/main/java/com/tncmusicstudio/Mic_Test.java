@@ -25,18 +25,17 @@ import android.media.audiofx.PresetReverb;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
 import com.model.ButtonMap;
 import com.model.RecManager;
 import com.model.RecNotes;
@@ -47,7 +46,7 @@ import com.model.RecNotes;
  //todo- make 6 timers, and purge hwne each finished, and reinstate
  */
 
-public class Mic_Test extends SherlockActivity {
+public class Mic_Test extends SherlockFragment{
 	boolean mStartRecording = true;
 	boolean mStartPlaying = true;
 
@@ -78,7 +77,7 @@ public class Mic_Test extends SherlockActivity {
 	private HashMap<Integer, ButtonMap> loop2Key;
 	private HashMap<String, ArrayList<RecNotes>> rn;
 	private RecManager rm;
-	final Context mctx = this;
+	final Context mctx = getActivity();
 	private SPPlayer sp;
 	public static String[] beatArrss = { "beat1", "beat2", "beat3", "beat4",
 			"beat5", "beat6", "clap", "snare", "oneshot3", "oneshot4",
@@ -92,6 +91,7 @@ public class Mic_Test extends SherlockActivity {
 	private Timer time;
 	private Timer[] timeArr;
 	private Boolean pauseJam;
+	View rootview;
 
 	public Mic_Test() {
 		mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -108,18 +108,19 @@ public class Mic_Test extends SherlockActivity {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 
-		setTitle("Mic Check one two");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		setContentView(R.layout.activity_mic);
-
-		rm = new RecManager(this);
+//		setTitle("Mic Check one two");
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		rootview = inflater.inflate(R.layout.activity_mic, container, false);
+		setHasOptionsMenu(true);
+		rm = new RecManager(mctx);
 		listJams = new HashMap<Integer, ArrayList<RecNotes>>();
 		// listJams.put(0, jam1);
 		// listJams.put(1, jam2);
@@ -130,12 +131,12 @@ public class Mic_Test extends SherlockActivity {
 		/**
 		 * Creating all buttons instances
 		 * */
-		beat1 = (Button) findViewById(R.id.rec1);
-		beat2 = (Button) findViewById(R.id.rec2);
-		beat3 = (Button) findViewById(R.id.rec3);
-		beat4 = (Button) findViewById(R.id.rec4);
-		beat5 = (Button) findViewById(R.id.rec5);
-		beat6 = (Button) findViewById(R.id.rec6);
+		beat1 = (Button) rootview.findViewById(R.id.rec1);
+		beat2 = (Button) rootview.findViewById(R.id.rec2);
+		beat3 = (Button) rootview.findViewById(R.id.rec3);
+		beat4 = (Button) rootview.findViewById(R.id.rec4);
+		beat5 = (Button) rootview.findViewById(R.id.rec5);
+		beat6 = (Button) rootview.findViewById(R.id.rec6);
 
 		states = new int[6];
 
@@ -160,7 +161,7 @@ public class Mic_Test extends SherlockActivity {
 
 		setUpKeyListeners();
 		setUpSound();
-
+		return rootview;
 	}
 
 	private void setUpKeyListeners() {
@@ -301,24 +302,18 @@ public class Mic_Test extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.activity_mic, menu);
-		getSupportActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.rgb(9, 59, 99)));
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.activity_mic, menu);
+//		getSupportActionBar().setBackgroundDrawable(
+//				new ColorDrawable(Color.rgb(9, 59, 99)));
 		mymenu = menu;
-		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (16908332 == item.getItemId())
-
-		{
-			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
-			startActivity(i);
-			return true;
-		} else if (item.getItemId() == R.id.mic_icon) {
+		if (item.getItemId() == R.id.mic_icon) {
 
 			onRecord(mStartRecording);
 			mStartRecording = !mStartRecording;
@@ -511,7 +506,7 @@ public class Mic_Test extends SherlockActivity {
 
 			b.setBackgroundResource(R.drawable.neonorange);
 
-			Toast.makeText(getApplicationContext(), "start recording!",
+			Toast.makeText(getActivity(), "start recording!",
 					Toast.LENGTH_SHORT).show();
 		} catch (InterruptedException ex) {
 
@@ -531,6 +526,7 @@ public class Mic_Test extends SherlockActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
+		stopAll();
 		if (mRecorder1 != null) {
 			mRecorder1.release();
 			mRecorder1 = null;
@@ -542,13 +538,13 @@ public class Mic_Test extends SherlockActivity {
 		}
 	}
 
-	@Override
-	public void onDestroy() {
-		stopAll();
+	//@Override
+	//public void onDestroy() {
 
-		super.onDestroy();
 
-	}
+	//	super.onDestroy();
+
+	//}
 
 	@Override
 	public void onStop() {
@@ -581,7 +577,7 @@ public class Mic_Test extends SherlockActivity {
 			i++;
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Load Your Recordings");
 
 		builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -625,11 +621,11 @@ public class Mic_Test extends SherlockActivity {
 
 	private void setUpSound() {
 		// Log.e("SP", "FAILED ON ONCREATE");
-		AssetManager am = getAssets();
+		AssetManager am = getActivity().getAssets();
 		// activity only stuff
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 		this.sp = new SPPlayer(am, audioManager);
 	}
 

@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pre-dex-items>
+<items version="2" >
 
     <item
-        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/classes-590a1eb7a92075d5a1fbf369088825500b98bd57.jar"
-        jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="af64527b748983a75de9c0756e9768b56b240a49"/>
-    <item
-        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-bca9cd8c8082330ef7549e0398af852faae531fd.jar"
-        jar="/Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
-    <item
-        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-12edd377a9601b08d265aadc7e342f347a376089.jar"
         jar="/Users/choucalate/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.5/77bf7cacf9cefe19dc105e5425d2eb1bb5285881/android-async-http-1.4.5.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881"/>
+        sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881">
+        <dex dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-12edd377a9601b08d265aadc7e342f347a376089.jar" />
+    </item>
     <item
-        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/classes-a8a8a37669816f0566a27e1dbb1b957941051282.jar"
-        jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+        sha1="af64527b748983a75de9c0756e9768b56b240a49">
+        <dex dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/classes-590a1eb7a92075d5a1fbf369088825500b98bd57.jar" />
+    </item>
     <item
-        dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-dd8b4a8de63620756f49db2dcd6720e8f64c750f.jar"
         jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-dd8b4a8de63620756f49db2dcd6720e8f64c750f.jar" />
+    </item>
+    <item
+        jar="/Users/choucalate/Downloads/adt-bundle-mac-x86_64-20140321/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-5d5a121f65d699fe7570fe55d88447a1b2a5c029.jar" />
+    </item>
+    <item
+        jar="/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
+        <dex dex="/Users/choucalate/workspace/music1/app/build/intermediates/pre-dexed/debug/classes-a8a8a37669816f0566a27e1dbb1b957941051282.jar" />
+    </item>
 
-</pre-dex-items>
+</items>

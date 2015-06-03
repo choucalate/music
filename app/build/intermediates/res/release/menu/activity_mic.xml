@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+  
+    <item
+        android:id="@+id/mic_icon"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:icon="@drawable/mic_icon"
+        android:title="@string/mic_icon"/>
+    <item
+        android:id="@+id/play_icon"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:icon="@drawable/play_icon"
+        android:title="@string/play_icon"/>
+    <item
+        android:id="@+id/save_icon"
+        android:orderInCategory="3"
+        android:icon="@drawable/save_icon"
+        android:showAsAction="always|withText"
+        android:title="@string/save_icon"/>
+ 
+</menu><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/menu/activity_mic.xml -->

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -16,17 +17,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.model.ButtonMap;
 import com.model.RecNotes;
@@ -34,7 +33,7 @@ import com.model.RecManager;
 import com.model.TupleStringInt;
 import com.tncmusicstudio.R;
 
-public class Beats_Activity extends SherlockActivity {
+public class Beats_Activity extends SherlockFragment{
 	boolean check = true;
 	// boolean saving = true;
 
@@ -61,22 +60,24 @@ public class Beats_Activity extends SherlockActivity {
 	private String origin = "_BEATS";
 	private HashMap<Integer, ButtonMap> beats2Key;
 	ButtonMap bm1, bm2, bm3, bm4, bm5, bm6;
-
+	View rootview;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		rm = new RecManager(this);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		rm = new RecManager(getActivity());
 		super.onCreate(savedInstanceState);
-
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		setContentView(R.layout.activity_beats_);
-		setTitle("One Shots");
+		setHasOptionsMenu(true);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		rootview = inflater.inflate(R.layout.activity_beats_, container, false);
+		//setContentView(R.layout.activity_beats_);
+		getActivity().setTitle("One Shots");
 		setUpSound();
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		settings = getSharedPreferences(PREFS, 0);
+		settings = getActivity().getSharedPreferences(PREFS, 0);
 		edit = settings.edit();
 		/* then it's been set up, otherwise set it up */
 		// myset = settings.getString(beat_key, DEFAULT_STRING_ARRAY);
@@ -90,12 +91,12 @@ public class Beats_Activity extends SherlockActivity {
 		/**
 		 * Creating all buttons instances
 		 * */
-		beat1 = (Button) findViewById(R.id.button1);
-		beat2 = (Button) findViewById(R.id.button2);
-		beat3 = (Button) findViewById(R.id.button3);
-		beat4 = (Button) findViewById(R.id.button4);
-		beat5 = (Button) findViewById(R.id.button5);
-		beat6 = (Button) findViewById(R.id.button6);
+		beat1 = (Button) rootview.findViewById(R.id.button1);
+		beat2 = (Button) rootview.findViewById(R.id.button2);
+		beat3 = (Button) rootview.findViewById(R.id.button3);
+		beat4 = (Button) rootview.findViewById(R.id.button4);
+		beat5 = (Button) rootview.findViewById(R.id.button5);
+		beat6 = (Button) rootview.findViewById(R.id.button6);
 
 		/* tag indicates that it's blue */
 		resetTags();
@@ -125,7 +126,7 @@ public class Beats_Activity extends SherlockActivity {
 		setUpButton(bm6);
 
 		setUpKeyListeners();
-
+		return rootview;
 	}
 
 	private void setUpKeyListeners() {
@@ -285,18 +286,19 @@ public class Beats_Activity extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.beats_, menu);
-		getSupportActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.rgb(223, 160, 23)));
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.beats_, menu);
+//		getSupportActionBar().setBackgroundDrawable(
+//				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;
-		return true;
+		//return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (16908332 == item.getItemId())
+		/*if (16908332 == item.getItemId())
 
 		{
 			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
@@ -306,8 +308,9 @@ public class Beats_Activity extends SherlockActivity {
 			Intent i = new Intent(this, PlayAroundActivity.class);
 			startActivity(i);
 			return true;
-		} else if (item.getItemId() == R.id.loop_icon) {
-			Toast.makeText(this, "Recording", Toast.LENGTH_SHORT).show();
+		} else*/
+		if (item.getItemId() == R.id.loop_icon) {
+			Toast.makeText(getActivity(), "Recording", Toast.LENGTH_SHORT).show();
 			startRec();
 			return true;
 		} else if (item.getItemId() == R.id.toggle) {
@@ -316,7 +319,7 @@ public class Beats_Activity extends SherlockActivity {
 			if (check) {
 				check = false;
 				item.setTitle(R.string.toggleBeats);
-				setTitle("Beats");
+				getActivity().setTitle("Beats");
 				// if(!saving)
 				setDefaultColors();
 				// else setBeatColors();
@@ -327,7 +330,7 @@ public class Beats_Activity extends SherlockActivity {
 
 				// else setBeatColors();
 				item.setTitle(R.string.toggleShots);
-				setTitle("One Shots");
+				getActivity().setTitle("One Shots");
 				setDefaultColors();
 
 			}
@@ -338,7 +341,7 @@ public class Beats_Activity extends SherlockActivity {
 			item.setTitle(R.string.mode_play);
 			// item.getItemId(R.id.loop_icon).setVisible(false);
 			// ((Menu) item).getItem(1).setVisible(false);
-			Toast.makeText(this, "Start playing some beats!",
+			Toast.makeText(getActivity(), "Start playing some beats!",
 					Toast.LENGTH_SHORT).show();
 			// saving = false;
 			setDefaultColors();
@@ -358,8 +361,8 @@ public class Beats_Activity extends SherlockActivity {
 			return option_save();
 
 		else if (item.getItemId() == R.id.list_rec) {
-			Intent goListRec = new Intent(this, SoonToBe.class);
-			startActivity(goListRec);
+//			Intent goListRec = new Intent(this, SoonToBe.class);
+//			startActivity(goListRec);
 			return true;
 		} else
 			return false;
@@ -397,11 +400,11 @@ public class Beats_Activity extends SherlockActivity {
 
 	private void setUpSound() {
 		// Log.e("SP", "FAILED ON ONCREATE");
-		AssetManager am = getAssets();
+		AssetManager am = getActivity().getAssets();
 		// activity only stuff
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 		this.sp = new SPPlayer(am, audioManager);
 	}
 
@@ -465,12 +468,12 @@ public class Beats_Activity extends SherlockActivity {
 	// saving
 	private boolean option_save() {
 		if (myRec.size() == 0) {
-			Toast.makeText(this, "no recording found", Toast.LENGTH_SHORT)
+			Toast.makeText(getActivity(), "no recording found", Toast.LENGTH_SHORT)
 					.show();
 			return true;
 		}
 		Log.i("option", "saving rec option");
-		Toast.makeText(this, "saving your recording", Toast.LENGTH_SHORT)
+		Toast.makeText(getActivity(), "saving your recording", Toast.LENGTH_SHORT)
 				.show();
 		rm.saveRec(myRec, origin);
 		return true;

@@ -18,17 +18,16 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
+import android.view.*;
 //import android.view.Menu;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.*;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-import android.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
@@ -48,7 +47,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.tncmusicstudio.R;
 import com.model.NotePlay;
 
-public class TutorialMSActivity extends SherlockActivity {
+public class TutorialMSActivity extends SherlockFragment {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
 			"Level 3: Actual Songs" };
@@ -130,28 +129,33 @@ public class TutorialMSActivity extends SherlockActivity {
 			dflat2, aflat1, aflat2, eflat1, eflat2, bflat1, bflat2, fmajor1,
 			fmajor2, bmajor1, bmajor2, thriftshop1, thriftshop2, thriftshop3,
 			thriftshop4, thriftshop5;
+	View rootview;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		//super.onCreate(savedInstanceState);
 		popUpCount = 0;
 		ivArray = new ImageView[2];
 
-		/********/
-		Bundle bundle = getIntent().getExtras();
+		/********
+		Bundle bundle = getActivity().getIntent().getExtras();
 		tut = bundle.getString(LevelActivity.mSelected);
 		Log.i("tutlevel", "tutlvl" + tut);
-		tut = tut.substring(6, tut.indexOf(":"));
-		Log.i("tutlevel", "new tutlvl" + tut);
-		tutLevel = Integer.parseInt(tut);
-		Log.i("tutlevel", "parsed tutlvl" + tut);
+		if(tut != null) {
+			tut = tut.substring(6, tut.indexOf(":"));
+			Log.i("tutlevel", "new tutlvl" + tut);
+			tutLevel = Integer.parseInt(tut);
+			Log.i("tutlevel", "parsed tutlvl" + tut);
+		}
 		/********/
 
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setTitle("Piano Tutorials");
-
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getActivity().setTitle("Piano Tutorials");
+		setHasOptionsMenu(true);
+		rootview = inflater.inflate(R.layout.simplelayout, container, false);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		try {
 			setPiano = new pianoAsync();
 			setPiano.execute();
@@ -161,15 +165,16 @@ public class TutorialMSActivity extends SherlockActivity {
 		} catch (Exception ex) {
 			Log.e("animation", "fail");
 		}
+		return rootview;
 	}
 
 	private void setUpSound() {
 		// Log.e("SP", "FAILED ON ONCREATE");
-		AssetManager am = getAssets();
+		AssetManager am = getActivity().getAssets();
 		// activity only stuff
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 		sp = new SPPlayer(am, audioManager);
 	}
 
@@ -182,81 +187,81 @@ public class TutorialMSActivity extends SherlockActivity {
 	}
 
 	private void createViewOnlyPiano() {
-		Display display = getWindowManager().getDefaultDisplay();
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
 		// Point size = new Point();
 		int width = display.getWidth();
 		int height = display.getHeight();
 		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-		layout = new LinearLayout(this);
+		layout = (LinearLayout)rootview.findViewById(R.id.linearlayout1);//new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
+//		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
 		/* for the button play */
-		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-
-		/* for the button next */
-		LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-		/* for the button restart */
-		LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-
-		/* for the button back */
-		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-		LinearLayout rl = new LinearLayout(this);
-		rl.setOrientation(LinearLayout.HORIZONTAL);
+//		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT,
+//				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+//
+//		/* for the button next */
+//		LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT,
+//				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+//		/* for the button restart */
+//		LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT,
+//				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+//
+//		/* for the button back */
+//		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
+//				LinearLayout.LayoutParams.MATCH_PARENT,
+//				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+//		LinearLayout rl = new LinearLayout(this);
+//		rl.setOrientation(LinearLayout.HORIZONTAL);
 		// layoutParams3.leftMargin = 100;
 		// layoutParams3.topMargin = 100;
 		// layoutParams3.setMargins(10, 10, 10, 10);
 		/*
 		 * For the button to start that tutorial
 		 */
-		playNote = new Button(this);
-		playNote.setText("Play!");
-		playNote.setLayoutParams(layoutParams2);
+//		playNote = new Button(this);
+//		playNote.setText("Play!");
+//		playNote.setLayoutParams(layoutParams2);
 
 		/*
 		 * For the button to play the next tutorial
 		 */
-		nextTut = new Button(this);
-		nextTut.setText("Next!");
-		nextTut.setLayoutParams(layoutParams3);
+//		nextTut = new Button(this);
+//		nextTut.setText("Next!");
+//		nextTut.setLayoutParams(layoutParams3);
 
 		/*
 		 * For the button to play the back tutorial
 		 */
-		backTut = new Button(this);
-		backTut.setText("Previous");
-		backTut.setLayoutParams(layoutParams4);
+//		backTut = new Button(this);
+//		backTut.setText("Previous");
+//		backTut.setLayoutParams(layoutParams4);
 
 		/*
 		 * For the button to play the restart tutorial
 		 */
-		restartTut = new Button(this);
-		restartTut.setText("Restart!");
-		restartTut.setLayoutParams(layoutParams5);
+//		restartTut = new Button(this);
+//		restartTut.setText("Restart!");
+//		restartTut.setLayoutParams(layoutParams5);
 
 		// rl.addView(playNote);
 		// rl.addView(nextTut);
 		// rl.addView(backTut);
 		// rl.addView(restartTut);
 
-		layout.addView(rl, layoutParams);
+//		layout.addView(rl, layoutParams);
 
-		popupLayout = new LinearLayout(this);
+		popupLayout = new LinearLayout(getActivity());
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 
-		textview = new TextView(this);
+		textview = new TextView(getActivity());
 		textview.setText("Hi this is a sample text for popup window");
-		popUp = new PopupWindow(this);
+		popUp = new PopupWindow(getActivity());
 
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
 		final int[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
@@ -306,10 +311,10 @@ public class TutorialMSActivity extends SherlockActivity {
 			}
 		};
 
-		playNote.setOnClickListener(myPlay0);
-		nextTut.setOnClickListener(myPlay1);
-		backTut.setOnClickListener(myPlay2);
-		restartTut.setOnClickListener(myPlay3);
+//		playNote.setOnClickListener(myPlay0);
+//		nextTut.setOnClickListener(myPlay1);
+//		backTut.setOnClickListener(myPlay2);
+//		restartTut.setOnClickListener(myPlay3);
 
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
@@ -324,13 +329,13 @@ public class TutorialMSActivity extends SherlockActivity {
 		int left = 0;
 		marginVal[2] = right;
 		marginVal[3] = left;
-		layoutParams.setMargins(0, 0, 0, 0);
+		//layoutParams.setMargins(0, 0, 0, 0);
 
-		RelativeLayout rlPiano = new RelativeLayout(this);
+		RelativeLayout rlPiano = new RelativeLayout(getActivity());
 		RelativeLayout.LayoutParams lpPiano = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		piano = new Piano(this, marginVal, sp, true);
+		piano = new Piano(getActivity(), marginVal, sp, true);
 		/*** SET BUTTON WIDTH AND HEIGHT FROM PIANO KEY WIDTH AND HEIGHTS **/
 		// noteOr.setMinimumWidth(piano.getKeyWidths("white")); //change to
 		// public static later
@@ -346,7 +351,7 @@ public class TutorialMSActivity extends SherlockActivity {
 		} else {
 			layout.setBackground(background);
 		}
-		setContentView(layout);
+		//setContentView(layout);
 		// player.SetPiano(piano);
 		layout.requestLayout();
 	}
@@ -1034,7 +1039,7 @@ public class TutorialMSActivity extends SherlockActivity {
 
 	/** Show an error dialog with the given message */
 	private void showDialog(String message) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(message);
 		builder.setTitle("Piano Tutorial");
 		builder.setCancelable(false);
@@ -1055,11 +1060,12 @@ public class TutorialMSActivity extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.activity_tutorial_ms, menu);
-		getSupportActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.rgb(223, 160, 23)));
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.activity_tutorial_ms, menu);
+//		getSupportActionBar().setBackgroundDrawable(
+//				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;
 
 		for (int i = 0; i < mybuts.length; i++) {
@@ -1067,7 +1073,6 @@ public class TutorialMSActivity extends SherlockActivity {
 					+ mymenu.getItem(i).getTitle());
 			mybuts[i] = mymenu.getItem(i);
 		}
-		return true;
 	}
 
 	private void lockOthers(int button) {
@@ -1090,14 +1095,6 @@ public class TutorialMSActivity extends SherlockActivity {
 		if (!unlock)
 			return false;
 		switch (item.getItemId()) {
-
-		case 16908332:
-
-		{
-			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
-			startActivity(i);
-			return true;
-		}
 
 		case R.id.play_icon: {
 			Log.i("asdf", "playnote");
@@ -1169,7 +1166,7 @@ public class TutorialMSActivity extends SherlockActivity {
 	}
 
 	private Context retContext() {
-		return this;
+		return getActivity();
 	}
 
 	public class pianoAsync extends AsyncTask<Void, Void, Boolean> {

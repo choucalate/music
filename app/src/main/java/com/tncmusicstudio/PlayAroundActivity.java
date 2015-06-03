@@ -22,12 +22,8 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.KeyEvent;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -44,14 +40,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
 import com.model.NotePlay;
 import com.model.RecManager;
 import com.model.RecNotes;
 import com.model.TupleStringInt;
 
-public class PlayAroundActivity extends SherlockActivity {
+public class PlayAroundActivity extends SherlockFragment {
 	String[] values = new String[] { "Level 0: Keyboard Note Training! ",
 			"Level 1: Major Scales", "Level 2: Learning Chords",
 			"Level 3: Actual Songs" };
@@ -138,7 +136,7 @@ public class PlayAroundActivity extends SherlockActivity {
 	// HashMap implementation
 	HashMap<String, ArrayList<RecNotes>> rn = null;
 
-	final Context mctx = this;
+	final Context mctx = getActivity();
 	RecManager rm;
 	private int beatstate = 0;
 	SharedPreferences settings;
@@ -146,19 +144,23 @@ public class PlayAroundActivity extends SherlockActivity {
 	String myset;
 	private HashMap<Integer, TupleStringInt> note2Key;
 
+	View rootview;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		rm = new RecManager(getActivity());
+		//super.onCreate(savedInstanceState);
 		popUpCount = 0;
 		ivArray = new ImageView[2];
-		rm = new RecManager(this);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		setTitle("Music Studio");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		setHasOptionsMenu(true);
+		rootview = inflater.inflate(R.layout.simplelayout, container, false);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		getActivity().setTitle("Music Studio");
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		settings = getSharedPreferences(Beats_Activity.PREFS, 0);
+		settings = getActivity().getSharedPreferences(Beats_Activity.PREFS, 0);
 		edit = settings.edit();
 		/* then it's been set up, otherwise set it up */
 		myset = settings.getString(Beats_Activity.beat_key,
@@ -180,29 +182,48 @@ public class PlayAroundActivity extends SherlockActivity {
 		} catch (Exception ex) {
 			Log.e("animation", "fail");
 		}
+
+
+        // now set up the key listeners
+//        rootview.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                Log.e("KEY", "SOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HIT");
+//                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+//                    //do something here
+//                    onKeyDown(keyCode, event);
+//                    return true;
+//                } else if (event.getAction() == KeyEvent.ACTION_UP) {
+//                    onKeyUp(keyCode, event);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+		return rootview;
 	}
 
 	private void setUpAnimation() {
-		anim1 = AnimationUtils.loadAnimation(this, R.animator.falling);
+		anim1 = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
 		anim1.setFillAfter(false);
-		anim2 = AnimationUtils.loadAnimation(this, R.animator.falling);
+		anim2 = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);//R.animator.falling);
 		anim2.setFillAfter(false);
-		anim3 = AnimationUtils.loadAnimation(this, R.animator.falling);
+		anim3 = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);//R.animator.falling);
 		anim3.setFillAfter(false);
-		anim4 = AnimationUtils.loadAnimation(this, R.animator.falling);
+		anim4 = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);//R.animator.falling);
 		anim4.setFillAfter(false);
-		anim5 = AnimationUtils.loadAnimation(this, R.animator.falling);
+		anim5 = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);//R.animator.falling);
 		anim5.setFillAfter(false);
 
 	}
 
 	private void setUpSound() {
 		// Log.e("SP", "FAILED ON ONCREATE");
-		AssetManager am = getAssets();
+		AssetManager am = getActivity().getAssets();
 		// activity only stuff
-		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 		sp = new SPPlayer(am, audioManager);
 	}
 
@@ -227,14 +248,14 @@ public class PlayAroundActivity extends SherlockActivity {
 	}
 
 	private void createViewOnlyPiano() {
-		Display display = getWindowManager().getDefaultDisplay();
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
 		// Point size = new Point();
 		int width = display.getWidth();
 		int height = display.getHeight();
 		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-		layout = new LinearLayout(this);
-		layout.setOrientation(LinearLayout.VERTICAL);
+		layout = (LinearLayout)rootview.findViewById(R.id.linearlayout1);//new LinearLayout(getActivity());
+		//layout.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
 		/* for the button record */
@@ -265,22 +286,22 @@ public class PlayAroundActivity extends SherlockActivity {
 		LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-		LinearLayout rl = new LinearLayout(this);
+		LinearLayout rl = new LinearLayout(getActivity());
 		rl.setOrientation(LinearLayout.HORIZONTAL);
 
-		backTut = new Button(this);
-		backTut.setText("Beat1");
-		backTut.setLayoutParams(layoutParams4);
+//		backTut = new Button(this);
+//		backTut.setText("Beat1");
+//		backTut.setLayoutParams(layoutParams4);
 
 		/*
 		 * For the button to play the restart tutorial
 		 */
-		restartTut = new Button(this);
-		restartTut.setText("Beat2");
-		restartTut.setLayoutParams(layoutParams5);
+//		restartTut = new Button(this);
+//		restartTut.setText("Beat2");
+//		restartTut.setLayoutParams(layoutParams5);
 
 		/* spinners- beats has beat sets, save_list is the context menu */
-		beats = new Spinner(this);
+		beats = new Spinner(getActivity());
 		// save_list = new Spinner(this);
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
@@ -306,7 +327,7 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		});
 
-		ArrayAdapter<String> beatArrayAdapter = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> beatArrayAdapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_spinner_dropdown_item, beatset_arr);
 		// ArrayAdapter<String> contextArrayAdapter = new ArrayAdapter<String>(
 		// this, android.R.layout.simple_spinner_dropdown_item,
@@ -328,13 +349,13 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		layout.addView(rl, layoutParams);
 
-		popupLayout = new LinearLayout(this);
+		popupLayout = new LinearLayout(getActivity());
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 
-		textview = new TextView(this);
+		textview = new TextView(getActivity());
 		textview.setText("Hi this is a sample text for popup window");
-		popUp = new PopupWindow(this);
+		popUp = new PopupWindow(getActivity());
 
 		final String[] blinkNotes = { "3N", "4N", "5N", "6N", "2#" };
 		final int[] playAscending = { 0, 1, 2, 3, 4, 5, 6, 7 };
@@ -397,8 +418,8 @@ public class PlayAroundActivity extends SherlockActivity {
 
 		// playNote.setOnClickListener(myPlay0);
 		// nextTut.setOnClickListener(myPlay1);
-		backTut.setOnClickListener(myPlay2);
-		restartTut.setOnClickListener(myPlay3);
+//		backTut.setOnClickListener(myPlay2);
+//		restartTut.setOnClickListener(myPlay3);
 
 		popupLayout.addView(textview, params);
 		popUp.setContentView(popupLayout);
@@ -415,11 +436,11 @@ public class PlayAroundActivity extends SherlockActivity {
 		marginVal[3] = left;
 		layoutParams.setMargins(0, 0, 0, 0);
 
-		RelativeLayout rlPiano = new RelativeLayout(this);
+		RelativeLayout rlPiano = new RelativeLayout(getActivity());
 		RelativeLayout.LayoutParams lpPiano = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		piano = new Piano(this, marginVal, sp, true);
+		piano = new Piano(getActivity(), marginVal, sp, true);
 
 		/*** SET BUTTON WIDTH AND HEIGHT FROM PIANO KEY WIDTH AND HEIGHTS **/
 		// noteOr.setMinimumWidth(piano.getKeyWidths("white")); //change to
@@ -436,161 +457,10 @@ public class PlayAroundActivity extends SherlockActivity {
 		} else {
 			layout.setBackground(background);
 		}
-		setContentView(layout);
+		//rootview.setsetContentView(layout);<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 		// player.SetPiano(piano);
 		layout.requestLayout();
 	}
-
-	/**
-	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 C#
-	 * D# F# G# A# C# D# F# G# A#
-	 */
-//	private void initSongs() {
-//		/************* C-major scale init *******************/
-//		int size = 10;
-//		cmajor1 = new NotePlay[size];
-//		cmajor2 = new NotePlay[size];
-//		final double[] cNote1 = { 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5,
-//				9.5 };
-//		final int[] cDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-//		final double[] cNote2 = { 9.5, 8.5, 7.5, 6.5, 5.5, 4.5, 3.5, 2.5, 1.5,
-//				0.5 };
-//		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-//
-//		for (int i = 0; i < cmajor1.length; i++)
-//			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
-//		for (int i = 0; i < cmajor2.length; i++)
-//			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);
-//
-//		/********** Mary had a little lamb **************/
-//
-//		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
-//		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
-//
-//		final int[] llNote2 = { 6, 5, 4, 5, 6, 6, 6 };
-//		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] llNote3 = { 5, 5, 6, 5, 4 };
-//		final int[] llDur3 = { 1, 1, 1, 1, 4 };
-//
-//		int lambsize1 = llNote1.length;
-//		int lambsize2 = llNote2.length;
-//		int lambsize3 = llNote3.length;
-//		littlelamb1 = new NotePlay[lambsize1];
-//		littlelamb2 = new NotePlay[lambsize2];
-//		littlelamb3 = new NotePlay[lambsize3];
-//
-//		for (int i = 0; i < littlelamb1.length; i++)
-//			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
-//		for (int i = 0; i < littlelamb2.length; i++)
-//			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
-//		for (int i = 0; i < littlelamb3.length; i++)
-//			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
-//
-//		/*********** Twinkle Twinkle Little Stars **************/
-//
-//		final int[] ttNote1 = { 0, 0, 4, 4, 5, 5, 4 };
-//		final int[] ttDur1 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote2 = { 3, 3, 2, 2, 1, 1, 0 };
-//		final int[] ttDur2 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote3 = { 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1 };
-//		final int[] ttDur3 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote4 = { 3, 3, 2, 2, 1, 4, 0 };
-//		final int[] ttDur4 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		int ttsize1 = ttNote1.length;
-//		int ttsize2 = ttNote2.length;
-//		int ttsize3 = ttNote3.length;
-//		int ttsize4 = ttNote4.length;
-//		twinkle1 = new NotePlay[ttsize1];
-//		twinkle2 = new NotePlay[ttsize2];
-//		twinkle3 = new NotePlay[ttsize3];
-//		twinkle4 = new NotePlay[ttsize4];
-//
-//		for (int i = 0; i < ttsize1; i++)
-//			twinkle1[i] = new NotePlay(ttDur1[i], ttNote1[i]);
-//		for (int i = 0; i < ttsize2; i++)
-//			twinkle2[i] = new NotePlay(ttDur2[i], ttNote2[i]);
-//		for (int i = 0; i < ttsize3; i++)
-//			twinkle3[i] = new NotePlay(ttDur3[i], ttNote3[i]);
-//		for (int i = 0; i < ttsize4; i++)
-//			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
-//
-//		/************** Justin Biebs *************/
-//
-//		final int[] jbNote1 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
-//				8, 8, 7, 8, 8, 8, 7, 7 };
-//		final int[] jbDur1 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
-//				1, 1, 1, 2, 2, 2, 1, 2 };
-//
-//		final int[] jbNote2 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
-//				8, 9, 9, 9, 9, 8 };
-//		final int[] jbDur2 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
-//				2, 1, 1, 1, 1, 2 };
-//
-//		final int[] jbNote3 = { 7, 7, 7, 11, 11, 11, 10, 9, 10, 9 };
-//		final int[] jbDur3 = { 1, 1, 1, 2, 2, 2, 1, 1, 1, 4 };
-//
-//		final int[] jbNote4 = { 7, 7, 11, 10, 9, 8, 7 };
-//		final int[] jbDur4 = { 1, 1, 2, 2, 2, 2, 6 };
-//
-//		final int[] jbNote5 = { 7, 7, 11, 10, 9, 8, 7, 8, 9, 10, 9 };
-//		final int[] jbDur5 = { 1, 1, 2, 2, 2, 2, 3, 1, 1, 1, 4 };
-//
-//		int jbsize1 = jbNote1.length;
-//		int jbsize2 = jbNote2.length;
-//		int jbsize3 = jbNote3.length;
-//		int jbsize4 = jbNote4.length;
-//		int jbsize5 = jbNote5.length;
-//		biebs1 = new NotePlay[jbsize1];
-//		biebs2 = new NotePlay[jbsize2];
-//		biebs3 = new NotePlay[jbsize3];
-//		biebs4 = new NotePlay[jbsize4];
-//		biebs5 = new NotePlay[jbsize5];
-//
-//		for (int i = 0; i < jbsize1; i++)
-//			biebs1[i] = new NotePlay(jbDur1[i], jbNote1[i]);
-//		for (int i = 0; i < jbsize2; i++)
-//			biebs2[i] = new NotePlay(jbDur2[i], jbNote2[i]);
-//		for (int i = 0; i < jbsize3; i++)
-//			biebs3[i] = new NotePlay(jbDur3[i], jbNote3[i]);
-//		for (int i = 0; i < jbsize4; i++)
-//			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
-//		for (int i = 0; i < jbsize5; i++)
-//			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
-//		/***************************************************/
-//
-//	}
-
-//	protected void onClickHandler(int button) {
-//		// TODO Auto-generated method stub
-//
-//		if (button == 0) {
-//			Log.i("asdf", "playnote");
-//			initSongs();
-//			// No increment
-//		} else if (button == 1) {
-//			Log.i("asdf", "nextTut");
-//			// initSongs();
-//			numClicks++;
-//		} else if (button == 2) {
-//			Log.i("asdf", "backTut");
-//			initSongs();
-//			numClicks--;
-//		} else if (button == 3) {
-//			Log.i("asdf", "restartTut");
-//			initSongs();
-//			// initnotes
-//			numClicks = 0;
-//		} else {
-//			Log.e("OOB", "button out of bounds");
-//			numClicks = 0;
-//		}
-//
-//	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
@@ -634,37 +504,22 @@ public class PlayAroundActivity extends SherlockActivity {
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
 
-	/** Show an error dialog with the given message */
-//	private void showDialog(String message) {
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setMessage(message);
-//		builder.setTitle("Piano Tutorial");
-//		builder.setCancelable(false);
-//		builder.setPositiveButton("Finished",
-//				new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int id) {
-//
-//					}
-//				});
-//		builder.setNegativeButton("Restart",
-//				new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int id) {
-//
-//					}
-//				});
-//		AlertDialog alert = builder.create();
-//		alert.show();
-//	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		super.onCreateOptionsMenu(menu);
-		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
-
-		getSupportActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.rgb(223, 160, 23)));
+//		super.onCreateOptionsMenu(menu);
+//		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.activity_playaround, menu);
+//		getSupportActionBar().setBackgroundDrawable(
+//				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;
+
+        settings = getActivity().getSharedPreferences(Beats_Activity.PREFS, 0);
+		/* then it's been set up, otherwise set it up */
+        myset = settings.getString(Beats_Activity.beat_key,
+                Beats_Activity.DEFAULT_STRING_ARRAY);
 
 		int num = 0;
 		for (int i = 0; i < myset.length(); i++) {
@@ -678,7 +533,7 @@ public class PlayAroundActivity extends SherlockActivity {
 			mymenu.getItem(i + 2).setVisible(false);
 		}
 
-		return true;
+//		return true;
 	}
 
 	public void playBeat(int i) {
@@ -778,13 +633,6 @@ public class PlayAroundActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int beat = -1;
 		switch (item.getItemId()) {
-		case 16908332:
-
-		{
-			Intent i = new Intent(this, AndroidDashboardDesignActivity.class);
-			startActivity(i);
-			return true;
-		}
 
 		case R.id.play_icon: {
 			piano.playBack(1);
@@ -793,13 +641,13 @@ public class PlayAroundActivity extends SherlockActivity {
 		case R.id.record_icon: {
 			stop = !stop; // perhaps use to change the icon from record to pause
 							// and viceversa?
-			// if(!stop)
-			piano.startRec();
+			if(!stop)
+				piano.startRec();
 			if (stop)
-				Toast.makeText(this, "Recording Jam", Toast.LENGTH_SHORT)
+				Toast.makeText(getActivity(), "Recording Jam", Toast.LENGTH_SHORT)
 						.show();
 			else
-				Toast.makeText(this, "Stop Recording", Toast.LENGTH_SHORT)
+				Toast.makeText(getActivity(), "Stop Recording", Toast.LENGTH_SHORT)
 						.show();
 			return true;
 		}
@@ -839,23 +687,11 @@ public class PlayAroundActivity extends SherlockActivity {
 						.getTimeInMillis()), beat));
 			return true;
 		}
-		case R.id.submenu1: {
-			Intent mybeats = new Intent(this, Beats_Activity.class);
 
-			// goListRec.putExtra("DATABASE", new Gson().toJson(rm));
-			startActivity(mybeats);
-			return true;
-		}
 		case R.id.submenu2: {
 			return option_save(rm);
 		}
-		case R.id.submenu3: {
-			Intent goListRec = new Intent(this, SoonToBe.class);
 
-			// goListRec.putExtra("DATABASE", new Gson().toJson(rm));
-			startActivity(goListRec);
-			return true;
-		}
 		case R.id.submenu4: {
 			return option_list(rm);
 		}
@@ -870,12 +706,12 @@ public class PlayAroundActivity extends SherlockActivity {
 
 	private boolean option_save(RecManager rm) {
 		if (piano.getMyRec().size() == 0) {
-			Toast.makeText(this, "no recording found", Toast.LENGTH_SHORT)
+			Toast.makeText(getActivity(), "no recording found", Toast.LENGTH_SHORT)
 					.show();
 			return true;
 		}
 		Log.i("option", "saving rec option");
-		Toast.makeText(this, "saving your recording", Toast.LENGTH_SHORT)
+		Toast.makeText(getActivity(), "saving your recording", Toast.LENGTH_SHORT)
 				.show();
 		rm.saveRec(piano.getMyRec(), origin);
 		return true;
@@ -898,7 +734,7 @@ public class PlayAroundActivity extends SherlockActivity {
 			i++;
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle("Play Your Recordings");
 
 		builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -934,8 +770,8 @@ public class PlayAroundActivity extends SherlockActivity {
 	}
 
 	private Context retContext() {
-		return this;
-	}
+		return getActivity();
+	} // necessary??
 
 	public class pianoAsync extends AsyncTask<Void, Void, Boolean> {
 		boolean running = true;
