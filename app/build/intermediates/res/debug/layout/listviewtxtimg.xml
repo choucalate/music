@@ -29,6 +29,7 @@
                 android:layout_marginRight="3dp"
                 android:gravity="center_vertical"
                 android:text="Example application"
+                android:textColor="#93a1a1"
                 android:textSize="16sp" />
 
 
@@ -37,4 +38,4 @@
 
 
 
-</RelativeLayout><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/layout/listviewtxtimg.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/layout/listviewtxtimg.xml -->

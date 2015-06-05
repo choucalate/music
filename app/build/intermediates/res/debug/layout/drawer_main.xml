@@ -14,9 +14,9 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#111"
+        android:background="#073642"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp" />
 
-</android.support.v4.widget.DrawerLayout><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/layout/drawer_main.xml -->
+</android.support.v4.widget.DrawerLayout><!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/layout/drawer_main.xml -->

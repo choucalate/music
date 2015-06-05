@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/arrays.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <string-array name="combine_interval_entries">
         <item>20 milliseconds</item>
@@ -116,7 +116,7 @@
         <item>-11</item>
         <item>-12</item>
     </string-array>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference|color" name="background"/>
     <attr format="reference|color" name="backgroundSplit"/>
@@ -160,11 +160,11 @@
     <dimen name="abs__dropdownitem_text_padding_right">8dip</dimen>
     <dimen name="abs__search_view_preferred_width">320dip</dimen>
     <dimen name="abs__search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
     <eat-comment/>
     <item name="abs__action_menu_divider" type="id"/>
     <item name="abs__action_menu_presenter" type="id"/>
@@ -173,7 +173,7 @@
     <item name="abs__progress_horizontal" type="id"/>
     <item name="abs__up" type="id"/>
     <integer name="abs__max_action_buttons">2</integer>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Beats_Page">Beats Page</string>
     <string name="Compose_Choice">Compose</string>
@@ -183,7 +183,7 @@
     <string name="Loop4">Ill change later</string>
     <string name="Tutorials">Tutorials</string>
     <string name="Welcome_Text">Welcome to Music Learner</string>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abs__action_bar_home_description">Navigate home</string>
     <string name="abs__action_bar_up_description">Navigate up</string>
@@ -198,7 +198,7 @@
     <string name="abs__searchview_description_voice">Voice search</string>
     <string name="abs__shareactionprovider_share_with">Share with</string>
     <string name="abs__shareactionprovider_share_with_application">Share with <ns1:g example="Bluetooth" id="application_name">%s</ns1:g></string>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
     <string name="app_name">TnC Music Studio</string>
@@ -289,7 +289,7 @@
     <string name="transpose">Transpose Notes</string>
     <string name="trash_icon">Delete</string>
     <string name="tutorial_icon">Tutorials</string>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="ButtonA">
         <item name="android:layout_gravity">center_vertical</item> 
@@ -319,13 +319,13 @@
         <item name="android:background">@null</item>
         
     </style>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/values/themes.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/values/themes.xml -->
     <eat-comment/>
     <style name="MyAppTheme" parent="@android:style/Theme.Holo.Light">
         <!-- Any customizations for your app running on pre-3.0 devices here -->
         
     </style>
-    <!-- From: file:/Users/choucalate/workspace/music1/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Sherlock.__TextAppearance.Small" parent="Widget">
         <item name="android:textSize">14sp</item>
