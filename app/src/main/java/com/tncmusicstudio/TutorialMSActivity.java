@@ -343,7 +343,7 @@ public class TutorialMSActivity extends SherlockFragment {
 		rlPiano.addView(piano, lpPiano);
 		layout.addView(rlPiano);
 		Bitmap bmImg = decodeSampledBitmapFromResource(getResources(),
-				R.drawable.pianobckgd1, 768, 469);
+				R.drawable.pianobckgd2, 768, 469);
 		BitmapDrawable background = new BitmapDrawable(bmImg);
 		int sdk = android.os.Build.VERSION.SDK_INT;
 		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {

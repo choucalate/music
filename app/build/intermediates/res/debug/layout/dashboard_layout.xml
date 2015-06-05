@@ -5,7 +5,7 @@
 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/mural"
+    android:background="@drawable/brickwall"
     android:orientation="vertical" >
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/title" />
+        />
 
 
 </LinearLayout><!-- From: file:/C:/Users/Fabian/Documents/Projects/programs/music/music/app/src/main/res/layout/dashboard_layout.xml -->

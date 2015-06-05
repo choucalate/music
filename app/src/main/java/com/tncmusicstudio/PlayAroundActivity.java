@@ -431,7 +431,7 @@ public class PlayAroundActivity extends SherlockFragment {
 		rlPiano.addView(piano, lpPiano);
 		layout.addView(rlPiano);
 		Bitmap bmImg = decodeSampledBitmapFromResource(getResources(),
-				R.drawable.pianobckgd1, 768, 469);
+				R.drawable.pianobckgd2, 768, 469);
 		BitmapDrawable background = new BitmapDrawable(bmImg);
 		int sdk = android.os.Build.VERSION.SDK_INT;
 		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
@@ -665,7 +665,7 @@ public class PlayAroundActivity extends SherlockFragment {
 //		super.onCreateOptionsMenu(menu);
 //		getSupportMenuInflater().inflate(R.menu.activity_playaround, menu);
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.beats_, menu);
+		inflater.inflate(R.menu.activity_playaround, menu);
 //		getSupportActionBar().setBackgroundDrawable(
 //				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;

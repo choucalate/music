@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -70,6 +71,8 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		       R.drawable.beats_icon, R.drawable.recnote_icon, R.drawable.mic_icon};
 		mDrawerLayout =(DrawerLayout)findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.listview_drawer);
+//		TextView txt = (TextView) findViewById(R.id.label);
+//		txt.setTextColor(Color.parseColor("#93a1a1"));
 		mMenuAdapter = new ListArrayAdapter(AndroidDashboardDesignActivity.this, title, icon);
 		mDrawerList.setAdapter(mMenuAdapter);
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -288,9 +291,9 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			Log.e("async", "post");
-			Intent i = new Intent(getApplicationContext(), LevelActivity.class);
-			startActivity(i);
+			//Log.e("async", "post");
+			//Intent i = new Intent(getApplicationContext(), LevelActivity.class);
+			//startActivity(i);
 		}
 		
 	}

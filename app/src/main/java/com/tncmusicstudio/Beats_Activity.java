@@ -126,6 +126,7 @@ public class Beats_Activity extends SherlockFragment{
 		setUpButton(bm6);
 
 		setUpKeyListeners();
+		myRec = new ArrayList<RecNotes>();
 		return rootview;
 	}
 
@@ -431,7 +432,7 @@ public class Beats_Activity extends SherlockFragment{
 		recStart = !recStart;
 
 		if (recStart) {
-			myRec = new ArrayList<RecNotes>(); /* clear the old one */
+			myRec.clear(); /* clear the old one */
 			startTime = Calendar.getInstance();
 			Log.i("startRec", "startTime " + startTime);
 		}

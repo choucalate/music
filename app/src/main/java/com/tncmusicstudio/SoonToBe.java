@@ -160,12 +160,12 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 			if (elem == null)
 				return true;
 			Log.i("recordList", "rename");
-			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getApplicationContext());
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 			alert.setTitle("Rename your Jam");
 			alert.setMessage(elem);
 
 			// Set an EditText view to get user input
-			final EditText input = new EditText(getActivity().getApplicationContext());
+			final EditText input = new EditText(getActivity());
 			alert.setView(input);
 
 			alert.setPositiveButton("Ok",
@@ -178,7 +178,7 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 							renam = true;
 							if (renam) {
 
-								Toast.makeText(getActivity().getApplicationContext(),
+								Toast.makeText(getActivity(),
 										"Jam Renamed!", Toast.LENGTH_SHORT)
 										.show();
 								getDataBase();
