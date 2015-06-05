@@ -182,6 +182,24 @@ public class PlayAroundActivity extends SherlockFragment {
 		} catch (Exception ex) {
 			Log.e("animation", "fail");
 		}
+
+
+        // now set up the key listeners
+//        rootview.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                Log.e("KEY", "SOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HITSOMETHING HIT");
+//                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+//                    //do something here
+//                    onKeyDown(keyCode, event);
+//                    return true;
+//                } else if (event.getAction() == KeyEvent.ACTION_UP) {
+//                    onKeyUp(keyCode, event);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 		return rootview;
 	}
 
@@ -444,157 +462,6 @@ public class PlayAroundActivity extends SherlockFragment {
 		layout.requestLayout();
 	}
 
-	/**
-	 * Black keys range from 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 C#
-	 * D# F# G# A# C# D# F# G# A#
-	 */
-//	private void initSongs() {
-//		/************* C-major scale init *******************/
-//		int size = 10;
-//		cmajor1 = new NotePlay[size];
-//		cmajor2 = new NotePlay[size];
-//		final double[] cNote1 = { 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5,
-//				9.5 };
-//		final int[] cDur1 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-//		final double[] cNote2 = { 9.5, 8.5, 7.5, 6.5, 5.5, 4.5, 3.5, 2.5, 1.5,
-//				0.5 };
-//		final int[] cDur2 = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-//
-//		for (int i = 0; i < cmajor1.length; i++)
-//			cmajor1[i] = new NotePlay(cDur1[i], cNote1[i]);
-//		for (int i = 0; i < cmajor2.length; i++)
-//			cmajor2[i] = new NotePlay(cDur2[i], cNote2[i]);
-//
-//		/********** Mary had a little lamb **************/
-//
-//		final int[] llNote1 = { 6, 5, 4, 5, 6, 6, 6, 5, 5, 5, 6, 8, 8 };
-//		final int[] llDur1 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2 };
-//
-//		final int[] llNote2 = { 6, 5, 4, 5, 6, 6, 6 };
-//		final int[] llDur2 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] llNote3 = { 5, 5, 6, 5, 4 };
-//		final int[] llDur3 = { 1, 1, 1, 1, 4 };
-//
-//		int lambsize1 = llNote1.length;
-//		int lambsize2 = llNote2.length;
-//		int lambsize3 = llNote3.length;
-//		littlelamb1 = new NotePlay[lambsize1];
-//		littlelamb2 = new NotePlay[lambsize2];
-//		littlelamb3 = new NotePlay[lambsize3];
-//
-//		for (int i = 0; i < littlelamb1.length; i++)
-//			littlelamb1[i] = new NotePlay(llDur1[i], llNote1[i]);
-//		for (int i = 0; i < littlelamb2.length; i++)
-//			littlelamb2[i] = new NotePlay(llDur2[i], llNote2[i]);
-//		for (int i = 0; i < littlelamb3.length; i++)
-//			littlelamb3[i] = new NotePlay(llDur3[i], llNote3[i]);
-//
-//		/*********** Twinkle Twinkle Little Stars **************/
-//
-//		final int[] ttNote1 = { 0, 0, 4, 4, 5, 5, 4 };
-//		final int[] ttDur1 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote2 = { 3, 3, 2, 2, 1, 1, 0 };
-//		final int[] ttDur2 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote3 = { 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1 };
-//		final int[] ttDur3 = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };
-//
-//		final int[] ttNote4 = { 3, 3, 2, 2, 1, 4, 0 };
-//		final int[] ttDur4 = { 1, 1, 1, 1, 1, 1, 2 };
-//
-//		int ttsize1 = ttNote1.length;
-//		int ttsize2 = ttNote2.length;
-//		int ttsize3 = ttNote3.length;
-//		int ttsize4 = ttNote4.length;
-//		twinkle1 = new NotePlay[ttsize1];
-//		twinkle2 = new NotePlay[ttsize2];
-//		twinkle3 = new NotePlay[ttsize3];
-//		twinkle4 = new NotePlay[ttsize4];
-//
-//		for (int i = 0; i < ttsize1; i++)
-//			twinkle1[i] = new NotePlay(ttDur1[i], ttNote1[i]);
-//		for (int i = 0; i < ttsize2; i++)
-//			twinkle2[i] = new NotePlay(ttDur2[i], ttNote2[i]);
-//		for (int i = 0; i < ttsize3; i++)
-//			twinkle3[i] = new NotePlay(ttDur3[i], ttNote3[i]);
-//		for (int i = 0; i < ttsize4; i++)
-//			twinkle4[i] = new NotePlay(ttDur4[i], ttNote4[i]);
-//
-//		/************** Justin Biebs *************/
-//
-//		final int[] jbNote1 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
-//				8, 8, 7, 8, 8, 8, 7, 7 };
-//		final int[] jbDur1 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
-//				1, 1, 1, 2, 2, 2, 1, 2 };
-//
-//		final int[] jbNote2 = { 9, 9, 9, 9, 8, 8, 7, 8, 8, 8, 7, 7, 9, 9, 9, 9,
-//				8, 9, 9, 9, 9, 8 };
-//		final int[] jbDur2 = { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1,
-//				2, 1, 1, 1, 1, 2 };
-//
-//		final int[] jbNote3 = { 7, 7, 7, 11, 11, 11, 10, 9, 10, 9 };
-//		final int[] jbDur3 = { 1, 1, 1, 2, 2, 2, 1, 1, 1, 4 };
-//
-//		final int[] jbNote4 = { 7, 7, 11, 10, 9, 8, 7 };
-//		final int[] jbDur4 = { 1, 1, 2, 2, 2, 2, 6 };
-//
-//		final int[] jbNote5 = { 7, 7, 11, 10, 9, 8, 7, 8, 9, 10, 9 };
-//		final int[] jbDur5 = { 1, 1, 2, 2, 2, 2, 3, 1, 1, 1, 4 };
-//
-//		int jbsize1 = jbNote1.length;
-//		int jbsize2 = jbNote2.length;
-//		int jbsize3 = jbNote3.length;
-//		int jbsize4 = jbNote4.length;
-//		int jbsize5 = jbNote5.length;
-//		biebs1 = new NotePlay[jbsize1];
-//		biebs2 = new NotePlay[jbsize2];
-//		biebs3 = new NotePlay[jbsize3];
-//		biebs4 = new NotePlay[jbsize4];
-//		biebs5 = new NotePlay[jbsize5];
-//
-//		for (int i = 0; i < jbsize1; i++)
-//			biebs1[i] = new NotePlay(jbDur1[i], jbNote1[i]);
-//		for (int i = 0; i < jbsize2; i++)
-//			biebs2[i] = new NotePlay(jbDur2[i], jbNote2[i]);
-//		for (int i = 0; i < jbsize3; i++)
-//			biebs3[i] = new NotePlay(jbDur3[i], jbNote3[i]);
-//		for (int i = 0; i < jbsize4; i++)
-//			biebs4[i] = new NotePlay(jbDur4[i], jbNote4[i]);
-//		for (int i = 0; i < jbsize5; i++)
-//			biebs5[i] = new NotePlay(jbDur5[i], jbNote5[i]);
-//		/***************************************************/
-//
-//	}
-
-//	protected void onClickHandler(int button) {
-//		// TODO Auto-generated method stub
-//
-//		if (button == 0) {
-//			Log.i("asdf", "playnote");
-//			initSongs();
-//			// No increment
-//		} else if (button == 1) {
-//			Log.i("asdf", "nextTut");
-//			// initSongs();
-//			numClicks++;
-//		} else if (button == 2) {
-//			Log.i("asdf", "backTut");
-//			initSongs();
-//			numClicks--;
-//		} else if (button == 3) {
-//			Log.i("asdf", "restartTut");
-//			initSongs();
-//			// initnotes
-//			numClicks = 0;
-//		} else {
-//			Log.e("OOB", "button out of bounds");
-//			numClicks = 0;
-//		}
-//
-//	}
-
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
 		// Raw height and width of image
@@ -637,27 +504,6 @@ public class PlayAroundActivity extends SherlockFragment {
 		return BitmapFactory.decodeResource(res, resId, options);
 	}
 
-	/** Show an error dialog with the given message */
-//	private void showDialog(String message) {
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setMessage(message);
-//		builder.setTitle("Piano Tutorial");
-//		builder.setCancelable(false);
-//		builder.setPositiveButton("Finished",
-//				new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int id) {
-//
-//					}
-//				});
-//		builder.setNegativeButton("Restart",
-//				new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int id) {
-//
-//					}
-//				});
-//		AlertDialog alert = builder.create();
-//		alert.show();
-//	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -669,6 +515,11 @@ public class PlayAroundActivity extends SherlockFragment {
 //		getSupportActionBar().setBackgroundDrawable(
 //				new ColorDrawable(Color.rgb(223, 160, 23)));
 		mymenu = menu;
+
+        settings = getActivity().getSharedPreferences(Beats_Activity.PREFS, 0);
+		/* then it's been set up, otherwise set it up */
+        myset = settings.getString(Beats_Activity.beat_key,
+                Beats_Activity.DEFAULT_STRING_ARRAY);
 
 		int num = 0;
 		for (int i = 0; i < myset.length(); i++) {

@@ -23,5 +23,12 @@
         android:showAsAction="always"
         android:icon="@drawable/piano_icon"
         android:title="@string/piano_icon"/>
+    <item
+        android:id="@+id/sync_icon"
+        android:orderInCategory="5"
+        android:showAsAction="always"
+        android:icon="@drawable/noun_2888_cc"
+        android:title="@string/sync"/>
+
 
 </menu>

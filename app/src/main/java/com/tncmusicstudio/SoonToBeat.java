@@ -1,9 +1,5 @@
 package com.tncmusicstudio;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +21,10 @@ import com.model.RecManager;
 import com.model.RecNotes;
 import com.testmusic.MySimpleArrayAdapter;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class SoonToBeat extends SherlockListActivity{
 	private RecManager rm;
 	private String filename = "Rec1.txt";
@@ -43,7 +43,7 @@ public class SoonToBeat extends SherlockListActivity{
 		setContentView(R.layout.activity_soon_to_be);
 
 		setTitle("My Beats");
-		Log.i("recordList", "inside recordList activity");
+		Log.i("recordList", "inside recordList activity- soontobeat");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		rm = new RecManager(this);
 		setUpSound();

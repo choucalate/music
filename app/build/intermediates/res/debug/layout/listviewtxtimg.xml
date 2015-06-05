@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:id="@+id/rowlayout"
+                android:padding="6dip"
+        >
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+            >
+        <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dip"
+                android:layout_marginLeft="25dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/piano_icon" />
+
+
+        <TextView
+                android:id="@+id/label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:gravity="center_vertical"
+                android:text="Example application"
+                android:textSize="16sp" />
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout><!-- From: file:/Users/choucalate/workspace/music1/app/src/main/res/layout/listviewtxtimg.xml -->

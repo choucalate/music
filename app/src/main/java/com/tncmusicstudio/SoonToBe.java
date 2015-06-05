@@ -1,5 +1,7 @@
 package com.tncmusicstudio;
 
+import com.actionbarsherlock.app.SherlockListActivity;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +38,30 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SoonToBe extends SherlockListFragment{//Activity {
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.model.RecManager;
+import com.model.RecNotes;
+import com.testmusic.MySimpleArrayAdapter;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+public class SoonToBe extends SherlockListFragment{
 
 	private RecManager rm;
 	private String filename = "Rec1.txt";
@@ -160,12 +185,12 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 			if (elem == null)
 				return true;
 			Log.i("recordList", "rename");
-			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getWindow().getContext());
 			alert.setTitle("Rename your Jam");
 			alert.setMessage(elem);
 
 			// Set an EditText view to get user input
-			final EditText input = new EditText(getActivity());
+			final EditText input = new EditText(getActivity().getApplicationContext());
 			alert.setView(input);
 
 			alert.setPositiveButton("Ok",
@@ -178,7 +203,7 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 							renam = true;
 							if (renam) {
 
-								Toast.makeText(getActivity(),
+								Toast.makeText(getActivity().getApplicationContext(),
 										"Jam Renamed!", Toast.LENGTH_SHORT)
 										.show();
 								getDataBase();
@@ -214,11 +239,77 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 
 			return true;
 		}
-//		case R.id.piano_icon: {
-//			Intent i = new Intent(this, PlayAroundActivity.class);
-//			startActivity(i);
-//			return true;
-//		}
+            case R.id.sync_icon: {
+                Log.i("SYNC", "syncing to web app: " + elem);
+                if (elem == null) return true;
+
+                Log.i("recordList", "opening alert dialog");
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity().getWindow().getContext());
+                alert.setTitle("Sending Jam To Website... Enter Your Username");
+                alert.setMessage(elem);
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(getActivity().getApplicationContext());
+                alert.setView(input);
+
+                alert.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                String username = input.getText().toString();
+
+                                Log.i("recordList", "sending data with username: " + username);
+                                sendJamToServer(username, new JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                        // If the response is JSONObject instead of expected JSONArray
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Jam SUCCEEDED!", Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Jam SUCCEEDED...!", Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+
+                                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Jam FAILED!", Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+
+                                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Jam FAILED...!", Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                });
+
+                                // Do something with value!
+                            }
+                        });
+
+                alert.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                // Canceled.
+                            }
+                        });
+
+                alert.show();
+
+
+
+                return true;
+
+
+                // use the elem that gets chosen here to be synced
+
+            }
 
 		default: {
 			// insert something
@@ -283,5 +374,41 @@ public class SoonToBe extends SherlockListFragment{//Activity {
 	public static void playBeat(int i) {
 		sp.playNote(beatArrss[i], 1);
 	}
+
+       /*
+       Creates the entire http stuff to send to the server
+       this sends it in a json like this:
+       {
+        "song_title": String,
+        "user_name": String,
+        "data" : [
+            "sound": String,
+            "offset": Number
+        ]
+       }
+
+        */
+    public void sendJamToServer(String username, JsonHttpResponseHandler handler) {
+        ArrayList<RecNotes> recNotesToConfigure = db.get(elem);
+        RequestParams params = new RequestParams();
+        params.put("song_title", elem);
+        params.put("user_name", username);
+        List<Map<String, Object>> data = new ArrayList<Map<String,
+                Object>>();
+        for(int i = 0; i < recNotesToConfigure.size(); i++) {
+            Map<String, Object> sample = new HashMap<String, Object>();
+            RecNotes rn = recNotesToConfigure.get(i);
+            if (rn.isBeat()) {
+                sample.put("sound", beatArrss[rn.getBeat()] + ".ogg");
+            } else {
+                sample.put("sound", SPPlayer.keyArrayToOgg(rn.getNoteToPlay()));
+            }
+            sample.put("offset", rn.getCurrTime());
+            Log.i("sending data", sample.toString());
+            data.add(sample);
+        }
+        params.put("data", data);
+        ServerRestClient.post("send_jam", params, handler);
+    }
 
 }

@@ -30,8 +30,7 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
         this.icon = icon;
     }
 
-    public ListArrayAdapter(Context context, String[] entries,
-                                boolean listRec) {
+    public ListArrayAdapter(Context context, String[] entries,boolean listRec) {
         super(context, R.layout.listviewtxtimg, entries);
         this.context = context;
         this.values = entries;
@@ -77,3 +76,4 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 }
+

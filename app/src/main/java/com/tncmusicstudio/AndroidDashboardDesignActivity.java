@@ -6,6 +6,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,8 +33,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.model.TupleStringInt;
 import com.testmusic.ListArrayAdapter;
 import com.testmusic.MySimpleArrayAdapter;
+
+import java.util.List;
 
 
 public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
@@ -45,6 +50,15 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 	ListArrayAdapter mMenuAdapter;
 	String[] title, subtitle;
 	int[] icon;
+
+	public static final String HOME_FRAG_TAG = "HOME FRAGMENT";
+	public static final String TUTORIAL_FRAG_TAG = "TUTORIAL FRAGMENT";
+	public static final String PLAY_FRAG_TAG = "PLAYAROUND FRAGMENT";
+	public static final String BEATS_FRAG_TAG = "BEATS FRAGMENT";
+	public static final String SOON_FRAG_TAG = "SOON FRAGMENT";
+	public static final String MIC_FRAG_TAG = "MIC FRAGMENT";
+
+
 	Fragment fragment1 = new HomeFragment();
 	Fragment fragment2 = new TutorialMSActivity();
 	Fragment fragment3 = new PlayAroundActivity();
@@ -98,6 +112,81 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		if(savedInstanceState == null)
 			selectItem(0);
 	}
+
+	/*Handle key presses
+
+	*/
+    public Fragment getCurFragment() {
+        List<Fragment> myFrags = getSupportFragmentManager().getFragments();
+        for(int i = 0; i< myFrags.size(); i++) {
+            if(myFrags.get(i) != null && myFrags.get(i).isVisible()) {
+                return myFrags.get(i);
+            }
+        }
+        return null;
+    }
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Fragment f = getCurFragment();
+        Log.i("key", "KEY DOWN FRAG");
+        if (f == null) {
+            Log.i("key", "NULL FRAG");
+            return false;
+            // add your code here
+        }
+        /*
+        public static final String HOME_FRAG_TAG = "HOME FRAGMENT";
+	public static final String TUTORIAL_FRAG_TAG = "TUTORIAL FRAGMENT";
+	public static final String PLAY_FRAG_TAG = "PLAYAROUND FRAGMENT";
+	public static final String BEATS_FRAG_TAG = "BEATS FRAGMENT";
+	public static final String SOON_FRAG_TAG = "SOON FRAGMENT";
+	public static final String MIC_FRAG_TAG = "MIC FRAGMENT";
+         */
+        if(f.getTag()== HOME_FRAG_TAG) {
+
+        } else if(f.getTag() == TUTORIAL_FRAG_TAG) {
+        } else if(f.getTag() == PLAY_FRAG_TAG) {
+            ((PlayAroundActivity) f).onKeyDown(keyCode, event);
+        } else if(f.getTag() == BEATS_FRAG_TAG) {
+            ((Beats_Activity) f).onKeyDown(keyCode, event);
+
+        } else if(f.getTag() == SOON_FRAG_TAG) {
+
+        } else if(f.getTag() == MIC_FRAG_TAG) {
+            ((Mic_Test) f).onKeyDown(keyCode, event);
+
+        }
+
+		// play the sound based on the hashmap from keyCode to note
+
+		return false;
+	}
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        Fragment f = getCurFragment();
+        Log.i("key", "KEY UP FRAG");
+        if (f == null) {
+            Log.i("key", "NULL FRAG");
+            return false;
+            // add your code here
+        }
+        if(f.getTag()== HOME_FRAG_TAG) {
+
+        } else if(f.getTag() == TUTORIAL_FRAG_TAG) {
+        } else if(f.getTag() == PLAY_FRAG_TAG) {
+            ((PlayAroundActivity) f).onKeyUp(keyCode, event);
+        } else if(f.getTag() == BEATS_FRAG_TAG) {
+            ((Beats_Activity) f).onKeyUp(keyCode, event);
+
+        } else if(f.getTag() == SOON_FRAG_TAG) {
+
+        } else if(f.getTag() == MIC_FRAG_TAG) {
+//            ((Mic_Test) f).onKeyUp(keyCode, event);
+
+        }
+        // play the sound based on the hashmap from keyCode to note
+
+        return false;
+    }
+
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
 //		// the .png file makes it appear with the yellow underline, but if we want it completely
@@ -176,22 +265,22 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		// Locate Position
 		switch (position) {
 			case 0:
-				ft.replace(R.id.content_frame, fragment1); // Home
+				ft.replace(R.id.content_frame, fragment1, HOME_FRAG_TAG); // Home
 				break;
 			case 1:
-				ft.replace(R.id.content_frame, fragment2); // Tutorial
+				ft.replace(R.id.content_frame, fragment2, TUTORIAL_FRAG_TAG); // Tutorial
 				break;
 			case 2:
-				ft.replace(R.id.content_frame, fragment3); // Piano
+				ft.replace(R.id.content_frame, fragment3, PLAY_FRAG_TAG); // Piano
 				break;
 			case 3:
-				ft.replace(R.id.content_frame, fragment4); // Beats
+				ft.replace(R.id.content_frame, fragment4, BEATS_FRAG_TAG); // Beats
 				break;
 			case 4:
-				ft.replace(R.id.content_frame, fragment5); // Recordings
+				ft.replace(R.id.content_frame, fragment5, SOON_FRAG_TAG); // Recordings
 				break;
 			case 5:
-				ft.replace(R.id.content_frame, fragment6); // Mic
+				ft.replace(R.id.content_frame, fragment6, MIC_FRAG_TAG); // Mic
 				break;
 		}
 		ft.commit();

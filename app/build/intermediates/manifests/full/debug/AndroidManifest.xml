@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tncmusicstudio"
+    android:versionCode="2"
+    android:versionName="0.0.3" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application
+        android:allowTaskReparenting="true"
+        android:icon="@drawable/home"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Sherlock" >
+        <activity
+            android:name="com.tncmusicstudio.AndroidDashboardDesignActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tncmusicstudio.HelpActivity" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.LevelActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_test"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.TutorialMSActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_tutorial_ms"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.PlayAroundActivity"
+            android:configChanges="orientation"
+            android:label="@string/playaround"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.NotesExperimentActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.Beats_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_beats_"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.SoonToBe"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_soon_to_be"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.SoonToBeat"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_soon_to_beat"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.tncmusicstudio.Mic_Test"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_Mic_Test"
+            android:screenOrientation="landscape" >
+        </activity>
+    </application>
+
+</manifest>
