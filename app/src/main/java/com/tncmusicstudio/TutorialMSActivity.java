@@ -195,8 +195,8 @@ public class TutorialMSActivity extends SherlockFragment {
 
 		layout = (LinearLayout)rootview.findViewById(R.id.linearlayout1);//new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
-//		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-//				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
 		/* for the button play */
 //		LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
 //				LinearLayout.LayoutParams.MATCH_PARENT,
@@ -215,8 +215,8 @@ public class TutorialMSActivity extends SherlockFragment {
 //		LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
 //				LinearLayout.LayoutParams.MATCH_PARENT,
 //				LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-//		LinearLayout rl = new LinearLayout(this);
-//		rl.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout rl = new LinearLayout(getActivity());
+		rl.setOrientation(LinearLayout.HORIZONTAL);
 		// layoutParams3.leftMargin = 100;
 		// layoutParams3.topMargin = 100;
 		// layoutParams3.setMargins(10, 10, 10, 10);
@@ -253,7 +253,7 @@ public class TutorialMSActivity extends SherlockFragment {
 		// rl.addView(backTut);
 		// rl.addView(restartTut);
 
-//		layout.addView(rl, layoutParams);
+		layout.addView(rl, layoutParams);
 
 		popupLayout = new LinearLayout(getActivity());
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
