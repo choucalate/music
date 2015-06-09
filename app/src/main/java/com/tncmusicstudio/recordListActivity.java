@@ -152,12 +152,12 @@ public class recordListActivity extends SherlockListActivity {
 
         	 return true;
          }
-         case R.id.piano_icon:
-         {
-        	 Intent i = new Intent(this, PlayAroundActivity.class);
-        	 startActivity(i); 
-        	 return true;
-         }
+//         case R.id.piano_icon:
+//         {
+//        	 Intent i = new Intent(this, PlayAroundActivity.class);
+//        	 startActivity(i);
+//        	 return true;
+//         }
 
          default:{
          //insert something

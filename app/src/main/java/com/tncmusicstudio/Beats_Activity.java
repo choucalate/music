@@ -394,9 +394,9 @@ public class Beats_Activity extends SherlockFragment{
 
 	private void setBeatColor(Button b, boolean on) {
 		if (on)
-			b.setBackgroundResource(R.drawable.neonorange);
+			b.setBackgroundResource(R.drawable.magenta_btn);
 		else
-			b.setBackgroundResource(R.drawable.default_btn);
+			b.setBackgroundResource(R.drawable.cyan_btn);
 	}
 
 	private void setUpSound() {

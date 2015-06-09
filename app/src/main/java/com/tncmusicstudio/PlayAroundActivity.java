@@ -692,9 +692,9 @@ public class PlayAroundActivity extends SherlockFragment {
 			return option_save(rm);
 		}
 
-		case R.id.submenu4: {
-			return option_list(rm);
-		}
+//		case R.id.submenu4: {
+//			return option_list(rm);
+//		}
 
 		case R.id.save_rec:
 			return option_save(rm);

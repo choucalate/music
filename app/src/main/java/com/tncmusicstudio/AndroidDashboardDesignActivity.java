@@ -133,14 +133,7 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
             return false;
             // add your code here
         }
-        /*
-        public static final String HOME_FRAG_TAG = "HOME FRAGMENT";
-	public static final String TUTORIAL_FRAG_TAG = "TUTORIAL FRAGMENT";
-	public static final String PLAY_FRAG_TAG = "PLAYAROUND FRAGMENT";
-	public static final String BEATS_FRAG_TAG = "BEATS FRAGMENT";
-	public static final String SOON_FRAG_TAG = "SOON FRAGMENT";
-	public static final String MIC_FRAG_TAG = "MIC FRAGMENT";
-         */
+
         if(f.getTag()== HOME_FRAG_TAG) {
 
         } else if(f.getTag() == TUTORIAL_FRAG_TAG) {
@@ -220,34 +213,6 @@ public class AndroidDashboardDesignActivity extends SherlockFragmentActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
-		/*if(R.id.tutorial_icon==item.getItemId()){
-			
-			Intent i= new Intent(this,LevelActivity.class );
-			startActivity(i);
-			return true;
-		}
-		else if(item.getItemId()==R.id.recnote_icon){
-			Intent i = new Intent(this, SoonToBe.class);
-			startActivity(i);
-			return true;
-		}
-		else if(item.getItemId()==R.id.beats_icon){
-			Intent i = new Intent(this, Beats_Activity.class);
-			startActivity(i);
-			return true;
-		}
-		else if(item.getItemId()==R.id.pianointro_icon){
-			Intent i = new Intent(this,PlayAroundActivity.class);
-			startActivity(i);
-			return true;
-		}
-		else if(item.getItemId()==R.id.mic_icon){
-			Intent i = new Intent(this,Mic_Test.class);
-			startActivity(i);
-			return true;
-		}*/
-		//return false;
-		
 	}
 
 	private class DrawerItemClickListener implements

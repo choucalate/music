@@ -410,5 +410,10 @@ public class SoonToBe extends SherlockListFragment{
         params.put("data", data);
         ServerRestClient.post("send_jam", params, handler);
     }
-
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		ListView listView = getListView();
+		listView.setBackgroundColor(Color.parseColor("#657b83"));
+	}
 }

@@ -209,7 +209,7 @@ public class Mic_Test extends SherlockFragment{
 			System.out.println("asdfasdfasdfasdf");
 			return;
 		}
-		b.setBackgroundResource(R.drawable.default_btn);
+		b.setBackgroundResource(R.drawable.cyan_btn);
 
 		b.setOnClickListener(new OnClickListener() {
 
@@ -227,7 +227,7 @@ public class Mic_Test extends SherlockFragment{
 					startRecording(b, num);
 					break;
 				case 1:
-					b.setBackgroundResource(R.drawable.neonblue);
+					b.setBackgroundResource(R.drawable.magenta_btn);
 
 					System.out.println("is it null ? : "
 							+ (mrList[num] == null));
@@ -242,7 +242,7 @@ public class Mic_Test extends SherlockFragment{
 
 					break;
 				case 2:
-					b.setBackgroundResource(R.drawable.neongreen);
+					b.setBackgroundResource(R.drawable.cyan_btn);
 					if (isBeat[num]) {
 						Log.i("Pause Button", "PAUSE, PAUSE" + num + pauseJam);
 						pauseJam = true;
@@ -250,7 +250,7 @@ public class Mic_Test extends SherlockFragment{
 						pausePlaying(num);
 					break;
 				default:
-					b.setBackgroundResource(R.drawable.neonblue);
+					b.setBackgroundResource(R.drawable.magenta_btn);
 					if (!isBeat[num]) {
 						resumePlaying(num);
 					} else {
@@ -290,7 +290,7 @@ public class Mic_Test extends SherlockFragment{
 					Log.i("long click", "loading jam in " + num);
 
 					showListRecs(rm, num);
-					b.setBackgroundResource(R.drawable.neongreen);
+					b.setBackgroundResource(R.drawable.cyan_btn);
 					// myRec = listJams.get(num);
 					// playBack(1);
 					// startRecording(num);
@@ -504,7 +504,7 @@ public class Mic_Test extends SherlockFragment{
 		try {
 			Thread.sleep(400);
 
-			b.setBackgroundResource(R.drawable.neonorange);
+			b.setBackgroundResource(R.drawable.yellow_btn);
 
 			Toast.makeText(getActivity(), "start recording!",
 					Toast.LENGTH_SHORT).show();
@@ -523,20 +523,20 @@ public class Mic_Test extends SherlockFragment{
 		recorder = null;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		stopAll();
-		if (mRecorder1 != null) {
-			mRecorder1.release();
-			mRecorder1 = null;
-		}
-
-		if (mPlayer1 != null) {
-			mPlayer1.release();
-			mPlayer1 = null;
-		}
-	}
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		stopAll();
+//		if (mRecorder1 != null) {
+//			mRecorder1.release();
+//			mRecorder1 = null;
+//		}
+//
+//		if (mPlayer1 != null) {
+//			mPlayer1.release();
+//			mPlayer1 = null;
+//		}
+//	}
 
 	//@Override
 	//public void onDestroy() {
@@ -546,12 +546,12 @@ public class Mic_Test extends SherlockFragment{
 
 	//}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-
-		stopAll();
-	}
+//	@Override
+//	public void onStop() {
+//		super.onStop();
+//
+//		stopAll();
+//	}
 
 	private String getFileName(int i) {
 		String str = Environment.getExternalStorageDirectory()

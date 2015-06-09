@@ -17,12 +17,12 @@
         android:showAsAction="always"
         android:icon="@drawable/trash_icon"
         android:title="@string/trash_icon"/>
-                <item
-        android:id="@+id/piano_icon"
-        android:orderInCategory="4"
-        android:showAsAction="always"
-        android:icon="@drawable/piano_icon"
-        android:title="@string/piano_icon"/>
+                <!--<item-->
+        <!--android:id="@+id/piano_icon"-->
+        <!--android:orderInCategory="4"-->
+        <!--android:showAsAction="always"-->
+        <!--android:icon="@drawable/piano_icon"-->
+        <!--android:title="@string/piano_icon"/>-->
     <item
         android:id="@+id/sync_icon"
         android:orderInCategory="5"

@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/piano_icon"
-        android:icon="@drawable/piano_icon"
-        android:orderInCategory="1"
-        android:showAsAction="always"
-        android:title="@string/piano_icon"/>
+    <!--<item-->
+        <!--android:id="@+id/piano_icon"-->
+        <!--android:icon="@drawable/piano_icon"-->
+        <!--android:orderInCategory="1"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="@string/piano_icon"/>-->
     <item
         android:id="@+id/loop_icon"
         android:icon="@drawable/loop_icon"

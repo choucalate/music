@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/menu_settings"
-        android:orderInCategory="100"
-        android:title="@string/menu_settings"/>
+    <!--<item-->
+        <!--android:id="@+id/menu_settings"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/menu_settings"/>-->
     <item
         android:id="@+id/list_rec"
         android:checkable="false"
@@ -59,26 +59,26 @@
         android:showAsAction="always"
         android:title="@string/menu">
         <menu>
-            <item
-                android:id="@+id/submenu1"
-                android:orderInCategory="8"
-                android:showAsAction="ifRoom|withText"
-                android:title="@string/beats"/>
+            <!--<item-->
+                <!--android:id="@+id/submenu1"-->
+                <!--android:orderInCategory="8"-->
+                <!--android:showAsAction="ifRoom|withText"-->
+                <!--android:title="@string/beats"/>-->
             <item
                 android:id="@+id/submenu2"
                 android:orderInCategory="9"
                 android:showAsAction="ifRoom|withText"
                 android:title="@string/save"/>
-            <item
-                android:id="@+id/submenu3"
-                android:orderInCategory="10"
-                android:showAsAction="ifRoom|withText"
-                android:title="@string/list"/>
-            <item
-                android:id="@+id/submenu4"
-                android:orderInCategory="10"
-                android:showAsAction="ifRoom|withText"
-                android:title="@string/replay"/>
+            <!--<item-->
+                <!--android:id="@+id/submenu3"-->
+                <!--android:orderInCategory="10"-->
+                <!--android:showAsAction="ifRoom|withText"-->
+                <!--android:title="@string/list"/>-->
+            <!--<item-->
+                <!--android:id="@+id/submenu4"-->
+                <!--android:orderInCategory="10"-->
+                <!--android:showAsAction="ifRoom|withText"-->
+                <!--android:title="@string/replay"/>-->
         </menu>
     </item>
 
