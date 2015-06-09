@@ -201,7 +201,7 @@ public class Beats_Activity extends SherlockFragment{
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					if (mymenu.getItem(1).getTitle().equals("One Shots")) {
+					if (check) { //if one shots play one shots
 						if (!commits(b, num2))
 							return false;
 						playBeat(num2);
