@@ -89,14 +89,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49c75081-e617-4612-86af-3154cd346c7a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="music.iws" />
@@ -142,8 +134,8 @@
       <file leaf-file-name="Beats_Activity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71672356">
-              <caret line="203" column="62" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.83959043">
+              <caret line="205" column="41" selection-start-line="205" selection-start-column="41" selection-end-line="205" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -2105,7 +2097,13 @@
       <option name="project" value="LOCAL" />
       <updated>1433819686082</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="beats issues fixed">
+      <created>1433822123454</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1433822123454</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2166,7 +2164,8 @@
     <MESSAGE value="fixed" />
     <MESSAGE value="merged" />
     <MESSAGE value="new UI for beats, UI fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="new UI for beats, UI fixes" />
+    <MESSAGE value="beats issues fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="beats issues fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2628,8 +2627,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tncmusicstudio/Beats_Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71672356">
-          <caret line="203" column="62" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.83959043">
+          <caret line="205" column="41" selection-start-line="205" selection-start-column="41" selection-end-line="205" selection-end-column="41" />
           <folding />
         </state>
       </provider>
